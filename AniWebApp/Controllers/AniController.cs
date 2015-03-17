@@ -13,5 +13,13 @@ namespace AniWebApp.Controllers
             return View();
         }
 
+        public ActionResult Forecasts()
+        {
+            return View();
+        }
+        public ActionResult Traffic()
+        {
+            return View();
+        }
     }
 }

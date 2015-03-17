@@ -292,6 +292,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Ani\Index.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
+    <Content Include="Views\Ani\Forecasts.cshtml" />
+    <None Include="Views\Ani\Traffic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
