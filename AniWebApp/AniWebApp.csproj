@@ -190,6 +190,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\Fixedsys500c.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -233,6 +234,10 @@
     <Content Include="Scripts\bootstrap-386.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\Fixedsys500c.eot" />
+    <Content Include="fonts\Fixedsys500c.otf" />
+    <Content Include="fonts\Fixedsys500c.ttf" />
+    <Content Include="fonts\Fixedsys500c.woff" />
     <None Include="Properties\PublishProfiles\matteland.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
