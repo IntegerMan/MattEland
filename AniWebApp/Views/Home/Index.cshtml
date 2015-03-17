@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Matt Eland</h1>
+    <p class="lead">This website houses app information and web / database / web services related to experimental projects.</p>
+    <div class="alert-warning">
+        <p>This website is currently under active development and expansion and is not yet intended for active use.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Apps</h2>
+        <p>
+            Links and information on apps for Windows Phone. These apps are older and are not actively updated or maintained.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Apps")">View Apps &raquo;</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2>ANI</h2>
+        <p>A series of experiments around using Artificial Narrow Intelligence to analyze data and make inferences and recommendations based on that data.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Ani")">Learn more &raquo;</a></p>
+    </div>
+</div>
