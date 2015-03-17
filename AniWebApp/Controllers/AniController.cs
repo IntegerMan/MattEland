@@ -17,8 +17,13 @@ namespace AniWebApp.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Route(@"Ani\Traffic")]
         public ActionResult Traffic()
         {
+            //List<>
+
             return View();
         }
     }
