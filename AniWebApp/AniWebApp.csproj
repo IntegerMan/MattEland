@@ -196,6 +196,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="bower.json" />
+    <None Include="gruntfile.js" />
     <Content Include="Images\ApplicationIcon.png" />
     <Content Include="Images\contentback.jpg" />
     <Content Include="Images\DailyQuestions99.png" />
@@ -240,6 +242,7 @@
     <Content Include="fonts\Fixedsys500c.otf" />
     <Content Include="fonts\Fixedsys500c.ttf" />
     <Content Include="fonts\Fixedsys500c.woff" />
+    <None Include="package.json" />
     <None Include="Properties\PublishProfiles\matteland.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
