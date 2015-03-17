@@ -1,4 +1,4 @@
-﻿self._386 = self._386 || {};
+﻿self._386 = self._386 || {onePass: true, speedFactor: 1.5};
 
 $(function(){
   var character = { height: 20, width: 10 };
