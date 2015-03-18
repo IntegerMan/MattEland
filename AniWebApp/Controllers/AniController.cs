@@ -15,7 +15,13 @@ namespace AniWebApp.Controllers
 
         public ActionResult Forecasts()
         {
-            return View();
+            var entities = new AniEntities();
+
+            // TODO: Grab this from the current user's profile
+            const int ZipCode = 43035;
+
+            var predictions = entities.ActiveWeatherPredictionsSelect(ZipCode).ToList();
+            return View(predictions);
         }
 
         /// <summary>
@@ -26,13 +32,9 @@ namespace AniWebApp.Controllers
         [Route(@"Ani\Traffic")]
         public ActionResult Traffic()
         {
-
-            var utcNow = DateTime.UtcNow;
-
             var entities = new AniEntities();
 
-            List<ActiveTrafficIncidentInfoSelect_Result> incidents = entities.ActiveTrafficIncidentInfoSelect().ToList();
-
+            var incidents = entities.ActiveTrafficIncidentInfoSelect().ToList();
             return View(incidents);
         }
     }

@@ -28,6 +28,7 @@ namespace AniWebApp
         }
     
         public virtual DbSet<TrafficIncident> TrafficIncidents { get; set; }
+        public virtual DbSet<FrostPredictionDataView> FrostPredictionDataViews { get; set; }
     
         public virtual ObjectResult<ActiveTrafficIncidentInfoSelect_Result> ActiveTrafficIncidentInfoSelect()
         {
@@ -142,6 +143,15 @@ namespace AniWebApp
                 new ObjectParameter("MinutesToDefrost", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUpdateWeatherPrediction", predictionDateUTCParameter, creatorNodeIDParameter, zipCodeParameter, lowParameter, highParameter, codeParameter, minutesToDefrostParameter);
+        }
+    
+        public virtual ObjectResult<ActiveWeatherPredictionsSelect_Result> ActiveWeatherPredictionsSelect(Nullable<int> zipCode)
+        {
+            var zipCodeParameter = zipCode.HasValue ?
+                new ObjectParameter("ZipCode", zipCode) :
+                new ObjectParameter("ZipCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter);
         }
     }
 }

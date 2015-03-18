@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IList<ActiveWeatherPredictionsSelect_Result>
+
+@{
     ViewBag.Title = "Weather Forecasts for 43035";
 }
 
@@ -12,6 +14,66 @@
     <h1>@ViewBag.Title</h1>
 </div>
 
-<div class="alert alert-danger" role="alert">
-    Weather Forecast Data is not yet available via web
-</div>
+@if (!Model.Any())
+{
+    <p class="alert alert-danger">
+        No forecasts have been recorded. This area may be outside of the service area.
+    </p>
+}
+else
+{
+    <p class="alert alert-warning">
+        Frost Time is still in early development as a neural network is still being trained as data accumulates. Predictions may be comically bad during this time.
+    </p>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Weather Forecast
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-responsive table-condensed">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Forecast</th>
+                        <th>Low</th>
+                        <th>High</th>
+                        <th>Minutes to Defrost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                {
+                        <tr class="@if (m.SeverityID >= 3)
+                               {<text>danger</text>
+                               }
+                               else if (m.SeverityID >= 2)
+                               {
+                                   <text>warning</text>
+                               }">
+                            <td>
+                                @m.PredictionDateUTC.ToString("ddd M/d")
+                            </td>
+                            <td>
+                                @m.WeatherCodeName
+                            </td>
+                            <td>
+                                @m.Low
+                            </td>
+                            <td>
+                                @m.High
+                            </td>
+                            <td>
+                                @if (m.MinutesToDefrost.HasValue)
+                                {
+                                    @m.MinutesToDefrost.Value.ToString("0.00") <text>Minutes</text>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e7c51a4201604a62bee9f152175bef3c" Name="Diagram1">
         <EntityTypeShape EntityType="AniEntitiesModel.TrafficIncident" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AniEntitiesModel.FrostPredictionDataView" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

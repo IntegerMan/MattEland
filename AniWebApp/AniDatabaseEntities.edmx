@@ -27,7 +27,38 @@
           <Property Name="TI_LastEncounteredTimeUTC" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="TI_CreatedUserNodeID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SQL2008_753919_prod.dbo.FrostPredictionDataView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FrostPredictionDataView">
+          <Key>
+            <PropertyRef Name="HadFrost" />
+            <PropertyRef Name="MinutesToDefrost" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="HadRain" />
+            <PropertyRef Name="HasRain" />
+            <PropertyRef Name="HasClouds" />
+            <PropertyRef Name="HasStorm" />
+            <PropertyRef Name="HasWind" />
+            <PropertyRef Name="HasSnow" />
+            <PropertyRef Name="WeatherCode" />
+          </Key>
+          <Property Name="HadFrost" Type="bit" Nullable="false" />
+          <Property Name="MinutesToDefrost" Type="float" Nullable="false" />
+          <Property Name="Low" Type="int" Nullable="false" />
+          <Property Name="High" Type="int" Nullable="false" />
+          <Property Name="HadRain" Type="bit" Nullable="false" />
+          <Property Name="HasRain" Type="bit" Nullable="false" />
+          <Property Name="HasClouds" Type="bit" Nullable="false" />
+          <Property Name="HasStorm" Type="bit" Nullable="false" />
+          <Property Name="HasWind" Type="bit" Nullable="false" />
+          <Property Name="HasSnow" Type="bit" Nullable="false" />
+          <Property Name="WeatherCode" Type="int" Nullable="false" />
+        </EntityType>
         <Function Name="ActiveTrafficIncidentInfoSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ActiveWeatherPredictionsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ZipCode" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertUpdateTrafficIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IncidentID" Type="bigint" Mode="In" />
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
@@ -59,6 +90,21 @@
         </Function>
         <EntityContainer Name="AniEntitiesModelStoreContainer">
           <EntitySet Name="TrafficIncidents" EntityType="Self.TrafficIncidents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FrostPredictionDataView" EntityType="Self.FrostPredictionDataView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FrostPredictionDataView].[HadFrost] AS [HadFrost], 
+    [FrostPredictionDataView].[MinutesToDefrost] AS [MinutesToDefrost], 
+    [FrostPredictionDataView].[Low] AS [Low], 
+    [FrostPredictionDataView].[High] AS [High], 
+    [FrostPredictionDataView].[HadRain] AS [HadRain], 
+    [FrostPredictionDataView].[HasRain] AS [HasRain], 
+    [FrostPredictionDataView].[HasClouds] AS [HasClouds], 
+    [FrostPredictionDataView].[HasStorm] AS [HasStorm], 
+    [FrostPredictionDataView].[HasWind] AS [HasWind], 
+    [FrostPredictionDataView].[HasSnow] AS [HasSnow], 
+    [FrostPredictionDataView].[WeatherCode] AS [WeatherCode]
+    FROM [dbo].[FrostPredictionDataView] AS [FrostPredictionDataView]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -118,6 +164,10 @@
             <Parameter Name="Code" Mode="In" Type="Int32" />
             <Parameter Name="MinutesToDefrost" Mode="In" Type="Double" />
           </FunctionImport>
+          <EntitySet Name="FrostPredictionDataViews" EntityType="AniEntitiesModel.FrostPredictionDataView" />
+          <FunctionImport Name="ActiveWeatherPredictionsSelect" ReturnType="Collection(AniEntitiesModel.ActiveWeatherPredictionsSelect_Result)">
+            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -135,6 +185,49 @@
           <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" />
           <Property Type="Double" Name="Lat" Nullable="false" />
           <Property Type="Double" Name="Lng" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="FrostPredictionDataView">
+          <Key>
+            <PropertyRef Name="HadFrost" />
+            <PropertyRef Name="MinutesToDefrost" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="HadRain" />
+            <PropertyRef Name="HasRain" />
+            <PropertyRef Name="HasClouds" />
+            <PropertyRef Name="HasStorm" />
+            <PropertyRef Name="HasWind" />
+            <PropertyRef Name="HasSnow" />
+            <PropertyRef Name="WeatherCode" />
+          </Key>
+          <Property Name="HadFrost" Type="Boolean" Nullable="false" />
+          <Property Name="MinutesToDefrost" Type="Double" Nullable="false" />
+          <Property Name="Low" Type="Int32" Nullable="false" />
+          <Property Name="High" Type="Int32" Nullable="false" />
+          <Property Name="HadRain" Type="Boolean" Nullable="false" />
+          <Property Name="HasRain" Type="Boolean" Nullable="false" />
+          <Property Name="HasClouds" Type="Boolean" Nullable="false" />
+          <Property Name="HasStorm" Type="Boolean" Nullable="false" />
+          <Property Name="HasWind" Type="Boolean" Nullable="false" />
+          <Property Name="HasSnow" Type="Boolean" Nullable="false" />
+          <Property Name="WeatherCode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="ActiveWeatherPredictionsSelect_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="PredictionDateUTC" Nullable="false" />
+          <Property Type="Int32" Name="ZipCode" Nullable="false" />
+          <Property Type="Int32" Name="Low" Nullable="false" />
+          <Property Type="Int32" Name="High" Nullable="false" />
+          <Property Type="Double" Name="MinutesToDefrost" Nullable="true" />
+          <Property Type="Int32" Name="WeatherCodeID" Nullable="false" />
+          <Property Type="String" Name="WeatherCodeName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="SeverityID" Nullable="false" />
+          <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="HasRain" Nullable="false" />
+          <Property Type="Boolean" Name="HasClouds" Nullable="false" />
+          <Property Type="Boolean" Name="HasStorm" Nullable="false" />
+          <Property Type="Boolean" Name="HasWind" Nullable="false" />
+          <Property Type="Boolean" Name="HasSnow" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -188,6 +281,44 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertUpdateTrafficIncident" FunctionName="AniEntitiesModel.Store.InsertUpdateTrafficIncident" />
           <FunctionImportMapping FunctionImportName="InsertUpdateWeatherPrediction" FunctionName="AniEntitiesModel.Store.InsertUpdateWeatherPrediction" />
+          <EntitySetMapping Name="FrostPredictionDataViews">
+            <EntityTypeMapping TypeName="AniEntitiesModel.FrostPredictionDataView">
+              <MappingFragment StoreEntitySet="FrostPredictionDataView">
+                <ScalarProperty Name="WeatherCode" ColumnName="WeatherCode" />
+                <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
+                <ScalarProperty Name="HasWind" ColumnName="HasWind" />
+                <ScalarProperty Name="HasStorm" ColumnName="HasStorm" />
+                <ScalarProperty Name="HasClouds" ColumnName="HasClouds" />
+                <ScalarProperty Name="HasRain" ColumnName="HasRain" />
+                <ScalarProperty Name="HadRain" ColumnName="HadRain" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="MinutesToDefrost" ColumnName="MinutesToDefrost" />
+                <ScalarProperty Name="HadFrost" ColumnName="HadFrost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ActiveWeatherPredictionsSelect" FunctionName="AniEntitiesModel.Store.ActiveWeatherPredictionsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AniEntitiesModel.ActiveWeatherPredictionsSelect_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PredictionDateUTC" ColumnName="PredictionDateUTC" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="MinutesToDefrost" ColumnName="MinutesToDefrost" />
+                <ScalarProperty Name="WeatherCodeID" ColumnName="WeatherCodeID" />
+                <ScalarProperty Name="WeatherCodeName" ColumnName="WeatherCodeName" />
+                <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
+                <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
+                <ScalarProperty Name="HasRain" ColumnName="HasRain" />
+                <ScalarProperty Name="HasClouds" ColumnName="HasClouds" />
+                <ScalarProperty Name="HasStorm" ColumnName="HasStorm" />
+                <ScalarProperty Name="HasWind" ColumnName="HasWind" />
+                <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
