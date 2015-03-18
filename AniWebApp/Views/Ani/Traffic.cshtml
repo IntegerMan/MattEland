@@ -24,7 +24,7 @@ else
 {
     <div class="panel panel-default">
         <div class="panel-heading">
-            Traffic Incidents in Columbus Ohio
+            Current Traffic Incidents
         </div>
 
         <div class="panel-body">
@@ -32,6 +32,7 @@ else
                 <thead>
                     <tr>
                         <th>Severity</th>
+                        <th>Type</th>
                         <th>Description</th>
                         <th>Start</th>
                         <th>End</th>
@@ -49,6 +50,9 @@ else
                                }">
                             <td>
                                 @m.SeverityName
+                            </td>
+                            <td>
+                                @m.TypeName
                             </td>
                             <td>
                                 @m.Description <small>(@m.Lat, @m.Lng)</small>
