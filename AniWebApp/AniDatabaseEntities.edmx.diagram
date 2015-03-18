@@ -4,42 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3b03f401e33e4419b1f2109687533c8a" Name="Diagram1">
-        <EntityTypeShape EntityType="AniDatabaseEntities.GPSLocation" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.Node" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.NodeType" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.Severity" Width="1.5" PointX="9" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.TrafficIncident" Width="1.5" PointX="10.5" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.TrafficIncidentSeverity" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.TrafficIncidentType" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.Transit" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.UserNode" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.User" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.WeatherCode" Width="1.5" PointX="11.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.WeatherFrostResult" Width="1.5" PointX="13.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.WeatherPrediction" Width="1.5" PointX="13.5" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.WeatherSource" Width="1.5" PointX="11.25" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.ZipCode" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniDatabaseEntities.FrostPredictionDataView" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_Node_GPSLocation_GPS_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_Transits_GPSLocations_GPS_ID_End" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_Transits_GPSLocations_GPS_ID_Start" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_ZipCode_GPSLocation_GPS_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_Drives_Nodes_N_ID_Modified" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_Node_NodeType_NT_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_UserNodes_Node_N_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_TrafficIncidentSeverity_Severities_SEV_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_WeatherCodes_Severities_SEV_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_TrafficIncidents_TrafficIncidentSeverity_TIS_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_TrafficIncidents_TrafficIncidentType_TIT_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_TrafficIncidents_UserNodes_UN_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_Transits_UserNodes_UN_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_UserNodes_Users_U_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_WeatherFrostResults_UserNodes_UN_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_WeatherPredictions_UserNodes_UN_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_WeatherPrediction_WeatherCode_WC_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_WeatherFrostResult_WeatherPrediction_WP_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="AniDatabaseEntities.FK_WeatherPrediction_WeatherSource_WS_ID" ManuallyRouted="false" />
+      <Diagram DiagramId="e7c51a4201604a62bee9f152175bef3c" Name="Diagram1">
+        <EntityTypeShape EntityType="AniEntitiesModel.TrafficIncident" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

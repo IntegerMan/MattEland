@@ -1,13 +1,42 @@
-﻿@{
+﻿@model IList<TrafficIncident>
+
+@{
     ViewBag.Title = "Traffic Incidents";
 }
 
-<h2>@ViewBag.Title</h2>
-
-<p>
-    Traffic Incidents in Columbus Ohio
-</p>
-
-<div class="alert alert-danger" role="alert">
-    Traffic Data is not yet available via web
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
 </div>
+
+@if (!Model.Any())
+{
+    <p class="alert alert-info">
+        No active traffic incidents for this region.
+    </p>
+}
+else
+{
+    <p>
+        Traffic Incidents in Columbus Ohio
+    </p>
+
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.TI_Description</td>
+                    <td>@m.TI_StartTimeUTC</td>
+                    <td>@m.TI_EndTimeUTC</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

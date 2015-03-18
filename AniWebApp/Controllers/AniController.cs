@@ -22,9 +22,15 @@ namespace AniWebApp.Controllers
         [Route(@"Ani\Traffic")]
         public ActionResult Traffic()
         {
-            //List<>
 
-            return View();
+            var utcNow = DateTime.UtcNow;
+
+            var entities = new AniEntities();
+
+            var eligibleIncidents = entities.TrafficIncidents.Where(i => !i.TI_EndTimeUTC.HasValue || i.TI_EndTimeUTC > utcNow);
+            var incidents = eligibleIncidents.OrderBy(i => i.TI_StartTimeUTC).ThenBy(i => i.TI_EndTimeUTC).ToList();
+
+            return View(incidents);
         }
     }
 }

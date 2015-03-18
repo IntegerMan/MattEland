@@ -31,9 +31,5 @@ namespace AniWebApp
         public Nullable<System.DateTime> TI_EndTimeUTC { get; set; }
         public System.DateTime TI_LastEncounteredTimeUTC { get; set; }
         public int TI_CreatedUserNodeID { get; set; }
-    
-        public virtual TrafficIncidentSeverity TrafficIncidentSeverity { get; set; }
-        public virtual TrafficIncidentType TrafficIncidentType { get; set; }
-        public virtual UserNode UserNode { get; set; }
     }
 }

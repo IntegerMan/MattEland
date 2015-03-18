@@ -196,61 +196,16 @@
     <Compile Include="Controllers\AniController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="FrostPredictionDataView.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="GPSLocation.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NavUtilities.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Node.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NodeType.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Severity.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TrafficIncident.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TrafficIncidentSeverity.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TrafficIncidentType.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Transit.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserNode.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherCode.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherFrostResult.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherPrediction.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherSource.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ZipCode.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
