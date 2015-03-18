@@ -1,7 +1,15 @@
 ﻿@{
     ViewBag.Title = "About Me";
 }
-<h2>@ViewBag.Title</h2>
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="active">About Me</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
 
 <p>
     I'm a software developer / husband / Church preschool teacher / hobbyist / nerd with a love for most things creative, robotic, futuristic, and/or nerdy.
@@ -10,7 +18,7 @@
     This site exists largely to host experimental projects, data, and web services, but if you're a human, cyborg, or an Artificial General Intelligence, I hope you're enjoying your visit and getting something useful out of this.
 </p>
 
-<h3>Contact Me</h3>
+<h2>Contact Me</h2>
 
 <div class="list-group">
     <a class="list-group-item" href="https://github.com/IntegerMan">

@@ -18,6 +18,10 @@ namespace AniWebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Gets the traffic incidents master view
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         [HttpGet]
         [Route(@"Ani\Traffic")]
         public ActionResult Traffic()
@@ -27,8 +31,7 @@ namespace AniWebApp.Controllers
 
             var entities = new AniEntities();
 
-            var eligibleIncidents = entities.TrafficIncidents.Where(i => !i.TI_EndTimeUTC.HasValue || i.TI_EndTimeUTC > utcNow);
-            var incidents = eligibleIncidents.OrderBy(i => i.TI_StartTimeUTC).ThenBy(i => i.TI_EndTimeUTC).ToList();
+            List<ActiveTrafficIncidentInfoSelect_Result> incidents = entities.ActiveTrafficIncidentInfoSelect().ToList();
 
             return View(incidents);
         }

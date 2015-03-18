@@ -2,7 +2,15 @@
     ViewBag.Title = "Weather Forecasts for 43035";
 }
 
-<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index")">ANI</a></li>
+    <li class="active">Weather</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
 
 <div class="alert alert-danger" role="alert">
     Weather Forecast Data is not yet available via web

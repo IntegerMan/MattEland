@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "www.MattEland.com";
 }
 
 <div class="jumbotron">
 
-    <h1>www.MattEland.com</h1>
+    <h1>@ViewBag.Title</h1>
 
     <p class="lead">This website houses app information and web / database / web services related to experimental projects.</p>
 
@@ -19,6 +19,7 @@
         <h2>ANI</h2>
         <p>A series of experiments around using Artificial Narrow Intelligence to analyze data and make inferences and recommendations based on that data.</p>
         <a class="btn btn-primary" href="@Url.Action("Index", "Ani")">Learn More</a>
+        <br />
     </div>
     <div class="col-md-6">
         <h2>Apps</h2>
@@ -26,5 +27,6 @@
             Links and information on apps for Windows Phone. These apps are older and are not actively updated or maintained.
         </p>
         <a class="btn btn-default" href="@Url.Action("Index","Apps")">View Apps</a>
+        <br />
     </div>
 </div>

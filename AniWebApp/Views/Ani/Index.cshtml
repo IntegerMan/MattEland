@@ -2,7 +2,14 @@
     ViewBag.Title = "ANI Online";
 }
 
-<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="active">ANI</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
 
 <p>
     Welcome to the Artificial Narrow Intelligence (ANI) project. This project is still in its infancy

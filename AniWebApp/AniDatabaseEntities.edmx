@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AniEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AniEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TrafficIncidents">
           <Key>
             <PropertyRef Name="TI_ID" />
@@ -27,11 +27,40 @@
           <Property Name="TI_LastEncounteredTimeUTC" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="TI_CreatedUserNodeID" Type="int" Nullable="false" />
         </EntityType>
+        <Function Name="ActiveTrafficIncidentInfoSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertUpdateTrafficIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IncidentID" Type="bigint" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Congsestion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Detour" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Lane" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RoadClosed" Type="bit" Mode="In" />
+          <Parameter Name="Verified" Type="bit" Mode="In" />
+          <Parameter Name="CreatedTimeUTC" Type="datetime2" Mode="In" />
+          <Parameter Name="ModifiedTimeUTC" Type="datetime2" Mode="In" />
+          <Parameter Name="StartTimeUTC" Type="datetime2" Mode="In" />
+          <Parameter Name="EndTimeUTC" Type="datetime2" Mode="In" />
+          <Parameter Name="LocationLat" Type="float" Mode="In" />
+          <Parameter Name="LocationLng" Type="float" Mode="In" />
+          <Parameter Name="EndLocationLat" Type="float" Mode="In" />
+          <Parameter Name="EndLocationLng" Type="float" Mode="In" />
+          <Parameter Name="CreatorUserNodeID" Type="int" Mode="In" />
+          <Parameter Name="SeverityID" Type="int" Mode="In" />
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertUpdateWeatherPrediction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PredictionDateUTC" Type="date" Mode="In" />
+          <Parameter Name="CreatorNodeID" Type="int" Mode="In" />
+          <Parameter Name="ZipCode" Type="int" Mode="In" />
+          <Parameter Name="Low" Type="float" Mode="In" />
+          <Parameter Name="High" Type="float" Mode="In" />
+          <Parameter Name="Code" Type="int" Mode="In" />
+          <Parameter Name="MinutesToDefrost" Type="float" Mode="In" />
+        </Function>
         <EntityContainer Name="AniEntitiesModelStoreContainer">
           <EntitySet Name="TrafficIncidents" EntityType="Self.TrafficIncidents" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AniEntitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -59,7 +88,54 @@
         </EntityType>
         <EntityContainer Name="AniEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TrafficIncidents" EntityType="Self.TrafficIncident" />
+          <FunctionImport Name="ActiveTrafficIncidentInfoSelect" ReturnType="Collection(AniEntitiesModel.ActiveTrafficIncidentInfoSelect_Result)" />
+          <FunctionImport Name="InsertUpdateTrafficIncident">
+            <Parameter Name="IncidentID" Mode="In" Type="Int64" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Congsestion" Mode="In" Type="String" />
+            <Parameter Name="Detour" Mode="In" Type="String" />
+            <Parameter Name="Lane" Mode="In" Type="String" />
+            <Parameter Name="RoadClosed" Mode="In" Type="Boolean" />
+            <Parameter Name="Verified" Mode="In" Type="Boolean" />
+            <Parameter Name="CreatedTimeUTC" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedTimeUTC" Mode="In" Type="DateTime" />
+            <Parameter Name="StartTimeUTC" Mode="In" Type="DateTime" />
+            <Parameter Name="EndTimeUTC" Mode="In" Type="DateTime" />
+            <Parameter Name="LocationLat" Mode="In" Type="Double" />
+            <Parameter Name="LocationLng" Mode="In" Type="Double" />
+            <Parameter Name="EndLocationLat" Mode="In" Type="Double" />
+            <Parameter Name="EndLocationLng" Mode="In" Type="Double" />
+            <Parameter Name="CreatorUserNodeID" Mode="In" Type="Int32" />
+            <Parameter Name="SeverityID" Mode="In" Type="Int32" />
+            <Parameter Name="TypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUpdateWeatherPrediction">
+            <Parameter Name="PredictionDateUTC" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatorNodeID" Mode="In" Type="Int32" />
+            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+            <Parameter Name="Low" Mode="In" Type="Double" />
+            <Parameter Name="High" Mode="In" Type="Double" />
+            <Parameter Name="Code" Mode="In" Type="Int32" />
+            <Parameter Name="MinutesToDefrost" Mode="In" Type="Double" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="String" Name="Congestion" Nullable="true" />
+          <Property Type="String" Name="Detour" Nullable="true" />
+          <Property Type="String" Name="Lane" Nullable="true" />
+          <Property Type="Boolean" Name="RoadClosed" Nullable="false" />
+          <Property Type="Boolean" Name="Verified" Nullable="false" />
+          <Property Type="DateTime" Name="StartTimeUTC" Nullable="true" />
+          <Property Type="DateTime" Name="EndTimeUTC" Nullable="true" />
+          <Property Type="Int32" Name="SeverityID" Nullable="false" />
+          <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TypeID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Lat" Nullable="false" />
+          <Property Type="Double" Name="Lng" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -89,6 +165,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ActiveTrafficIncidentInfoSelect" FunctionName="AniEntitiesModel.Store.ActiveTrafficIncidentInfoSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AniEntitiesModel.ActiveTrafficIncidentInfoSelect_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Congestion" ColumnName="Congestion" />
+                <ScalarProperty Name="Detour" ColumnName="Detour" />
+                <ScalarProperty Name="Lane" ColumnName="Lane" />
+                <ScalarProperty Name="RoadClosed" ColumnName="RoadClosed" />
+                <ScalarProperty Name="Verified" ColumnName="Verified" />
+                <ScalarProperty Name="StartTimeUTC" ColumnName="StartTimeUTC" />
+                <ScalarProperty Name="EndTimeUTC" ColumnName="EndTimeUTC" />
+                <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
+                <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertUpdateTrafficIncident" FunctionName="AniEntitiesModel.Store.InsertUpdateTrafficIncident" />
+          <FunctionImportMapping FunctionImportName="InsertUpdateWeatherPrediction" FunctionName="AniEntitiesModel.Store.InsertUpdateWeatherPrediction" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

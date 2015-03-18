@@ -171,6 +171,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveTrafficIncidentInfoSelect_Result.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="AniDatabaseEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
