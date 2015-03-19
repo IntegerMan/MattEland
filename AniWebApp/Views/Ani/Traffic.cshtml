@@ -31,11 +31,11 @@ else
             <table class="table table-responsive table-condensed">
                 <thead>
                     <tr>
-                        <th>Severity</th>
-                        <th>Type</th>
+                        <th></th>
                         <th>Description</th>
                         <th>Start</th>
                         <th>End</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,10 +49,18 @@ else
                                    <text>warning</text>
                                }">
                             <td>
-                                @m.SeverityName
-                            </td>
-                            <td>
-                                @m.TypeName
+                                @if (m.SeverityID >= 3)
+                                {
+                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                }
+                                else if (m.SeverityID >= 2)
+                                {
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                }
                             </td>
                             <td>
                                 @m.Description (@m.Lat, @m.Lng)
@@ -68,6 +76,9 @@ else
                                 {
                                     @m.EndTimeUTC.Value.ToLocalTime().ToString("g")
                                 }
+                            </td>
+                            <td>
+                                @m.TypeName
                             </td>
                         </tr>
                     }

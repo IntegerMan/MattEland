@@ -243,6 +243,7 @@
       <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
     </Content>
     <None Include="bower.json" />
+    <Content Include="Content\Bootstrap.less" />
     <None Include="gruntfile.js" />
     <Content Include="Images\ApplicationIcon.png" />
     <Content Include="Images\contentback.jpg" />
