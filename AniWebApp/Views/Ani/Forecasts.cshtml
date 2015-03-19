@@ -67,7 +67,15 @@ else
                             <td>
                                 @if (m.MinutesToDefrost.HasValue)
                                 {
-                                    @m.MinutesToDefrost.Value.ToString("0.00") <text>Minutes</text>
+                                    if (m.MinutesToDefrost <= 0.1)
+                                    {
+                                        <text>No Frost</text>
+                                    }
+                                    else
+                                    {
+                                        @m.MinutesToDefrost.Value.ToString("0.00")
+                                        <text>Minutes</text>
+                                    }
                                 }
                             </td>
                         </tr>
