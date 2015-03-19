@@ -19,8 +19,20 @@
 
 <h2>Supported Functions</h2>
 
-<div class="list-group">
-    <a class="list-group-item" href="@Url.Action("Forecasts")">Weather Forecasts</a>
-    <a class="list-group-item" href="@Url.Action("Traffic")">Traffic Incidents</a>
-</div>
+<ul class="nav-stacked">
+    <li>
+        Weather
+        <ul class="nav-stacked">
+            <li>
+                <a href="@Url.Action("Forecasts")">Weather Forecasts</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Frost")">View / Edit Frost Data</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="@Url.Action("Traffic")">Traffic Incidents</a>
+    </li>
+</ul>
 
