@@ -1,0 +1,59 @@
+﻿@model IList<FrostPredictionDataView>
+
+@{
+    ViewBag.Title = "Frost Predictions and Observations";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index")">ANI</a></li>
+    <li><a href="@Url.Action("Forecasts", "ANI")">Weather</a></li>
+    <li class="active">Frost</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="alert alert-danger">
+        No frost observations have been recorded.
+    </p>
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Weather Forecast
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Low</th>
+                        <th>High</th>
+                        <th>Minutes to Defrost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                {
+                        <tr>
+                            <td>
+                                @m.Low
+                            </td>
+                            <td>
+                                @m.High
+                            </td>
+                            <td>
+                                @m.MinutesToDefrost
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
