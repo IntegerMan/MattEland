@@ -29,6 +29,21 @@ namespace AniWebApp
     
         public virtual DbSet<TrafficIncident> TrafficIncidents { get; set; }
         public virtual DbSet<FrostPredictionDataView> FrostPredictionDataViews { get; set; }
+        public virtual DbSet<GPSLocation> GPSLocations { get; set; }
+        public virtual DbSet<LogEntry> LogEntries { get; set; }
+        public virtual DbSet<Node> Nodes { get; set; }
+        public virtual DbSet<NodeType> NodeTypes { get; set; }
+        public virtual DbSet<Severity> Severities { get; set; }
+        public virtual DbSet<TrafficIncidentSeverity> TrafficIncidentSeverities { get; set; }
+        public virtual DbSet<TrafficIncidentType> TrafficIncidentTypes { get; set; }
+        public virtual DbSet<Transit> Transits { get; set; }
+        public virtual DbSet<UserNode> UserNodes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<WeatherCode> WeatherCodes { get; set; }
+        public virtual DbSet<WeatherFrostResult> WeatherFrostResults { get; set; }
+        public virtual DbSet<WeatherPrediction> WeatherPredictions { get; set; }
+        public virtual DbSet<WeatherSource> WeatherSources { get; set; }
+        public virtual DbSet<ZipCode> ZipCodes { get; set; }
     
         public virtual ObjectResult<ActiveTrafficIncidentInfoSelect_Result> ActiveTrafficIncidentInfoSelect()
         {
