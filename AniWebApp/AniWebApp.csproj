@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\AniController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="FrostPredictionDataView.cs">
@@ -402,6 +403,7 @@
     <Content Include="Views\Ani\Index.cshtml" />
     <Content Include="Views\Ani\Traffic.cshtml" />
     <Content Include="Views\Ani\Frost.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

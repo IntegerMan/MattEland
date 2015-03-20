@@ -47,7 +47,7 @@ namespace AniWebApp.Controllers
         {
             var entities = new AniEntities();
 
-            List<WeatherFrostPredictionsVsActualsSelect_Result> predictions = entities.WeatherFrostPredictionsVsActualsSelect().ToList();
+            var predictions = entities.WeatherFrostPredictionsVsActualsSelect().ToList();
             return View(predictions);
         }
 
