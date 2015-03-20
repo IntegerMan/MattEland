@@ -1,0 +1,53 @@
+﻿@model AniWebApp.Models.AddFrostRecordModel
+
+@{
+    ViewBag.Title = "Add Frost Observation";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index")">ANI</a></li>
+    <li><a href="@Url.Action("Forecasts", "ANI")">Weather</a></li>
+    <li><a href="@Url.Action("Frost", "ANI")">Frost</a></li>
+    <li class="active">Add Entry</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
+
+<div class="alert alert-info">
+    Please enter records of frost observed on a given day with the zip code the frost was observed in. <br />
+    Records will only be preserved for days and zip codes where weather predictions were entered.
+</div>
+
+@using (Html.BeginForm("AddFrostEntry", "ANI", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
+{
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RecordDate, new {@class = "form-label"})<br/>
+        @Html.TextBoxFor(m => m.RecordDate, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here..." })
+        @Html.ValidationMessageFor(m => m.RecordDate, "", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ZipCode, new { @class = "form-label" })<br />
+        @Html.TextBoxFor(m => m.ZipCode, new { @class="form-control"} )
+        @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RainedOvernight, new { @class = "form-label" })<br />
+        @Html.CheckBoxFor(m => m.RainedOvernight, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ActualMinutes, new { @class = "form-label" })<br />
+        @Html.TextBoxFor(m => m.ActualMinutes, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.ActualMinutes, "", new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+}

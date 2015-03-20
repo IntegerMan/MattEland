@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AniWebApp.Models;
 
 namespace AniWebApp.Controllers
 {
@@ -63,6 +65,25 @@ namespace AniWebApp.Controllers
 
             var incidents = entities.ActiveTrafficIncidentInfoSelect().ToList();
             return View(incidents);
+        }
+
+        [HttpGet]
+        [Route(@"Ani/Weather/Frost/AddEntry")]
+        public ActionResult AddFrostEntry()
+        {
+            var model = new AddFrostRecordModel();
+            model.RecordDate = DateTime.Today;
+            model.ZipCode = 43035; // TODO: This should use something from the user's settings instead
+            model.ActualMinutes = 0;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route(@"Ani/Weather/Frost/AddEntry")]
+        public ActionResult AddFrostEntry_Push()
+        {
+            return RedirectToAction("Frost");
         }
     }
 }
