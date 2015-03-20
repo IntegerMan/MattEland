@@ -36,6 +36,7 @@ else
                         <th>Zip</th>
                         <th>Low</th>
                         <th>High</th>
+                        <th>Conditions</th>
                         <th>Predicted Minutes</th>
                         <th>Actual Minutes</th>
                     </tr>
@@ -55,6 +56,9 @@ else
                             </td>
                             <td class="red">
                                 @m.High
+                            </td>
+                            <td>
+                                @m.WeatherCodeName
                             </td>
                             <td>
                                 @if (m.PredictedMinutes != null)
