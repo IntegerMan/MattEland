@@ -168,5 +168,10 @@ namespace AniWebApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter);
         }
+    
+        public virtual ObjectResult<WeatherFrostPredictionsVsActualsSelect_Result> WeatherFrostPredictionsVsActualsSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WeatherFrostPredictionsVsActualsSelect_Result>("WeatherFrostPredictionsVsActualsSelect");
+        }
     }
 }

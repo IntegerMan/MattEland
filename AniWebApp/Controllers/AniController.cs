@@ -25,7 +25,7 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         [HttpGet]
-        [Route(@"Ani\Weather\Forecasts")]
+        [Route(@"Ani/Weather/Forecasts")]
         public ActionResult Forecasts()
         {
             var entities = new AniEntities();
@@ -42,12 +42,12 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         [HttpGet]
-        [Route(@"Ani\Weather\Frost")]
+        [Route(@"Ani/Weather/Frost")]
         public ActionResult Frost()
         {
             var entities = new AniEntities();
 
-            var predictions = entities.FrostPredictionDataViews.ToList();
+            List<WeatherFrostPredictionsVsActualsSelect_Result> predictions = entities.WeatherFrostPredictionsVsActualsSelect().ToList();
             return View(predictions);
         }
 
@@ -56,7 +56,7 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         [HttpGet]
-        [Route(@"Ani\Traffic")]
+        [Route(@"Ani/Traffic")]
         public ActionResult Traffic()
         {
             var entities = new AniEntities();

@@ -64,10 +64,10 @@ else
                             <td>
                                 @m.WeatherCodeName
                             </td>
-                            <td>
+                            <td class="blue">
                                 @m.Low
                             </td>
-                            <td>
+                            <td class="red">
                                 @m.High
                             </td>
                             <td>
@@ -75,7 +75,7 @@ else
                                 {
                                     if (m.MinutesToDefrost <= 0.1)
                                     {
-                                        <text>No Frost</text>
+                                        <text><span class="text-muted">No Frost</span></text>
                                     }
                                     else
                                     {

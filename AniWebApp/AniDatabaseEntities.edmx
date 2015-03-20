@@ -464,6 +464,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Parameter Name="Code" Type="int" Mode="In" />
           <Parameter Name="MinutesToDefrost" Type="float" Mode="In" />
         </Function>
+        <Function Name="WeatherFrostPredictionsVsActualsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="AniEntitiesModelStoreContainer">
           <EntitySet Name="GPSLocations" EntityType="Self.GPSLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogEntries" EntityType="Self.LogEntries" Schema="dbo" store:Type="Tables" />
@@ -729,6 +730,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="WeatherSource" EntitySet="WeatherSources" />
             <End Role="WeatherPrediction" EntitySet="WeatherPredictions" />
           </AssociationSet>
+          <FunctionImport Name="WeatherFrostPredictionsVsActualsSelect" ReturnType="Collection(AniEntitiesModel.WeatherFrostPredictionsVsActualsSelect_Result)" />
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -1201,6 +1203,31 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="WeatherFrostPredictionsVsActualsSelect_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Boolean" Name="HadFrost" Nullable="false" />
+          <Property Type="Boolean" Name="RainedOvernight" Nullable="false" />
+          <Property Type="Double" Name="PredictedMinutes" Nullable="true" />
+          <Property Type="Double" Name="ActualMinutes" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="RecordedTimeUTC" Nullable="false" />
+          <Property Type="DateTime" Name="PredictionDateUTC" Nullable="false" />
+          <Property Type="Int32" Name="ZipCode" Nullable="false" />
+          <Property Type="Int32" Name="Low" Nullable="false" />
+          <Property Type="Int32" Name="High" Nullable="false" />
+          <Property Type="Int32" Name="WeatherCodeID" Nullable="false" />
+          <Property Type="String" Name="WeatherCodeName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="HasRain" Nullable="false" />
+          <Property Type="Boolean" Name="HasClouds" Nullable="false" />
+          <Property Type="Boolean" Name="HasStorm" Nullable="false" />
+          <Property Type="Boolean" Name="HasWind" Nullable="false" />
+          <Property Type="Boolean" Name="HasSnow" Nullable="false" />
+          <Property Type="Int32" Name="SeverityID" Nullable="false" />
+          <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1454,6 +1481,35 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="WeatherFrostPredictionsVsActualsSelect" FunctionName="AniEntitiesModel.Store.WeatherFrostPredictionsVsActualsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AniEntitiesModel.WeatherFrostPredictionsVsActualsSelect_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="HadFrost" ColumnName="HadFrost" />
+                <ScalarProperty Name="RainedOvernight" ColumnName="RainedOvernight" />
+                <ScalarProperty Name="PredictedMinutes" ColumnName="PredictedMinutes" />
+                <ScalarProperty Name="ActualMinutes" ColumnName="ActualMinutes" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RecordedTimeUTC" ColumnName="RecordedTimeUTC" />
+                <ScalarProperty Name="PredictionDateUTC" ColumnName="PredictionDateUTC" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="WeatherCodeID" ColumnName="WeatherCodeID" />
+                <ScalarProperty Name="WeatherCodeName" ColumnName="WeatherCodeName" />
+                <ScalarProperty Name="HasRain" ColumnName="HasRain" />
+                <ScalarProperty Name="HasClouds" ColumnName="HasClouds" />
+                <ScalarProperty Name="HasStorm" ColumnName="HasStorm" />
+                <ScalarProperty Name="HasWind" ColumnName="HasWind" />
+                <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
+                <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
+                <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
