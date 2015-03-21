@@ -63,7 +63,14 @@ else
                             <td>
                                 @if (m.PredictedMinutes != null)
                                 {
-                                    @m.PredictedMinutes.Value.ToString("0.00 Minutes")
+                                    if (m.PredictedMinutes > 0)
+                                    {
+                                        @m.PredictedMinutes.Value.ToString("0.0 Minutes")
+                                    }
+                                    else
+                                    {
+                                        <text><span class="text-muted">No Frost</span></text>
+                                    }
                                 }
                                 else
                                 {
@@ -71,9 +78,9 @@ else
                                 }
                             </td>
                             <td>
-                                @if (m.ActualMinutes != null)
+                                @if (m.ActualMinutes != null && m.ActualMinutes > 0)
                                 {
-                                    @m.ActualMinutes.Value.ToString("0.00 Minutes")
+                                    @m.ActualMinutes.Value.ToString("0.0 Minutes")
                                 }
                                 else
                                 {
