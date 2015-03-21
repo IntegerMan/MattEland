@@ -22,7 +22,7 @@ namespace AniWebApp.Models
         /// </summary>
         [DisplayName("Actual Minutes")]
         [Required]
-        public float ActualMinutes { get; set; }
+        public double ActualMinutes { get; set; }
 
         /// <summary>
         /// Whether or not it rained overnight

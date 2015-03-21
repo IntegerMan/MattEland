@@ -23,6 +23,7 @@
 
 @using (Html.BeginForm("AddFrostEntry", "ANI", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
 {
+    @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

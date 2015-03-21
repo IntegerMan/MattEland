@@ -11,6 +11,8 @@ namespace AniWebApp.Controllers
     /// </summary>
     public class AniController : Controller
     {
+        private readonly AniEntities _entities = new AniEntities();
+
         /// <summary>
         /// Gets the main ANI view
         /// </summary>
@@ -30,12 +32,10 @@ namespace AniWebApp.Controllers
         [Route(@"Ani/Weather/Forecasts")]
         public ActionResult Forecasts()
         {
-            var entities = new AniEntities();
-
             // TODO: Grab this from the current user's profile
             const int ZipCode = 43035;
 
-            var predictions = entities.ActiveWeatherPredictionsSelect(ZipCode).ToList();
+            var predictions = _entities.ActiveWeatherPredictionsSelect(ZipCode).ToList();
             return View(predictions);
         }
 
@@ -47,9 +47,7 @@ namespace AniWebApp.Controllers
         [Route(@"Ani/Weather/Frost")]
         public ActionResult Frost()
         {
-            var entities = new AniEntities();
-
-            var predictions = entities.WeatherFrostPredictionsVsActualsSelect().ToList();
+            var predictions = _entities.WeatherFrostPredictionsVsActualsSelect().ToList();
             return View(predictions);
         }
 
@@ -61,9 +59,7 @@ namespace AniWebApp.Controllers
         [Route(@"Ani/Traffic")]
         public ActionResult Traffic()
         {
-            var entities = new AniEntities();
-
-            var incidents = entities.ActiveTrafficIncidentInfoSelect().ToList();
+            var incidents = _entities.ActiveTrafficIncidentInfoSelect().ToList();
             return View(incidents);
         }
 
@@ -71,19 +67,43 @@ namespace AniWebApp.Controllers
         [Route(@"Ani/Weather/Frost/AddEntry")]
         public ActionResult AddFrostEntry()
         {
-            var model = new AddFrostRecordModel();
-            model.RecordDate = DateTime.Today;
-            model.ZipCode = 43035; // TODO: This should use something from the user's settings instead
-            model.ActualMinutes = 0;
+            // TODO: Require authorize
+
+            var model = new AddFrostRecordModel
+            {
+                RecordDate = DateTime.Today,
+                ZipCode = 43035,
+                ActualMinutes = 0.0
+            };
+            // TODO: This should use something from the user's settings instead
 
             return View(model);
         }
 
         [HttpPost]
         [Route(@"Ani/Weather/Frost/AddEntry")]
-        public ActionResult AddFrostEntry_Push()
+        [ValidateAntiForgeryToken]
+        public ActionResult AddFrostEntry_Push(AddFrostRecordModel entry)
         {
-            return RedirectToAction("Frost");
+            // TODO: Require authorize
+
+            // TODO: Grab this from the current user!
+            const int userID = 1;
+
+            var result = _entities.WeatherFrostResultsInsert(userID,
+                entry.RainedOvernight,
+                entry.ActualMinutes,
+                entry.ZipCode,
+                entry.RecordDate.Date);
+
+            // On success, go back to the list page
+            if (result >= 1)
+            {
+                return RedirectToAction("Frost");
+            }
+
+            // We're not quite valid. Redirect to the view
+            return View(entry);
         }
     }
 }
