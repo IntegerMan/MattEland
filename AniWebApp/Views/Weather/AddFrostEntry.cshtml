@@ -21,7 +21,7 @@
     <p>Records will only be preserved for days and zip codes where weather predictions were entered.</p>
 </div>
 
-@using (Html.BeginForm("AddFrostEntry", "ANI", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
+@using (Html.BeginForm("AddFrostEntry", "Weather", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
