@@ -22,74 +22,62 @@
 }
 else
 {
-    <div class="alert alert-warning">
-        <p>
-            Frost Time is still in early development as a neural network is still being trained as data accumulates. Predictions may be comically bad during this time.
-        </p>
-        <br/>
-        <a class="btn btn-default" href="@Url.Action("Frost", "Weather")">
-            View Frost Data
-        </a>
-        <a class="btn btn-default" href="@Url.Action("AddFrostEntry", "Weather")">
-            Add Frost Entry
-        </a>
+    <div class="row">
+
+        @foreach (var m in Model.Take(5))
+        {
+            <div class="col-md-2">
+                <div class="panel @if (m.SeverityID >= 3)
+                                  {@Html.Raw("panel-danger")
+                                  }
+                                  else if (m.SeverityID >= 2)
+                                  {
+                                      @Html.Raw("panel-warning")
+                                  }
+                                  else
+                                  {
+                                      @Html.Raw("panel-info")
+                                  }">
+                    <div class="panel-heading">
+                        @m.PredictionDateUTC.ToString("ddd M/d")
+                    </div>
+
+                    <div class="panel-body">
+                        <i class="glyphicon glyphicon-cloud"></i><br/>
+                        @m.WeatherCodeName<br/>
+                        <br/>
+                        Temp: <span class="blue">@m.Low</span> / <span class="red">@m.High</span> <br/>
+                        @if (m.MinutesToDefrost.HasValue)
+                        {
+                            if (m.MinutesToDefrost <= 0)
+                            {
+                                @Html.Raw("No Frost")
+                            }
+                            else
+                            {
+                                @m.MinutesToDefrost.Value.ToString("0 Mins Frost")
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Weather Forecast
-        </div>
-
-        <div class="panel-body">
-            <table class="table table-responsive table-condensed">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Forecast</th>
-                        <th>Low</th>
-                        <th>High</th>
-                        <th>Minutes to Defrost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var m in Model)
-                {
-                        <tr class="@if (m.SeverityID >= 3)
-                               {<text>danger</text>
-                               }
-                               else if (m.SeverityID >= 2)
-                               {
-                                   <text>warning</text>
-                               }">
-                            <td>
-                                @m.PredictionDateUTC.ToString("ddd M/d")
-                            </td>
-                            <td>
-                                @m.WeatherCodeName
-                            </td>
-                            <td class="blue">
-                                @m.Low
-                            </td>
-                            <td class="red">
-                                @m.High
-                            </td>
-                            <td>
-                                @if (m.MinutesToDefrost.HasValue)
-                                {
-                                    if (m.MinutesToDefrost <= 0)
-                                    {
-                                        <text><span class="text-muted">No Frost</span></text>
-                                    }
-                                    else
-                                    {
-                                        @m.MinutesToDefrost.Value.ToString("0.0 Minutes")
-                                    }
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="alert alert-warning">
+                <p>
+                    Frost Time is still in early development as a neural network is still being trained as data accumulates. Predictions may be comically bad during this time.
+                </p>
+                <br />
+                <a class="btn btn-default" href="@Url.Action("Frost", "Weather")">
+                    View Frost Data
+                </a>
+                <a class="btn btn-default" href="@Url.Action("AddFrostEntry", "Weather")">
+                    Add Frost Entry
+                </a>
+            </div>
         </div>
     </div>
+
 }
