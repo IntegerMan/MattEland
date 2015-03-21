@@ -465,6 +465,13 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Parameter Name="MinutesToDefrost" Type="float" Mode="In" />
         </Function>
         <Function Name="WeatherFrostPredictionsVsActualsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="WeatherFrostResultsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreatorUserNodeID" Type="int" Mode="In" />
+          <Parameter Name="RainedOvernight" Type="bit" Mode="In" />
+          <Parameter Name="MinutesToDefrost" Type="float" Mode="In" />
+          <Parameter Name="ZipCode" Type="int" Mode="In" />
+          <Parameter Name="PredictionDate" Type="datetime2" Mode="In" />
+        </Function>
         <EntityContainer Name="AniEntitiesModelStoreContainer">
           <EntitySet Name="GPSLocations" EntityType="Self.GPSLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogEntries" EntityType="Self.LogEntries" Schema="dbo" store:Type="Tables" />
@@ -731,6 +738,13 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="WeatherPrediction" EntitySet="WeatherPredictions" />
           </AssociationSet>
           <FunctionImport Name="WeatherFrostPredictionsVsActualsSelect" ReturnType="Collection(AniEntitiesModel.WeatherFrostPredictionsVsActualsSelect_Result)" />
+          <FunctionImport Name="WeatherFrostResultsInsert">
+            <Parameter Name="CreatorUserNodeID" Mode="In" Type="Int32" />
+            <Parameter Name="RainedOvernight" Mode="In" Type="Boolean" />
+            <Parameter Name="MinutesToDefrost" Mode="In" Type="Double" />
+            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+            <Parameter Name="PredictionDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -1510,6 +1524,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="WeatherFrostResultsInsert" FunctionName="AniEntitiesModel.Store.WeatherFrostResultsInsert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

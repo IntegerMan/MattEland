@@ -173,5 +173,30 @@ namespace AniWebApp
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WeatherFrostPredictionsVsActualsSelect_Result>("WeatherFrostPredictionsVsActualsSelect");
         }
+    
+        public virtual int WeatherFrostResultsInsert(Nullable<int> creatorUserNodeID, Nullable<bool> rainedOvernight, Nullable<double> minutesToDefrost, Nullable<int> zipCode, Nullable<System.DateTime> predictionDate)
+        {
+            var creatorUserNodeIDParameter = creatorUserNodeID.HasValue ?
+                new ObjectParameter("CreatorUserNodeID", creatorUserNodeID) :
+                new ObjectParameter("CreatorUserNodeID", typeof(int));
+    
+            var rainedOvernightParameter = rainedOvernight.HasValue ?
+                new ObjectParameter("RainedOvernight", rainedOvernight) :
+                new ObjectParameter("RainedOvernight", typeof(bool));
+    
+            var minutesToDefrostParameter = minutesToDefrost.HasValue ?
+                new ObjectParameter("MinutesToDefrost", minutesToDefrost) :
+                new ObjectParameter("MinutesToDefrost", typeof(double));
+    
+            var zipCodeParameter = zipCode.HasValue ?
+                new ObjectParameter("ZipCode", zipCode) :
+                new ObjectParameter("ZipCode", typeof(int));
+    
+            var predictionDateParameter = predictionDate.HasValue ?
+                new ObjectParameter("PredictionDate", predictionDate) :
+                new ObjectParameter("PredictionDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WeatherFrostResultsInsert", creatorUserNodeIDParameter, rainedOvernightParameter, minutesToDefrostParameter, zipCodeParameter, predictionDateParameter);
+        }
     }
 }
