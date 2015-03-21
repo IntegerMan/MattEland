@@ -160,15 +160,6 @@ namespace AniWebApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUpdateWeatherPrediction", predictionDateUTCParameter, creatorNodeIDParameter, zipCodeParameter, lowParameter, highParameter, codeParameter, minutesToDefrostParameter);
         }
     
-        public virtual ObjectResult<ActiveWeatherPredictionsSelect_Result> ActiveWeatherPredictionsSelect(Nullable<int> zipCode)
-        {
-            var zipCodeParameter = zipCode.HasValue ?
-                new ObjectParameter("ZipCode", zipCode) :
-                new ObjectParameter("ZipCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter);
-        }
-    
         public virtual ObjectResult<WeatherFrostPredictionsVsActualsSelect_Result> WeatherFrostPredictionsVsActualsSelect()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WeatherFrostPredictionsVsActualsSelect_Result>("WeatherFrostPredictionsVsActualsSelect");
@@ -197,6 +188,19 @@ namespace AniWebApp
                 new ObjectParameter("PredictionDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WeatherFrostResultsInsert", creatorUserNodeIDParameter, rainedOvernightParameter, minutesToDefrostParameter, zipCodeParameter, predictionDateParameter);
+        }
+    
+        public virtual ObjectResult<ActiveWeatherPredictionsSelect_Result> ActiveWeatherPredictionsSelect(Nullable<int> zipCode, Nullable<System.DateTime> afterDate)
+        {
+            var zipCodeParameter = zipCode.HasValue ?
+                new ObjectParameter("ZipCode", zipCode) :
+                new ObjectParameter("ZipCode", typeof(int));
+    
+            var afterDateParameter = afterDate.HasValue ?
+                new ObjectParameter("AfterDate", afterDate) :
+                new ObjectParameter("AfterDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter, afterDateParameter);
         }
     }
 }

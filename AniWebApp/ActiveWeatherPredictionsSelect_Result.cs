@@ -28,5 +28,7 @@ namespace AniWebApp
         public bool HasStorm { get; set; }
         public bool HasWind { get; set; }
         public bool HasSnow { get; set; }
+        public string IconClass { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

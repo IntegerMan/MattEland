@@ -22,7 +22,7 @@ namespace AniWebApp.Controllers
             // TODO: Grab this from the current user's profile
             const int ZipCode = 43035;
 
-            var predictions = _entities.ActiveWeatherPredictionsSelect(ZipCode).ToList();
+            var predictions = _entities.ActiveWeatherPredictionsSelect(ZipCode, DateTime.Today).ToList();
             return View(predictions);
         }
 
