@@ -26,7 +26,7 @@ else
 
         @foreach (var m in Model.Take(5))
         {
-            <div class="col-md-2">
+            <div class="col-md-2 text-center">
                 <div class="panel @if (m.SeverityID >= 3)
                                   {@Html.Raw("panel-danger")
                                   }
@@ -43,10 +43,13 @@ else
                     </div>
 
                     <div class="panel-body">
-                        <i class="glyphicon glyphicon-cloud"></i><br/>
+                        <br/>
+                        <i class="fa fa-3x fa-sun-o"></i><br/>
                         @m.WeatherCodeName<br/>
                         <br/>
-                        Temp: <span class="blue">@m.Low</span> / <span class="red">@m.High</span> <br/>
+                    </div>
+                    <div class="panel-footer">
+                        Temp: <span class="blue">@m.Low</span> / <span class="red">@m.High</span> <br />
                         @if (m.MinutesToDefrost.HasValue)
                         {
                             if (m.MinutesToDefrost <= 0)
@@ -57,7 +60,7 @@ else
                             {
                                 @m.MinutesToDefrost.Value.ToString("0 Mins Frost")
                             }
-                        }
+                        }                        
                     </div>
                 </div>
             </div>
