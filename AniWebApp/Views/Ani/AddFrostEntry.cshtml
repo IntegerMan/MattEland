@@ -4,16 +4,6 @@
     ViewBag.Title = "Add Frost Entry";
 }
 
-@section scripts{
-    <script type="text/javascript">
-        if (!Modernizr.inputtypes.date) {
-            $(function () {
-                $(".datefield").datepicker();
-            });
-        }
-    </script>
-}
-
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
     <li><a href="@Url.Action("Index")">ANI</a></li>
@@ -27,7 +17,7 @@
 </div>
 
 <div class="alert alert-info">
-    <p>Please enter records of frost observed on a given day with the zip code the frost was observed in.</p>
+    <p>Please enter records of frost observed on a given day with the zip code the frost was observed in.</p> <br/>
     <p>Records will only be preserved for days and zip codes where weather predictions were entered.</p>
 </div>
 
@@ -38,7 +28,7 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.RecordDate, new { @class = "form-label" })<br />
-        @Html.TextBox("RecordDate", Model.RecordDate.ToString("yyyy-MM-dd"), new { @class = "form-control datefield", type = "date" })
+        @Html.TextBox("RecordDate", Model.RecordDate.ToShortDateString(), new { @class = "form-control datefield"})
         @Html.ValidationMessageFor(m => m.RecordDate, "", new { @class = "text-danger" })
     </div>
 
