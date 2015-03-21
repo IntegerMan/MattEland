@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="FrostPredictionDataView.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
@@ -435,12 +436,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
-    <Content Include="Views\Ani\Forecasts.cshtml" />
+    <Content Include="Views\Weather\Forecasts.cshtml" />
     <Content Include="Views\Ani\Index.cshtml" />
     <Content Include="Views\Ani\Traffic.cshtml" />
-    <Content Include="Views\Ani\Frost.cshtml" />
+    <Content Include="Views\Weather\Frost.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
-    <Content Include="Views\Ani\AddFrostEntry.cshtml" />
+    <Content Include="Views\Weather\AddFrostEntry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

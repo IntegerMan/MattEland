@@ -27,8 +27,11 @@ else
             Frost Time is still in early development as a neural network is still being trained as data accumulates. Predictions may be comically bad during this time.
         </p>
         <br/>
-        <a class="btn btn-primary" href="@Url.Action("Frost")">
-            View / Enter Frost Data
+        <a class="btn btn-default" href="@Url.Action("Frost", "Weather")">
+            View Frost Data
+        </a>
+        <a class="btn btn-default" href="@Url.Action("AddFrostEntry", "Weather")">
+            Add Frost Entry
         </a>
     </div>
 
@@ -73,14 +76,13 @@ else
                             <td>
                                 @if (m.MinutesToDefrost.HasValue)
                                 {
-                                    if (m.MinutesToDefrost <= 0.1)
+                                    if (m.MinutesToDefrost <= 0)
                                     {
                                         <text><span class="text-muted">No Frost</span></text>
                                     }
                                     else
                                     {
-                                        @m.MinutesToDefrost.Value.ToString("0.00")
-                                        <text>Minutes</text>
+                                        @m.MinutesToDefrost.Value.ToString("0.0 Minutes")
                                     }
                                 }
                             </td>

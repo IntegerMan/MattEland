@@ -25,33 +25,6 @@ namespace AniWebApp.Controllers
         }
 
         /// <summary>
-        /// Gets data for the weather forecasts page.
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        [HttpGet]
-        [Route(@"Ani/Weather/Forecasts")]
-        public ActionResult Forecasts()
-        {
-            // TODO: Grab this from the current user's profile
-            const int ZipCode = 43035;
-
-            var predictions = _entities.ActiveWeatherPredictionsSelect(ZipCode).ToList();
-            return View(predictions);
-        }
-
-        /// <summary>
-        /// Gets data for the weather forecasts page.
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        [HttpGet]
-        [Route(@"Ani/Weather/Frost")]
-        public ActionResult Frost()
-        {
-            var predictions = _entities.WeatherFrostPredictionsVsActualsSelect().ToList();
-            return View(predictions);
-        }
-
-        /// <summary>
         /// Gets the traffic incidents master view
         /// </summary>
         /// <returns>ActionResult.</returns>
@@ -63,47 +36,5 @@ namespace AniWebApp.Controllers
             return View(incidents);
         }
 
-        [HttpGet]
-        [Route(@"Ani/Weather/Frost/AddEntry")]
-        public ActionResult AddFrostEntry()
-        {
-            // TODO: Require authorize
-
-            var model = new AddFrostRecordModel
-            {
-                RecordDate = DateTime.Today,
-                ZipCode = 43035,
-                ActualMinutes = 0.0
-            };
-            // TODO: This should use something from the user's settings instead
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [Route(@"Ani/Weather/Frost/AddEntry")]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddFrostEntry_Push(AddFrostRecordModel entry)
-        {
-            // TODO: Require authorize
-
-            // TODO: Grab this from the current user!
-            const int userID = 1;
-
-            var result = _entities.WeatherFrostResultsInsert(userID,
-                entry.RainedOvernight,
-                entry.ActualMinutes,
-                entry.ZipCode,
-                entry.RecordDate.Date);
-
-            // On success, go back to the list page
-            if (result >= 1)
-            {
-                return RedirectToAction("Frost");
-            }
-
-            // We're not quite valid. Redirect to the view
-            return View(entry);
-        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "ANI Online";
+    ViewBag.Title = "ANI Project";
 }
 
 <ol class="breadcrumb">
@@ -24,10 +24,10 @@
         Weather
         <ul class="nav-stacked">
             <li>
-                <a href="@Url.Action("Forecasts")">Weather Forecasts</a>
+                <a href="@Url.Action("Forecasts", "Weather")">Weather Forecasts</a>
             </li>
             <li>
-                <a href="@Url.Action("Frost")">View / Edit Frost Data</a>
+                <a href="@Url.Action("Frost", "Weather")">View / Edit Frost Data</a>
             </li>
         </ul>
     </li>
