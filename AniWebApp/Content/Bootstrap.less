@@ -19,6 +19,7 @@
 @ColorOrange: #aa5500;
 @ColorPrimary: #00aaaa;
 @ColorSmoke: #aaaaaa;
+@ColorSmokeBright: #bbbbbb;
 @ColorGray: #555555;
 
 @ColorBackground: @ColorDarkBlue;
@@ -37,7 +38,9 @@
 @ColorInfo: @ColorBlue;
 @ColorListFocus: @ColorOrange;
 @ColorPressed: @ColorGray;
-@ColorForegroundAccent: #bbbbbb;
+@ColorForegroundAccent: @ColorSmokeBright;
+@ColorAccent: @ColorBrightYellow;
+@ColorInput: @ColorShadow;
 
 html {
   font-family: sans-serif;
@@ -131,6 +134,7 @@ hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
+  border-top-color: @ColorAccent
 }
 pre {
   overflow: auto;
@@ -147,7 +151,7 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit;
+  color: @ColorInput;
   font: inherit;
   margin: 0;
 }
@@ -2537,8 +2541,8 @@ output {
   height: 20px;
   padding: 0px 0px;
   line-height: 20px;
-  color: @ColorHighlightText;
-  background-color: #00aaaa;
+  color: @ColorInput;
+  background-color: @ColorForeground;
   background-image: none;
   border: none;
 }
@@ -3611,6 +3615,9 @@ tbody.collapse.in {
   float: left;
   width: 100%;
   margin-bottom: 0;
+}
+input[type="checkbox"].form-control {
+  width: 15px;
 }
 .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
@@ -4685,12 +4692,12 @@ a.thumbnail.active {
   color: @ColorHighlightText;
 }
 .alert-info {
-  background-color: #000000;
-  border-color: #000000;
+  background-color: @ColorShadow;
+  border-color: @ColorShadow;
   color: @ColorHighlightText;
 }
 .alert-info hr {
-  border-top-color: #000000;
+  border-top-color: @ColorShadow;
 }
 .alert-info .alert-link {
   color: @ColorHighlightText;
@@ -4707,12 +4714,12 @@ a.thumbnail.active {
   color: @ColorHighlightText;
 }
 .alert-danger {
-  background-color: #000000;
-  border-color: #000000;
+  background-color: @ColorShadow;
+  border-color: @ColorShadow;
   color: @ColorValidation;
 }
 .alert-danger hr {
-  border-top-color: #000000;
+  border-top-color: @ColorShadow;
 }
 .alert-danger .alert-link {
   color: @ColorValidation;

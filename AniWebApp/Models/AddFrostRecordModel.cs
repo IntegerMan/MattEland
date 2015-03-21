@@ -13,6 +13,7 @@ namespace AniWebApp.Models
         /// The zip code
         /// </summary>
         [DisplayName("Zip Code")]
+        [DataType(DataType.PostalCode)]
         [Required]
         public int ZipCode { get; set; }
 
@@ -33,6 +34,7 @@ namespace AniWebApp.Models
         /// The date the observation was made
         /// </summary>
         [DisplayName("Date")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime RecordDate { get; set; }
     }

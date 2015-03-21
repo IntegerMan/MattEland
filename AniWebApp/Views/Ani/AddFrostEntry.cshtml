@@ -4,6 +4,14 @@
     ViewBag.Title = "Add Frost Observation";
 }
 
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".datefield").datepicker();
+        });
+    </script>
+}
+
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
     <li><a href="@Url.Action("Index")">ANI</a></li>
@@ -28,7 +36,7 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.RecordDate, new {@class = "form-label"})<br/>
-        @Html.TextBoxFor(m => m.RecordDate, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here..." })
+        @Html.TextBox("RecordDate", String.Format("{0:d}", Model.RecordDate.ToShortDateString()), new { @class = "form-control datefield", type="date" })
         @Html.ValidationMessageFor(m => m.RecordDate, "", new { @class = "text-danger"})
     </div>
 
