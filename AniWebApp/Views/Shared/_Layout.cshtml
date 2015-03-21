@@ -52,6 +52,7 @@
                     <li class='@Html.IsActive("Apps", "Index")'>@Html.ActionLink("Apps", "Index", "Apps")</li>
                     <li class='@Html.IsActive("Home", "AboutMe")'>@Html.ActionLink("About", "AboutMe", "Home")</li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

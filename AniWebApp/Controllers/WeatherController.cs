@@ -40,10 +40,9 @@ namespace AniWebApp.Controllers
         
         [HttpGet]
         [Route(@"Weather/Frost/AddEntry")]
+        [Authorize]
         public ActionResult AddFrostEntry()
         {
-            // TODO: Require authorize
-
             var model = new AddFrostRecordModel
             {
                 RecordDate = DateTime.Today,
@@ -57,11 +56,10 @@ namespace AniWebApp.Controllers
 
         [HttpPost]
         [Route(@"Weather/Frost/AddEntry")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult AddFrostEntry_Push(AddFrostRecordModel entry)
         {
-            // TODO: Require authorize
-
             // TODO: Grab this from the current user!
             const int userID = 1;
 
