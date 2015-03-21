@@ -12,8 +12,11 @@
 </ol>
 
 <div class="page-header">
-    <h1>@ViewBag.Title</h1>
+    <h1>
+        @ViewBag.Title
+    </h1>
 </div>
+
 
 @if (!Model.Any())
 {
@@ -24,71 +27,73 @@
 else
 {
     <div class="panel panel-default">
+
         <div class="panel-heading">
             Weather Forecast
         </div>
 
         <div class="panel-body">
+
             <table class="table table-responsive">
                 <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Zip</th>
-                        <th>Low</th>
-                        <th>High</th>
-                        <th>Conditions</th>
-                        <th>Predicted Minutes</th>
-                        <th>Actual Minutes</th>
-                    </tr>
+                <tr>
+                    <th>Date</th>
+                    <th>Zip</th>
+                    <th>Low</th>
+                    <th>High</th>
+                    <th>Conditions</th>
+                    <th>Predicted Minutes</th>
+                    <th>Actual Minutes</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var m in Model)
+                @foreach (var m in Model)
                 {
-                        <tr>
-                            <td>
-                                @m.PredictionDateUTC.ToShortDateString()
-                            </td>
-                            <td>
-                                @m.ZipCode
-                            </td>
-                            <td class="blue">
-                                @m.Low
-                            </td>
-                            <td class="red">
-                                @m.High
-                            </td>
-                            <td>
-                                @m.WeatherCodeName
-                            </td>
-                            <td>
-                                @if (m.PredictedMinutes != null)
+                    <tr>
+                        <td>
+                            @m.PredictionDateUTC.ToShortDateString()
+                        </td>
+                        <td>
+                            @m.ZipCode
+                        </td>
+                        <td class="blue">
+                            @m.Low
+                        </td>
+                        <td class="red">
+                            @m.High
+                        </td>
+                        <td>
+                            @m.WeatherCodeName
+                        </td>
+                        <td>
+                            @if (m.PredictedMinutes != null)
+                            {
+                                if (m.PredictedMinutes > 0)
                                 {
-                                    if (m.PredictedMinutes > 0)
-                                    {
-                                        @m.PredictedMinutes.Value.ToString("0.0 Minutes")
-                                    }
-                                    else
-                                    {
-                                        <text><span class="text-muted">No Frost</span></text>
-                                    }
-                                }
-                                else
-                                {
-                                    <text><span class="text-danger">Not Available</span></text>
-                                }
-                            </td>
-                            <td>
-                                @if (m.ActualMinutes != null && m.ActualMinutes > 0)
-                                {
-                                    @m.ActualMinutes.Value.ToString("0.0 Minutes")
+                                    @m.PredictedMinutes.Value.ToString("0.0 Minutes")
                                 }
                                 else
                                 {
                                     <text><span class="text-muted">No Frost</span></text>
                                 }
-                            </td>
-                        </tr>
-                    }
+                            }
+                            else
+                            {
+                                <text><span class="text-danger">Not Available</span></text>
+                            }
+                        </td>
+                        <td>
+                            @if (m.ActualMinutes != null && m.ActualMinutes > 0)
+                            {
+                                @m.ActualMinutes.Value.ToString("0.0 Minutes")
+                            }
+                            else
+                            {
+                                <text><span class="text-muted">No Frost</span></text>
+                            }
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
@@ -98,5 +103,4 @@ else
         Add Frost Entry
     </a>
 
-    <br/>
 }
