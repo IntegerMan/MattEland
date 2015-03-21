@@ -35,6 +35,7 @@ namespace AniWebApp.Models
         /// </summary>
         [DisplayName("Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [Required]
         public DateTime RecordDate { get; set; }
     }

@@ -1,14 +1,16 @@
 ﻿@model AniWebApp.Models.AddFrostRecordModel
 
 @{
-    ViewBag.Title = "Add Frost Observation";
+    ViewBag.Title = "Add Frost Entry";
 }
 
 @section scripts{
     <script type="text/javascript">
-        $(function () {
-            $(".datefield").datepicker();
-        });
+        if (!Modernizr.inputtypes.date) {
+            $(function () {
+                $(".datefield").datepicker();
+            });
+        }
     </script>
 }
 
@@ -25,8 +27,8 @@
 </div>
 
 <div class="alert alert-info">
-    Please enter records of frost observed on a given day with the zip code the frost was observed in. <br />
-    Records will only be preserved for days and zip codes where weather predictions were entered.
+    <p>Please enter records of frost observed on a given day with the zip code the frost was observed in.</p>
+    <p>Records will only be preserved for days and zip codes where weather predictions were entered.</p>
 </div>
 
 @using (Html.BeginForm("AddFrostEntry", "ANI", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
@@ -35,14 +37,14 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        @Html.LabelFor(m => m.RecordDate, new {@class = "form-label"})<br/>
-        @Html.TextBox("RecordDate", String.Format("{0:d}", Model.RecordDate.ToShortDateString()), new { @class = "form-control datefield", type="date" })
-        @Html.ValidationMessageFor(m => m.RecordDate, "", new { @class = "text-danger"})
+        @Html.LabelFor(m => m.RecordDate, new { @class = "form-label" })<br />
+        @Html.TextBox("RecordDate", Model.RecordDate.ToString("yyyy-MM-dd"), new { @class = "form-control datefield", type = "date" })
+        @Html.ValidationMessageFor(m => m.RecordDate, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.ZipCode, new { @class = "form-label" })<br />
-        @Html.TextBoxFor(m => m.ZipCode, new { @class="form-control"} )
+        @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "text-danger" })
     </div>
 
@@ -53,7 +55,7 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.ActualMinutes, new { @class = "form-label" })<br />
-        @Html.TextBoxFor(m => m.ActualMinutes, new { @class = "form-control"})
+        @Html.TextBoxFor(m => m.ActualMinutes, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.ActualMinutes, "", new { @class = "text-danger" })
     </div>
 
