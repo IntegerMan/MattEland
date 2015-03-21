@@ -37,16 +37,16 @@ else
                                   else
                                   {
                                       @Html.Raw("panel-info")
-                                  }">
+                                  }  ">
                     <div class="panel-heading">
                         @m.PredictionDateUTC.ToString("ddd M/d")
                     </div>
 
                     <div class="panel-body">
-                        <br/>
-                        <i class="fa fa-3x @m.IconClass"></i><br/>
-                        @m.WeatherCodeName<br/>
-                        <br/>
+                        <br />
+                        <i class="fa fa-3x @m.IconClass"></i><br />
+                        @m.WeatherCodeName<br />
+                        <br />
                     </div>
                     <div class="panel-footer">
                         Temp: <span class="blue">@m.Low</span> / <span class="red">@m.High</span> <br />
@@ -60,7 +60,7 @@ else
                             {
                                 @m.MinutesToDefrost.Value.ToString("0 Mins Frost")
                             }
-                        }                        
+                        }
                     </div>
                 </div>
             </div>
