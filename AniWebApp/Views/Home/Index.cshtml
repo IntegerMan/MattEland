@@ -20,34 +20,46 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">Projects</div>
-            <div class="panel-body">
-                <p>View a list of active and historical software developmnt projects I've done on my own.</p>
-                @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn btn-block btn-default" })
-                <br />
+            <div class="panel-body media">
+                <div class="media-left">
+                    <i class="fa fa-3x fa-list-alt"></i>
+                </div>
+                <div class="media-body">
+                    <p>View a list of active and historical software projects I've done on my own.</p>
+                    @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn btn-block btn-default" })
+                    <br />
+                </div>
             </div>
         </div>
-        <br />
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">ANI Project</div>
-            <div class="panel-body">
-                <p>A series of experiments around using machine learning to improve daily life.</p>
-                @Html.ActionLink("View Project", "ANI", "Projects", null, new { @class = "btn btn-block btn-default" })
-                <br />
+            <div class="panel-body media">
+                <div class="media-left">
+                    <i class="fa fa-3x fa-connectdevelop"></i>
+                </div>
+                <div class="media-body">
+                    <p>A series of experiments to use machine learning to improve daily life.</p>
+                    @Html.ActionLink("View Project", "ANI", "Projects", null, new { @class = "btn btn-block btn-default" })
+                    <br />
+                </div>
             </div>
         </div>
-        <br />
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">Windows Phone Apps</div>
-            <div class="panel-body">
-                <p>Links and information on ministry and productivity apps for Windows Phone 7, 8, and 8.1.</p>
-                @Html.ActionLink("View Apps", "Index", "Apps", null, new { @class = "btn btn-block btn-default" })
-                <br />
+            <div class="panel-body media">
+                <div class="media-left">
+                    <i class="fa fa-3x fa-windows"></i>
+                </div>
+                <div class="media-body">
+                    <p>Links and information on ministry and productivity apps for Windows Phone.</p>
+                    @Html.ActionLink("View Apps", "Index", "Apps", null, new { @class = "btn btn-block btn-default" })
+                    <br />
+                </div>
             </div>
         </div>
-        <br />
     </div>
 </div>
