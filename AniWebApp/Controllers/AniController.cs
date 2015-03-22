@@ -23,18 +23,40 @@ namespace AniWebApp.Controllers
         {
             return View();
         }
-
+        
         /// <summary>
-        /// Gets the traffic incidents master view
+        /// The traffic root view
         /// </summary>
         /// <returns>ActionResult.</returns>
         [HttpGet]
         [Route(@"Ani/Traffic")]
         public ActionResult Traffic()
         {
-            var incidents = _entities.ActiveTrafficIncidentInfoSelect().ToList();
+            return View();
+        }
+
+        /// <summary>
+        /// Gets the traffic incidents master view
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        [HttpGet]
+        [Route(@"Ani/Traffic/Accidents")]
+        public ActionResult Accidents()
+        {
+            var incidents = _entities.ActiveTrafficIncidentInfoSelect(true, false).ToList();
             return View(incidents);
         }
 
+        /// <summary>
+        /// Gets the construction master view
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        [HttpGet]
+        [Route(@"Ani/Traffic/Construction")]
+        public ActionResult Construction()
+        {
+            var incidents = _entities.ActiveTrafficIncidentInfoSelect(false, true).ToList();
+            return View(incidents);
+        }
     }
 }

@@ -550,7 +550,10 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="ActiveTrafficIncidentInfoSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ActiveTrafficIncidentInfoSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IncludeAccidents" Type="bit" Mode="In" />
+          <Parameter Name="IncludeConstruction" Type="bit" Mode="In" />
+        </Function>
         <Function Name="ActiveWeatherPredictionsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ZipCode" Type="int" Mode="In" />
           <Parameter Name="AfterDate" Type="datetime2" Mode="In" />
@@ -764,7 +767,10 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
         </EntityType>
         <EntityContainer Name="AniEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TrafficIncidents" EntityType="Self.TrafficIncident" />
-          <FunctionImport Name="ActiveTrafficIncidentInfoSelect" ReturnType="Collection(AniEntitiesModel.ActiveTrafficIncidentInfoSelect_Result)" />
+          <FunctionImport Name="ActiveTrafficIncidentInfoSelect" ReturnType="Collection(AniEntitiesModel.ActiveTrafficIncidentInfoSelect_Result)" >
+            <Parameter Name="IncludeAccidents" Mode="In" Type="Boolean" />
+            <Parameter Name="IncludeConstruction" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="InsertUpdateTrafficIncident">
             <Parameter Name="IncidentID" Mode="In" Type="Int64" />
             <Parameter Name="Description" Mode="In" Type="String" />

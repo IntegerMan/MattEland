@@ -422,6 +422,8 @@
     <Content Include="Views\Weather\Frost.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Weather\AddFrostEntry.cshtml" />
+    <Content Include="Views\Ani\Construction.cshtml" />
+    <Content Include="Views\Ani\Accidents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

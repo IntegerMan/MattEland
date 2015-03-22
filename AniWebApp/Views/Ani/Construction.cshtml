@@ -1,0 +1,94 @@
+﻿@model IEnumerable<AniWebApp.ActiveTrafficIncidentInfoSelect_Result>
+
+@{
+    ViewBag.Title = "Active Construction";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Ani")">ANI</a></li>
+    <li><a href="@Url.Action("Traffic", "Ani")">Traffic</a></li>
+    <li class="active">Construction</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="alert alert-info">
+        No active construction for this region.
+    </p>
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Current Traffic Incidents
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Description</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                {
+                        <tr class="@if (m.SeverityID >= 3)
+                               {<text>danger</text>
+                               }
+                               else if (m.SeverityID >= 2)
+                               {
+                                   <text>warning</text>
+                               }
+                               else
+                               {
+                                   <text>info</text>
+                               }">
+                            <td>
+                                @if (m.SeverityID >= 3)
+                                {
+                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                }
+                                else if (m.SeverityID >= 2)
+                                {
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                }
+                            </td>
+                            <td>
+                                @m.Description (@m.Lat, @m.Lng)
+                            </td>
+                            <td>
+                                @if (m.StartTimeUTC.HasValue)
+                                {
+                                    @m.StartTimeUTC.Value.ToLocalTime().ToString("g")
+                                }
+                            </td>
+                            <td>
+                                @if (m.EndTimeUTC.HasValue)
+                                {
+                                    @m.EndTimeUTC.Value.ToLocalTime().ToString("g")
+                                }
+                            </td>
+                            <td>
+                                @m.TypeName
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

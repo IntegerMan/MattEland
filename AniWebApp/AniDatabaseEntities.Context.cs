@@ -49,9 +49,17 @@ namespace AniWebApp
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     
-        public virtual ObjectResult<ActiveTrafficIncidentInfoSelect_Result> ActiveTrafficIncidentInfoSelect()
+        public virtual ObjectResult<ActiveTrafficIncidentInfoSelect_Result> ActiveTrafficIncidentInfoSelect(Nullable<bool> includeAccidents, Nullable<bool> includeConstruction)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveTrafficIncidentInfoSelect_Result>("ActiveTrafficIncidentInfoSelect");
+            var includeAccidentsParameter = includeAccidents.HasValue ?
+                new ObjectParameter("IncludeAccidents", includeAccidents) :
+                new ObjectParameter("IncludeAccidents", typeof(bool));
+    
+            var includeConstructionParameter = includeConstruction.HasValue ?
+                new ObjectParameter("IncludeConstruction", includeConstruction) :
+                new ObjectParameter("IncludeConstruction", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveTrafficIncidentInfoSelect_Result>("ActiveTrafficIncidentInfoSelect", includeAccidentsParameter, includeConstructionParameter);
         }
     
         public virtual int InsertUpdateTrafficIncident(Nullable<long> incidentID, string description, string congsestion, string detour, string lane, Nullable<bool> roadClosed, Nullable<bool> verified, Nullable<System.DateTime> createdTimeUTC, Nullable<System.DateTime> modifiedTimeUTC, Nullable<System.DateTime> startTimeUTC, Nullable<System.DateTime> endTimeUTC, Nullable<double> locationLat, Nullable<double> locationLng, Nullable<double> endLocationLat, Nullable<double> endLocationLng, Nullable<int> creatorUserNodeID, Nullable<int> severityID, Nullable<int> typeID)
