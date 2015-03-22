@@ -58,6 +58,10 @@ namespace AniWebApp.Controllers
             return View(predictions);
         }
 
+        /// <summary>
+        /// Shows a view allowing the user to enter a frost entry to the system.
+        /// </summary>
+        /// <returns>The view for entering a frost entry</returns>
         [HttpGet]
         [Route(@"Weather/Frost/AddEntry")]
         [Authorize]
@@ -73,24 +77,32 @@ namespace AniWebApp.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Adds the frost entry to the database.
+        /// </summary>
+        /// <param name="entry">The frost entry.</param>
+        /// <returns>A view showing the new item or a view to re-enter the item.</returns>
         [HttpPost]
         [Route(@"Weather/Frost/AddEntry")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult AddFrostEntry_Push(AddFrostRecordModel entry)
+        public ActionResult AddFrostEntryPost(AddFrostRecordModel entry)
         {
-            int userID = GetUserId();
-
-            var result = this.Entities.WeatherFrostResultsInsert(userID,
-                entry.RainedOvernight,
-                entry.ActualMinutes,
-                entry.ZipCode,
-                entry.RecordDate.Date);
-
-            // On success, go back to the list page
-            if (result >= 1)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Frost");
+                var userId = GetUserId();
+
+                var result = this.Entities.WeatherFrostResultsInsert(userId,
+                    entry.RainedOvernight,
+                    entry.ActualMinutes,
+                    entry.ZipCode,
+                    entry.RecordDate.Date);
+
+                // On success, go back to the list page
+                if (result >= 1)
+                {
+                    return RedirectToAction("Frost");
+                }
             }
 
             // We're not quite valid. Redirect to the view

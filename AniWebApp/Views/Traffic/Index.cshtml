@@ -6,7 +6,7 @@
 
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-    <li><a href="@Url.Action("Index")">ANI</a></li>
+    <li><a href="@Url.Action("Index", "Ani")">ANI</a></li>
     <li class="active">Traffic</li>
 </ol>
 
@@ -20,8 +20,8 @@
         <h2>Select Subpage</h2>
 
         <div class="list-group">
-            @Html.ActionLink("Accidents", "Accidents", "Ani", new { @class = "list-group-item" })
-            @Html.ActionLink("Construction", "Construction", "Ani", new { @class = "list-group-item" })
+            @Html.ActionLink("Accidents", "Accidents", "Traffic", new { @class = "list-group-item" })
+            @Html.ActionLink("Construction", "Construction", "Traffic", new { @class = "list-group-item" })
         </div>
     </div>
 </div>

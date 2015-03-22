@@ -7,7 +7,7 @@
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
     <li><a href="@Url.Action("Index", "Ani")">ANI</a></li>
-    <li><a href="@Url.Action("Traffic", "Ani")">Traffic</a></li>
+    <li><a href="@Url.Action("Index", "Traffic")">Traffic</a></li>
     <li class="active">Accidents</li>
 </ol>
 
@@ -43,28 +43,25 @@ else
                     @foreach (var m in Model)
                 {
                         <tr class="@if (m.SeverityID >= 3)
-                               {<text>danger</text>
-                               }
-                               else if (m.SeverityID >= 2)
-                               {
-                                   <text>warning</text>
-                               }
-                               else
-                               {
-                                   <text>info</text>
-                               }">
+                                {
+                                   @:danger
+                                } else if (m.SeverityID >= 2) { 
+                                   @: warning
+                                } else {
+                                   @: info
+                                }">
                             <td>
                                 @if (m.SeverityID >= 3)
                                 {
-                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                    <span class="fa fa-minus-circle" aria-hidden="true" title="@m.SeverityName"></span>
                                 }
                                 else if (m.SeverityID >= 2)
                                 {
-                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                    <span class="fa fa-exclamation-circle" aria-hidden="true" title="@m.SeverityName"></span>
                                 }
                                 else
                                 {
-                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="@m.SeverityName"></span>
+                                    <span class="fa fa-info-circle" aria-hidden="true" title="@m.SeverityName"></span>
                                 }
                             </td>
                             <td>

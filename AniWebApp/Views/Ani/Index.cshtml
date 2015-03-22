@@ -16,8 +16,8 @@
         <h2>Project Overview</h2>
         <p class="lead">
             This is a web services / data mining / data aggregation experiment focusing around collecting and
-            analyzing information pertaining to our daily lives and using machine learning techniques to attempt to
-            nalyze, predict, and improve users daily lives.
+            analyzing information pertaining to our daily lives and using machine learning techniques and
+            Advanced Narrow Intelligence (ANI) to attempt to analyze, predict, and improve users daily lives.
         </p>
         <p>
             This project is still in its infancy and only services the Columbus, Ohio area at present, but if this
@@ -31,18 +31,20 @@
 
         <ul class="list-group">
             <li class="list-group-item">
-                <span class="list-group-item">Weather</span>
+
+                @Html.ActionLink("Weather", "Traffic", "Weather", new { @class = "list-group-item" })
+
                 <ul class="nav-stacked">
                     <li>@Html.ActionLink("Weather Forecasts", "Forecasts", "Weather", new { @class = "list-group-item" })</li>
                     <li>@Html.ActionLink("Frost Data", "Frost", "Weather", new { @class = "list-group-item" })</li>
                 </ul>
             </li>
             <li class="list-group-item">
-                @Html.ActionLink("Traffic", "Traffic", "Ani", new { @class = "list-group-item" })
+                @Html.ActionLink("Traffic", "Index", "Traffic", new { @class = "list-group-item" })
 
                 <ul class="nav-stacked">
-                    <li>@Html.ActionLink("Accidents", "Accidents", "Ani", new { @class = "list-group-item" })</li>
-                    <li>@Html.ActionLink("Construction", "Construction", "Ani", new { @class = "list-group-item" })</li>
+                    <li>@Html.ActionLink("Accidents", "Accidents", "Traffic", new { @class = "list-group-item" })</li>
+                    <li>@Html.ActionLink("Construction", "Construction", "Traffic", new { @class = "list-group-item" })</li>
                 </ul>
             </li>
         </ul>

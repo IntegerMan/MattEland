@@ -9,9 +9,8 @@ namespace AniWebApp.Controllers
     /// <summary>
     /// A Controller related to all ANI-related items
     /// </summary>
-    public class AniController : Controller
+    public class AniController : CustomController
     {
-        private readonly AniEntities _entities = new AniEntities();
 
         /// <summary>
         /// Gets the main ANI view
@@ -24,39 +23,5 @@ namespace AniWebApp.Controllers
             return View();
         }
         
-        /// <summary>
-        /// The traffic root view
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        [HttpGet]
-        [Route(@"Ani/Traffic")]
-        public ActionResult Traffic()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// Gets the traffic incidents master view
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        [HttpGet]
-        [Route(@"Ani/Traffic/Accidents")]
-        public ActionResult Accidents()
-        {
-            var incidents = _entities.ActiveTrafficIncidentInfoSelect(true, false).ToList();
-            return View(incidents);
-        }
-
-        /// <summary>
-        /// Gets the construction master view
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        [HttpGet]
-        [Route(@"Ani/Traffic/Construction")]
-        public ActionResult Construction()
-        {
-            var incidents = _entities.ActiveTrafficIncidentInfoSelect(false, true).ToList();
-            return View(incidents);
-        }
     }
 }
