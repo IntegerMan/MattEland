@@ -11,28 +11,40 @@
     <h1>@ViewBag.Title</h1>
 </div>
 
-<p>
-    Welcome to the Artificial Narrow Intelligence (ANI) project. This project is still in its infancy
-    and only services the Columbus, Ohio area at present, but if this proves to be useful to people
-    beyond as an experiment, I may scale it upward to reach more users.
-</p>
+<div class="row">
+    <div class="col-md-8">
+        <h2>Project Overview</h2>
+        <p class="lead">
+            This is a web services / data mining / data aggregation experiment focusing around collecting and
+            analyzing information pertaining to our daily lives and using machine learning techniques to attempt to
+            nalyze, predict, and improve users daily lives.
+        </p>
+        <p>
+            This project is still in its infancy and only services the Columbus, Ohio area at present, but if this
+            proves to be useful to people beyond as an experiment, I may scale it upward to reach more users.
+        </p>
 
-<h2>Supported Functions</h2>
+    </div>
+    <div class="col-md-4">
 
-<ul class="nav-stacked">
-    <li>
-        Weather
-        <ul class="nav-stacked">
-            <li>
-                <a href="@Url.Action("Forecasts", "Weather")">Weather Forecasts</a>
+        <h2>Supported Functions</h2>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="list-group-item">Weather</span>
+                <ul class="nav-stacked">
+                    <li>@Html.ActionLink("Weather Forecasts", "Forecasts", "Weather", new { @class = "list-group-item" })</li>
+                    <li>@Html.ActionLink("Frost Data", "Frost", "Weather", new { @class = "list-group-item" })</li>
+                </ul>
             </li>
-            <li>
-                <a href="@Url.Action("Frost", "Weather")">View / Edit Frost Data</a>
+            <li class="list-group-item">
+                @Html.ActionLink("Traffic", "Traffic", "Ani", new { @class = "list-group-item" })
+
+                <ul class="nav-stacked">
+                    <li>@Html.ActionLink("Accidents", "Accidents", "Ani", new { @class = "list-group-item" })</li>
+                    <li>@Html.ActionLink("Construction", "Construction", "Ani", new { @class = "list-group-item" })</li>
+                </ul>
             </li>
         </ul>
-    </li>
-    <li>
-        <a href="@Url.Action("Traffic")">Traffic Incidents</a>
-    </li>
-</ul>
-
+    </div>
+</div>
