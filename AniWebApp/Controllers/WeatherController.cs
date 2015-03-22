@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using AniWebApp.Models;
-using Microsoft.AspNet.Identity;
 
 namespace AniWebApp.Controllers
 {
@@ -10,10 +9,8 @@ namespace AniWebApp.Controllers
     /// The MVC weather controller
     /// </summary>
     [Route("Weather")]
-    public class WeatherController : Controller
+    public class WeatherController : CustomController
     {
-
-        private readonly AniEntities _entities = new AniEntities();
 
         /// <summary>
         /// Gets the weather for a specific zip code.
@@ -26,7 +23,7 @@ namespace AniWebApp.Controllers
         {
             if (zipCode <= 0)
             {
-                zipCode = this.GetUserZipCode();
+                zipCode = GetUserZipCode();
             }
 
             return RedirectToAction("Forecasts", "Weather", new { zipCode = zipCode });
@@ -45,48 +42,8 @@ namespace AniWebApp.Controllers
                 zipCode = GetUserZipCode();
             }
 
-            var predictions = _entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today).ToList();
+            var predictions = this.Entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today).ToList();
             return View(predictions);
-        }
-
-        private int GetUserZipCode()
-        {
-            User user = GetUserEntity();
-            if (user != null)
-            {
-                return user.U_ZipCode;
-            }
-
-            return 43035;
-        }
-
-        private string GetUserAspNetId()
-        {
-            return this.User?.Identity?.GetUserId();
-        }
-
-        private User GetUserEntity()
-        {
-            var aspNetId = this.GetUserAspNetId();
-
-            if (!string.IsNullOrWhiteSpace(aspNetId))
-            {
-                User user = _entities.Users.FirstOrDefault(u => u.U_ASPNET_ID == aspNetId);
-                return user;
-            }
-
-            return null;
-        }
-
-        private int GetUserId()
-        {
-            User user = GetUserEntity();
-            if (user != null)
-            {
-                return user.U_ID;
-            }
-
-            return 0;
         }
 
         /// <summary>
@@ -97,7 +54,7 @@ namespace AniWebApp.Controllers
         [Route(@"Weather/Frost")]
         public ActionResult Frost()
         {
-            var predictions = _entities.WeatherFrostPredictionsVsActualsSelect().ToList();
+            var predictions = this.Entities.WeatherFrostPredictionsVsActualsSelect().ToList();
             return View(predictions);
         }
 
@@ -124,7 +81,7 @@ namespace AniWebApp.Controllers
         {
             int userID = GetUserId();
 
-            var result = _entities.WeatherFrostResultsInsert(userID,
+            var result = this.Entities.WeatherFrostResultsInsert(userID,
                 entry.RainedOvernight,
                 entry.ActualMinutes,
                 entry.ZipCode,
