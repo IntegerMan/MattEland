@@ -14,6 +14,7 @@
 @ColorGreenHighlight: #007700;
 @ColorWhite: #dddddd;
 @ColorWhiteHighlight: #ffffff;
+@ColorDarkDarkBlue: #000060;
 @ColorDarkBlue: #000084;
 @ColorBlack: #000000;
 @ColorOrange: #aa5500;
@@ -23,6 +24,7 @@
 @ColorGray: #555555;
 
 @ColorBackground: @ColorDarkBlue;
+@ColorBackgroundDark: @ColorDarkDarkBlue;
 @ColorForeground: @ColorWhite;
 @ColorHighlightText: @ColorWhiteHighlight;
 @ColorWarning: @ColorYellow;
@@ -4602,7 +4604,7 @@ a.badge:focus {
   color: @ColorForegroundAccent;
   padding: 9px 3px 9px 4px;
   margin: 9px 4px 9px 3px;
-  background-color: transparent;
+  background-color: @ColorBackgroundDark;
   border: 2px solid @ColorAccent;
 }
 .jumbotron h1,

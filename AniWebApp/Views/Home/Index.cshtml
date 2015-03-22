@@ -6,11 +6,11 @@
 
     <h1>@ViewBag.Title</h1>
 
-    <p class="lead">This website houses app information and web / database / web services related to experimental projects.</p>
-
-    <div class="alert alert-info" role="alert">
-        This website is currently under active development and expansion and is not yet intended for active use.
-    </div>
+    <p class="lead">
+        This website is an ongoing development site that hosts web services for legacy applications, holds some
+        experimental data dashboard applications and as a limited portal for ongoing and past software development
+        projects I've undertaken.
+    </p>
 
 </div>
 
@@ -18,22 +18,22 @@
 
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-primary">
+        <div class="panel panel-default">
             <div class="panel-heading">Projects</div>
             <div class="panel-body">
                 <p>View a list of active and historical software developmnt projects I've done on my own.</p>
-                @Html.ActionLink("View Projects", "Index", "Projects", null,  new { @class = "btn btn-block btn-primary" })
+                @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn btn-block btn-default" })
                 <br />
             </div>
         </div>
         <br />
     </div>
     <div class="col-md-4">
-        <div class="panel panel-info">
+        <div class="panel panel-default">
             <div class="panel-heading">ANI Project</div>
             <div class="panel-body">
                 <p>A series of experiments around using machine learning to improve daily life.</p>
-                @Html.ActionLink("View Apps", "ANI", "Projects", null, new { @class = "btn btn-block btn-info" })
+                @Html.ActionLink("View Apps", "ANI", "Projects", null, new { @class = "btn btn-block btn-default" })
                 <br />
             </div>
         </div>

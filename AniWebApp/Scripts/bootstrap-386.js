@@ -1,7 +1,7 @@
-﻿self._386 = self._386 || {onePass: true, speedFactor: 1.5};
+﻿self._386 = self._386 || {onePass: false, speedFactor: 0.75};
 
 $(function(){
-  var character = { height: 20, width: 10 };
+  var character = { height: 45, width: 25 };
 
   function scrollLock() {
     var last = 0;
