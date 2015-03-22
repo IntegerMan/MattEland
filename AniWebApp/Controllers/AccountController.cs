@@ -15,6 +15,8 @@ namespace AniWebApp.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private AniEntities _entities = new AniEntities();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -152,9 +154,14 @@ namespace AniWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    // We've created the ASP .NET user, now add a table with extra data 
+                    _entities.InsertUser(user.Id, model.ZipCode, null, null);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -208,8 +215,7 @@ namespace AniWebApp.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-
-
+                
                 // TODO: This is not yet supported
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

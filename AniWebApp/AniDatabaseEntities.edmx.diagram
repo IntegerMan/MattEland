@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e7c51a4201604a62bee9f152175bef3c" Name="Diagram1" ZoomLevel="70">
+      <Diagram DiagramId="e7c51a4201604a62bee9f152175bef3c" Name="diagramAll" ZoomLevel="84">
         <EntityTypeShape EntityType="AniEntitiesModel.TrafficIncident" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AniEntitiesModel.FrostPredictionDataView" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="AniEntitiesModel.GPSLocation" Width="1.5" PointX="0.75" PointY="7.375" />
@@ -40,6 +40,27 @@
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherPredictions_UserNodes_UN_ID" />
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherPrediction_WeatherCode_WC_ID" />
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherFrostResult_WeatherPrediction_WP_ID" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherPrediction_WeatherSource_WS_ID" />
+        <EntityTypeShape EntityType="AniEntitiesModel.AspNetRole" Width="1.5" PointX="1.5" PointY="20" />
+        <EntityTypeShape EntityType="AniEntitiesModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="26.125" />
+        <EntityTypeShape EntityType="AniEntitiesModel.AspNetUserLogin" Width="1.5" PointX="6" PointY="23.625" />
+        <EntityTypeShape EntityType="AniEntitiesModel.AspNetUser" Width="1.5" PointX="3.75" PointY="18.75" />
+        <AssociationConnector Association="AniEntitiesModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AniEntitiesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AniEntitiesModel.FK_Users_AspNetUsers_Id" />
+        <AssociationConnector Association="AniEntitiesModel.FK_TrafficIncidents_UserNodes_UN_ID1" />
+        <AssociationConnector Association="AniEntitiesModel.FK_Transits_UserNodes_UN_ID1" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID1" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherPredictions_Users_U_ID" />
+        <AssociationConnector Association="AniEntitiesModel.AspNetUserRoles" />
+      </Diagram>
+      <Diagram DiagramId="090dbd5a52bf4234b10ebf0c31b8b425" Name="diagramWeather" ZoomLevel="63" >
+        <EntityTypeShape EntityType="AniEntitiesModel.WeatherCode" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="AniEntitiesModel.WeatherFrostResult" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="AniEntitiesModel.WeatherPrediction" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherPrediction_WeatherCode_WC_ID" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherFrostResult_WeatherPrediction_WP_ID" />
+        <EntityTypeShape EntityType="AniEntitiesModel.WeatherSource" Width="1.5" PointX="0.75" PointY="2.125" />
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherPrediction_WeatherSource_WS_ID" />
       </Diagram>
     </edmx:Diagrams>

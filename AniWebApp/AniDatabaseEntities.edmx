@@ -5,6 +5,57 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AniEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="GPSLocations">
           <Key>
             <PropertyRef Name="GPS_ID" />
@@ -112,12 +163,10 @@
             <PropertyRef Name="U_ID" />
           </Key>
           <Property Name="U_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="U_UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="U_ASPNET_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="U_FirstName" Type="varchar" MaxLength="50" />
           <Property Name="U_LastName" Type="varchar" MaxLength="50" />
-          <Property Name="U_EmailAddress" Type="varchar" MaxLength="255" />
-          <Property Name="U_LastActivityTimeUTC" Type="datetime2" Precision="7" />
-          <Property Name="U_CreatedTimeUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="U_ZipCode" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="WeatherCodes">
           <Key>
@@ -205,6 +254,62 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Property Name="HasSnow" Type="bit" Nullable="false" />
           <Property Name="WeatherCode" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Drives_Nodes_N_ID_Modified">
           <End Role="Nodes" Type="Self.Nodes" Multiplicity="1" />
           <End Role="Transits" Type="Self.Transits" Multiplicity="*" />
@@ -266,11 +371,11 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TrafficIncidents_UserNodes_UN_ID">
-          <End Role="UserNodes" Type="Self.UserNodes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="TrafficIncidents" Type="Self.TrafficIncidents" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserNodes">
-              <PropertyRef Name="UN_ID" />
+            <Principal Role="Users">
+              <PropertyRef Name="U_ID" />
             </Principal>
             <Dependent Role="TrafficIncidents">
               <PropertyRef Name="TI_CreatedUserNodeID" />
@@ -314,11 +419,11 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transits_UserNodes_UN_ID">
-          <End Role="UserNodes" Type="Self.UserNodes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Transits" Type="Self.Transits" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserNodes">
-              <PropertyRef Name="UN_ID" />
+            <Principal Role="Users">
+              <PropertyRef Name="U_ID" />
             </Principal>
             <Dependent Role="Transits">
               <PropertyRef Name="TR_CreatorUserNodeID" />
@@ -349,6 +454,18 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Users_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="U_ASPNET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WeatherCodes_Severities_SEV_ID">
           <End Role="Severities" Type="Self.Severities" Multiplicity="1" />
           <End Role="WeatherCodes" Type="Self.WeatherCodes" Multiplicity="*" />
@@ -374,11 +491,11 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WeatherFrostResults_UserNodes_UN_ID">
-          <End Role="UserNodes" Type="Self.UserNodes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="WeatherFrostResults" Type="Self.WeatherFrostResults" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserNodes">
-              <PropertyRef Name="UN_ID" />
+            <Principal Role="Users">
+              <PropertyRef Name="U_ID" />
             </Principal>
             <Dependent Role="WeatherFrostResults">
               <PropertyRef Name="WFR_CreatorUserNodeID" />
@@ -409,12 +526,12 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WeatherPredictions_UserNodes_UN_ID">
-          <End Role="UserNodes" Type="Self.UserNodes" Multiplicity="1" />
+        <Association Name="FK_WeatherPredictions_Users_U_ID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="WeatherPredictions" Type="Self.WeatherPredictions" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserNodes">
-              <PropertyRef Name="UN_ID" />
+            <Principal Role="Users">
+              <PropertyRef Name="U_ID" />
             </Principal>
             <Dependent Role="WeatherPredictions">
               <PropertyRef Name="WP_CreatorUserNodeID" />
@@ -467,6 +584,12 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Parameter Name="Code" Type="int" Mode="In" />
           <Parameter Name="MinutesToDefrost" Type="float" Mode="In" />
         </Function>
+        <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="WeatherFrostPredictionsVsActualsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="WeatherFrostResultsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CreatorUserNodeID" Type="int" Mode="In" />
@@ -476,6 +599,11 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Parameter Name="PredictionDate" Type="datetime2" Mode="In" />
         </Function>
         <EntityContainer Name="AniEntitiesModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GPSLocations" EntityType="Self.GPSLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogEntries" EntityType="Self.LogEntries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nodes" EntityType="Self.Nodes" Schema="dbo" store:Type="Tables" />
@@ -507,6 +635,22 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
     [FrostPredictionDataView].[WeatherCode] AS [WeatherCode]
     FROM [dbo].[FrostPredictionDataView] AS [FrostPredictionDataView]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Drives_Nodes_N_ID_Modified" Association="Self.FK_Drives_Nodes_N_ID_Modified">
             <End Role="Nodes" EntitySet="Nodes" />
             <End Role="Transits" EntitySet="Transits" />
@@ -528,7 +672,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="TrafficIncidents" EntitySet="TrafficIncidents" />
           </AssociationSet>
           <AssociationSet Name="FK_TrafficIncidents_UserNodes_UN_ID" Association="Self.FK_TrafficIncidents_UserNodes_UN_ID">
-            <End Role="UserNodes" EntitySet="UserNodes" />
+            <End Role="Users" EntitySet="Users" />
             <End Role="TrafficIncidents" EntitySet="TrafficIncidents" />
           </AssociationSet>
           <AssociationSet Name="FK_TrafficIncidentSeverity_Severities_SEV_ID" Association="Self.FK_TrafficIncidentSeverity_Severities_SEV_ID">
@@ -544,7 +688,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="Transits" EntitySet="Transits" />
           </AssociationSet>
           <AssociationSet Name="FK_Transits_UserNodes_UN_ID" Association="Self.FK_Transits_UserNodes_UN_ID">
-            <End Role="UserNodes" EntitySet="UserNodes" />
+            <End Role="Users" EntitySet="Users" />
             <End Role="Transits" EntitySet="Transits" />
           </AssociationSet>
           <AssociationSet Name="FK_UserNodes_Node_N_ID" Association="Self.FK_UserNodes_Node_N_ID">
@@ -555,6 +699,10 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="Users" EntitySet="Users" />
             <End Role="UserNodes" EntitySet="UserNodes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Users_AspNetUsers_Id" Association="Self.FK_Users_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_WeatherCodes_Severities_SEV_ID" Association="Self.FK_WeatherCodes_Severities_SEV_ID">
             <End Role="Severities" EntitySet="Severities" />
             <End Role="WeatherCodes" EntitySet="WeatherCodes" />
@@ -564,7 +712,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="WeatherFrostResults" EntitySet="WeatherFrostResults" />
           </AssociationSet>
           <AssociationSet Name="FK_WeatherFrostResults_UserNodes_UN_ID" Association="Self.FK_WeatherFrostResults_UserNodes_UN_ID">
-            <End Role="UserNodes" EntitySet="UserNodes" />
+            <End Role="Users" EntitySet="Users" />
             <End Role="WeatherFrostResults" EntitySet="WeatherFrostResults" />
           </AssociationSet>
           <AssociationSet Name="FK_WeatherPrediction_WeatherCode_WC_ID" Association="Self.FK_WeatherPrediction_WeatherCode_WC_ID">
@@ -575,8 +723,8 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <End Role="WeatherSources" EntitySet="WeatherSources" />
             <End Role="WeatherPredictions" EntitySet="WeatherPredictions" />
           </AssociationSet>
-          <AssociationSet Name="FK_WeatherPredictions_UserNodes_UN_ID" Association="Self.FK_WeatherPredictions_UserNodes_UN_ID">
-            <End Role="UserNodes" EntitySet="UserNodes" />
+          <AssociationSet Name="FK_WeatherPredictions_Users_U_ID" Association="Self.FK_WeatherPredictions_Users_U_ID">
+            <End Role="Users" EntitySet="Users" />
             <End Role="WeatherPredictions" EntitySet="WeatherPredictions" />
           </AssociationSet>
           <AssociationSet Name="FK_ZipCode_GPSLocation_GPS_ID" Association="Self.FK_ZipCode_GPSLocation_GPS_ID">
@@ -612,6 +760,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <NavigationProperty Name="TrafficIncidentSeverity" Relationship="AniEntitiesModel.FK_TrafficIncidents_TrafficIncidentSeverity_TIS_ID" FromRole="TrafficIncident" ToRole="TrafficIncidentSeverity" />
           <NavigationProperty Name="TrafficIncidentType" Relationship="AniEntitiesModel.FK_TrafficIncidents_TrafficIncidentType_TIT_ID" FromRole="TrafficIncident" ToRole="TrafficIncidentType" />
           <NavigationProperty Name="UserNode" Relationship="AniEntitiesModel.FK_TrafficIncidents_UserNodes_UN_ID" FromRole="TrafficIncident" ToRole="UserNode" />
+          <NavigationProperty Name="User" Relationship="AniEntitiesModel.FK_TrafficIncidents_UserNodes_UN_ID1" FromRole="TrafficIncident" ToRole="User" />
         </EntityType>
         <EntityContainer Name="AniEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TrafficIncidents" EntityType="Self.TrafficIncident" />
@@ -749,6 +898,48 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <Parameter Name="ZipCode" Mode="In" Type="Int32" />
             <Parameter Name="AfterDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="AspNetRoles" EntityType="AniEntitiesModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="AniEntitiesModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="AniEntitiesModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="AniEntitiesModel.AspNetUser" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AniEntitiesModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AniEntitiesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_AspNetUsers_Id" Association="AniEntitiesModel.FK_Users_AspNetUsers_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrafficIncidents_UserNodes_UN_ID1" Association="AniEntitiesModel.FK_TrafficIncidents_UserNodes_UN_ID1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TrafficIncident" EntitySet="TrafficIncidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transits_UserNodes_UN_ID1" Association="AniEntitiesModel.FK_Transits_UserNodes_UN_ID1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transit" EntitySet="Transits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeatherFrostResults_UserNodes_UN_ID1" Association="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WeatherFrostResult" EntitySet="WeatherFrostResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeatherPredictions_Users_U_ID" Association="AniEntitiesModel.FK_WeatherPredictions_Users_U_ID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WeatherPrediction" EntitySet="WeatherPredictions" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="AniEntitiesModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="InsertUser" ReturnType="Collection(Decimal)">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -881,6 +1072,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <NavigationProperty Name="GPSLocation1" Relationship="AniEntitiesModel.FK_Transits_GPSLocations_GPS_ID_Start" FromRole="Transit" ToRole="GPSLocation" />
           <NavigationProperty Name="Node" Relationship="AniEntitiesModel.FK_Drives_Nodes_N_ID_Modified" FromRole="Transit" ToRole="Node" />
           <NavigationProperty Name="UserNode" Relationship="AniEntitiesModel.FK_Transits_UserNodes_UN_ID" FromRole="Transit" ToRole="UserNode" />
+          <NavigationProperty Name="User" Relationship="AniEntitiesModel.FK_Transits_UserNodes_UN_ID1" FromRole="Transit" ToRole="User" />
         </EntityType>
         <EntityType Name="UserNode">
           <Key>
@@ -902,13 +1094,16 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
             <PropertyRef Name="U_ID" />
           </Key>
           <Property Name="U_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="U_UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="U_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="U_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="U_EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="U_LastActivityTimeUTC" Type="DateTime" Precision="7" />
-          <Property Name="U_CreatedTimeUTC" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="UserNodes" Relationship="AniEntitiesModel.FK_UserNodes_Users_U_ID" FromRole="User" ToRole="UserNode" />
+          <Property Name="U_ASPNET_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="U_ZipCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="AniEntitiesModel.FK_Users_AspNetUsers_Id" FromRole="User" ToRole="AspNetUser" />
+          <NavigationProperty Name="TrafficIncidents" Relationship="AniEntitiesModel.FK_TrafficIncidents_UserNodes_UN_ID1" FromRole="User" ToRole="TrafficIncident" />
+          <NavigationProperty Name="Transits" Relationship="AniEntitiesModel.FK_Transits_UserNodes_UN_ID1" FromRole="User" ToRole="Transit" />
+          <NavigationProperty Name="WeatherFrostResults" Relationship="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID1" FromRole="User" ToRole="WeatherFrostResult" />
+          <NavigationProperty Name="WeatherPredictions" Relationship="AniEntitiesModel.FK_WeatherPredictions_Users_U_ID" FromRole="User" ToRole="WeatherPrediction" />
         </EntityType>
         <EntityType Name="WeatherCode">
           <Key>
@@ -940,6 +1135,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Property Name="WFR_MinutesToDefrost" Type="Double" />
           <NavigationProperty Name="UserNode" Relationship="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID" FromRole="WeatherFrostResult" ToRole="UserNode" />
           <NavigationProperty Name="WeatherPrediction" Relationship="AniEntitiesModel.FK_WeatherFrostResult_WeatherPrediction_WP_ID" FromRole="WeatherFrostResult" ToRole="WeatherPrediction" />
+          <NavigationProperty Name="User" Relationship="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID1" FromRole="WeatherFrostResult" ToRole="User" />
         </EntityType>
         <EntityType Name="WeatherPrediction">
           <Key>
@@ -959,6 +1155,7 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <NavigationProperty Name="WeatherCode" Relationship="AniEntitiesModel.FK_WeatherPrediction_WeatherCode_WC_ID" FromRole="WeatherPrediction" ToRole="WeatherCode" />
           <NavigationProperty Name="WeatherFrostResults" Relationship="AniEntitiesModel.FK_WeatherFrostResult_WeatherPrediction_WP_ID" FromRole="WeatherPrediction" ToRole="WeatherFrostResult" />
           <NavigationProperty Name="WeatherSource" Relationship="AniEntitiesModel.FK_WeatherPrediction_WeatherSource_WS_ID" FromRole="WeatherPrediction" ToRole="WeatherSource" />
+          <NavigationProperty Name="User" Relationship="AniEntitiesModel.FK_WeatherPredictions_Users_U_ID" FromRole="WeatherPrediction" ToRole="User" />
         </EntityType>
         <EntityType Name="WeatherSource">
           <Key>
@@ -1250,6 +1447,148 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <Property Type="String" Name="IconClass" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ImageUrl" Nullable="true" />
         </ComplexType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="AniEntitiesModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AniEntitiesModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AniEntitiesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="AniEntitiesModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="AniEntitiesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Users" Relationship="AniEntitiesModel.FK_Users_AspNetUsers_Id" FromRole="AspNetUser" ToRole="User" />
+          <NavigationProperty Name="AspNetRoles" Relationship="AniEntitiesModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="AniEntitiesModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AniEntitiesModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="AniEntitiesModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AniEntitiesModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_AspNetUsers_Id">
+          <End Type="AniEntitiesModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="U_ASPNET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrafficIncidents_UserNodes_UN_ID1">
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="1" />
+          <End Type="AniEntitiesModel.TrafficIncident" Role="TrafficIncident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="TrafficIncident">
+              <PropertyRef Name="TI_CreatedUserNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transits_UserNodes_UN_ID1">
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="1" />
+          <End Type="AniEntitiesModel.Transit" Role="Transit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="Transit">
+              <PropertyRef Name="TR_CreatorUserNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeatherFrostResults_UserNodes_UN_ID1">
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="1" />
+          <End Type="AniEntitiesModel.WeatherFrostResult" Role="WeatherFrostResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="WeatherFrostResult">
+              <PropertyRef Name="WFR_CreatorUserNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeatherPredictions_Users_U_ID">
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="1" />
+          <End Type="AniEntitiesModel.WeatherPrediction" Role="WeatherPrediction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="WeatherPrediction">
+              <PropertyRef Name="WP_CreatorUserNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="AniEntitiesModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="AniEntitiesModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1411,12 +1750,10 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AniEntitiesModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="U_CreatedTimeUTC" ColumnName="U_CreatedTimeUTC" />
-                <ScalarProperty Name="U_LastActivityTimeUTC" ColumnName="U_LastActivityTimeUTC" />
-                <ScalarProperty Name="U_EmailAddress" ColumnName="U_EmailAddress" />
+                <ScalarProperty Name="U_ZipCode" ColumnName="U_ZipCode" />
+                <ScalarProperty Name="U_ASPNET_ID" ColumnName="U_ASPNET_ID" />
                 <ScalarProperty Name="U_LastName" ColumnName="U_LastName" />
                 <ScalarProperty Name="U_FirstName" ColumnName="U_FirstName" />
-                <ScalarProperty Name="U_UserName" ColumnName="U_UserName" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1537,6 +1874,60 @@ warning 6002: The table/view 'AniDatabase.dbo.FrostPredictionDataView' does not 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="AniEntitiesModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="AniEntitiesModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="AniEntitiesModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="AniEntitiesModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="AniEntitiesModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="AniEntitiesModel.Store.InsertUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

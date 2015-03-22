@@ -17,7 +17,7 @@
 @ColorDarkBlue: #000084;
 @ColorBlack: #000000;
 @ColorOrange: #aa5500;
-@ColorPrimary: #00aaaa;
+@ColorPrimary: #00eeee;
 @ColorSmoke: #aaaaaa;
 @ColorSmokeBright: #bbbbbb;
 @ColorGray: #555555;
@@ -1090,8 +1090,10 @@ th {
 }
 @font-face {
   font-family: 'DOS';
+  /*
   src: url('../fonts/Fixedsys500c.eot');
   src: local('☺'), url('../fonts/Fixedsys500c.woff') format('woff'), url('../fonts/Fixedsys500c.ttf') format('truetype'), url('../fonts/Fixedsys500c.svg') format('svg');
+  */
   font-weight: normal;
   font-style: normal;
 }
@@ -1126,7 +1128,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: @ColorForegroundAccent;
+  color: @ColorPrimary;
   text-decoration: none;
 }
 
@@ -4600,7 +4602,7 @@ a.badge:focus {
   padding: 9px 3px 9px 4px;
   margin: 9px 4px 9px 3px;
   background-color: transparent;
-  border: 2px solid @ColorYellow;
+  border: 2px solid @ColorAccent;
 }
 .jumbotron h1,
 .jumbotron .h1 {

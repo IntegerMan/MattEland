@@ -18,17 +18,28 @@ namespace AniWebApp
         public User()
         {
             this.UserNodes = new HashSet<UserNode>();
+            this.TrafficIncidents = new HashSet<TrafficIncident>();
+            this.Transits = new HashSet<Transit>();
+            this.WeatherFrostResults = new HashSet<WeatherFrostResult>();
+            this.WeatherPredictions = new HashSet<WeatherPrediction>();
         }
     
         public int U_ID { get; set; }
-        public string U_UserName { get; set; }
         public string U_FirstName { get; set; }
         public string U_LastName { get; set; }
-        public string U_EmailAddress { get; set; }
-        public Nullable<System.DateTime> U_LastActivityTimeUTC { get; set; }
-        public System.DateTime U_CreatedTimeUTC { get; set; }
+        public string U_ASPNET_ID { get; set; }
+        public int U_ZipCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserNode> UserNodes { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TrafficIncident> TrafficIncidents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transit> Transits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WeatherFrostResult> WeatherFrostResults { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WeatherPrediction> WeatherPredictions { get; set; }
     }
 }

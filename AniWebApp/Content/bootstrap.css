@@ -1046,10 +1046,13 @@ th {
 }
 @font-face {
   font-family: 'DOS';
-  src: url('../fonts/Fixedsys500c.eot');
-  src: local('☺'), url('../fonts/Fixedsys500c.woff') format('woff'), url('../fonts/Fixedsys500c.ttf') format('truetype'), url('../fonts/Fixedsys500c.svg') format('svg');
   font-weight: normal;
   font-style: normal;
+  
+  /*
+  src: url('../fonts/Fixedsys500c.eot');
+  src: local('☺'), url('../fonts/Fixedsys500c.woff') format('woff'), url('../fonts/Fixedsys500c.ttf') format('truetype'), url('../fonts/Fixedsys500c.svg') format('svg');
+  */
 }
 * {
   -webkit-box-sizing: border-box;
@@ -1082,7 +1085,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #bbbbbb;
+  color: #00eeee;
   text-decoration: none;
 }
 a:hover,
@@ -1285,7 +1288,7 @@ mark,
   color: #555555;
 }
 .text-primary {
-  color: #00aaaa;
+  color: #00eeee;
 }
 a.text-primary:hover {
   color: #a2a2a2;
@@ -3086,7 +3089,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #000000;
-  background-color: #00aaaa;
+  background-color: #00eeee;
   /*
   &:hover,
   &:focus,
@@ -4630,7 +4633,7 @@ a.badge:focus {
   padding: 9px 3px 9px 4px;
   margin: 9px 4px 9px 3px;
   background-color: transparent;
-  border: 2px solid #777700;
+  border: 2px solid #fefe54;
 }
 .jumbotron h1,
 .jumbotron .h1 {

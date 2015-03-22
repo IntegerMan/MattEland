@@ -21,7 +21,7 @@ namespace AniWebApp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("AniConnStr", throwIfV1Schema: false)
+            : base("AniDatabase", throwIfV1Schema: false)
         {
         }
 
