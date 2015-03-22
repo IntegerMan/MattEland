@@ -14,19 +14,40 @@
 
 </div>
 
+<br />
+
 <div class="row">
-    <div class="col-md-6">
-        <h2>ANI</h2>
-        <p>A series of experiments around using Artificial Narrow Intelligence to analyze data and make inferences and recommendations based on that data.</p>
-        <a class="btn btn-primary" href="@Url.Action("Index", "Ani")">Learn More</a>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Projects</div>
+            <div class="panel-body">
+                <p>View a list of active and historical software developmnt projects I've done on my own.</p>
+                @Html.ActionLink("View Projects", "Index", "Projects", null,  new { @class = "btn btn-block btn-primary" })
+                <br />
+            </div>
+        </div>
         <br />
     </div>
-    <div class="col-md-6">
-        <h2>Apps</h2>
-        <p>
-            Links and information on apps for Windows Phone. These apps are older and are not actively updated or maintained.
-        </p>
-        <a class="btn btn-default" href="@Url.Action("Index","Apps")">View Apps</a>
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">ANI Project</div>
+            <div class="panel-body">
+                <p>A series of experiments around using machine learning to improve daily life.</p>
+                @Html.ActionLink("View Apps", "ANI", "Projects", null, new { @class = "btn btn-block btn-info" })
+                <br />
+            </div>
+        </div>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Windows Phone Apps</div>
+            <div class="panel-body">
+                <p>Links and information on ministry and productivity apps for Windows Phone 7, 8, and 8.1.</p>
+                @Html.ActionLink("View Apps", "Index", "Apps", null, new { @class = "btn btn-block btn-default" })
+                <br />
+            </div>
+        </div>
         <br />
     </div>
 </div>

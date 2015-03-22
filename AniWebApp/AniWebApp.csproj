@@ -210,8 +210,8 @@
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AppController.cs" />
-    <Compile Include="Controllers\AniController.cs" />
+    <Compile Include="Controllers\AppsController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -418,13 +418,16 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
     <Content Include="Views\Weather\Forecasts.cshtml" />
-    <Content Include="Views\Ani\Index.cshtml" />
+    <Content Include="Views\Projects\ANI.cshtml" />
     <Content Include="Views\Traffic\Index.cshtml" />
     <Content Include="Views\Weather\Frost.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Weather\AddFrostEntry.cshtml" />
     <Content Include="Views\Traffic\Construction.cshtml" />
     <Content Include="Views\Traffic\Accidents.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\TemporalProtocols.cshtml" />
+    <Content Include="Views\Projects\PiMFD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

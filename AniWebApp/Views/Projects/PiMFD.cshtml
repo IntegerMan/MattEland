@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Pi-MFD";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Projects")">Projects</a></li>
+    <li class="active">Pi-MFD</li>
+</ol>
+
+<div class="page-header">
+
+    <h1>@ViewBag.Title</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+
+        <h2>Project Overview</h2>
+
+        <p class="lead">
+            A Python information dashboard monstrosity hosted inside of a Raspberry Pi (which in turn is hosted inside an
+            ammo box).
+        </p>
+
+        <h3>Current Features</h3>
+        <p>
+            Pi-MFD Currently Supports:
+            <ul>
+                <li>Open Street Maps Map Browsing</li>
+                <li>Current Weather Conditions</li>
+                <li>Weather Forecasts</li>
+                <li>Frost Warnings</li>
+                <li>Traffic Accidents and Construction Alerts</li>
+                <li>Traffic Cameras</li>
+                <li>Disk Space Monitoring</li>
+                <li>Memory Usage</li>
+                <li>CPU Usage (per Core)</li>
+                <li>Processes Running</li>
+                <li>Active Connections</li>
+                <li>System Time</li>
+            </ul>
+        </p>
+
+        <h3>Why would you even build this?</h3>
+        <p>
+            This is what happens when:
+            <ul>
+                <li>You might be a bit of a nerd</li>
+                <li>You want to learn python</li>
+                <li>Your wife gives you a Raspberry Pi for Christmas</li>
+                <li>You play a bit too much DCS World and modded Kerbal Space Program</li>
+                <li>You decide to build an information dashboard application</li>
+            </ul>
+        </p>
+
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                Learn More
+            </div>
+            <div class="panel-body">
+                <br/>
+                <p>
+                    <i class="fa fa-github fa-3x"></i><br/>
+                </p>
+                <a href="https://github.com/IntegerMan/Pi-MFD" class="btn btn-default btn-block">
+                    View on GitHub
+                </a>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>

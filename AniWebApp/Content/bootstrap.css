@@ -3043,8 +3043,8 @@ fieldset[disabled] .btn {
   box-shadow: none;
 }
 .btn-default {
-  color: #000000;
-  background-color: #bbbbbb;
+  color: #dddddd;
+  background-color: #555555;
   /*
   &:hover,
   &:focus,
@@ -3179,7 +3179,7 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
   color: #ffffff;
-  background-color: #000000;
+  background-color: #5555ff;
   /*
   &:hover,
   &:focus,
@@ -3344,7 +3344,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-block {
   display: block;
-  width: 100%;
+  width: 95%;
 }
 .btn-block + .btn-block {
   margin-top: 20px;
@@ -5180,22 +5180,22 @@ a.list-group-item-danger.active:focus {
   border-bottom-color: #dddddd;
 }
 .panel-primary {
-  border-color: #bbbbbb;
+  border-color: #00eeee;
 }
 .panel-primary > .panel-heading {
-  color: #ffffff;
-  background-color: #bbbbbb;
-  border-color: #bbbbbb;
+  color: #000000;
+  background-color: #00eeee;
+  border-color: #00eeee;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #bbbbbb;
+  border-top-color: #00eeee;
 }
 .panel-primary > .panel-heading .badge {
-  color: #bbbbbb;
-  background-color: #ffffff;
+  color: #00eeee;
+  background-color: #000000;
 }
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #bbbbbb;
+  border-bottom-color: #00eeee;
 }
 .panel-success {
   border-color: #00aa00;
@@ -5216,22 +5216,22 @@ a.list-group-item-danger.active:focus {
   border-bottom-color: #00aa00;
 }
 .panel-info {
-  border-color: #000000;
+  border-color: #5555ff;
 }
 .panel-info > .panel-heading {
   color: #ffffff;
-  background-color: #000000;
-  border-color: #000000;
+  background-color: #5555ff;
+  border-color: #5555ff;
 }
 .panel-info > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #000000;
+  border-top-color: #5555ff;
 }
 .panel-info > .panel-heading .badge {
-  color: #000000;
+  color: #5555ff;
   background-color: #ffffff;
 }
 .panel-info > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #000000;
+  border-bottom-color: #5555ff;
 }
 .panel-warning {
   border-color: #777700;

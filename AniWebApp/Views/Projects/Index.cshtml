@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Projects";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="active">Projects</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+
+    <p class="lead">
+        A list of active and past software development projects.
+    </p>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="panel panel-info text-center">
+            <div class="panel-heading">
+                ANI Project
+            </div>
+            <div class="panel-body">
+                <br />
+                <p>
+                    <i class="fa fa-connectdevelop fa-3x"></i>
+                </p>
+                <p>
+                    Analytics for Daily Life
+                </p>
+                <p>
+                    @Html.ActionLink("View", "ANI", "Projects", null, new { @class = "btn btn-block btn-info" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-info text-center">
+            <div class="panel-heading">
+                Pi-MFD
+            </div>
+            <div class="panel-body">
+                <br />
+                <p>
+                    <i class="fa fa-newspaper-o fa-3x"></i>
+                </p>
+                <p>
+                    Raspberry Pi Dashboard
+                </p>
+                <p>
+                    @Html.ActionLink("View", "PiMFD", "Projects", null, new { @class = "btn btn-block btn-info" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-danger text-center">
+            <div class="panel-heading">
+                Temp. Protocols
+            </div>
+            <div class="panel-body">
+                <br />
+                <p>
+                    <i class="fa fa-play-circle-o fa-3x"></i>
+                </p>
+                <p>
+                    Long-Term Project
+                </p>
+                <p>
+                    @Html.ActionLink("View", "TemporalProtocols", "Projects", null, new { @class = "btn btn-block btn-danger" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                Windows Phone
+            </div>
+            <div class="panel-body">
+                <br />
+                <p>
+                    <i class="fa fa-windows fa-3x"></i>
+                </p>
+                <p>
+                    Windows Phone Apps
+                </p>
+                <p>
+                    @Html.ActionLink("View", "Index", "Apps", null, new { @class = "btn btn-block btn-default" })
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -48,7 +48,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class='@Html.IsActive("Home", "Index")'>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class='@Html.IsActive("Ani", "Index")'>@Html.ActionLink("ANI", "Index", "Ani")</li>
+                    <li class='@Html.IsActive("Projects", "Index")'>@Html.ActionLink("Projects", "Index", "Projects")</li>
+                    <li class='@Html.IsActive("Projects", "ANI")'>@Html.ActionLink("ANI", "ANI", "Projects")</li>
                     <li class='@Html.IsActive("Apps", "Index")'>@Html.ActionLink("Apps", "Index", "Apps")</li>
                     <li class='@Html.IsActive("Home", "AboutMe")'>@Html.ActionLink("About", "AboutMe", "Home")</li>
                 </ul>
