@@ -1289,9 +1289,7 @@ p {
 }
 .lead {
   margin-bottom: 20px;
-  font-size: 18px;
   font-weight: normal;
-  line-height: 1;
 }
 @media (min-width: 768px) {
   .lead {
@@ -1526,6 +1524,7 @@ abbr[data-original-title] {
 blockquote {
   padding: 20px 20px;
   margin: 0 0 20px;
+  background-color: @ColorBackgroundDark;
   border-left: 5px solid @ColorForegroundAccent;
 }
 blockquote p:last-child,
@@ -4599,11 +4598,10 @@ a.badge:focus {
   float: right;
 }
 .jumbotron {
-  padding: 18px 6px 18px 8px 18px 6px 18px 8px;
   margin-bottom: 18px 6px 18px 8px;
   color: @ColorForegroundAccent;
   padding: 9px 3px 9px 4px;
-  margin: 9px 4px 9px 3px;
+  margin: 18px 4px 18px 3px;
   background-color: @ColorBackgroundDark;
   border: 2px solid @ColorAccent;
 }
