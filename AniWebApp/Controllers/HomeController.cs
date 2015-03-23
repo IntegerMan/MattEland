@@ -20,7 +20,7 @@ namespace AniWebApp.Controllers
         /// Serves up the about me page
         /// </summary>
         /// <returns>The about me view.</returns>
-        public ActionResult AboutMe()
+        public ActionResult About()
         {
             return View();
         }

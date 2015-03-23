@@ -52,7 +52,7 @@
                     <li class='@Html.IsActive("Projects", "Index")'>@Html.ActionLink("Projects", "Index", "Projects")</li>
                     <li class='@Html.IsActive("Projects", "ANI")'>@Html.ActionLink("ANI", "ANI", "Projects")</li>
                     <li class='@Html.IsActive("Apps", "Index")'>@Html.ActionLink("Apps", "Index", "Apps")</li>
-                    <li class='@Html.IsActive("Home", "AboutMe")'>@Html.ActionLink("About", "AboutMe", "Home")</li>
+                    <li class='@Html.IsActive("Home", "About")'>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -60,10 +60,8 @@
     </div>
 <div class="container body-content">
     @RenderBody()
-    <br/>
-    <br/>
-    <hr/>
     <footer>
+        <hr />
         <p>&copy; @DateTime.Now.Year Matt Eland</p>
     </footer>
 </div>
