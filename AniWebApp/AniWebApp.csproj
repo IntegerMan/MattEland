@@ -356,6 +356,7 @@
     <Content Include="fonts\Fixedsys500c.ttf" />
     <Content Include="fonts\Fixedsys500c.woff" />
     <None Include="package.json" />
+    <None Include="Properties\PublishProfiles\DiscountASP.net.pubxml" />
     <None Include="Properties\PublishProfiles\matteland.pubxml" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel.js" />
