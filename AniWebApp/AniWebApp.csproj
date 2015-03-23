@@ -346,6 +346,7 @@
     <Content Include="Images\WheelOfNames99.png" />
     <Content Include="Images\world.png" />
     <Content Include="Scripts\affix.js" />
+    <Content Include="Scripts\easySlider1.7.min.js" />
     <Content Include="Scripts\alert.js" />
     <Content Include="Scripts\bootstrap-386.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -428,6 +429,7 @@
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\TemporalProtocols.cshtml" />
     <Content Include="Views\Projects\PiMFD.cshtml" />
+    <Content Include="Views\Apps\SeekingGod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

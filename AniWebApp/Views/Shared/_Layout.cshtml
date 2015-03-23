@@ -28,14 +28,15 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
     @* Enable JQuery date pickers *@
-
     <script type="text/javascript">
         $(function() {
             $(".datefield").datepicker();
         });
     </script>
 
-    <meta name="description" content="Personal Development and Research Projects by Matt Eland" />
+    <meta name="description" content="Personal Development and Research Projects by Matt Eland"/>
+
+    @RenderSection("heading", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
