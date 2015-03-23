@@ -12,6 +12,14 @@ namespace AniWebApp.Controllers
     public class WeatherController : CustomController
     {
 
+
+        [HttpGet]
+        [Route(@"Weather")]
+        public ActionResult Index()
+        {
+            return AreaWeather();
+        }
+
         /// <summary>
         /// Gets the weather for a specific zip code.
         /// </summary>
