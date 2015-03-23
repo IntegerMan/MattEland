@@ -13,7 +13,7 @@ using AniWebApp.Models;
 namespace AniWebApp.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : CustomController
     {
         private AniEntities _entities = new AniEntities();
 

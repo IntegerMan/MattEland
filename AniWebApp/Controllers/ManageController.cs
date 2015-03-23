@@ -11,7 +11,7 @@ using AniWebApp.Models;
 namespace AniWebApp.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : CustomController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

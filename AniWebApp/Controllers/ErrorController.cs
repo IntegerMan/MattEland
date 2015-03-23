@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AniWebApp.Controllers
 {
-    public class ErrorController : Controller
+    public class ErrorController : CustomController
     {
 
         /// <summary>
