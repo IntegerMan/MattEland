@@ -11,6 +11,11 @@ namespace AniWebApp.Controllers
     /// </summary>
     public class AppsController : CustomController
     {
+
+        /// <summary>
+        /// Presents the main app list view.
+        /// </summary>
+        /// <returns>The main app list view.</returns>
         [HttpGet]
         [Route("Apps")]
         public ActionResult Index()
@@ -18,9 +23,35 @@ namespace AniWebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Presents the main Seeking God page view.
+        /// </summary>
+        /// <returns>The Seeking God app view.</returns>
         [HttpGet]
         [Route(@"Apps/SeekingGod")]
         public ActionResult SeekingGod()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Presents the Seeking Jesus page view.
+        /// </summary>
+        /// <returns>The Seeking Jesus app view.</returns>
+        [HttpGet]
+        [Route(@"Apps/SeekingJesus")]
+        public ActionResult SeekingJesus()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Presents the Life Lights page view.
+        /// </summary>
+        /// <returns>The Life Lights app view.</returns>
+        [HttpGet]
+        [Route(@"Apps/LifeLights")]
+        public ActionResult LifeLights()
         {
             return View();
         }

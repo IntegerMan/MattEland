@@ -431,6 +431,8 @@
     <Content Include="Views\Projects\PiMFD.cshtml" />
     <Content Include="Views\Apps\SeekingGod.cshtml" />
     <Content Include="Views\Apps\_AppLayout.cshtml" />
+    <Content Include="Views\Apps\SeekingJesus.cshtml" />
+    <Content Include="Views\Apps\LifeLights.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

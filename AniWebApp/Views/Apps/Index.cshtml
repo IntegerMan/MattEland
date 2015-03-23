@@ -26,9 +26,8 @@
         <h3>Featured Apps</h3>
         <div class="list-group">
             @Html.ActionLink("Seeking God", "SeekingGod", "Apps", null, new { @class="list-group-item"})
-            <a class="list-group-item" href="http://www.matteland.com/SeekingGod.html">Seeking God</a>
-            <a class="list-group-item" href="http://www.matteland.com/SeekingJesus.html">Seeking Jesus</a>
-            <a class="list-group-item" href="http://www.matteland.com/LifeLights.html">Life Lights</a>
+            @Html.ActionLink("Seeking Jesus", "SeekingJesus", "Apps", null, new { @class="list-group-item"})
+            @Html.ActionLink("Life Lights", "LifeLights", "Apps", null, new { @class="list-group-item"})
         </div>
     </div>
 
