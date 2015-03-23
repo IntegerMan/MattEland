@@ -430,6 +430,7 @@
     <Content Include="Views\Projects\TemporalProtocols.cshtml" />
     <Content Include="Views\Projects\PiMFD.cshtml" />
     <Content Include="Views\Apps\SeekingGod.cshtml" />
+    <Content Include="Views\Apps\_AppLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
