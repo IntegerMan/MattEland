@@ -18,6 +18,7 @@ namespace AniWebApp
         public WeatherCode()
         {
             this.WeatherPredictions = new HashSet<WeatherPrediction>();
+            this.WeatherRecords = new HashSet<WeatherRecord>();
         }
     
         public int WC_ID { get; set; }
@@ -34,5 +35,7 @@ namespace AniWebApp
         public virtual Severity Severity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WeatherPrediction> WeatherPredictions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WeatherRecord> WeatherRecords { get; set; }
     }
 }

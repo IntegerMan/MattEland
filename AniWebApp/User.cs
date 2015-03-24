@@ -22,6 +22,7 @@ namespace AniWebApp
             this.Transits = new HashSet<Transit>();
             this.WeatherFrostResults = new HashSet<WeatherFrostResult>();
             this.WeatherPredictions = new HashSet<WeatherPrediction>();
+            this.WeatherRecords = new HashSet<WeatherRecord>();
         }
     
         public int U_ID { get; set; }
@@ -41,5 +42,7 @@ namespace AniWebApp
         public virtual ICollection<WeatherFrostResult> WeatherFrostResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WeatherPrediction> WeatherPredictions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WeatherRecord> WeatherRecords { get; set; }
     }
 }

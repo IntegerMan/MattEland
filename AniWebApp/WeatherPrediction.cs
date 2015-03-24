@@ -30,6 +30,7 @@ namespace AniWebApp
         public int WP_WeatherCode { get; set; }
         public int WP_WeatherSourceID { get; set; }
         public Nullable<double> WP_MinutesToDefrost { get; set; }
+        public string WP_Description { get; set; }
     
         public virtual UserNode UserNode { get; set; }
         public virtual WeatherCode WeatherCode { get; set; }

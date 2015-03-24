@@ -31,6 +31,12 @@ namespace AniWebApp.Models
         public bool RainedOvernight { get; set; }
 
         /// <summary>
+        /// Whether or not it snowed overnight
+        /// </summary>
+        [DisplayName("Snowed Overnight?")]
+        public bool SnowedOvernight { get; set; }
+
+        /// <summary>
         /// The date the observation was made
         /// </summary>
         [DisplayName("Date")]

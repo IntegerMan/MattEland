@@ -72,7 +72,7 @@ namespace AniWebApp.Controllers
         /// <returns>The view for entering a frost entry</returns>
         [HttpGet]
         [Route(@"Weather/Frost/AddEntry")]
-        [Authorize]
+        [Authorize(Users = "Batman, ani")]
         public ActionResult AddFrostEntry()
         {
             var model = new AddFrostRecordModel
@@ -92,7 +92,7 @@ namespace AniWebApp.Controllers
         /// <returns>A view showing the new item or a view to re-enter the item.</returns>
         [HttpPost]
         [Route(@"Weather/Frost/AddEntry")]
-        [Authorize]
+        [Authorize(Users = "Batman, ani")]
         [ValidateAntiForgeryToken]
         public ActionResult AddFrostEntryPost(AddFrostRecordModel entry)
         {
@@ -102,6 +102,7 @@ namespace AniWebApp.Controllers
 
                 var result = this.Entities.WeatherFrostResultsInsert(userId,
                     entry.RainedOvernight,
+                    entry.SnowedOvernight,
                     entry.ActualMinutes,
                     entry.ZipCode,
                     entry.RecordDate.Date);

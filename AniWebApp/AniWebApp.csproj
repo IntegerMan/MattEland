@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -218,9 +219,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TrafficController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
-    <Compile Include="FrostPredictionDataView.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +240,9 @@
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceStatu.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Severity.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
@@ -274,6 +275,9 @@
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WeatherPrediction.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherRecord.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WeatherSource.cs">

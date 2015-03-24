@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e7c51a4201604a62bee9f152175bef3c" Name="diagramAll" ZoomLevel="84">
         <EntityTypeShape EntityType="AniEntitiesModel.TrafficIncident" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AniEntitiesModel.FrostPredictionDataView" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="AniEntitiesModel.GPSLocation" Width="1.5" PointX="0.75" PointY="7.375" />
         <EntityTypeShape EntityType="AniEntitiesModel.LogEntry" Width="1.5" PointX="13.125" PointY="11.125" />
         <EntityTypeShape EntityType="AniEntitiesModel.Node" Width="1.5" PointX="3" PointY="7.25" />
@@ -21,11 +20,9 @@
         <EntityTypeShape EntityType="AniEntitiesModel.WeatherFrostResult" Width="1.5" PointX="7.5" PointY="2.25" />
         <EntityTypeShape EntityType="AniEntitiesModel.WeatherPrediction" Width="1.5" PointX="10.5" PointY="0.75" />
         <EntityTypeShape EntityType="AniEntitiesModel.WeatherSource" Width="1.5" PointX="8.25" PointY="22.125" />
-        <EntityTypeShape EntityType="AniEntitiesModel.ZipCode" Width="1.5" PointX="10.5" PointY="10.625" />
         <AssociationConnector Association="AniEntitiesModel.FK_Node_GPSLocation_GPS_ID" />
         <AssociationConnector Association="AniEntitiesModel.FK_Transits_GPSLocations_GPS_ID_End" />
         <AssociationConnector Association="AniEntitiesModel.FK_Transits_GPSLocations_GPS_ID_Start" />
-        <AssociationConnector Association="AniEntitiesModel.FK_ZipCode_GPSLocation_GPS_ID" />
         <AssociationConnector Association="AniEntitiesModel.FK_Drives_Nodes_N_ID_Modified" />
         <AssociationConnector Association="AniEntitiesModel.FK_Node_NodeType_NT_ID" />
         <AssociationConnector Association="AniEntitiesModel.FK_UserNodes_Node_N_ID" />
@@ -53,6 +50,14 @@
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID1" />
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherPredictions_Users_U_ID" />
         <AssociationConnector Association="AniEntitiesModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="AniEntitiesModel.ServiceStatu" Width="1.5" PointX="8.25" PointY="9.625" />
+        <EntityTypeShape EntityType="AniEntitiesModel.WeatherRecord" Width="1.5" PointX="12.75" PointY="16.5" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherRecord_Users_U_ID" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherRecord_WeatherCodes_WC_ID" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherRecord_WeatherSources_WS_ID" />
+        <EntityTypeShape EntityType="AniEntitiesModel.ZipCode" Width="1.5" PointX="10.5" PointY="11.125" />
+        <AssociationConnector Association="AniEntitiesModel.FK_ZipCodes_ServiceStatus_ID" />
+        <AssociationConnector Association="AniEntitiesModel.FK_WeatherRecord_ZipCodes_ID" />
       </Diagram>
       <Diagram DiagramId="090dbd5a52bf4234b10ebf0c31b8b425" Name="diagramWeather" ZoomLevel="63" >
         <EntityTypeShape EntityType="AniEntitiesModel.WeatherCode" Width="1.5" PointX="0.75" PointY="5.25" />
