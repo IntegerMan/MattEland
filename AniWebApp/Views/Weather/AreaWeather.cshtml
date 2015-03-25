@@ -1,0 +1,68 @@
+﻿@model AniWebApp.Models.Weather.WeatherHomeModel
+
+@{
+    ViewBag.Title = "Weather for " + @Model.ZipCode;
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+    <li class="active">Weather</li>
+</ol>
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
+
+<h2>Current Weather</h2>
+
+<div class="alert alert-danger">
+    Not Implemented
+</div>
+
+<h2>Forecasts</h2>
+
+<div class="row">
+
+    @foreach (var m in Model.Forecasts.Take(5))
+    {
+        <div class="col-md-2 text-center">
+            <div class="panel @if (m.SeverityId >= 3)
+                                  {@:panel-danger
+                                  }
+                                  else if (m.SeverityId >= 2)
+                                  {
+                                      @:panel-warning
+                                  }
+                                  else
+                                  {
+                                      @:panel-info
+                                  }  ">
+                <div class="panel-heading">
+                    @m.ForecastDate.ToString("ddd M/d")
+                </div>
+
+                <div class="panel-body">
+                    <br />
+                    <i class="fa fa-3x @m.IconClass"></i><br />
+                    @m.WeatherCodeName<br />
+                    <br />
+                </div>
+                <div class="panel-footer">
+                    Temp: <span class="blue">@m.Low</span> / <span class="red">@m.High</span> <br />
+                    @if (m.MinutesToDefrost.HasValue)
+                    {
+                        if (m.MinutesToDefrost <= 0)
+                        {
+                            @:No Frost
+                        }
+                        else
+                        {
+                            @m.MinutesToDefrost.Value.ToString("0 Mins Frost")
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

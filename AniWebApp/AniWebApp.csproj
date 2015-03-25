@@ -233,6 +233,10 @@
     <Compile Include="Models\AddFrostRecordModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Weather\WeatherConditionsModel.cs" />
+    <Compile Include="Models\Weather\WeatherEntryBase.cs" />
+    <Compile Include="Models\Weather\WeatherForecastModel.cs" />
+    <Compile Include="Models\Weather\WeatherHomeModel.cs" />
     <Compile Include="Node.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
@@ -438,6 +442,7 @@
     <Content Include="Views\Apps\_AppLayout.cshtml" />
     <Content Include="Views\Apps\SeekingJesus.cshtml" />
     <Content Include="Views\Apps\LifeLights.cshtml" />
+    <Content Include="Views\Weather\AreaWeather.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AniWebApp.Models;
+using AniWebApp.Models.Weather;
 
 namespace AniWebApp.Controllers
 {
@@ -35,7 +36,27 @@ namespace AniWebApp.Controllers
                 zipCode = GetUserZipCode();
             }
 
-            return RedirectToAction("Forecasts", "Weather", new { zipCode = zipCode });
+            var model = new WeatherHomeModel {ZipCode = zipCode};
+
+            var predictions = this.Entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today);
+            foreach (var prediction in predictions)
+            {
+                var forecast = new WeatherForecastModel
+                {
+                    Low = prediction.Low,
+                    High = prediction.High,
+                    SeverityId = prediction.SeverityID,
+                    MinutesToDefrost = prediction.MinutesToDefrost,
+                    WeatherCodeName = prediction.WeatherCodeName,
+                    WeatherCode = prediction.WeatherCodeID,
+                    ForecastDate = prediction.PredictionDateUTC,
+                    IconClass = prediction.IconClass
+                };
+
+                model.Forecasts.Add(forecast);
+            }
+
+            return View(model);
         }
 
         /// <summary>
@@ -63,7 +84,7 @@ namespace AniWebApp.Controllers
         [Route(@"Weather/Frost")]
         public ActionResult Frost()
         {
-            List<WeatherFrostDataSelect_Result> predictions = this.Entities.WeatherFrostDataSelect().ToList();
+            var predictions = this.Entities.WeatherFrostDataSelect().ToList();
             return View(predictions);
         }
 
