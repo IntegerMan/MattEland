@@ -20,6 +20,7 @@ namespace AniWebApp
         public int High { get; set; }
         public Nullable<double> MinutesToDefrost { get; set; }
         public int WeatherCodeID { get; set; }
+        public string Description { get; set; }
         public string WeatherCodeName { get; set; }
         public int SeverityID { get; set; }
         public string SeverityName { get; set; }

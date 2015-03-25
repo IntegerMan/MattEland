@@ -659,6 +659,9 @@
           <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="LatestWeatherEntrySelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ZipCode" Type="int" Mode="In" />
+        </Function>
         <Function Name="RecordWeatherObservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ZipCode" Type="int" Mode="In" />
           <Parameter Name="WeatherCode" Type="int" Mode="In" />
@@ -985,10 +988,6 @@
             <Parameter Name="ZipCode" Mode="In" Type="Int32" />
             <Parameter Name="PredictionDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="ActiveWeatherPredictionsSelect" ReturnType="Collection(AniEntitiesModel.ActiveWeatherPredictionsSelect_Result)">
-            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
-            <Parameter Name="AfterDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="AspNetRoles" EntityType="AniEntitiesModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="AniEntitiesModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="AniEntitiesModel.AspNetUserLogin" />
@@ -1081,8 +1080,14 @@
             <End Role="ZipCode" EntitySet="ZipCodes" />
             <End Role="WeatherRecord" EntitySet="WeatherRecords" />
           </AssociationSet>
-          <FunctionImport Name="WeatherFrostPredictionsVsActualsSelect" />
           <FunctionImport Name="WeatherFrostDataSelect" ReturnType="Collection(AniEntitiesModel.WeatherFrostDataSelect_Result)" />
+          <FunctionImport Name="LatestWeatherEntrySelect" ReturnType="Collection(AniEntitiesModel.LatestWeatherEntrySelect_Result)">
+          <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ActiveWeatherPredictionsSelect" ReturnType="Collection(AniEntitiesModel.ActiveWeatherPredictionsSelect_Result)">
+            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+            <Parameter Name="AfterDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -1502,25 +1507,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="ActiveWeatherPredictionsSelect_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="DateTime" Name="PredictionDateUTC" Nullable="false" />
-          <Property Type="Int32" Name="ZipCode" Nullable="false" />
-          <Property Type="Int32" Name="Low" Nullable="false" />
-          <Property Type="Int32" Name="High" Nullable="false" />
-          <Property Type="Double" Name="MinutesToDefrost" Nullable="true" />
-          <Property Type="Int32" Name="WeatherCodeID" Nullable="false" />
-          <Property Type="String" Name="WeatherCodeName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="SeverityID" Nullable="false" />
-          <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="HasRain" Nullable="false" />
-          <Property Type="Boolean" Name="HasClouds" Nullable="false" />
-          <Property Type="Boolean" Name="HasStorm" Nullable="false" />
-          <Property Type="Boolean" Name="HasWind" Nullable="false" />
-          <Property Type="Boolean" Name="HasSnow" Nullable="false" />
-          <Property Type="String" Name="IconClass" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ImageUrl" Nullable="true" />
-        </ComplexType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -1801,6 +1787,55 @@
           <Property Type="Int32" Name="SeverityID" Nullable="false" />
           <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="LatestWeatherEntrySelect_Result">
+          <Property Type="Int32" Name="WeatherCode" Nullable="false" />
+          <Property Type="String" Name="WeatherCodeName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Temperature" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="RecordTimeUTC" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateUTC" Nullable="false" />
+          <Property Type="String" Name="Sunrise" Nullable="false" MaxLength="10" />
+          <Property Type="Double" Name="Lng" Nullable="false" />
+          <Property Type="Double" Name="Lat" Nullable="false" />
+          <Property Type="Int32" Name="WindSpeed" Nullable="false" />
+          <Property Type="Int32" Name="WindDirection" Nullable="false" />
+          <Property Type="Int32" Name="WindChill" Nullable="false" />
+          <Property Type="Int32" Name="Rising" Nullable="false" />
+          <Property Type="Double" Name="Pressure" Nullable="false" />
+          <Property Type="Int32" Name="Visibility" Nullable="false" />
+          <Property Type="Int32" Name="Humidity" Nullable="false" />
+          <Property Type="String" Name="Sunset" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="ZipCode" Nullable="false" />
+          <Property Type="Int32" Name="SeverityID" Nullable="false" />
+          <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="HasRain" Nullable="false" />
+          <Property Type="Boolean" Name="HasClouds" Nullable="false" />
+          <Property Type="Boolean" Name="HasStorm" Nullable="false" />
+          <Property Type="Boolean" Name="HasWind" Nullable="false" />
+          <Property Type="Boolean" Name="HasSnow" Nullable="false" />
+          <Property Type="String" Name="IconClass" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageUrl" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ActiveWeatherPredictionsSelect_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="PredictionDateUTC" Nullable="false" />
+          <Property Type="Int32" Name="ZipCode" Nullable="false" />
+          <Property Type="Int32" Name="Low" Nullable="false" />
+          <Property Type="Int32" Name="High" Nullable="false" />
+          <Property Type="Double" Name="MinutesToDefrost" Nullable="true" />
+          <Property Type="Int32" Name="WeatherCodeID" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="WeatherCodeName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="SeverityID" Nullable="false" />
+          <Property Type="String" Name="SeverityName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="HasRain" Nullable="false" />
+          <Property Type="Boolean" Name="HasClouds" Nullable="false" />
+          <Property Type="Boolean" Name="HasStorm" Nullable="false" />
+          <Property Type="Boolean" Name="HasWind" Nullable="false" />
+          <Property Type="Boolean" Name="HasSnow" Nullable="false" />
+          <Property Type="String" Name="IconClass" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageUrl" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2009,29 +2044,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="WeatherFrostResultsInsert" FunctionName="AniEntitiesModel.Store.WeatherFrostResultsInsert" />
-          <FunctionImportMapping FunctionImportName="ActiveWeatherPredictionsSelect" FunctionName="AniEntitiesModel.Store.ActiveWeatherPredictionsSelect">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AniEntitiesModel.ActiveWeatherPredictionsSelect_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="PredictionDateUTC" ColumnName="PredictionDateUTC" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="Low" ColumnName="Low" />
-                <ScalarProperty Name="High" ColumnName="High" />
-                <ScalarProperty Name="MinutesToDefrost" ColumnName="MinutesToDefrost" />
-                <ScalarProperty Name="WeatherCodeID" ColumnName="WeatherCodeID" />
-                <ScalarProperty Name="WeatherCodeName" ColumnName="WeatherCodeName" />
-                <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
-                <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
-                <ScalarProperty Name="HasRain" ColumnName="HasRain" />
-                <ScalarProperty Name="HasClouds" ColumnName="HasClouds" />
-                <ScalarProperty Name="HasStorm" ColumnName="HasStorm" />
-                <ScalarProperty Name="HasWind" ColumnName="HasWind" />
-                <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
-                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="AniEntitiesModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -2163,6 +2175,63 @@
                 <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
                 <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
                 <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LatestWeatherEntrySelect" FunctionName="AniEntitiesModel.Store.LatestWeatherEntrySelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AniEntitiesModel.LatestWeatherEntrySelect_Result">
+                <ScalarProperty Name="WeatherCode" ColumnName="WeatherCode" />
+                <ScalarProperty Name="WeatherCodeName" ColumnName="WeatherCodeName" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RecordTimeUTC" ColumnName="RecordTimeUTC" />
+                <ScalarProperty Name="CreatedDateUTC" ColumnName="CreatedDateUTC" />
+                <ScalarProperty Name="Sunrise" ColumnName="Sunrise" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="WindSpeed" ColumnName="WindSpeed" />
+                <ScalarProperty Name="WindDirection" ColumnName="WindDirection" />
+                <ScalarProperty Name="WindChill" ColumnName="WindChill" />
+                <ScalarProperty Name="Rising" ColumnName="Rising" />
+                <ScalarProperty Name="Pressure" ColumnName="Pressure" />
+                <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+                <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+                <ScalarProperty Name="Sunset" ColumnName="Sunset" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
+                <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
+                <ScalarProperty Name="HasRain" ColumnName="HasRain" />
+                <ScalarProperty Name="HasClouds" ColumnName="HasClouds" />
+                <ScalarProperty Name="HasStorm" ColumnName="HasStorm" />
+                <ScalarProperty Name="HasWind" ColumnName="HasWind" />
+                <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ActiveWeatherPredictionsSelect" FunctionName="AniEntitiesModel.Store.ActiveWeatherPredictionsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AniEntitiesModel.ActiveWeatherPredictionsSelect_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PredictionDateUTC" ColumnName="PredictionDateUTC" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="MinutesToDefrost" ColumnName="MinutesToDefrost" />
+                <ScalarProperty Name="WeatherCodeID" ColumnName="WeatherCodeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WeatherCodeName" ColumnName="WeatherCodeName" />
+                <ScalarProperty Name="SeverityID" ColumnName="SeverityID" />
+                <ScalarProperty Name="SeverityName" ColumnName="SeverityName" />
+                <ScalarProperty Name="HasRain" ColumnName="HasRain" />
+                <ScalarProperty Name="HasClouds" ColumnName="HasClouds" />
+                <ScalarProperty Name="HasStorm" ColumnName="HasStorm" />
+                <ScalarProperty Name="HasWind" ColumnName="HasWind" />
+                <ScalarProperty Name="HasSnow" ColumnName="HasSnow" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

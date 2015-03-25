@@ -206,19 +206,6 @@ namespace AniWebApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WeatherFrostResultsInsert", creatorUserNodeIDParameter, rainedOvernightParameter, snowedOvernightParameter, minutesToDefrostParameter, zipCodeParameter, predictionDateParameter);
         }
     
-        public virtual ObjectResult<ActiveWeatherPredictionsSelect_Result> ActiveWeatherPredictionsSelect(Nullable<int> zipCode, Nullable<System.DateTime> afterDate)
-        {
-            var zipCodeParameter = zipCode.HasValue ?
-                new ObjectParameter("ZipCode", zipCode) :
-                new ObjectParameter("ZipCode", typeof(int));
-    
-            var afterDateParameter = afterDate.HasValue ?
-                new ObjectParameter("AfterDate", afterDate) :
-                new ObjectParameter("AfterDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter, afterDateParameter);
-        }
-    
         public virtual ObjectResult<Nullable<decimal>> InsertUser(string iD, Nullable<int> zipCode, string firstName, string lastName)
         {
             var iDParameter = iD != null ?
@@ -342,14 +329,31 @@ namespace AniWebApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RecordWeatherObservation", zipCodeParameter, weatherCodeParameter, temperatureParameter, descParameter, recordTimeUTCParameter, createdUserIDParameter, sunriseParameter, sunsetParameter, humidityParameter, visibilityParameter, pressureParameter, risingParameter, windChillParameter, windDirectionParameter, windSpeedParameter, latParameter, lngParameter, sourceIDParameter);
         }
     
-        public virtual int WeatherFrostPredictionsVsActualsSelect()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WeatherFrostPredictionsVsActualsSelect");
-        }
-    
         public virtual ObjectResult<WeatherFrostDataSelect_Result> WeatherFrostDataSelect()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WeatherFrostDataSelect_Result>("WeatherFrostDataSelect");
+        }
+    
+        public virtual ObjectResult<LatestWeatherEntrySelect_Result> LatestWeatherEntrySelect(Nullable<int> zipCode)
+        {
+            var zipCodeParameter = zipCode.HasValue ?
+                new ObjectParameter("ZipCode", zipCode) :
+                new ObjectParameter("ZipCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LatestWeatherEntrySelect_Result>("LatestWeatherEntrySelect", zipCodeParameter);
+        }
+    
+        public virtual ObjectResult<ActiveWeatherPredictionsSelect_Result> ActiveWeatherPredictionsSelect(Nullable<int> zipCode, Nullable<System.DateTime> afterDate)
+        {
+            var zipCodeParameter = zipCode.HasValue ?
+                new ObjectParameter("ZipCode", zipCode) :
+                new ObjectParameter("ZipCode", typeof(int));
+    
+            var afterDateParameter = afterDate.HasValue ?
+                new ObjectParameter("AfterDate", afterDate) :
+                new ObjectParameter("AfterDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter, afterDateParameter);
         }
     }
 }

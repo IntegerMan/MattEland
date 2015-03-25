@@ -14,7 +14,6 @@ namespace AniWebApp.Controllers
     public class WeatherController : CustomController
     {
 
-
         [HttpGet]
         [Route(@"Weather")]
         public ActionResult Index()
@@ -38,6 +37,31 @@ namespace AniWebApp.Controllers
 
             var model = new WeatherHomeModel {ZipCode = zipCode};
 
+            var latestRecord = this.Entities.LatestWeatherEntrySelect(zipCode).FirstOrDefault();
+            if (latestRecord != null)
+            {
+                model.Conditions.Temperature = latestRecord.Temperature;
+                model.Conditions.Sunrise = latestRecord.Sunrise;
+                model.Conditions.Sunset = latestRecord.Sunset;
+                model.Conditions.Description = latestRecord.Description;
+                model.Conditions.Pressure = latestRecord.Pressure;
+                model.Conditions.Humidity = latestRecord.Humidity;
+                model.Conditions.Rising = latestRecord.Rising;
+                model.Conditions.Visibility = latestRecord.Visibility;
+                model.Conditions.WindChill = latestRecord.WindChill;
+                model.Conditions.WindDirection = latestRecord.WindDirection;
+                model.Conditions.WindSpeed = latestRecord.WindSpeed;
+                model.Conditions.WeatherCode = latestRecord.WeatherCode;
+                model.Conditions.WeatherCodeName = latestRecord.WeatherCodeName;
+                model.Conditions.SeverityId = latestRecord.SeverityID;
+                model.Conditions.IconClass = latestRecord.IconClass;
+            }
+            else
+            {
+                // Well, crap. No weather. This may be an out of service area. Indicate via a null model.
+                model.Conditions = null;
+            }
+
             var predictions = this.Entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today);
             foreach (var prediction in predictions)
             {
@@ -50,7 +74,8 @@ namespace AniWebApp.Controllers
                     WeatherCodeName = prediction.WeatherCodeName,
                     WeatherCode = prediction.WeatherCodeID,
                     ForecastDate = prediction.PredictionDateUTC,
-                    IconClass = prediction.IconClass
+                    IconClass = prediction.IconClass,
+                    Description = prediction.Description
                 };
 
                 model.Forecasts.Add(forecast);

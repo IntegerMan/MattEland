@@ -32,9 +32,10 @@
         <ul class="list-group">
             <li class="list-group-item">
 
-                @Html.ActionLink("Weather", "Index", "Weather", null, new {@class = "list-group-item"})
+                @Html.ActionLink("Weather", "AreaWeather", "Weather", null, new {@class = "list-group-item"})
 
                 <ul class="nav-stacked">
+                    <li>@Html.ActionLink("Current Weather", "AreaWeather", "Weather", null, new {@class = "list-group-item"})</li>
                     <li>@Html.ActionLink("Weather Forecasts", "Forecasts", "Weather", null, new {@class = "list-group-item"})</li>
                     <li>@Html.ActionLink("Frost Data", "Frost", "Weather", null, new {@class = "list-group-item"})</li>
                 </ul>
@@ -89,7 +90,7 @@
                     Planned
                 </p>
                 <p>
-                    @Html.ActionLink("View", "Index", "Weather", null, new { @class = "btn btn-block btn-default" })
+                    @Html.ActionLink("View", "AreaWeather", "Weather", null, new { @class = "btn btn-block btn-default" })
                 </p>
             </div>
         </div>

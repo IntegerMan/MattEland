@@ -7,18 +7,6 @@ namespace AniWebApp.Models.Weather
     {
 
         /// <summary>
-        /// Gets or sets the low temperature.
-        /// </summary>
-        /// <value>The low temperature.</value>
-        public int Low { get; set; }
-
-        /// <summary>
-        /// Gets or sets the high temperature.
-        /// </summary>
-        /// <value>The high temperature.</value>
-        public int High { get; set; }
-
-        /// <summary>
         /// Gets or sets the weather code.
         /// </summary>
         /// <value>The weather code.</value>
