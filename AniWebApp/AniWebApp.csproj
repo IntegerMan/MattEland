@@ -268,7 +268,7 @@
     <Compile Include="WeatherCode.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="WeatherFrostPredictionsVsActualsSelect_Result.cs">
+    <Compile Include="WeatherFrostDataSelect_Result.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WeatherFrostResult.cs">

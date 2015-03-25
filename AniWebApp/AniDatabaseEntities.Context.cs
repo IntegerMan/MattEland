@@ -177,11 +177,6 @@ namespace AniWebApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUpdateWeatherPrediction", predictionDateUTCParameter, creatorNodeIDParameter, zipCodeParameter, lowParameter, highParameter, codeParameter, minutesToDefrostParameter, descriptionParameter);
         }
     
-        public virtual ObjectResult<WeatherFrostPredictionsVsActualsSelect_Result> WeatherFrostPredictionsVsActualsSelect()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WeatherFrostPredictionsVsActualsSelect_Result>("WeatherFrostPredictionsVsActualsSelect");
-        }
-    
         public virtual int WeatherFrostResultsInsert(Nullable<int> creatorUserNodeID, Nullable<bool> rainedOvernight, Nullable<bool> snowedOvernight, Nullable<double> minutesToDefrost, Nullable<int> zipCode, Nullable<System.DateTime> predictionDate)
         {
             var creatorUserNodeIDParameter = creatorUserNodeID.HasValue ?
@@ -345,6 +340,16 @@ namespace AniWebApp
                 new ObjectParameter("SourceID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RecordWeatherObservation", zipCodeParameter, weatherCodeParameter, temperatureParameter, descParameter, recordTimeUTCParameter, createdUserIDParameter, sunriseParameter, sunsetParameter, humidityParameter, visibilityParameter, pressureParameter, risingParameter, windChillParameter, windDirectionParameter, windSpeedParameter, latParameter, lngParameter, sourceIDParameter);
+        }
+    
+        public virtual int WeatherFrostPredictionsVsActualsSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WeatherFrostPredictionsVsActualsSelect");
+        }
+    
+        public virtual ObjectResult<WeatherFrostDataSelect_Result> WeatherFrostDataSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WeatherFrostDataSelect_Result>("WeatherFrostDataSelect");
         }
     }
 }

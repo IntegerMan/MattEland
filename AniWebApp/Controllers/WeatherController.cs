@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AniWebApp.Models;
@@ -62,7 +63,7 @@ namespace AniWebApp.Controllers
         [Route(@"Weather/Frost")]
         public ActionResult Frost()
         {
-            var predictions = this.Entities.WeatherFrostPredictionsVsActualsSelect().ToList();
+            List<WeatherFrostDataSelect_Result> predictions = this.Entities.WeatherFrostDataSelect().ToList();
             return View(predictions);
         }
 

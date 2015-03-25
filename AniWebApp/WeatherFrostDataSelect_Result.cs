@@ -11,11 +11,12 @@ namespace AniWebApp
 {
     using System;
     
-    public partial class WeatherFrostPredictionsVsActualsSelect_Result
+    public partial class WeatherFrostDataSelect_Result
     {
         public int id { get; set; }
         public bool HadFrost { get; set; }
         public bool RainedOvernight { get; set; }
+        public Nullable<bool> SnowedOvernight { get; set; }
         public Nullable<double> PredictedMinutes { get; set; }
         public Nullable<double> ActualMinutes { get; set; }
         public int UserID { get; set; }

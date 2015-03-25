@@ -1,4 +1,4 @@
-﻿@model IList<WeatherFrostPredictionsVsActualsSelect_Result>
+﻿@model IList<WeatherFrostDataSelect_Result>
 
 @{
     ViewBag.Title = "Frost Predictions and Observations";
@@ -41,6 +41,8 @@ else
                     <th>Zip</th>
                     <th>Low</th>
                     <th>High</th>
+                    <th>Rain</th>
+                    <th>Snow</th>
                     <th>Conditions</th>
                     <th>Predicted Minutes</th>
                     <th>Actual Minutes</th>
@@ -61,6 +63,18 @@ else
                         </td>
                         <td class="red">
                             @m.High
+                        </td>
+                        <td>
+                            @if (m.RainedOvernight)
+                            {
+                                @:<i class="fa fa-check"></i>
+                            }
+                        </td>
+                        <td>
+                            @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
+                            {
+                                @:<i class="fa fa-check"></i>
+                            }
                         </td>
                         <td>
                             @m.WeatherCodeName
