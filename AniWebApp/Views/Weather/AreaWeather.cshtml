@@ -6,6 +6,10 @@
     ViewBag.Title = "Weather for " + @Model.ZipCode;
 }
 
+@section heading {
+    @Styles.Render("~/content/weather-icons.min.css")
+}
+
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
@@ -34,10 +38,9 @@ else
                 </div>
                 <div class="panel-body">
                     <br />
-                    <i class="fa fa-3x @Model.Conditions.IconClass"></i><br />
+                    <i class="fa-3x @Model.Conditions.IconClass"></i><br />
+                    <br />
                     @(Model.Conditions.Description.IsNullOrWhiteSpace() ? Model.Conditions.WeatherCodeName : Model.Conditions.Description)
-                    <br />
-                    <br />
                 </div>
                 <div class="panel-footer">
                     Temp: @Model.Conditions.Temperature&deg;
@@ -119,10 +122,9 @@ else
 
                     <div class="panel-body">
                         <br />
-                        <i class="fa fa-3x @m.IconClass"></i><br />
+                        <i class="wi fa-3x @m.IconClass"></i><br />
+                        <br />
                         @(m.Description.IsNullOrWhiteSpace() ? m.WeatherCodeName : m.Description)
-                        <br />
-                        <br />
                     </div>
                     <div class="panel-footer">
                         Temp: <span class="blue">@m.Low&deg;</span> / <span class="red">@m.High&deg;</span> <br />
