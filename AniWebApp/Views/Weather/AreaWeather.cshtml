@@ -32,7 +32,6 @@ else
                 <div class=" panel-heading">
                     @DateTime.Today.ToString("ddd M/d")
                 </div>
-
                 <div class="panel-body">
                     <br />
                     <i class="fa fa-3x @Model.Conditions.IconClass"></i><br />
@@ -46,20 +45,59 @@ else
             </div>
         </div>
         <div class="col-md-6">
-            Windchill: @Model.Conditions.WindChill&deg;<br />
-            Wind: @Model.Conditions.WindDirection&deg; at @Model.Conditions.WindSpeed mph<br />
-            Humidty: @Model.Conditions.Humidity%<br />
-            Visibility: @Model.Conditions.Visibility mi<br />
-            Pressure: @Model.Conditions.Pressure&deg;<br />
-            UV Index: @Model.Conditions.Rising<br />
-            Sunrise: @Model.Conditions.Sunrise<br />
-            Sunset: @Model.Conditions.Sunset<br />
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Details
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <br/>
+                            <dl class="dl-horizontal">
+                                <dt>Windchill:</dt>
+                                <dd>@Model.Conditions.WindChill&deg;</dd>
+                                <dt>Wind:</dt>
+                                <dd>@Model.Conditions.WindDirection&deg; at @Model.Conditions.WindSpeed mph</dd>
+                                <dt>Sunrise:</dt>
+                                <dd>@Model.Conditions.Sunrise</dd>
+                                <dt>Sunset:</dt>
+                                <dd>@Model.Conditions.Sunset</dd>
+                                <dt>Humidity:</dt>
+                                <dd>@Model.Conditions.Humidity%</dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-6">
+                            <br/>
+                            <dl class="dl-horizontal">
+                                <dt>Visibility:</dt>
+                                <dd>@Model.Conditions.Visibility mi</dd>
+                                <dt>Pressure:</dt>
+                                <dd>@Model.Conditions.Pressure&deg;</dd>
+                                <dt>UV Index:</dt>
+                                <dd>@Model.Conditions.Rising</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    &nbsp;
+                </div>
+            </div>
         </div>
         <div class="col-md-2 text-center">
-            <div class="alert alert-info" role="alert">
-                <i class="fa fa-2x fa-refresh"></i><br />
-                <br />
-                Weather data refreshes every hour.
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Weather Data
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <i class="fa fa-3x fa-refresh"></i><br/>
+                    <br/>
+                    Data updates every hour.
+                </div>
+                <div class="panel-footer">
+                    &nbsp;
+                </div>
             </div>
         </div>
     </div>
