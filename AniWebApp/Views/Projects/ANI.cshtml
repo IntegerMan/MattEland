@@ -36,11 +36,10 @@
         <ul class="list-group">
             <li class="list-group-item">
 
-                @Html.ActionLink("Weather", "AreaWeather", "Weather", null, new {@class = "list-group-item"})
+                @Html.ActionLink("Weather", "Home", "Weather", null, new {@class = "list-group-item"})
 
                 <ul class="nav-stacked">
-                    <li>@Html.ActionLink("Current Weather", "AreaWeather", "Weather", null, new {@class = "list-group-item"})</li>
-                    <li>@Html.ActionLink("Weather Forecasts", "Forecasts", "Weather", null, new {@class = "list-group-item"})</li>
+                    <li>@Html.ActionLink("Conditions and Forecasts", "Home", "Weather", null, new {@class = "list-group-item"})</li>
                     <li>@Html.ActionLink("Frost Data", "Frost", "Weather", null, new {@class = "list-group-item"})</li>
                 </ul>
             </li>
@@ -81,28 +80,9 @@
         </div>
     </div>
     <div class="col-md-2">
-        <div class="panel panel-info text-center">
-            <div class="panel-heading">
-                Current Weather
-            </div>
-            <div class="panel-body">
-                <br />
-                <p>
-                    <i class="wi wi-cloud fa-3x"></i>
-                </p>
-                <p>
-                    In Process
-                </p>
-                <p>
-                    @Html.ActionLink("View", "AreaWeather", "Weather", null, new { @class = "btn btn-block btn-info" })
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-2">
         <div class="panel panel-success text-center">
             <div class="panel-heading">
-                Weather Forecast
+                Weather
             </div>
             <div class="panel-body">
                 <br />
@@ -113,7 +93,7 @@
                     Available
                 </p>
                 <p>
-                    @Html.ActionLink("View", "Forecasts", "Weather", null, new { @class = "btn btn-block btn-success" })
+                    @Html.ActionLink("View", "Index", "Weather", null, new { @class = "btn btn-block btn-success" })
                 </p>
             </div>
         </div>

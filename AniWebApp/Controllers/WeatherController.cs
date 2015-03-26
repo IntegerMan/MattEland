@@ -13,12 +13,12 @@ namespace AniWebApp.Controllers
     [Route("Weather")]
     public class WeatherController : CustomController
     {
-
         [HttpGet]
         [Route(@"Weather")]
-        public ActionResult Index()
+        public ActionResult Home()
         {
-            return AreaWeather();
+            var zipCode = GetUserZipCode();
+            return RedirectToAction("Index", "Weather", new {zipCode=zipCode});
         }
 
         /// <summary>
@@ -28,14 +28,14 @@ namespace AniWebApp.Controllers
         /// <returns>Redirects to the forecast view for this zip code</returns>
         [HttpGet]
         [Route(@"Weather/{zipCode}")]
-        public ActionResult AreaWeather(int zipCode = 0)
+        public ActionResult Index(int zipCode = 0)
         {
             if (zipCode <= 0)
             {
                 zipCode = GetUserZipCode();
             }
 
-            var model = new WeatherHomeModel {ZipCode = zipCode};
+            var model = new WeatherHomeModel { ZipCode = zipCode };
 
             var latestRecord = this.Entities.LatestWeatherEntrySelect(zipCode).FirstOrDefault();
             if (latestRecord != null)
@@ -82,23 +82,6 @@ namespace AniWebApp.Controllers
             }
 
             return View(model);
-        }
-
-        /// <summary>
-        /// Gets data for the weather forecasts page.
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        [HttpGet]
-        [Route(@"Weather/{zipCode}/Forecasts")]
-        public ActionResult Forecasts(int zipCode = 0)
-        {
-            if (zipCode <= 0)
-            {
-                zipCode = GetUserZipCode();
-            }
-
-            var predictions = this.Entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today).ToList();
-            return View(predictions);
         }
 
         /// <summary>

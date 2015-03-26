@@ -438,7 +438,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
-    <Content Include="Views\Weather\Forecasts.cshtml" />
     <Content Include="Views\Projects\ANI.cshtml" />
     <Content Include="Views\Traffic\Index.cshtml" />
     <Content Include="Views\Weather\Frost.cshtml" />
@@ -453,7 +452,7 @@
     <Content Include="Views\Apps\_AppLayout.cshtml" />
     <Content Include="Views\Apps\SeekingJesus.cshtml" />
     <Content Include="Views\Apps\LifeLights.cshtml" />
-    <Content Include="Views\Weather\AreaWeather.cshtml" />
+    <Content Include="Views\Weather\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
