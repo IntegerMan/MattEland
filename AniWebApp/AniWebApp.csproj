@@ -307,9 +307,12 @@
       <LastGenOutput>AniDatabaseEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\weather-icons.css" />
+    <Content Include="Content\weather-icons.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\Fixedsys500c.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\weathericons-regular-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <EntityDeploy Include="AniDatabaseEntities.edmx">
@@ -321,6 +324,10 @@
     </Content>
     <None Include="bower.json" />
     <Content Include="Content\Bootstrap.less" />
+    <Content Include="fonts\weathericons-regular-webfont.eot" />
+    <Content Include="fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="fonts\weathericons-regular-webfont.woff" />
+    <Content Include="fonts\WeatherIcons-Regular.otf" />
     <None Include="gruntfile.js" />
     <Content Include="Images\ApplicationIcon.png" />
     <Content Include="Images\contentback.jpg" />

@@ -2,6 +2,10 @@
     ViewBag.Title = "ANI Project";
 }
 
+@section heading {
+    @Styles.Render("~/content/weather-icons.min.css")
+}
+
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
     <li class="active">ANI</li>
@@ -84,7 +88,7 @@
             <div class="panel-body">
                 <br />
                 <p>
-                    <i class="fa fa-sun-o fa-3x"></i>
+                    <i class="wi wi-cloud fa-3x"></i>
                 </p>
                 <p>
                     In Process
@@ -103,7 +107,7 @@
             <div class="panel-body">
                 <br />
                 <p>
-                    <i class="fa fa-cloud fa-3x"></i>
+                    <i class="wi wi-day-snow-thunderstorm fa-3x"></i>
                 </p>
                 <p>
                     Available
@@ -122,7 +126,7 @@
             <div class="panel-body">
                 <br />
                 <p>
-                    <i class="fa fa-cogs fa-3x"></i>
+                    <i class="wi wi-dust fa-3x"></i>
                 </p>
                 <p>
                     Calibrating
