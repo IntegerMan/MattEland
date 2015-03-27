@@ -412,6 +412,47 @@ namespace AniWebApp.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpGet]
+        [Route(@"Account/Profile")]
+        public ActionResult MyProfile()
+        {
+            var model = new UserProfileModel();
+
+            var userEntity = GetUserEntity();
+            model.FirstName = userEntity.U_FirstName;
+            model.LastName = userEntity.U_LastName;
+            model.ZipCode = userEntity.U_ZipCode;
+            model.UserName = userEntity.AspNetUser.UserName;
+            model.EmailAddress = userEntity.AspNetUser.Email;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        [Route(@"Account/Profile")]
+        public ActionResult SaveProfile(UserProfileModel model)
+        {
+            var userEntity = GetUserEntity();
+
+            if (ModelState.IsValid && 
+                userEntity != null && 
+                model != null)
+            {
+                userEntity.AspNetUser.Email = model.EmailAddress;
+                userEntity.U_ZipCode = model.ZipCode;
+                userEntity.U_FirstName = model.FirstName;
+                userEntity.U_LastName = model.LastName;
+                this.Entities.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("SaveProfile", "Account");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
