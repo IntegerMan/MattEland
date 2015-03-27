@@ -13,7 +13,7 @@ namespace AniWebApp.Helpers
     public static class StyleHelper
     {
         private const string DefaultCSS = "~/content/bootstrap.css";
-        private const string DefaultJavaScript = null;
+        private const string DefaultJavaScript = "~/scripts/bootstrap-386.js";
 
         /// <summary>
         /// Gets the panel class given the severity.
@@ -44,7 +44,7 @@ namespace AniWebApp.Helpers
             var entities = new AniEntities();
             var user = UserHelper.GetCurrentUserEntity(entities, HttpContext.Current.User);
 
-            return user != null ? user.WebTheme.WebJsUrl : DefaultJavaScript;
+            return user == null ? DefaultJavaScript : user.WebTheme.WebJsUrl;
         }
     }
 }
