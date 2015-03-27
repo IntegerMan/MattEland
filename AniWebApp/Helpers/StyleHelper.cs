@@ -12,8 +12,7 @@ namespace AniWebApp.Helpers
     /// </summary>
     public static class StyleHelper
     {
-        private const string DefaultCSS = "~/content/bootstrap.css";
-        private const string DefaultJavaScript = "~/scripts/bootstrap-386.js";
+        private const int DefaultThemeId = 1;
 
         /// <summary>
         /// Gets the panel class given the severity.
@@ -33,18 +32,23 @@ namespace AniWebApp.Helpers
 
         public static string GetThemeCSS(this HtmlHelper helper)
         {
-            var entities = new AniEntities();
-            var user = UserHelper.GetCurrentUserEntity(entities, HttpContext.Current.User);
+            var theme = GetTheme();
+            return theme.WebCssURL;
+        }
 
-            return user != null ? user.WebTheme.WebCssURL : DefaultCSS;
+        private static WebTheme GetTheme()
+        {
+            var entities = new AniEntities();
+
+            var user = UserHelper.GetCurrentUserEntity(entities, HttpContext.Current.User);
+            var theme = user != null ? user.WebTheme : entities.WebThemes.First(t => t.ID == DefaultThemeId);
+            return theme;
         }
 
         public static string GetThemeJavaScript(this HtmlHelper helper)
         {
-            var entities = new AniEntities();
-            var user = UserHelper.GetCurrentUserEntity(entities, HttpContext.Current.User);
-
-            return user == null ? DefaultJavaScript : user.WebTheme.WebJsUrl;
+            var theme = GetTheme();
+            return theme.WebJsUrl;
         }
     }
 }
