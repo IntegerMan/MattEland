@@ -227,6 +227,7 @@
     </Compile>
     <Compile Include="Helpers\NavUtilities.cs" />
     <Compile Include="Helpers\StyleHelper.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="LatestWeatherEntrySelect_Result.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>

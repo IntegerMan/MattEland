@@ -19,7 +19,6 @@
     </script>
 
     @* Site includes *@
-    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
     @* JQuery Includes *@
@@ -66,11 +65,15 @@
     </footer>
 </div>
 
+    @Html.GetThemeCSS()
+    @Styles.Render("~/Content/Site.css")
+
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/scripts/bootstrap-386.js")
+    @Html.GetThemeJavaScript()
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
