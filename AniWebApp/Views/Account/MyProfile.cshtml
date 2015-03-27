@@ -67,6 +67,14 @@
                 </div>
 
                 <div class="form-group">
+                    @Html.LabelFor(model => model.SelectedThemeID, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div>
+                        @Html.DropDownListFor(model => model.SelectedThemeID, Model.Themes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SelectedThemeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary col-md-offset-3"/>
                     @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-default" })
                 </div>

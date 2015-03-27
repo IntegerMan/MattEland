@@ -49,6 +49,7 @@ namespace AniWebApp
         public virtual DbSet<ServiceStatu> ServiceStatus { get; set; }
         public virtual DbSet<WeatherRecord> WeatherRecords { get; set; }
         public virtual DbSet<ZipCode> ZipCodes { get; set; }
+        public virtual DbSet<WebTheme> WebThemes { get; set; }
     
         public virtual ObjectResult<ActiveTrafficIncidentInfoSelect_Result> ActiveTrafficIncidentInfoSelect(Nullable<bool> includeAccidents, Nullable<bool> includeConstruction)
         {

@@ -292,6 +292,9 @@
     <Compile Include="WeatherSource.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebTheme.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ZipCode.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>

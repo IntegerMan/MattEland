@@ -58,6 +58,8 @@
         <EntityTypeShape EntityType="AniEntitiesModel.ZipCode" Width="1.5" PointX="10.5" PointY="11.125" />
         <AssociationConnector Association="AniEntitiesModel.FK_ZipCodes_ServiceStatus_ID" />
         <AssociationConnector Association="AniEntitiesModel.FK_WeatherRecord_ZipCodes_ID" />
+        <EntityTypeShape EntityType="AniEntitiesModel.WebTheme" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="AniEntitiesModel.FK_Users_WebThemes_ID" />
       </Diagram>
       <Diagram DiagramId="090dbd5a52bf4234b10ebf0c31b8b425" Name="diagramWeather" ZoomLevel="63" >
         <EntityTypeShape EntityType="AniEntitiesModel.WeatherCode" Width="1.5" PointX="0.75" PointY="5.25" />

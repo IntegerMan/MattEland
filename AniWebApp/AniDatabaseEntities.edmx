@@ -175,6 +175,7 @@
           <Property Name="U_FirstName" Type="varchar" MaxLength="50" />
           <Property Name="U_LastName" Type="varchar" MaxLength="50" />
           <Property Name="U_ZipCode" Type="int" Nullable="false" />
+          <Property Name="U_WebThemeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="WeatherCodes">
           <Key>
@@ -251,6 +252,16 @@
           </Key>
           <Property Name="WS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WS_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebThemes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="WebCssURL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WebJsUrl" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ZipCodes">
           <Key>
@@ -473,6 +484,18 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="U_ASPNET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_WebThemes_ID">
+          <End Role="WebThemes" Type="Self.WebThemes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebThemes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="U_WebThemeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -714,6 +737,7 @@
           <EntitySet Name="WeatherPredictions" EntityType="Self.WeatherPredictions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeatherRecord" EntityType="Self.WeatherRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeatherSources" EntityType="Self.WeatherSources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebThemes" EntityType="Self.WebThemes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZipCodes" EntityType="Self.ZipCodes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -781,6 +805,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Users_AspNetUsers_Id" Association="Self.FK_Users_AspNetUsers_Id">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_WebThemes_ID" Association="Self.FK_Users_WebThemes_ID">
+            <End Role="WebThemes" EntitySet="WebThemes" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_WeatherCodes_Severities_SEV_ID" Association="Self.FK_WeatherCodes_Severities_SEV_ID">
@@ -1088,6 +1116,11 @@
             <Parameter Name="ZipCode" Mode="In" Type="Int32" />
             <Parameter Name="AfterDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="WebThemes" EntityType="AniEntitiesModel.WebTheme" />
+          <AssociationSet Name="FK_Users_WebThemes_ID" Association="AniEntitiesModel.FK_Users_WebThemes_ID">
+            <End Role="WebTheme" EntitySet="WebThemes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -1226,6 +1259,8 @@
           <NavigationProperty Name="WeatherFrostResults" Relationship="AniEntitiesModel.FK_WeatherFrostResults_UserNodes_UN_ID1" FromRole="User" ToRole="WeatherFrostResult" />
           <NavigationProperty Name="WeatherPredictions" Relationship="AniEntitiesModel.FK_WeatherPredictions_Users_U_ID" FromRole="User" ToRole="WeatherPrediction" />
           <NavigationProperty Name="WeatherRecords" Relationship="AniEntitiesModel.FK_WeatherRecord_Users_U_ID" FromRole="User" ToRole="WeatherRecord" />
+          <Property Name="U_WebThemeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WebTheme" Relationship="AniEntitiesModel.FK_Users_WebThemes_ID" FromRole="User" ToRole="WebTheme" />
         </EntityType>
         <EntityType Name="WeatherCode">
           <Key>
@@ -1836,6 +1871,29 @@
           <Property Type="String" Name="IconClass" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ImageUrl" Nullable="true" />
         </ComplexType>
+        <EntityType Name="WebTheme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="WebCssURL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebJsUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="AniEntitiesModel.FK_Users_WebThemes_ID" FromRole="WebTheme" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Users_WebThemes_ID">
+          <End Type="AniEntitiesModel.WebTheme" Role="WebTheme" Multiplicity="1" />
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebTheme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="U_WebThemeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1980,6 +2038,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AniEntitiesModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="U_WebThemeID" ColumnName="U_WebThemeID" />
                 <ScalarProperty Name="U_ZipCode" ColumnName="U_ZipCode" />
                 <ScalarProperty Name="U_ASPNET_ID" ColumnName="U_ASPNET_ID" />
                 <ScalarProperty Name="U_LastName" ColumnName="U_LastName" />
@@ -2235,6 +2294,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="WebThemes">
+            <EntityTypeMapping TypeName="AniEntitiesModel.WebTheme">
+              <MappingFragment StoreEntitySet="WebThemes">
+                <ScalarProperty Name="WebJsUrl" ColumnName="WebJsUrl" />
+                <ScalarProperty Name="WebCssURL" ColumnName="WebCssURL" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

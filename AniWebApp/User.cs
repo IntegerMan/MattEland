@@ -30,6 +30,7 @@ namespace AniWebApp
         public string U_LastName { get; set; }
         public string U_ASPNET_ID { get; set; }
         public int U_ZipCode { get; set; }
+        public int U_WebThemeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserNode> UserNodes { get; set; }
@@ -44,5 +45,6 @@ namespace AniWebApp
         public virtual ICollection<WeatherPrediction> WeatherPredictions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WeatherRecord> WeatherRecords { get; set; }
+        public virtual WebTheme WebTheme { get; set; }
     }
 }

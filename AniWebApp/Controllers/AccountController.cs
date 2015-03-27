@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -419,12 +420,31 @@ namespace AniWebApp.Controllers
         {
             var model = new UserProfileModel();
 
+            // Set basic information
             var userEntity = GetUserEntity();
             model.FirstName = userEntity.U_FirstName;
             model.LastName = userEntity.U_LastName;
             model.ZipCode = userEntity.U_ZipCode;
             model.UserName = userEntity.AspNetUser.UserName;
             model.EmailAddress = userEntity.AspNetUser.Email;
+
+            // Set up the themes
+            var themes = new List<SelectListItem>();
+            foreach (var theme in Entities.WebThemes.Where(t => t.IsEnabled).OrderBy(t => t.Name))
+            {
+                var item = new SelectListItem();
+                if (theme.ID == userEntity.U_WebThemeID)
+                {
+                    item.Selected = true;
+                }
+
+                item.Text = theme.Name;
+                item.Value = theme.ID.ToString();
+
+                themes.Add(item);
+            }
+            model.SelectedThemeID = userEntity.U_WebThemeID;
+            model.Themes = themes;
 
             return View(model);
         }
@@ -445,6 +465,7 @@ namespace AniWebApp.Controllers
                 userEntity.U_ZipCode = model.ZipCode;
                 userEntity.U_FirstName = model.FirstName;
                 userEntity.U_LastName = model.LastName;
+                userEntity.U_WebThemeID = model.SelectedThemeID;
                 this.Entities.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
