@@ -23,7 +23,7 @@ namespace AniWebApp.Controllers
 
         protected int GetUserZipCode()
         {
-            User user = GetUserEntity();
+            var user = GetUserEntity();
             if (user != null)
             {
                 return user.U_ZipCode;

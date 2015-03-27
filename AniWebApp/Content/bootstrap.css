@@ -6045,3 +6045,6 @@ button.close {
   font-weight: bold;
   color: #ffffff;
 }
+body {
+  visibility: hidden;
+}
