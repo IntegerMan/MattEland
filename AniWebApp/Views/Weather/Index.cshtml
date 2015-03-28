@@ -1,24 +1,17 @@
 ﻿@using AniWebApp.Helpers
 @using Microsoft.Ajax.Utilities
+
 @model AniWebApp.Models.Weather.WeatherHomeModel
 
 @{
-    ViewBag.Title = "Weather for " + @Model.ZipCode;
+    ViewBag.Title = "Weather for " + @Model.ZipCode; ;
+    ViewBag.BreadcrumbTitle = "Weather";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
 @section heading {
     @Styles.Render("~/content/weather-icons.min.css")
 }
-
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
-    <li class="active">Weather</li>
-</ol>
-
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-</div>
 
 <h2>Current Weather</h2>
 
@@ -36,7 +29,7 @@ else
                 <div class=" panel-heading">
                     @DateTime.Today.ToString("ddd M/d")
                 </div>
-                <div class="panel-body">
+                <div class="panel-body tile-panel-tall">
                     <br />
                     <i class="fa-3x @Model.Conditions.IconClass"></i><br />
                     <br />
@@ -47,59 +40,64 @@ else
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="panel @Html.GetPanelClass(Model.Conditions.SeverityId)">
                 <div class="panel-heading">
                     Details
                 </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-7">
-                            <br/>
-                            <dl class="dl-horizontal">
-                                <dt>Windchill:</dt>
-                                <dd>@Model.Conditions.WindChill&deg;</dd>
-                                <dt>Wind:</dt>
-                                <dd>@Model.Conditions.WindDirection&deg; at @Model.Conditions.WindSpeed mph</dd>
-                                <dt>Sunrise:</dt>
-                                <dd>@Model.Conditions.Sunrise</dd>
-                                <dt>Sunset:</dt>
-                                <dd>@Model.Conditions.Sunset</dd>
-                                <dt>Humidity:</dt>
-                                <dd>@Model.Conditions.Humidity%</dd>
-                            </dl>
-                        </div>
-                        <div class="col-xs-5">
-                            <br/>
-                            <dl class="dl-horizontal">
-                                <dt>Visibility:</dt>
-                                <dd>@Model.Conditions.Visibility mi</dd>
-                                <dt>Pressure:</dt>
-                                <dd>@Model.Conditions.Pressure in</dd>
-                                <dt>UV Index:</dt>
-                                <dd>@Model.Conditions.Rising</dd>
-                            </dl>
-                        </div>
+                <div class="panel-body tile-panel-tall-no-footer row">
+                    <div class="col-sm-6">
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td class="text-right">Windchill</td>
+                                    <td>@Model.Conditions.WindChill&deg;</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Wind</td>
+                                    <td>@Model.Conditions.WindDirection&deg; at @Model.Conditions.WindSpeed mph</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Sunrise</td>
+                                    <td>@Model.Conditions.Sunrise</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Sunset</td>
+                                    <td>@Model.Conditions.Sunset</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Humidity</td>
+                                    <td>@Model.Conditions.Humidity</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="panel-footer">
-                    &nbsp;
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 text-center">
-            <div class="panel @Html.GetPanelClass(Model.Conditions.SeverityId)">
-                <div class="panel-heading">
-                    Weather Data
-                </div>
-                <div class="panel-body">
-                    <br/>
-                    <i class="fa fa-3x fa-refresh"></i><br/>
-                    <br/>
-                    Data updates every hour
-                </div>
-                <div class="panel-footer">
-                    &nbsp;
+                    <div class="col-sm-6">
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td class="text-right">Visibility</td>
+                                    <td>@Model.Conditions.Visibility mi</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Pressure</td>
+                                    <td>@Model.Conditions.Pressure in</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">UV Index</td>
+                                    <td>@Model.Conditions.Rising</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,7 +118,7 @@ else
                         @m.ForecastDate.ToString("ddd M/d")
                     </div>
 
-                    <div class="panel-body">
+                    <div class="panel-body tile-panel">
                         <br />
                         <i class="wi fa-3x @m.IconClass"></i><br />
                         <br />
@@ -129,14 +127,18 @@ else
                     <div class="panel-footer">
                         Temp: <span class="blue">@m.Low&deg;</span> / <span class="red">@m.High&deg;</span> <br />
                         @if (m.MinutesToDefrost.HasValue)
-                    {
-                        if (m.MinutesToDefrost <= 0)
                         {
+                            if (m.MinutesToDefrost <= 0)
+                            {
                                 @:No Frost
-                        }
-                        else
-                        {
-                                @m.MinutesToDefrost.Value.ToString("0 Mins Frost")
+                            }
+                            else if (m.MinutesToDefrost <= 1.5)
+                            {
+                                @:1 min Frost
+                            }
+                            else
+                            {
+                                @m.MinutesToDefrost.Value.ToString("0 mins Frost")
                             }
                         }
                     </div>
@@ -149,13 +151,13 @@ else
         <div class="col-md-10">
             <div class="alert alert-warning">
                 <p>
-                    Frost Time is still in early development as a neural network is still being trained as data accumulates. Predictions may be comically bad during this time.
+                    Frost Time is still in early development as a neural network is still being trained as data accumulates.
+                    Predictions may be comically bad during this time. 
                 </p>
-                <br />
-                <a class="btn btn-primary" href="@Url.Action("Frost", "Weather")">
-                    View Frost Data
-                </a>
             </div>
+            <a class="btn btn-default" href="@Url.Action("Frost", "Weather")">
+                View Frost Data
+            </a>
         </div>
     </div>
 

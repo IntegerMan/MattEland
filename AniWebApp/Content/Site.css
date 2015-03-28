@@ -20,6 +20,14 @@ textarea {
     color: #5555ff;
 }
 
-.panel-body {
+.tile-panel {
     min-height: 140px;
+}
+
+.tile-panel-tall {
+    min-height: 164px;
+}
+
+.tile-panel-tall-no-footer {
+    min-height: 206px;
 }
