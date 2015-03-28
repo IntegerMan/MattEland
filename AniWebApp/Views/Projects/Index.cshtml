@@ -10,7 +10,7 @@
             <div class="panel-heading">
                 ANI Project
             </div>
-            <div class="panel-body">
+            <div class="panel-body tile-panel-tall">
                 <br />
                 <p>
                     <i class="fa fa-connectdevelop fa-3x"></i>
@@ -18,18 +18,18 @@
                 <p>
                     Analytics for Daily Life
                 </p>
-                <p>
-                    @Html.ActionLink("View", "ANI", "Projects", null, new { @class = "btn btn-block btn-info" })
-                </p>
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("View", "ANI", "Projects", null, new { @class = "btn btn-block btn-info" })
             </div>
         </div>
     </div>
     <div class="col-md-2 col-sm-4">
-        <div class="panel panel-info text-center">
+        <div class="panel panel-info text-center tile-panel">
             <div class="panel-heading">
                 Pi-MFD
             </div>
-            <div class="panel-body">
+            <div class="panel-body tile-panel-tall">
                 <br />
                 <p>
                     <i class="fa fa-newspaper-o fa-3x"></i>
@@ -37,9 +37,9 @@
                 <p>
                     Raspberry Pi Dashboard
                 </p>
-                <p>
-                    @Html.ActionLink("View", "PiMFD", "Projects", null, new { @class = "btn btn-block btn-info" })
-                </p>
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("View", "PiMFD", "Projects", null, new { @class = "btn btn-block btn-info" })
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
             <div class="panel-heading">
                 Windows Phone
             </div>
-            <div class="panel-body">
+            <div class="panel-body tile-panel-tall">
                 <br />
                 <p>
                     <i class="fa fa-windows fa-3x"></i>
@@ -57,17 +57,20 @@
                     Windows Phone Apps
                 </p>
                 <p>
-                    @Html.ActionLink("View", "Index", "Apps", null, new { @class = "btn btn-block btn-default" })
+                    
                 </p>
             </div>
-        </div>
+                        <div class="panel-footer">
+                    @Html.ActionLink("View", "Index", "Apps", null, new { @class = "btn btn-block btn-default" })
+                </div>
+</div>
     </div>
     <div class="col-md-2 col-sm-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 Temp. Protocols
             </div>
-            <div class="panel-body">
+            <div class="panel-body tile-panel-tall">
                 <br />
                 <p>
                     <i class="fa fa-play-circle-o fa-3x"></i>
@@ -75,9 +78,9 @@
                 <p>
                     Long-Term Project
                 </p>
-                <p>
-                    @Html.ActionLink("View", "TemporalProtocols", "Projects", null, new { @class = "btn btn-block btn-default" })
-                </p>
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("View", "TemporalProtocols", "Projects", null, new { @class = "btn btn-block btn-default" })
             </div>
         </div>
     </div>
