@@ -18,12 +18,19 @@
 
     <h1>@ViewBag.Title</h1>
 
-    @if (!string.IsNullOrWhiteSpace(ViewBag.Lead))
-    {
-        <p class="lead">
-            @ViewBag.Lead
-        </p>
-    }
+    <div class="row">
+        <div class="col-md-10 col-sm-9">
+            @if (!string.IsNullOrWhiteSpace(ViewBag.Lead))
+            {
+                <p class="lead">
+                    @ViewBag.Lead
+                </p>
+            }
+        </div>
+        <div class="col-md-2 col-sm-3 text-right">
+            @RenderSection("header_side_content", false)
+        </div>
+    </div>
 
 </div>
 

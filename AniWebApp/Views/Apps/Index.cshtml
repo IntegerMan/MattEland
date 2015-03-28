@@ -1,25 +1,12 @@
 ﻿@{
-    ViewBag.Title = "My Apps";
+    ViewBag.Title = "Apps";
+    ViewBag.Lead = "These are ministry and utility apps I've written for Windows Phone. They are currently available in the Windows Marketplace and work on Windows Phone 7, 8, and 8.1.";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-    <li class="active">Apps</li>
-</ol>
+<h2>Featured Apps</h2>
 
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-
-    <p class="lead">
-        These are ministry and utility apps I've written for Windows Phone. They are currently available in the Windows
-        Marketplace and work on Windows Phone 7, 8, and 8.1.
-    </p>
-
-</div>
-
-<h3>Featured Apps</h3>
-
-<div class="row">
+<div class="row well">
     <div class="col-md-4">
         <div class="media">
             <div class="media-left">
@@ -55,10 +42,9 @@
     </div>
 </div>
 
-<br />
-<h3>Other Apps</h3>
+<h2>Other Apps</h2>
 
-<div class="row">
+<div class="row well-sm">
     <div class="col-md-3">
         <div class="media">
             <div class="media-left">
