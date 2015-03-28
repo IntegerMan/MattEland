@@ -32,13 +32,7 @@
 
     @* Site includes *@
     @Scripts.Render("~/bundles/bootstrap")
-    @{
-        var js = Html.GetThemeJavaScript();
-        if (!string.IsNullOrWhiteSpace(js))
-        {
-            Scripts.Render(js);
-        }
-    }
+    @Scripts.Render("~/scripts/bootstrap-386.js")
     @Styles.Render(Html.GetThemeCss())
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")

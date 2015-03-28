@@ -34,6 +34,9 @@ $(function(){
       return;
     }
 
+    // Ensure we start out as hidden
+    document.body.style.visibility = 'none';
+
     var
       onePass = _386.onePass,
       speedFactor = 1 / (_386.speedFactor || 1) * 165000;
