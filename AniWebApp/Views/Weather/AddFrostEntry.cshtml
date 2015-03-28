@@ -2,19 +2,16 @@
 
 @{
     ViewBag.Title = "Add Frost Entry";
+    ViewBag.BreadcrumbTitle = "Add Entry";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+@section breadcrumbs
+{
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
     <li><a href="@Url.Action("Home", "Weather")">Weather</a></li>
     <li><a href="@Url.Action("Frost", "Weather")">Frost</a></li>
-    <li class="active">Add Entry</li>
-</ol>
-
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-</div>
+}
 
 <div class="alert alert-info">
     <p>Please enter records of frost observed on a given day with the zip code the frost was observed in.</p> <br/>
@@ -41,12 +38,12 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.RainedOvernight, new { @class = "form-label" })<br />
-        @Html.CheckBoxFor(m => m.RainedOvernight, new { @class = "form-control" })
+        @Html.CheckBoxFor(m => m.RainedOvernight)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.SnowedOvernight, new { @class = "form-label" })<br />
-        @Html.CheckBoxFor(m => m.SnowedOvernight, new { @class = "form-control" })
+        @Html.CheckBoxFor(m => m.SnowedOvernight)
     </div>
 
     <div class="form-group">
@@ -56,4 +53,5 @@
     </div>
 
     <input type="submit" value="Save" class="btn btn-primary" />
+    <a href="@Url.Action("Frost", "Weather")" class="btn btn-default">Cancel</a>
 }

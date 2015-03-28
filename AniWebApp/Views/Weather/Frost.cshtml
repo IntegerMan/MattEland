@@ -2,21 +2,15 @@
 
 @{
     ViewBag.Title = "Frost Predictions and Observations";
+    ViewBag.BreadcrumbTitle = "Frost";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+@section breadcrumbs
+{
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
     <li><a href="@Url.Action("Home", "Weather")">Weather</a></li>
-    <li class="active">Frost</li>
-</ol>
-
-<div class="page-header">
-    <h1>
-        @ViewBag.Title
-    </h1>
-</div>
-
+}
 
 @if (!Model.Any())
 {
