@@ -39,7 +39,7 @@
             Scripts.Render(js);
         }
     }
-    @Styles.Render(Html.GetThemeCSS())
+    @Styles.Render(Html.GetThemeCss())
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -48,38 +48,66 @@
     @RenderSection("heading", false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    Menu
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class='@Html.IsActive("Home", "Index")'>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class='@Html.IsActive("Projects", "Index")'>@Html.ActionLink("Projects", "Index", "Projects")</li>
-                    <li class='@Html.IsActive("Projects", "ANI")'>@Html.ActionLink("ANI", "ANI", "Projects")</li>
-                    <li class='@Html.IsActive("Apps", "Index")'>@Html.ActionLink("Apps", "Index", "Apps")</li>
-                    <li class='@Html.IsActive("Home", "About")'>@Html.ActionLink("About", "About", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <header>
+        <div class="navbar navbar-inverse navbar-static-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        Menu
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class='@Html.IsActive("Home", "Index")'>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class='@Html.IsActive("Projects", "Index")'>@Html.ActionLink("Projects", "Index", "Projects")</li>
+                        <li class='@Html.IsActive("Projects", "ANI")'>@Html.ActionLink("ANI", "ANI", "Projects")</li>
+                        <li class='@Html.IsActive("Apps", "Index")'>@Html.ActionLink("Apps", "Index", "Apps")</li>
+                        <li class='@Html.IsActive("Home", "About")'>@Html.ActionLink("About", "About", "Home")</li>
+                    </ul>
+                    @if (Request.IsAuthenticated)
+            {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("My Profile", "MyProfile", "Account")
+                            </li>
+                            <li>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">
+                                    Log out
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
+                            {
+                                        @Html.AntiForgeryToken()
+                            }
+                                </a>
+                            </li>
+
+                        </ul>
+            }
+            else
+            {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
+                            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
+                        </ul>
+            }
+                </div>
             </div>
         </div>
+    </header>
+<div class="container body-content">
+    @RenderBody()
+</div>
+<footer>
+    <div class="container">
+        <hr />
+        <p>&copy; @DateTime.Now.Year Matt Eland</p>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <footer>
-            <hr />
-            <p>&copy; @DateTime.Now.Year Matt Eland</p>
-        </footer>
-    </div>
+</footer>
 
-    @Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/bootstrap")
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
 
 </body>
 </html>

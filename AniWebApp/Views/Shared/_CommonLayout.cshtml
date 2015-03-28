@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <ol class="breadcrumb" role="navigation">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        @RenderSection("breadcrumbs", false)
+        <li class="active">
+            @(String.IsNullOrWhiteSpace(ViewBag.BreadcrumbTitle) ? ViewBag.Title : ViewBag.BreadcrumbTitle)
+        </li>
+    </ol>
+
+    <h1>@ViewBag.Title</h1>
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Description))
+    {
+        <p class="lead">
+            @ViewBag.Description
+        </p>
+    }
+
+</div>
+
+@RenderBody()

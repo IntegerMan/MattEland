@@ -30,7 +30,7 @@ namespace AniWebApp.Helpers
             return severityId >= 2 ? "panel-warning" : "panel-info";
         }
 
-        public static string GetThemeCSS(this HtmlHelper helper)
+        public static string GetThemeCss(this HtmlHelper helper)
         {
             var theme = GetTheme();
             return theme.WebCssURL;
