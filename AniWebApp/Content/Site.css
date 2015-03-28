@@ -31,3 +31,7 @@ textarea {
 .tile-panel-tall-no-footer {
     min-height: 206px;
 }
+
+.table.table-no-lines th, .table.table-no-lines td { 
+     border-top: none; 
+ }
