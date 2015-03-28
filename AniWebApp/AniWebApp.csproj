@@ -312,6 +312,9 @@
       <LastGenOutput>AniDatabaseEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Console.css" />
+    <Content Include="Content\SlateCustom.css" />
+    <Content Include="Content\Terminal.css" />
     <Content Include="Content\weather-icons.css" />
     <Content Include="Content\weather-icons.min.css" />
     <Content Include="favicon.ico" />
@@ -333,6 +336,9 @@
     <Content Include="fonts\weathericons-regular-webfont.ttf" />
     <Content Include="fonts\weathericons-regular-webfont.woff" />
     <Content Include="fonts\WeatherIcons-Regular.otf" />
+    <Content Include="Content\SlateCustom.less" />
+    <Content Include="Content\Terminal.less" />
+    <Content Include="Content\Console.less" />
     <None Include="gruntfile.js" />
     <Content Include="Images\ApplicationIcon.png" />
     <Content Include="Images\contentback.jpg" />

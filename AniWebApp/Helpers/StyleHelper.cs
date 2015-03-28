@@ -29,6 +29,7 @@ namespace AniWebApp.Helpers
 
             return severityId >= 2 ? "warning" : "info";
         }
+
         /// <summary>
         /// Gets the panel class given the severity.
         /// </summary>
@@ -45,6 +46,21 @@ namespace AniWebApp.Helpers
             return severityId >= 2 ? "panel-warning" : "panel-info";
         }
 
+        /// <summary>
+        /// Gets the text class given the severity.
+        /// </summary>
+        /// <param name="helper">The helper.</param>
+        /// <param name="severityId">The severity identifier.</param>
+        /// <returns>The text class.</returns>
+        public static string GetTextClass(this HtmlHelper helper, int severityId)
+        {
+            if (severityId >= 3)
+            {
+                return "text-danger";
+            }
+
+            return severityId >= 2 ? "text-warning" : string.Empty;
+        }
         public static string GetThemeCss(this HtmlHelper helper)
         {
             var theme = GetTheme();
