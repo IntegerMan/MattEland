@@ -1,18 +1,12 @@
-﻿@model IList<ActiveTrafficIncidentInfoSelect_Result>
-
-@{
+﻿@{
     ViewBag.Title = "Traffic";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+@section breadcrumbs
+{
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
-    <li class="active">Traffic</li>
-</ol>
-
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-</div>
+}
 
 <div class="row">
     <div class="col-md-4">

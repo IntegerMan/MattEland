@@ -1,19 +1,17 @@
-﻿@model IList<ActiveTrafficIncidentInfoSelect_Result>
+﻿@using AniWebApp.Helpers
+@model IList<ActiveTrafficIncidentInfoSelect_Result>
 
 @{
     ViewBag.Title = "Traffic Accidents";
+    ViewBag.BreadcrumbTitle = "Accidents";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+@section breadcrumbs
+{
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
     <li><a href="@Url.Action("Index", "Traffic")">Traffic</a></li>
-    <li class="active">Accidents</li>
-</ol>
-
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-</div>
+}
 
 @if (!Model.Any())
 {
@@ -42,14 +40,7 @@ else
                 <tbody>
                     @foreach (var m in Model)
                 {
-                        <tr class="@if (m.SeverityID >= 3)
-                                {
-                                   @:danger
-                                } else if (m.SeverityID >= 2) { 
-                                   @: warning
-                                } else {
-                                   @: info
-                                }">
+                        <tr class="@Html.GetTableRowClass(m.SeverityID)">
                             <td>
                                 @if (m.SeverityID >= 3)
                                 {

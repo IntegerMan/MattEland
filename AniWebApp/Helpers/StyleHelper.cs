@@ -15,6 +15,21 @@ namespace AniWebApp.Helpers
         private const int DefaultThemeId = 1;
 
         /// <summary>
+        /// Gets the table row styling class given the severity.
+        /// </summary>
+        /// <param name="helper">The helper.</param>
+        /// <param name="severityId">The severity identifier.</param>
+        /// <returns>The table row class.</returns>
+        public static string GetTableRowClass(this HtmlHelper helper, int severityId)
+        {
+            if (severityId >= 3)
+            {
+                return "danger";
+            }
+
+            return severityId >= 2 ? "warning" : "info";
+        }
+        /// <summary>
         /// Gets the panel class given the severity.
         /// </summary>
         /// <param name="helper">The helper.</param>
