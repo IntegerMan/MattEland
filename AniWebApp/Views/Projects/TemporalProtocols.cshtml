@@ -1,16 +1,13 @@
 ﻿@{
     ViewBag.Title = "Temporal Protocols";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+@section breadcrumbs {
     <li><a href="@Url.Action("Index", "Projects")">Projects</a></li>
-    <li class="active">Temporal Protocols</li>
-</ol>
+}
 
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-</div>
+<br/>
 
 <div class="alert alert-danger">
     Information on this project is not currently public.

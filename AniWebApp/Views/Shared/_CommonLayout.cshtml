@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section heading {
+    @RenderSection("heading", false)
+}
+
 <div>
 
     <ol class="breadcrumb" role="navigation">
@@ -14,10 +18,10 @@
 
     <h1>@ViewBag.Title</h1>
 
-    @if (!string.IsNullOrWhiteSpace(ViewBag.Description))
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Lead))
     {
         <p class="lead">
-            @ViewBag.Description
+            @ViewBag.Lead
         </p>
     }
 

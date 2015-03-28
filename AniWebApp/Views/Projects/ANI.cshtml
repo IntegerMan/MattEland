@@ -1,91 +1,37 @@
 ﻿@{
     ViewBag.Title = "ANI Project";
+    ViewBag.Lead = "Exploring Machine Learning for improving daily life.";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
 @section heading {
     @Styles.Render("~/content/weather-icons.min.css")
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-    <li class="active">ANI</li>
-</ol>
+<h2>Project Overview</h2>
 
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
+<div class="well">
+    <p>
+        This is a web services / data mining / data aggregation experiment focusing around collecting and
+        analyzing information pertaining to our daily lives and using machine learning techniques and
+        Advanced Narrow Intelligence (ANI) to attempt to analyze, predict, and improve users daily lives.
+    </p>
+    <p>
+        This project is still in its infancy and only services the Columbus, Ohio area at present, but if this
+        proves to be useful to people beyond as an experiment, I may scale it upward to reach more users.
+    </p>
 </div>
 
-<div class="row">
-    <div class="col-md-8">
-        <h2>Project Overview</h2>
-        <p>
-            This is a web services / data mining / data aggregation experiment focusing around collecting and
-            analyzing information pertaining to our daily lives and using machine learning techniques and
-            Advanced Narrow Intelligence (ANI) to attempt to analyze, predict, and improve users daily lives.
-        </p>
-        <p>
-            This project is still in its infancy and only services the Columbus, Ohio area at present, but if this
-            proves to be useful to people beyond as an experiment, I may scale it upward to reach more users.
-        </p>
-
-    </div>
-    <div class="col-md-4">
-
-        <h2>Supported Functions</h2>
-
-        <ul class="list-group">
-            <li class="list-group-item">
-
-                @Html.ActionLink("Weather", "Home", "Weather", null, new {@class = "list-group-item"})
-
-                <ul class="nav-stacked">
-                    <li>@Html.ActionLink("Conditions and Forecasts", "Home", "Weather", null, new {@class = "list-group-item"})</li>
-                    <li>@Html.ActionLink("Frost Data", "Frost", "Weather", null, new {@class = "list-group-item"})</li>
-                </ul>
-            </li>
-            <li class="list-group-item">
-                
-                @Html.ActionLink("Traffic", "Index", "Traffic", null, new {@class = "list-group-item"})
-
-                <ul class="nav-stacked">
-                    <li>@Html.ActionLink("Accidents", "Accidents", "Traffic", null, new {@class = "list-group-item"})</li>
-                    <li>@Html.ActionLink("Construction", "Construction", "Traffic", null, new {@class = "list-group-item"})</li>
-                </ul>
-
-            </li>
-        </ul>
-    </div>
-</div>
-
-<h2>Module Status</h2>
+<h2>Modules</h2>
 
 <div class="row">
-    <div class="col-md-2">
-        <div class="panel panel-info text-center">
-            <div class="panel-heading">
-                Traffic
-            </div>
-            <div class="panel-body">
-                <br />
-                <p>
-                    <i class="fa fa-car fa-3x"></i>
-                </p>
-                <p>
-                    In Process
-                </p>
-                <p>
-                    @Html.ActionLink("View", "Index", "Traffic", null, new { @class = "btn btn-block btn-info" })
-                </p>
-            </div>
-        </div>
-    </div>
     <div class="col-md-2">
         <div class="panel panel-success text-center">
             <div class="panel-heading">
                 Weather
             </div>
             <div class="panel-body">
-                <br />
+                <br/>
                 <p>
                     <i class="wi wi-day-snow-thunderstorm fa-3x"></i>
                 </p>
@@ -93,7 +39,7 @@
                     Available
                 </p>
                 <p>
-                    @Html.ActionLink("View", "Index", "Weather", null, new { @class = "btn btn-block btn-success" })
+                    @Html.ActionLink("View", "Index", "Weather", null, new {@class = "btn btn-block btn-success"})
                 </p>
             </div>
         </div>
@@ -113,6 +59,25 @@
                 </p>
                 <p>
                     @Html.ActionLink("View", "Frost", "Weather", null, new { @class = "btn btn-block btn-info" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-info text-center">
+            <div class="panel-heading">
+                Traffic
+            </div>
+            <div class="panel-body">
+                <br />
+                <p>
+                    <i class="fa fa-car fa-3x"></i>
+                </p>
+                <p>
+                    In Process
+                </p>
+                <p>
+                    @Html.ActionLink("View", "Index", "Traffic", null, new { @class = "btn btn-block btn-info" })
                 </p>
             </div>
         </div>
