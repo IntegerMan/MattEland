@@ -25,23 +25,23 @@ else
 {
     <div class="row">
         <div class="col-md-2 text-center">
-            <div class="panel active @Html.GetPanelClass(Model.Conditions.SeverityId)">
+            <div class="panel active @Html.GetPanelClass(Model.Conditions.SeverityId, defaultClass: "panel-primary")">
                 <div class=" panel-heading">
                     @DateTime.Today.ToString("ddd M/d")
                 </div>
-                <div class="panel-body tile-panel-tall">
+                <div class="panel-body tile-panel-tall @Html.GetTextClass(Model.Conditions.SeverityId)">
                     <br />
                     <i class="fa-3x @Model.Conditions.IconClass"></i><br />
                     <br />
                     @(Model.Conditions.Description.IsNullOrWhiteSpace() ? Model.Conditions.WeatherCodeName : Model.Conditions.Description)
                 </div>
                 <div class="panel-footer active">
-                    Temp: <span class="label label-primary">@Model.Conditions.Temperature&deg;</span>
+                    Temp: <span class="label @Html.GetLabelClass(Model.Conditions.SeverityId, defaultClass: "label-primary")">@Model.Conditions.Temperature&deg;</span>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
-            <div class="panel @Html.GetPanelClass(Model.Conditions.SeverityId)">
+            <div class="panel @Html.GetPanelClass(Model.Conditions.SeverityId, defaultClass: "panel-primary")">
                 <div class="panel-heading">
                     Details
                 </div>
@@ -55,7 +55,7 @@ else
                                 </tr>
                                 <tr>
                                     <td class="text-right">Wind</td>
-                                    <td>@Model.Conditions.WindDirection&deg; at @Model.Conditions.WindSpeed mph</td>
+                                    <td>@Model.Conditions.WindSpeed mph - @Model.Conditions.WindCardinalDirection</td>
                                 </tr>
                                 <tr>
                                     <td class="text-right">Sunrise</td>
@@ -117,7 +117,7 @@ else
                     </div>
                     <div class="panel-footer">
                         <small>
-                            Temp: <span class="label label-info">@m.Low&deg;</span> / <span class="label label-danger">@m.High&deg;</span> <br />
+                            Temp: <span class="label label-info">@m.Low&deg;</span>-<span class="label label-danger">@m.High&deg;</span> <br />
                             @if (m.MinutesToDefrost.HasValue)
                             {
                                 if (m.MinutesToDefrost <= 0)

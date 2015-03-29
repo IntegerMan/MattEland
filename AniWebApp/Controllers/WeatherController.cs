@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AniWebApp.Helpers;
 using AniWebApp.Models;
 using AniWebApp.Models.Weather;
 
@@ -40,6 +41,7 @@ namespace AniWebApp.Controllers
             var latestRecord = this.Entities.LatestWeatherEntrySelect(zipCode).FirstOrDefault();
             if (latestRecord != null)
             {
+                model.Conditions.WeatherDate = latestRecord.CreatedDateUTC;
                 model.Conditions.Temperature = latestRecord.Temperature;
                 model.Conditions.Sunrise = latestRecord.Sunrise;
                 model.Conditions.Sunset = latestRecord.Sunset;
@@ -50,6 +52,7 @@ namespace AniWebApp.Controllers
                 model.Conditions.Visibility = latestRecord.Visibility;
                 model.Conditions.WindChill = latestRecord.WindChill;
                 model.Conditions.WindDirection = latestRecord.WindDirection;
+                model.Conditions.WindCardinalDirection = WindDirectionHelper.GetCardinalDirection(latestRecord.WindDirection);
                 model.Conditions.WindSpeed = latestRecord.WindSpeed;
                 model.Conditions.WeatherCode = latestRecord.WeatherCode;
                 model.Conditions.WeatherCodeName = latestRecord.WeatherCodeName;

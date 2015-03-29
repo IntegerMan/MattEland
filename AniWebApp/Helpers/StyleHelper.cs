@@ -35,15 +35,33 @@ namespace AniWebApp.Helpers
         /// </summary>
         /// <param name="helper">The helper.</param>
         /// <param name="severityId">The severity identifier.</param>
+        /// <param name="defaultClass">The default class to use if no severity. Defaults to panel-info.</param>
         /// <returns>The panel class.</returns>
-        public static string GetPanelClass(this HtmlHelper helper, int severityId)
+        public static string GetPanelClass(this HtmlHelper helper, int severityId, string defaultClass = "panel-info")
         {
             if (severityId >= 3)
             {
                 return "panel-danger";
             }
 
-            return severityId >= 2 ? "panel-warning" : "panel-info";
+            return severityId >= 2 ? "panel-warning" : defaultClass;
+        }
+
+        /// <summary>
+        /// Gets the label class given the severity.
+        /// </summary>
+        /// <param name="helper">The helper.</param>
+        /// <param name="severityId">The severity identifier.</param>
+        /// <param name="defaultClass">The default class to use if no severity. Defaults to label-info.</param>
+        /// <returns>The panel class.</returns>
+        public static string GetLabelClass(this HtmlHelper helper, int severityId, string defaultClass = "label-info")
+        {
+            if (severityId >= 3)
+            {
+                return "label-danger";
+            }
+
+            return severityId >= 2 ? "label-warning" : defaultClass;
         }
 
         /// <summary>
