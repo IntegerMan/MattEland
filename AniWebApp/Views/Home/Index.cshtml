@@ -1,17 +1,14 @@
 ﻿@{
-    ViewBag.Title = "DEVNET";
+    ViewBag.Title = "www.MattEland.com";
 }
 
 <div class="jumbotron">
 
-    <h1>@ViewBag.Title</h1>
-
     <p class="lead">
-        This website is an ongoing development site that hosts web services for legacy applications, holds some
-        experimental data dashboard applications and as a limited portal for ongoing and past software development
-        projects I've undertaken.
+        This is a development site that hosts web services for @Html.ActionLink("mobile applications", "Index", "Apps")
+        and houses some @Html.ActionLink("early experiments", "ANI", "Projects") in applying machine learning to our daily lives
+        as well as a smattering of @Html.ActionLink("other development projects", "Index", "Projects").
     </p>
-
 </div>
 
 <div class="row">

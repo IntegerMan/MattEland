@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "ANI Project";
+    ViewBag.BreadcrumbTitle = "ANI";
     ViewBag.Lead = "Exploring Machine Learning for improving daily life.";
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
@@ -45,7 +46,7 @@
         </div>
     </div>
     <div class="col-md-2">
-        <div class="panel panel-info text-center">
+        <div class="panel panel-success text-center">
             <div class="panel-heading">
                 Frost
             </div>
@@ -58,7 +59,7 @@
                     Calibrating
                 </p>
                 <p>
-                    @Html.ActionLink("View", "Frost", "Weather", null, new { @class = "btn btn-block btn-info" })
+                    @Html.ActionLink("View", "Frost", "Weather", null, new { @class = "btn btn-block btn-success" })
                 </p>
             </div>
         </div>
@@ -78,6 +79,25 @@
                 </p>
                 <p>
                     @Html.ActionLink("View", "Index", "Traffic", null, new { @class = "btn btn-block btn-info" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                Ratings
+            </div>
+            <div class="panel-body">
+                <br />
+                <p>
+                    <i class="fa fa-star-half-o fa-3x"></i>
+                </p>
+                <p>
+                    Planned
+                </p>
+                <p>
+                    @Html.ActionLink("View", "Index", "Ratings", null, new { @class = "btn btn-block btn-default" })
                 </p>
             </div>
         </div>
