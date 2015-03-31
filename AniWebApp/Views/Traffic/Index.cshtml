@@ -1,4 +1,6 @@
-﻿@{
+﻿@model AniWebApp.Models.TrafficModel
+
+@{
     ViewBag.Title = "Traffic";
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
@@ -14,8 +16,14 @@
         <h2>Select Subpage</h2>
 
         <div class="list-group">
-            @Html.ActionLink("Accidents", "Accidents", "Traffic", new { @class = "list-group-item" })
-            @Html.ActionLink("Construction", "Construction", "Traffic", new { @class = "list-group-item" })
+            <a href="@Url.Action("Accidents", "Traffic")" class="list-group-item">
+                <span class="badge">@Model.Accidents.Count</span>
+                Accidents
+            </a>
+            <a href="@Url.Action("Construction", "Traffic")" class="list-group-item">
+                <span class="badge">@Model.ConstructionEvents.Count</span>
+                Construction
+            </a>
         </div>
     </div>
 </div>

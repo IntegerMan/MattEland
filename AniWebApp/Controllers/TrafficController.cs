@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AniWebApp.Models;
 
 namespace AniWebApp.Controllers
 {
@@ -16,7 +17,24 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic")]
         public ActionResult Index()
         {
-            return View();
+            var model = GetTrafficModel();
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// Gets the model for traffic information.
+        /// </summary>
+        /// <returns>TrafficModel.</returns>
+        private TrafficModel GetTrafficModel()
+        {
+            var model = new TrafficModel
+            {
+                Accidents = Entities.ActiveTrafficIncidentInfoSelect(true, false).ToList(),
+                ConstructionEvents = Entities.ActiveTrafficIncidentInfoSelect(false, true).ToList()
+            };
+
+            return model;
         }
 
         /// <summary>
@@ -27,8 +45,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Accidents")]
         public ActionResult Accidents()
         {
-            var incidents = Entities.ActiveTrafficIncidentInfoSelect(true, false).ToList();
-            return View(incidents);
+            return View(GetTrafficModel().Accidents);
         }
 
         /// <summary>
@@ -39,8 +56,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Construction")]
         public ActionResult Construction()
         {
-            var incidents = Entities.ActiveTrafficIncidentInfoSelect(false, true).ToList();
-            return View(incidents);
+            return View(GetTrafficModel().ConstructionEvents);
         }
     }
 }

@@ -238,6 +238,7 @@
     </Compile>
     <Compile Include="Models\Accounts\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Accounts\NewUserViewModelBase.cs" />
+    <Compile Include="Models\Traffic\TrafficModel.cs" />
     <Compile Include="Models\Weather\AddFrostRecordModel.cs" />
     <Compile Include="Models\Accounts\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Accounts\ExternalLoginListViewModel.cs" />
