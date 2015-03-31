@@ -1,9 +1,10 @@
 ﻿@using AniWebApp.Helpers
 
-@model IEnumerable<AniWebApp.ActiveTrafficIncidentInfoSelect_Result>
+@model IList<AniWebApp.ActiveTrafficIncidentInfoSelect_Result>
 
 @{
     ViewBag.Title = "Active Construction";
+    ViewBag.TitleSmall = string.Format("{0}", @Model.Count());
     ViewBag.BreadcrumbTitle = "Construction";
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }

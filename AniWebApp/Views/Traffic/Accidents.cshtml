@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Traffic Accidents";
+    ViewBag.TitleSmall = string.Format("{0}", @Model.Count());
     ViewBag.BreadcrumbTitle = "Accidents";
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }

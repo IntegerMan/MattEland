@@ -16,12 +16,16 @@
     <ol class="breadcrumb" role="navigation">
         <li><a href="@Url.Action("Index", "Home")">Home</a></li>
         @RenderSection("breadcrumbs", false)
-        <li class="active">
-            @(String.IsNullOrWhiteSpace(ViewBag.BreadcrumbTitle) ? ViewBag.Title : ViewBag.BreadcrumbTitle)
-        </li>
+        <li class="active">@(String.IsNullOrWhiteSpace(ViewBag.BreadcrumbTitle) ? ViewBag.Title : ViewBag.BreadcrumbTitle)</li>
     </ol>
 
-    <h1>@ViewBag.Title</h1>
+    <h1>
+        @ViewBag.Title
+        @if (!string.IsNullOrWhiteSpace(ViewBag.TitleSmall))
+        {
+            <small>@ViewBag.TitleSmall</small>
+        }
+    </h1>
 
     <div class="row">
         <div class="col-md-10 col-sm-9">
