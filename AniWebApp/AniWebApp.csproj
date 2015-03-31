@@ -236,11 +236,20 @@
     <Compile Include="LogEntry.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AddFrostRecordModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\UserProfileModel.cs" />
+    <Compile Include="Models\Accounts\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Accounts\NewUserViewModelBase.cs" />
+    <Compile Include="Models\Weather\AddFrostRecordModel.cs" />
+    <Compile Include="Models\Accounts\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\Accounts\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\Accounts\ForgotViewModel.cs" />
+    <Compile Include="Models\Accounts\IdentityModels.cs" />
+    <Compile Include="Models\Accounts\LoginViewModel.cs" />
+    <Compile Include="Models\Accounts\ManageViewModels.cs" />
+    <Compile Include="Models\Accounts\RegisterViewModel.cs" />
+    <Compile Include="Models\Accounts\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Accounts\SendCodeViewModel.cs" />
+    <Compile Include="Models\Accounts\UserProfileModel.cs" />
+    <Compile Include="Models\Accounts\VerifyCodeViewModel.cs" />
     <Compile Include="Models\Weather\WeatherConditionsModel.cs" />
     <Compile Include="Models\Weather\WeatherEntryBase.cs" />
     <Compile Include="Models\Weather\WeatherForecastModel.cs" />

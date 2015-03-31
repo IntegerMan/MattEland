@@ -10,14 +10,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AniWebApp.Models;
+using AniWebApp.Models.Accounts;
 
 namespace AniWebApp.Controllers
 {
     [Authorize]
     public class AccountController : CustomController
     {
-        private AniEntities _entities = new AniEntities();
-
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -25,7 +24,7 @@ namespace AniWebApp.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +36,9 @@ namespace AniWebApp.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -123,7 +122,7 @@ namespace AniWebApp.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -161,10 +160,10 @@ namespace AniWebApp.Controllers
                 if (result.Succeeded)
                 {
                     // We've created the ASP .NET user, now add a table with extra data 
-                    _entities.InsertUser(user.Id, model.ZipCode, null, null);
+                    Entities.InsertUser(user.Id, model.ZipCode, null, null);
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -216,7 +215,7 @@ namespace AniWebApp.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-                
+
                 // TODO: This is not yet supported
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -353,7 +352,7 @@ namespace AniWebApp.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, UserName = loginInfo.DefaultUserName });
             }
         }
 
@@ -377,13 +376,22 @@ namespace AniWebApp.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    // See if the identity provider will give us information on the user's name
+                    var firstName = GetFieldFromClaim(info, ClaimTypes.GivenName);
+                    var lastName = GetFieldFromClaim(info, ClaimTypes.Surname);
+
+                    // We've created the ASP .NET user, now add a table with extra data 
+                    Entities.InsertUser(user.Id, model.ZipCode, firstName, lastName);
+
+                    // Also add login support for the new login
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        // We're good to go!
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
@@ -393,6 +401,11 @@ namespace AniWebApp.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        private static string GetFieldFromClaim(ExternalLoginInfo info, string claimType)
+        {
+            return info.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == claimType)?.Value;
         }
 
         //
@@ -457,8 +470,8 @@ namespace AniWebApp.Controllers
         {
             var userEntity = GetUserEntity();
 
-            if (ModelState.IsValid && 
-                userEntity != null && 
+            if (ModelState.IsValid &&
+                userEntity != null &&
                 model != null)
             {
                 userEntity.AspNetUser.Email = model.EmailAddress;
