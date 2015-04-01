@@ -11,7 +11,13 @@ namespace AniWebApp.Controllers
     /// </summary>
     public class ProjectsController : CustomController
     {
+        public ProjectsController() : this(null)
+        {
+        }
 
+        public ProjectsController(ApplicationRoleManager roleManager) : base(roleManager)
+        {
+        }
         /// <summary>
         /// Gets the main projects list
         /// </summary>
@@ -33,7 +39,7 @@ namespace AniWebApp.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// Gets the PiMFD project overview
         /// </summary>
@@ -44,7 +50,7 @@ namespace AniWebApp.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// Gets the Temporal Protocols project overview
         /// </summary>
@@ -55,6 +61,6 @@ namespace AniWebApp.Controllers
         {
             return View();
         }
-        
+
     }
 }

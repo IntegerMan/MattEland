@@ -9,6 +9,15 @@ namespace AniWebApp.Controllers
 {
     public class TrafficController : CustomController
     {
+
+        public TrafficController() : this(null)
+        {
+        }
+
+        public TrafficController(ApplicationRoleManager roleManager) : base(roleManager)
+        {
+        }
+
         /// <summary>
         /// The traffic root view
         /// </summary>

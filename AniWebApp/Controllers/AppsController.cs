@@ -11,6 +11,13 @@ namespace AniWebApp.Controllers
     /// </summary>
     public class AppsController : CustomController
     {
+        public AppsController() : this(null)
+        {
+        }
+
+        public AppsController(ApplicationRoleManager roleManager) : base(roleManager)
+        {
+        }
 
         /// <summary>
         /// Presents the main app list view.

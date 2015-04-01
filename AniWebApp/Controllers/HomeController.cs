@@ -7,6 +7,14 @@ namespace AniWebApp.Controllers
     /// </summary>
     public class HomeController : CustomController
     {
+        public HomeController() : this(null)
+        {
+        }
+
+        public HomeController(ApplicationRoleManager roleManager) : base(roleManager)
+        {
+        }
+
         /// <summary>
         /// Serves up the home page
         /// </summary>

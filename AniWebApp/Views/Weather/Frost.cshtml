@@ -1,8 +1,8 @@
-﻿@model IList<WeatherFrostDataSelect_Result>
+﻿@model AniWebApp.Models.Weather.WeatherFrostListModel
 
 @{
     ViewBag.Title = "Frost Predictions and Observations";
-    ViewBag.TitleSmall = string.Format("{0}", @Model.Count());
+    ViewBag.TitleSmall = string.Format("{0}", @Model.Items.Count());
     ViewBag.BreadcrumbTitle = "Frost";
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
@@ -13,7 +13,7 @@
     <li><a href="@Url.Action("Home", "Weather")">Weather</a></li>
 }
 
-@if (!Model.Any())
+@if (!Model.Items.Any())
 {
     <p class="alert alert-danger">
         No frost observations have been recorded.
@@ -31,85 +31,88 @@ else
 
             <table class="table table-responsive">
                 <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Zip</th>
-                    <th>Low</th>
-                    <th>High</th>
-                    <th>Rain</th>
-                    <th>Snow</th>
-                    <th>Conditions</th>
-                    <th>Predicted Minutes</th>
-                    <th>Actual Minutes</th>
-                </tr>
+                    <tr>
+                        <th>Date</th>
+                        <th>Zip</th>
+                        <th>Low</th>
+                        <th>High</th>
+                        <th>Rain</th>
+                        <th>Snow</th>
+                        <th>Conditions</th>
+                        <th>Predicted Minutes</th>
+                        <th>Actual Minutes</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach (var m in Model)
+                    @foreach (var m in Model.Items)
                 {
-                    <tr>
-                        <td>
-                            @m.PredictionDateUTC.ToShortDateString()
-                        </td>
-                        <td>
-                            @m.ZipCode
-                        </td>
-                        <td>
-                            <span class="label label-info">@m.Low&deg;</span>
-                        </td>
-                        <td>
-                            <span class="label label-danger">@m.High&deg;</span>
-                        </td>
-                        <td>
-                            @if (m.RainedOvernight)
-                            {
-                                @:<i class="fa fa-check"></i>
-                            }
-                        </td>
-                        <td>
-                            @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
-                            {
-                                @:<i class="fa fa-check"></i>
-                            }
-                        </td>
-                        <td>
-                            @m.WeatherCodeName
-                        </td>
-                        <td>
-                            @if (m.PredictedMinutes != null)
-                            {
-                                if (m.PredictedMinutes > 0)
+                        <tr>
+                            <td>
+                                @m.PredictionDateUTC.ToShortDateString()
+                            </td>
+                            <td>
+                                @m.ZipCode
+                            </td>
+                            <td>
+                                <span class="label label-info">@m.Low&deg;</span>
+                            </td>
+                            <td>
+                                <span class="label label-danger">@m.High&deg;</span>
+                            </td>
+                            <td>
+                                @if (m.RainedOvernight)
                                 {
-                                    @m.PredictedMinutes.Value.ToString("0.0 Minutes")
+                                    @:<i class="fa fa-check"></i>
+                            }
+                            </td>
+                            <td>
+                                @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
+                                {
+                                    @:<i class="fa fa-check"></i>
+                            }
+                            </td>
+                            <td>
+                                @m.WeatherCodeName
+                            </td>
+                            <td>
+                                @if (m.PredictedMinutes != null)
+                                {
+                                    if (m.PredictedMinutes > 0)
+                                    {
+                                        @m.PredictedMinutes.Value.ToString("0.0 Minutes")
+                                    }
+                                    else
+                                    {
+                                        <text><span class="text-muted">No Frost</span></text>
+                                    }
+                                }
+                                else
+                                {
+                                    <text><span class="text-danger">Not Available</span></text>
+                                }
+                            </td>
+                            <td>
+                                @if (m.ActualMinutes != null && m.ActualMinutes > 0)
+                                {
+                                    @m.ActualMinutes.Value.ToString("0.0 Minutes")
                                 }
                                 else
                                 {
                                     <text><span class="text-muted">No Frost</span></text>
                                 }
-                            }
-                            else
-                            {
-                                <text><span class="text-danger">Not Available</span></text>
-                            }
-                        </td>
-                        <td>
-                            @if (m.ActualMinutes != null && m.ActualMinutes > 0)
-                            {
-                                @m.ActualMinutes.Value.ToString("0.0 Minutes")
-                            }
-                            else
-                            {
-                                <text><span class="text-muted">No Frost</span></text>
-                            }
-                        </td>
-                    </tr>
-                }
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 
+}
+
+@if (Model.CanAddFrostEntry)
+{
     <a class="btn btn-primary" href="@Url.Action("AddFrostEntry", "Weather")">
         Add Frost Entry
     </a>
-
 }

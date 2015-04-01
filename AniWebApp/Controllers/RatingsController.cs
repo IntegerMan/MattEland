@@ -11,6 +11,15 @@ namespace AniWebApp.Controllers
     /// </summary>
     public class RatingsController : CustomController
     {
+
+        public RatingsController() : this(null)
+        {
+        }
+
+        public RatingsController(ApplicationRoleManager roleManager) : base(roleManager)
+        {
+        }
+
         /// <summary>
         /// Goes to the main index page for the ratings application.
         /// </summary>

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AniWebApp.Helpers;
 using AniWebApp.Models;
+using AniWebApp.Models.Accounts;
 using AniWebApp.Models.Weather;
 
 namespace AniWebApp.Controllers
@@ -14,6 +14,15 @@ namespace AniWebApp.Controllers
     [Route("Weather")]
     public class WeatherController : CustomController
     {
+
+        public WeatherController() : this(null)
+        {
+        }
+
+        public WeatherController(ApplicationRoleManager roleManager) : base(roleManager)
+        {
+        }
+
         [HttpGet]
         [Route(@"Weather")]
         public ActionResult Home()
@@ -95,8 +104,13 @@ namespace AniWebApp.Controllers
         [Route(@"Weather/Frost")]
         public ActionResult Frost()
         {
-            var predictions = this.Entities.WeatherFrostDataSelect().ToList();
-            return View(predictions);
+            var model = new WeatherFrostListModel
+            {
+                CanAddFrostEntry = this.User.IsInRole("Admin"),
+                Items = this.Entities.WeatherFrostDataSelect().ToList()
+            };
+
+            return View(model);
         }
 
         /// <summary>
@@ -105,7 +119,7 @@ namespace AniWebApp.Controllers
         /// <returns>The view for entering a frost entry</returns>
         [HttpGet]
         [Route(@"Weather/Frost/AddEntry")]
-        [Authorize(Users = "Batman, ani")]
+        [Authorize(Roles="Admin")]
         public ActionResult AddFrostEntry()
         {
             var model = new AddFrostRecordModel
@@ -125,7 +139,7 @@ namespace AniWebApp.Controllers
         /// <returns>A view showing the new item or a view to re-enter the item.</returns>
         [HttpPost]
         [Route(@"Weather/Frost/AddEntry")]
-        [Authorize(Users = "Batman, ani")]
+        [Authorize(Roles="Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult AddFrostEntryPost(AddFrostRecordModel entry)
         {
