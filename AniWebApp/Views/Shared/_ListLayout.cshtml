@@ -1,0 +1,46 @@
+﻿@using AniWebApp.Helpers
+@{
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section heading {
+    @RenderSection("heading", false)
+}
+
+@section scripts
+{
+    @RenderSection("scripts", false)
+}
+
+@section breadcrumbs
+{
+    @RenderSection("breadcrumbs", false)
+}
+
+<div class="panel panel-default @StyleHelper.GetHiddenClass(ViewBag.HasListItems)">
+
+    <div class="panel-heading">
+        @ViewBag.ListTitle
+    </div>
+
+    <div class="panel-body">
+
+        <table class="table table-responsive table-condensed table-hover">
+            <thead>
+            <tr>
+                @RenderSection("table_headers", true)
+            </tr>
+            </thead>
+            <tbody>
+            @RenderSection("table_body", true)
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<p class="alert alert-danger @StyleHelper.GetHiddenClass(!ViewBag.HasListItems)">
+    @ViewBag.NoListItemsMessage
+</p>
+
+@RenderBody()

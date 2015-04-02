@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Optimization;
 
 namespace AniWebApp.Helpers
 {
@@ -99,5 +96,17 @@ namespace AniWebApp.Helpers
             var theme = GetTheme();
             return theme.WebJsUrl;
         }
+
+
+        public static string GetHiddenClass(this HtmlHelper helper, bool isVisible)
+        {
+            return isVisible ? string.Empty : "hidden";
+        }
+
+        public static string GetHiddenClass(bool isVisible)
+        {
+            return isVisible ? string.Empty : "hidden";
+        }
+
     }
 }

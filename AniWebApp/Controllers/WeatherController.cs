@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Mvc;
 using AniWebApp.Helpers;
 using AniWebApp.Models;
-using AniWebApp.Models.Accounts;
 using AniWebApp.Models.Weather;
 
 namespace AniWebApp.Controllers

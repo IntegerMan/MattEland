@@ -1,10 +1,13 @@
 ﻿@model AniWebApp.Models.Weather.WeatherFrostListModel
 
 @{
-    ViewBag.Title = "Frost Predictions and Observations";
+    ViewBag.Title = "Frost Predictions";
     ViewBag.TitleSmall = string.Format("{0}", @Model.Items.Count());
     ViewBag.BreadcrumbTitle = "Frost";
-    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+    ViewBag.HasListItems = Model.Items.Any();
+    ViewBag.ListTitle = "Weather Forecast";
+    ViewBag.NoListItemsMessage = "No Frost Records are Present";
+    Layout = "~/Views/Shared/_ListLayout.cshtml";
 }
 
 @section breadcrumbs
@@ -13,102 +16,78 @@
     <li><a href="@Url.Action("Home", "Weather")">Weather</a></li>
 }
 
-@if (!Model.Items.Any())
-{
-    <p class="alert alert-danger">
-        No frost observations have been recorded.
-    </p>
+@section table_headers {
+    <th>Date</th>
+    <th>Zip</th>
+    <th>Low</th>
+    <th>High</th>
+    <th>Rain</th>
+    <th>Snow</th>
+    <th>Conditions</th>
+    <th>Predicted Minutes</th>
+    <th>Actual Minutes</th>
 }
-else
-{
-    <div class="panel panel-default">
 
-        <div class="panel-heading">
-            Weather Forecast
-        </div>
-
-        <div class="panel-body">
-
-            <table class="table table-responsive table-condensed table-hover">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Zip</th>
-                    <th>Low</th>
-                    <th>High</th>
-                    <th>Rain</th>
-                    <th>Snow</th>
-                    <th>Conditions</th>
-                    <th>Predicted Minutes</th>
-                    <th>Actual Minutes</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var m in Model.Items)
+@section table_body {
+    @foreach (var m in Model.Items)
+    {
+        <tr>
+            <td>
+                @m.PredictionDateUTC.ToShortDateString()
+            </td>
+            <td>
+                @m.ZipCode
+            </td>
+            <td>
+                <span class="label label-info">@m.Low&deg;</span>
+            </td>
+            <td>
+                <span class="label label-danger">@m.High&deg;</span>
+            </td>
+            <td>
+                @if (m.RainedOvernight)
                 {
-                    <tr>
-                        <td>
-                            @m.PredictionDateUTC.ToShortDateString()
-                        </td>
-                        <td>
-                            @m.ZipCode
-                        </td>
-                        <td>
-                            <span class="label label-info">@m.Low&deg;</span>
-                        </td>
-                        <td>
-                            <span class="label label-danger">@m.High&deg;</span>
-                        </td>
-                        <td>
-                            @if (m.RainedOvernight)
-                            {
-                                @:<i class="fa fa-check"></i>
-                            }
-                        </td>
-                        <td>
-                            @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
-                            {
-                                @:<i class="fa fa-check"></i>
-                            }
-                        </td>
-                        <td>
-                            @m.WeatherCodeName
-                        </td>
-                        <td>
-                            @if (m.PredictedMinutes != null)
-                            {
-                                if (m.PredictedMinutes > 0)
-                                {
-                                    @m.PredictedMinutes.Value.ToString("0.0 Minutes")
-                                }
-                                else
-                                {
-                                    <text><span class="text-success">No Frost</span></text>
-                                }
-                            }
-                            else
-                            {
-                                <text><span class="label label-danger">Not Available</span></text>
-                            }
-                        </td>
-                        <td>
-                            @if (m.ActualMinutes != null && m.ActualMinutes > 0)
-                            {
-                                @m.ActualMinutes.Value.ToString("0.0 Minutes")
-                            }
-                            else
-                            {
-                                <text><span class="text-success">No Frost</span></text>
-                            }
-                        </td>
-                    </tr>
+                    @:<i class="fa fa-check"></i>
                 }
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
+            </td>
+            <td>
+                @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
+                {
+                    @:<i class="fa fa-check"></i>
+                }
+            </td>
+            <td>
+                @m.WeatherCodeName
+            </td>
+            <td>
+                @if (m.PredictedMinutes != null)
+                {
+                    if (m.PredictedMinutes > 0)
+                    {
+                        @m.PredictedMinutes.Value.ToString("0.0 Minutes")
+                    }
+                    else
+                    {
+                        <text><span class="text-success">No Frost</span></text>
+                    }
+                }
+                else
+                {
+                    <text><span class="label label-danger">Not Available</span></text>
+                }
+            </td>
+            <td>
+                @if (m.ActualMinutes != null && m.ActualMinutes > 0)
+                {
+                    @m.ActualMinutes.Value.ToString("0.0 Minutes")
+                }
+                else
+                {
+                    <text><span class="text-success">No Frost</span></text>
+                }
+            </td>
+        </tr>
+    }
 }
 
 @if (Model.CanAddFrostEntry)
