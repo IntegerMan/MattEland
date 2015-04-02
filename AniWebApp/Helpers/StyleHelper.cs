@@ -97,12 +97,6 @@ namespace AniWebApp.Helpers
             return theme.WebJsUrl;
         }
 
-
-        public static string GetHiddenClass(this HtmlHelper helper, bool isVisible)
-        {
-            return isVisible ? string.Empty : "hidden";
-        }
-
         public static string GetHiddenClass(bool isVisible)
         {
             return isVisible ? string.Empty : "hidden";

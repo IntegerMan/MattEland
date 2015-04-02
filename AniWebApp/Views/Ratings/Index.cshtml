@@ -1,8 +1,12 @@
-﻿
+﻿@model AniWebApp.Models.Metrics.RatingsModel
+
 @{
+    Layout = "~/Views/Shared/_ListLayout.cshtml";
     ViewBag.Title = "Ratings";
     ViewBag.Lead = "Graphing life over time";
-    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+    ViewBag.ListNoItemsMessage = "No ratings have been defined.";
+    ViewBag.ListTitle = "Ratings";
+    ViewBag.HasListItems = @Model.Ratings.Any();
 }
 
 @section breadcrumbs
@@ -10,12 +14,35 @@
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
 }
 
-<hr/>
+@section top_content
+{
+    <p>
+        Ratings will allow users to track various ratings over time in their lives to get a visual indication of progress over time and to look for correlations between different types of items (e.g. Weather and Mood, Sleep and Energy, etc.)
+    </p>
 
-<p>
-    Ratings will allow users to track various ratings over time in their lives to get a visual indication of progress over time and to look for correlations between different types of items (e.g. Weather and Mood, Sleep and Energy, etc.)
-</p>
+    <hr />
+}
 
-<p class="text-danger">
-    Ratings are not yet available as the ratings system is in the very early stages of development.
-</p>
+@section table_headers
+{
+    <th>Rating</th>
+    <th>Num Ratings</th>
+    <th>Last Rating</th>
+    <th>Actions</th>
+}
+
+@section table_body
+{
+    @foreach (var rating in Model.Ratings)
+    {
+        <tr>
+            <td>
+                @rating.Name
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
+
+}

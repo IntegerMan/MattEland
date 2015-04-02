@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AniWebApp.Models.Metrics;
 
 namespace AniWebApp.Controllers
 {
@@ -28,7 +29,11 @@ namespace AniWebApp.Controllers
         [Route("Ratings")]
         public ActionResult Index()
         {
-            return View();
+            var model = new RatingsModel();
+
+            model.Ratings = this.Entities.Ratings.Where(r => r.IsActive && r.IsGlobal).ToList();
+
+            return View(model);
         }
     }
 }

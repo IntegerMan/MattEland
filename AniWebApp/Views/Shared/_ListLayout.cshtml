@@ -19,6 +19,8 @@
     @RenderSection("breadcrumbs", false)
 }
 
+@RenderSection("top_content", false)
+
 <div class="panel panel-default @StyleHelper.GetHiddenClass(ViewBag.HasListItems)">
 
     <div class="panel-heading">
@@ -29,12 +31,12 @@
 
         <table class="table @ViewBag.TableClasses">
             <thead>
-            <tr>
-                @RenderSection("table_headers", true)
-            </tr>
+                <tr>
+                    @RenderSection("table_headers", true)
+                </tr>
             </thead>
             <tbody>
-            @RenderSection("table_body", true)
+                @RenderSection("table_body", true)
             </tbody>
         </table>
 
