@@ -15,14 +15,29 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">Projects</div>
-            <div class="panel-body media">
-                <div class="media-left">
-                    <i class="fa fa-3x fa-list-alt"></i>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <i class="fa fa-3x fa-list-alt"></i>
+                    </div>
+                    <div class="media-body">
+                        <p>View a list of active and historical software projects I've done on my own.</p>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <p>View a list of active and historical software projects I've done on my own.</p>
-                    <br />
-                    @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn btn-block btn-primary" })
+            </div>
+            <div class="panel-footer text-right">
+                <div class="btn-group">
+                    @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn btn-primary" })
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("All Projects", "Index", "Projects")</li>
+                        <li>@Html.ActionLink("ANI Project", "ANI", "Projects")</li>
+                        <li>@Html.ActionLink("Pi-MFD", "PiMFD", "Projects")</li>
+                        <li>@Html.ActionLink("Mobile Apps", "Index", "Apps")</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -30,14 +45,29 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">ANI Project</div>
-            <div class="panel-body media">
-                <div class="media-left">
-                    <i class="fa fa-3x fa-connectdevelop"></i>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <i class="fa fa-3x fa-connectdevelop"></i>
+                    </div>
+                    <div class="media-body">
+                        <p>A series of experiments to use machine learning to improve daily life.</p>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <p>A series of experiments to use machine learning to improve daily life.</p>
-                    <br />
-                    @Html.ActionLink("View Project", "ANI", "Projects", null, new { @class = "btn btn-block btn-primary" })
+            </div>
+            <div class="panel-footer text-right">
+                <div class="btn-group">
+                    @Html.ActionLink("View Project", "ANI", "Projects", null, new { @class = "btn btn-primary" })
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Project Home", "ANI", "Projects")</li>
+                        <li>@Html.ActionLink("Weather", "Index", "Weather")</li>
+                        <li>@Html.ActionLink("Frost", "Frost", "Weather")</li>
+                        <li>@Html.ActionLink("Traffic", "Index", "Traffic")</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -45,16 +75,34 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">Windows Phone Apps</div>
-            <div class="panel-body media">
-                <div class="media-left">
-                    <i class="fa fa-3x fa-windows"></i>
-                </div>
-                <div class="media-body">
-                    <p>Links and information on ministry and productivity apps for Windows Phone.</p>
-                    <br />
-                    @Html.ActionLink("View Apps", "Index", "Apps", null, new { @class = "btn btn-block btn-primary" })
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <i class="fa fa-3x fa-windows"></i>
+                    </div>
+                    <div class="media-body">
+                        <p>Links and information on ministry and productivity apps for Windows Phone.</p>
+                    </div>
                 </div>
             </div>
+            <div class="panel-footer text-right">
+                <div class="btn-group">
+                    @Html.ActionLink("View Apps", "Index", "Apps", null, new { @class = "btn btn-primary" })
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("All Apps", "Index", "Apps")</li>
+                        <li>@Html.ActionLink("Seeking God", "SeekingGod", "Apps")</li>
+                        <li>@Html.ActionLink("Seeking Jesus", "SeekingJesus", "Apps")</li>
+                        <li>@Html.ActionLink("Life Lights", "LifeLights", "Apps")</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+
+
