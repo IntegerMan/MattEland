@@ -1,6 +1,7 @@
 ﻿@using AniWebApp.Helpers
 @{
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
+    ViewBag.NoListItemsClass = "alert-danger";
 }
 
 @section heading {
@@ -39,7 +40,7 @@
     </div>
 </div>
 
-<p class="alert alert-danger @StyleHelper.GetHiddenClass(!ViewBag.HasListItems)">
+<p class="alert @ViewBag.NoListItemsClass @StyleHelper.GetHiddenClass(!ViewBag.HasListItems)">
     @ViewBag.NoListItemsMessage
 </p>
 
