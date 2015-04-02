@@ -6,7 +6,11 @@
     ViewBag.Title = "Active Construction";
     ViewBag.TitleSmall = string.Format("{0}", @Model.Count());
     ViewBag.BreadcrumbTitle = "Construction";
-    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+    ViewBag.HasListItems = Model.Any();
+    ViewBag.ListTitle = "Current Construction";
+    ViewBag.NoListItemsClass = "alert-success";
+    ViewBag.NoListItemsMessage = "No active construction for this region.";
+    Layout = "~/Views/Shared/_ListLayout.cshtml";
 }
 
 @section breadcrumbs
@@ -15,70 +19,51 @@
     <li><a href="@Url.Action("Index", "Traffic")">Traffic</a></li>
 }
 
-@if (!Model.Any())
-{
-    <p class="alert alert-info">
-        No active construction for this region.
-    </p>
+@section table_headers {
+    <th></th>
+    <th>Description</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Type</th>
 }
-else
-{
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Current Traffic Incidents
-        </div>
 
-        <div class="panel-body">
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Description</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var m in Model)
+@section table_body
+{
+    @foreach (var m in Model)
+    {
+        <tr class="@Html.GetTableRowClass(m.SeverityID)">
+            <td>
+                @if (m.SeverityID >= 3)
                 {
-                        <tr class="@Html.GetTableRowClass(m.SeverityID)">
-                            <td>
-                                @if (m.SeverityID >= 3)
-                                {
-                                    <span class="fa fa-minus-circle" aria-hidden="true" title="@m.SeverityName"></span>
-                                }
-                                else if (m.SeverityID >= 2)
-                                {
-                                    <span class="fa fa-exclamation-circle" aria-hidden="true" title="@m.SeverityName"></span>
-                                }
-                                else
-                                {
-                                    <span class="fa fa-info-circle" aria-hidden="true" title="@m.SeverityName"></span>
-                                }
-                            </td>
-                            <td>
-                                @m.Description (@m.Lat, @m.Lng)
-                            </td>
-                            <td>
-                                @if (m.StartTimeUTC.HasValue)
-                                {
-                                    @m.StartTimeUTC.Value.ToLocalTime().ToString("g")
-                                }
-                            </td>
-                            <td>
-                                @if (m.EndTimeUTC.HasValue)
-                                {
-                                    @m.EndTimeUTC.Value.ToLocalTime().ToString("g")
-                                }
-                            </td>
-                            <td>
-                                @m.TypeName
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <span class="fa fa-minus-circle" aria-hidden="true" title="@m.SeverityName"></span>
+                }
+                else if (m.SeverityID >= 2)
+                {
+                    <span class="fa fa-exclamation-circle" aria-hidden="true" title="@m.SeverityName"></span>
+                }
+                else
+                {
+                    <span class="fa fa-info-circle" aria-hidden="true" title="@m.SeverityName"></span>
+                }
+            </td>
+            <td>
+                @m.Description (@m.Lat, @m.Lng)
+            </td>
+            <td>
+                @if (m.StartTimeUTC.HasValue)
+                {
+                    @m.StartTimeUTC.Value.ToLocalTime().ToString("g")
+                }
+            </td>
+            <td>
+                @if (m.EndTimeUTC.HasValue)
+                {
+                    @m.EndTimeUTC.Value.ToLocalTime().ToString("g")
+                }
+            </td>
+            <td>
+                @m.TypeName
+            </td>
+        </tr>
+    }
 }

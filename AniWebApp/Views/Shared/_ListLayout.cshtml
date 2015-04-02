@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
     ViewBag.NoListItemsClass = "alert-danger";
+    ViewBag.TableClasses = "table-responsive table-hover";
 }
 
 @section heading {
@@ -26,7 +27,7 @@
 
     <div class="panel-body">
 
-        <table class="table table-responsive table-condensed table-hover">
+        <table class="table @ViewBag.TableClasses">
             <thead>
             <tr>
                 @RenderSection("table_headers", true)
