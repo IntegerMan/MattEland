@@ -50,6 +50,8 @@ namespace AniWebApp
         public virtual DbSet<WeatherRecord> WeatherRecords { get; set; }
         public virtual DbSet<ZipCode> ZipCodes { get; set; }
         public virtual DbSet<WebTheme> WebThemes { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<RatingEntry> RatingEntries { get; set; }
     
         public virtual ObjectResult<ActiveTrafficIncidentInfoSelect_Result> ActiveTrafficIncidentInfoSelect(Nullable<bool> includeAccidents, Nullable<bool> includeConstruction)
         {
@@ -228,7 +230,7 @@ namespace AniWebApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("InsertUser", iDParameter, zipCodeParameter, firstNameParameter, lastNameParameter);
         }
     
-        public virtual int InsertUpdateZipCode(Nullable<int> zipCode, Nullable<double> lat, Nullable<double> lng, string name, string state)
+        public virtual int InsertUpdateZipCode(Nullable<int> zipCode, Nullable<double> lat, Nullable<double> lng, string name, string state, Nullable<int> status)
         {
             var zipCodeParameter = zipCode.HasValue ?
                 new ObjectParameter("ZipCode", zipCode) :
@@ -250,7 +252,11 @@ namespace AniWebApp
                 new ObjectParameter("State", state) :
                 new ObjectParameter("State", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUpdateZipCode", zipCodeParameter, latParameter, lngParameter, nameParameter, stateParameter);
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUpdateZipCode", zipCodeParameter, latParameter, lngParameter, nameParameter, stateParameter, statusParameter);
         }
     
         public virtual int RecordWeatherObservation(Nullable<int> zipCode, Nullable<int> weatherCode, Nullable<int> temperature, string desc, Nullable<System.DateTime> recordTimeUTC, Nullable<int> createdUserID, string sunrise, string sunset, Nullable<int> humidity, Nullable<int> visibility, Nullable<double> pressure, Nullable<int> rising, Nullable<int> windChill, Nullable<int> windDirection, Nullable<int> windSpeed, Nullable<double> lat, Nullable<double> lng, Nullable<int> sourceID)

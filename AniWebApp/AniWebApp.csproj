@@ -263,6 +263,12 @@
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rating.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RatingEntry.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ServiceStatu.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>

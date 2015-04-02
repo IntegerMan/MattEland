@@ -89,6 +89,31 @@
           <Property Name="NT_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NT_Description" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDateUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsGlobal" Type="bit" Nullable="false" />
+          <Property Name="IconClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="MinValue" Type="int" Nullable="false" />
+          <Property Name="MaxValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RatingEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RatingId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="CreatedDateUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedDateUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="ServiceStatus">
           <Key>
             <PropertyRef Name="ID" />
@@ -364,6 +389,30 @@
             </Principal>
             <Dependent Role="Nodes">
               <PropertyRef Name="N_NodeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RatingEntry_Rating_Id">
+          <End Role="Rating" Type="Self.Rating" Multiplicity="1" />
+          <End Role="RatingEntry" Type="Self.RatingEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rating">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RatingEntry">
+              <PropertyRef Name="RatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RatingEntry_Users_U_ID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="RatingEntry" Type="Self.RatingEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="RatingEntry">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -675,6 +724,7 @@
           <Parameter Name="Lng" Type="float" Mode="In" />
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
           <Parameter Name="State" Type="char" Mode="In" />
+          <Parameter Name="Status" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="nvarchar" Mode="In" />
@@ -724,6 +774,8 @@
           <EntitySet Name="LogEntries" EntityType="Self.LogEntries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nodes" EntityType="Self.Nodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NodeTypes" EntityType="Self.NodeTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RatingEntry" EntityType="Self.RatingEntry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceStatus" EntityType="Self.ServiceStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Severities" EntityType="Self.Severities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrafficIncidents" EntityType="Self.TrafficIncidents" Schema="dbo" store:Type="Tables" />
@@ -766,6 +818,14 @@
           <AssociationSet Name="FK_Node_NodeType_NT_ID" Association="Self.FK_Node_NodeType_NT_ID">
             <End Role="NodeTypes" EntitySet="NodeTypes" />
             <End Role="Nodes" EntitySet="Nodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RatingEntry_Rating_Id" Association="Self.FK_RatingEntry_Rating_Id">
+            <End Role="Rating" EntitySet="Rating" />
+            <End Role="RatingEntry" EntitySet="RatingEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RatingEntry_Users_U_ID" Association="Self.FK_RatingEntry_Users_U_ID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RatingEntry" EntitySet="RatingEntry" />
           </AssociationSet>
           <AssociationSet Name="FK_TrafficIncidents_TrafficIncidentSeverity_TIS_ID" Association="Self.FK_TrafficIncidents_TrafficIncidentSeverity_TIS_ID">
             <End Role="TrafficIncidentSeverities" EntitySet="TrafficIncidentSeverities" />
@@ -1078,6 +1138,7 @@
             <Parameter Name="Lng" Mode="In" Type="Double" />
             <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RecordWeatherObservation">
             <Parameter Name="ZipCode" Mode="In" Type="Int32" />
@@ -1120,6 +1181,16 @@
           <AssociationSet Name="FK_Users_WebThemes_ID" Association="AniEntitiesModel.FK_Users_WebThemes_ID">
             <End Role="WebTheme" EntitySet="WebThemes" />
             <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Ratings" EntityType="AniEntitiesModel.Rating" />
+          <EntitySet Name="RatingEntries" EntityType="AniEntitiesModel.RatingEntry" />
+          <AssociationSet Name="FK_RatingEntry_Rating_Id" Association="AniEntitiesModel.FK_RatingEntry_Rating_Id">
+            <End Role="Rating" EntitySet="Ratings" />
+            <End Role="RatingEntry" EntitySet="RatingEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RatingEntry_Users_U_ID" Association="AniEntitiesModel.FK_RatingEntry_Users_U_ID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="RatingEntry" EntitySet="RatingEntries" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
@@ -1261,6 +1332,7 @@
           <NavigationProperty Name="WeatherRecords" Relationship="AniEntitiesModel.FK_WeatherRecord_Users_U_ID" FromRole="User" ToRole="WeatherRecord" />
           <Property Name="U_WebThemeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="WebTheme" Relationship="AniEntitiesModel.FK_Users_WebThemes_ID" FromRole="User" ToRole="WebTheme" />
+          <NavigationProperty Name="RatingEntries" Relationship="AniEntitiesModel.FK_RatingEntry_Users_U_ID" FromRole="User" ToRole="RatingEntry" />
         </EntityType>
         <EntityType Name="WeatherCode">
           <Key>
@@ -1894,6 +1966,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateUTC" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsGlobal" Type="Boolean" Nullable="false" />
+          <Property Name="IconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MinValue" Type="Int32" Nullable="false" />
+          <Property Name="MaxValue" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RatingEntries" Relationship="AniEntitiesModel.FK_RatingEntry_Rating_Id" FromRole="Rating" ToRole="RatingEntry" />
+        </EntityType>
+        <EntityType Name="RatingEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RatingId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateUTC" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedDateUTC" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rating1" Relationship="AniEntitiesModel.FK_RatingEntry_Rating_Id" FromRole="RatingEntry" ToRole="Rating" />
+          <NavigationProperty Name="User" Relationship="AniEntitiesModel.FK_RatingEntry_Users_U_ID" FromRole="RatingEntry" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_RatingEntry_Rating_Id">
+          <End Type="AniEntitiesModel.Rating" Role="Rating" Multiplicity="1" />
+          <End Type="AniEntitiesModel.RatingEntry" Role="RatingEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rating">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RatingEntry">
+              <PropertyRef Name="RatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RatingEntry_Users_U_ID">
+          <End Type="AniEntitiesModel.User" Role="User" Multiplicity="1" />
+          <End Type="AniEntitiesModel.RatingEntry" Role="RatingEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="RatingEntry">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2302,6 +2426,33 @@
                 <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="AniEntitiesModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="IsGlobal" ColumnName="IsGlobal" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDateUTC" ColumnName="CreatedDateUTC" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RatingEntries">
+            <EntityTypeMapping TypeName="AniEntitiesModel.RatingEntry">
+              <MappingFragment StoreEntitySet="RatingEntry">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ModifiedDateUTC" ColumnName="ModifiedDateUTC" />
+                <ScalarProperty Name="CreatedDateUTC" ColumnName="CreatedDateUTC" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
