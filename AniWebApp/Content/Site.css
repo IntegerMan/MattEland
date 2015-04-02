@@ -64,3 +64,8 @@ body {
   font-weight: bold;
   color: #ffffff;
 }
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+}

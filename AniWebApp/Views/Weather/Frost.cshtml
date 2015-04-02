@@ -29,83 +29,84 @@ else
 
         <div class="panel-body">
 
-            <table class="table table-responsive">
+            <table class="table table-responsive table-condensed table-hover">
                 <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Zip</th>
-                        <th>Low</th>
-                        <th>High</th>
-                        <th>Rain</th>
-                        <th>Snow</th>
-                        <th>Conditions</th>
-                        <th>Predicted Minutes</th>
-                        <th>Actual Minutes</th>
-                    </tr>
+                <tr>
+                    <th>Date</th>
+                    <th>Zip</th>
+                    <th>Low</th>
+                    <th>High</th>
+                    <th>Rain</th>
+                    <th>Snow</th>
+                    <th>Conditions</th>
+                    <th>Predicted Minutes</th>
+                    <th>Actual Minutes</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var m in Model.Items)
+                @foreach (var m in Model.Items)
                 {
-                        <tr>
-                            <td>
-                                @m.PredictionDateUTC.ToShortDateString()
-                            </td>
-                            <td>
-                                @m.ZipCode
-                            </td>
-                            <td>
-                                <span class="label label-info">@m.Low&deg;</span>
-                            </td>
-                            <td>
-                                <span class="label label-danger">@m.High&deg;</span>
-                            </td>
-                            <td>
-                                @if (m.RainedOvernight)
-                                {
-                                    @:<i class="fa fa-check"></i>
+                    <tr>
+                        <td>
+                            @m.PredictionDateUTC.ToShortDateString()
+                        </td>
+                        <td>
+                            @m.ZipCode
+                        </td>
+                        <td>
+                            <span class="label label-info">@m.Low&deg;</span>
+                        </td>
+                        <td>
+                            <span class="label label-danger">@m.High&deg;</span>
+                        </td>
+                        <td>
+                            @if (m.RainedOvernight)
+                            {
+                                @:<i class="fa fa-check"></i>
                             }
-                            </td>
-                            <td>
-                                @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
-                                {
-                                    @:<i class="fa fa-check"></i>
+                        </td>
+                        <td>
+                            @if (m.SnowedOvernight.HasValue && m.SnowedOvernight.Value)
+                            {
+                                @:<i class="fa fa-check"></i>
                             }
-                            </td>
-                            <td>
-                                @m.WeatherCodeName
-                            </td>
-                            <td>
-                                @if (m.PredictedMinutes != null)
+                        </td>
+                        <td>
+                            @m.WeatherCodeName
+                        </td>
+                        <td>
+                            @if (m.PredictedMinutes != null)
+                            {
+                                if (m.PredictedMinutes > 0)
                                 {
-                                    if (m.PredictedMinutes > 0)
-                                    {
-                                        @m.PredictedMinutes.Value.ToString("0.0 Minutes")
-                                    }
-                                    else
-                                    {
-                                        <text><span class="text-muted">No Frost</span></text>
-                                    }
+                                    @m.PredictedMinutes.Value.ToString("0.0 Minutes")
                                 }
                                 else
                                 {
-                                    <text><span class="text-danger">Not Available</span></text>
+                                    <text><span class="text-success">No Frost</span></text>
                                 }
-                            </td>
-                            <td>
-                                @if (m.ActualMinutes != null && m.ActualMinutes > 0)
-                                {
-                                    @m.ActualMinutes.Value.ToString("0.0 Minutes")
-                                }
-                                else
-                                {
-                                    <text><span class="text-muted">No Frost</span></text>
-                                }
-                            </td>
-                        </tr>
-                    }
+                            }
+                            else
+                            {
+                                <text><span class="label label-danger">Not Available</span></text>
+                            }
+                        </td>
+                        <td>
+                            @if (m.ActualMinutes != null && m.ActualMinutes > 0)
+                            {
+                                @m.ActualMinutes.Value.ToString("0.0 Minutes")
+                            }
+                            else
+                            {
+                                <text><span class="text-success">No Frost</span></text>
+                            }
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
+
     </div>
 
 }
