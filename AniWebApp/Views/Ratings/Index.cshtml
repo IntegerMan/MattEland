@@ -47,8 +47,8 @@
                 @rating.LastRating
             </td>
             <td>
-                @Html.ActionLink("History", "Entries", "Ratings", new {RatingId = @rating.RatingId})<br/>
-                @Html.ActionLink("Add Entry", "AddEntry", "Ratings", new { RatingId=@rating.RatingId})
+                @Html.ActionLink("History", "History", new {RatingId = @rating.RatingId})<br/>
+                @Html.ActionLink("Add Entry", "AddEntry", new { RatingId=@rating.RatingId})
             </td>
         </tr>
     }
