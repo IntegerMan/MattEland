@@ -362,5 +362,14 @@ namespace AniWebApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveWeatherPredictionsSelect_Result>("ActiveWeatherPredictionsSelect", zipCodeParameter, afterDateParameter);
         }
+    
+        public virtual ObjectResult<RatingsWithLatestInfoForUserSelect_Result> RatingsWithLatestInfoForUserSelect(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RatingsWithLatestInfoForUserSelect_Result>("RatingsWithLatestInfoForUserSelect", userIdParameter);
+        }
     }
 }

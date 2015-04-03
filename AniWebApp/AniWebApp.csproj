@@ -270,6 +270,9 @@
     <Compile Include="RatingEntry.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="RatingsWithLatestInfoForUserSelect_Result.cs">
+      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ServiceStatu.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>

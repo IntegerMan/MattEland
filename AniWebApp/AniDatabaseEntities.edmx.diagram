@@ -61,7 +61,7 @@
         <EntityTypeShape EntityType="AniEntitiesModel.WebTheme" Width="1.5" PointX="3.375" PointY="0.875" />
         <AssociationConnector Association="AniEntitiesModel.FK_Users_WebThemes_ID" />
         <EntityTypeShape EntityType="AniEntitiesModel.Rating" Width="1.5" PointX="9" PointY="29.5" />
-        <EntityTypeShape EntityType="AniEntitiesModel.RatingEntry" Width="1.5" PointX="11.25" PointY="23.5" />
+        <EntityTypeShape EntityType="AniEntitiesModel.RatingEntry" Width="1.5" PointX="11.25" PointY="24.125" />
         <AssociationConnector Association="AniEntitiesModel.FK_RatingEntry_Rating_Id" />
         <AssociationConnector Association="AniEntitiesModel.FK_RatingEntry_Users_U_ID" />
       </Diagram>

@@ -29,9 +29,10 @@ namespace AniWebApp.Controllers
         [Route("Ratings")]
         public ActionResult Index()
         {
-            var model = new RatingsModel();
-
-            model.Ratings = this.Entities.Ratings.Where(r => r.IsActive && r.IsGlobal).ToList();
+            var model = new RatingsModel
+            {
+                Ratings = this.Entities.RatingsWithLatestInfoForUserSelect(this.GetUserId()).ToList()
+            };
 
             return View(model);
         }

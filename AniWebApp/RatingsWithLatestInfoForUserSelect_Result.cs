@@ -10,21 +10,12 @@
 namespace AniWebApp
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Rating
+    public partial class RatingsWithLatestInfoForUserSelect_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rating()
-        {
-            this.RatingEntries = new HashSet<RatingEntry>();
-        }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public System.DateTime CreatedDateUTC { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsGlobal { get; set; }
+        public int RatingId { get; set; }
+        public string RatingName { get; set; }
+        public System.DateTime RatingTypeCreatedTimeUTC { get; set; }
         public string IconClass { get; set; }
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
@@ -32,8 +23,12 @@ namespace AniWebApp
         public string MinLabel { get; set; }
         public string MaxLabel { get; set; }
         public bool RequireComments { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RatingEntry> RatingEntries { get; set; }
+        public Nullable<int> EntryId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> LastRating { get; set; }
+        public Nullable<System.DateTime> LastRatingTimeUTC { get; set; }
+        public Nullable<System.DateTime> LastRatingModifiedTimeUTC { get; set; }
+        public Nullable<System.DateTime> EntryDateUTC { get; set; }
+        public string LastRatingComments { get; set; }
     }
 }

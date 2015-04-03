@@ -101,6 +101,10 @@
           <Property Name="IconClass" Type="nvarchar" MaxLength="50" />
           <Property Name="MinValue" Type="int" Nullable="false" />
           <Property Name="MaxValue" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MinLabel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaxLabel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RequireComments" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RatingEntry">
           <Key>
@@ -110,8 +114,9 @@
           <Property Name="RatingId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Rating" Type="int" Nullable="false" />
-          <Property Name="CreatedDateUTC" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="ModifiedDateUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedTimeUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedTimeUTC" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EntryDateUTC" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Comments" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ServiceStatus">
@@ -735,6 +740,9 @@
         <Function Name="LatestWeatherEntrySelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ZipCode" Type="int" Mode="In" />
         </Function>
+        <Function Name="RatingsWithLatestInfoForUserSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="RecordWeatherObservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ZipCode" Type="int" Mode="In" />
           <Parameter Name="WeatherCode" Type="int" Mode="In" />
@@ -1192,6 +1200,9 @@
             <End Role="User" EntitySet="Users" />
             <End Role="RatingEntry" EntitySet="RatingEntries" />
           </AssociationSet>
+          <FunctionImport Name="RatingsWithLatestInfoForUserSelect" ReturnType="Collection(AniEntitiesModel.RatingsWithLatestInfoForUserSelect_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -1979,6 +1990,10 @@
           <Property Name="MinValue" Type="Int32" Nullable="false" />
           <Property Name="MaxValue" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RatingEntries" Relationship="AniEntitiesModel.FK_RatingEntry_Rating_Id" FromRole="Rating" ToRole="RatingEntry" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinLabel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaxLabel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RequireComments" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="RatingEntry">
           <Key>
@@ -1988,10 +2003,11 @@
           <Property Name="RatingId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDateUTC" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="ModifiedDateUTC" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedTimeUTC" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedTimeUTC" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EntryDateUTC" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Rating1" Relationship="AniEntitiesModel.FK_RatingEntry_Rating_Id" FromRole="RatingEntry" ToRole="Rating" />
+          <NavigationProperty Name="RatingEntity" Relationship="AniEntitiesModel.FK_RatingEntry_Rating_Id" FromRole="RatingEntry" ToRole="Rating" />
           <NavigationProperty Name="User" Relationship="AniEntitiesModel.FK_RatingEntry_Users_U_ID" FromRole="RatingEntry" ToRole="User" />
         </EntityType>
         <Association Name="FK_RatingEntry_Rating_Id">
@@ -2018,6 +2034,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="RatingsWithLatestInfoForUserSelect_Result">
+          <Property Type="Int32" Name="RatingId" Nullable="false" />
+          <Property Type="String" Name="RatingName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="RatingTypeCreatedTimeUTC" Nullable="false" />
+          <Property Type="String" Name="IconClass" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="MinValue" Nullable="false" />
+          <Property Type="Int32" Name="MaxValue" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="MinLabel" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MaxLabel" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="RequireComments" Nullable="false" />
+          <Property Type="Int32" Name="EntryId" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="LastRating" Nullable="true" />
+          <Property Type="DateTime" Name="LastRatingTimeUTC" Nullable="true" />
+          <Property Type="DateTime" Name="LastRatingModifiedTimeUTC" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDateUTC" Nullable="true" />
+          <Property Type="String" Name="LastRatingComments" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2432,6 +2467,10 @@
           <EntitySetMapping Name="Ratings">
             <EntityTypeMapping TypeName="AniEntitiesModel.Rating">
               <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="RequireComments" ColumnName="RequireComments" />
+                <ScalarProperty Name="MaxLabel" ColumnName="MaxLabel" />
+                <ScalarProperty Name="MinLabel" ColumnName="MinLabel" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
                 <ScalarProperty Name="MinValue" ColumnName="MinValue" />
                 <ScalarProperty Name="IconClass" ColumnName="IconClass" />
@@ -2447,8 +2486,9 @@
             <EntityTypeMapping TypeName="AniEntitiesModel.RatingEntry">
               <MappingFragment StoreEntitySet="RatingEntry">
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="ModifiedDateUTC" ColumnName="ModifiedDateUTC" />
-                <ScalarProperty Name="CreatedDateUTC" ColumnName="CreatedDateUTC" />
+                <ScalarProperty Name="EntryDateUTC" ColumnName="EntryDateUTC" />
+                <ScalarProperty Name="ModifiedTimeUTC" ColumnName="ModifiedTimeUTC" />
+                <ScalarProperty Name="CreatedTimeUTC" ColumnName="CreatedTimeUTC" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RatingId" ColumnName="RatingId" />
@@ -2456,6 +2496,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RatingsWithLatestInfoForUserSelect" FunctionName="AniEntitiesModel.Store.RatingsWithLatestInfoForUserSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AniEntitiesModel.RatingsWithLatestInfoForUserSelect_Result">
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="RatingName" ColumnName="RatingName" />
+                <ScalarProperty Name="RatingTypeCreatedTimeUTC" ColumnName="RatingTypeCreatedTimeUTC" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MinLabel" ColumnName="MinLabel" />
+                <ScalarProperty Name="MaxLabel" ColumnName="MaxLabel" />
+                <ScalarProperty Name="RequireComments" ColumnName="RequireComments" />
+                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastRating" ColumnName="LastRating" />
+                <ScalarProperty Name="LastRatingTimeUTC" ColumnName="LastRatingTimeUTC" />
+                <ScalarProperty Name="LastRatingModifiedTimeUTC" ColumnName="LastRatingModifiedTimeUTC" />
+                <ScalarProperty Name="EntryDateUTC" ColumnName="EntryDateUTC" />
+                <ScalarProperty Name="LastRatingComments" ColumnName="LastRatingComments" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

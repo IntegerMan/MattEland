@@ -7,6 +7,6 @@ namespace AniWebApp.Models.Metrics
 {
     public class RatingsModel
     {
-        public IList<Rating> Ratings { get; set; }
+        public List<RatingsWithLatestInfoForUserSelect_Result> Ratings { get; set; }
     }
 }

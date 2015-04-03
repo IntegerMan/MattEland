@@ -18,11 +18,12 @@ namespace AniWebApp
         public int RatingId { get; set; }
         public int UserId { get; set; }
         public int Rating { get; set; }
-        public System.DateTime CreatedDateUTC { get; set; }
-        public System.DateTime ModifiedDateUTC { get; set; }
+        public System.DateTime CreatedTimeUTC { get; set; }
+        public System.DateTime ModifiedTimeUTC { get; set; }
+        public System.DateTime EntryDateUTC { get; set; }
         public string Comments { get; set; }
     
-        public virtual Rating Rating1 { get; set; }
+        public virtual Rating RatingEntity { get; set; }
         public virtual User User { get; set; }
     }
 }

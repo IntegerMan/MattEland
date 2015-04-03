@@ -25,8 +25,8 @@
 
 @section table_headers
 {
-    <th>Rating</th>
-    <th>Num Ratings</th>
+    <th>Name</th>
+    <th>Description</th>
     <th>Last Rating</th>
     <th>Actions</th>
 }
@@ -36,12 +36,20 @@
     @foreach (var rating in Model.Ratings)
     {
         <tr>
-            <td>
-                @rating.Name
+            <td class="text-center">
+                <i class="fa fa-2x fa-fw @rating.IconClass"></i><br />
+                <strong>@rating.RatingName</strong>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                @rating.Description
+            </td>
+            <td>
+                @rating.LastRating
+            </td>
+            <td>
+                @Html.ActionLink("History", "Entries", "Ratings", new {RatingId = @rating.RatingId})<br/>
+                @Html.ActionLink("Add Entry", "AddEntry", "Ratings", new { RatingId=@rating.RatingId})
+            </td>
         </tr>
     }
 
