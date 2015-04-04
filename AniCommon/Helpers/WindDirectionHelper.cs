@@ -1,4 +1,4 @@
-﻿namespace AniWebApp.Helpers
+﻿namespace AniCommon.Helpers
 {
     /// <summary>
     /// Contains utility methods for dealing with wind

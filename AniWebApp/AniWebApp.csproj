@@ -229,7 +229,6 @@
     <Compile Include="Helpers\NavUtilities.cs" />
     <Compile Include="Helpers\StyleHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
-    <Compile Include="Helpers\WindDirectionHelper.cs" />
     <Compile Include="LatestWeatherEntrySelect_Result.cs">
       <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
     </Compile>
@@ -510,6 +509,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AniCommon\AniCommon.csproj">
+      <Project>{06cdb97d-7f03-45b5-8acb-e837aaf616cb}</Project>
+      <Name>AniCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
