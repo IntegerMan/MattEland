@@ -13,10 +13,17 @@
 	<li><a href="@Url.Action("History", "Rating", new { RatingId = @Model.Rating.Id})">@Model.Rating.Name</a></li>
 }
 
-<p class="lead">
-	Enter your @Model.Rating.Name rating and click Save to add the entry. If you select a date you already have an entry for,
-	your existing rating will be updated with the new value.
-</p>
+<div class="media alert alert-info">
+	<div class="media-left">
+		<i class="fa fa-2x media-object @Model.Rating.IconClass"></i>
+	</div>
+	<div class="media-body">
+		Enter your @Model.Rating.Name rating and click Save to add the entry.<br/>
+		If you select a date you already have an entry for, your existing rating will be updated with the new value.	
+	</div>
+</div>
+
+<hr />
 
 @using (Html.BeginForm("AddEntry", "Ratings", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
 {
@@ -57,8 +64,8 @@
 	</div>
 
 	<div class="form-group">
-		@Html.LabelFor(m => m.Comments, new { @class = "form-label" })<br />
-		@Html.EditorFor(m => m.Comments, new { @class = "form-control" })
+		@Html.LabelFor(m => m.Comments, new {@class = "form-label"})<br/>
+		@Html.TextAreaFor(m => m.Comments, new { @class = "form-control", rows=5, placeholder="Enter additional comments here..." })
 		@Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger" })
 	</div>
 	
