@@ -371,5 +371,30 @@ namespace AniWebApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RatingsWithLatestInfoForUserSelect_Result>("RatingsWithLatestInfoForUserSelect", userIdParameter);
         }
+    
+        public virtual int InsertUpdateUserRating(Nullable<int> userId, Nullable<int> ratingId, string comments, Nullable<int> rating, Nullable<System.DateTime> entryDateUTC)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var ratingIdParameter = ratingId.HasValue ?
+                new ObjectParameter("RatingId", ratingId) :
+                new ObjectParameter("RatingId", typeof(int));
+    
+            var commentsParameter = comments != null ?
+                new ObjectParameter("Comments", comments) :
+                new ObjectParameter("Comments", typeof(string));
+    
+            var ratingParameter = rating.HasValue ?
+                new ObjectParameter("Rating", rating) :
+                new ObjectParameter("Rating", typeof(int));
+    
+            var entryDateUTCParameter = entryDateUTC.HasValue ?
+                new ObjectParameter("EntryDateUTC", entryDateUTC) :
+                new ObjectParameter("EntryDateUTC", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUpdateUserRating", userIdParameter, ratingIdParameter, commentsParameter, ratingParameter, entryDateUTCParameter);
+        }
     }
 }

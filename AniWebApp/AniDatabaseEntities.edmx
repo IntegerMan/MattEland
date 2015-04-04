@@ -713,6 +713,13 @@
           <Parameter Name="SeverityID" Type="int" Mode="In" />
           <Parameter Name="TypeID" Type="int" Mode="In" />
         </Function>
+        <Function Name="InsertUpdateUserRating" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="RatingId" Type="int" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Rating" Type="int" Mode="In" />
+          <Parameter Name="EntryDateUTC" Type="date" Mode="In" />
+        </Function>
         <Function Name="InsertUpdateWeatherPrediction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PredictionDateUTC" Type="date" Mode="In" />
           <Parameter Name="CreatorNodeID" Type="int" Mode="In" />
@@ -1201,7 +1208,14 @@
             <End Role="RatingEntry" EntitySet="RatingEntries" />
           </AssociationSet>
           <FunctionImport Name="RatingsWithLatestInfoForUserSelect" ReturnType="Collection(AniEntitiesModel.RatingsWithLatestInfoForUserSelect_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUpdateUserRating">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="RatingId" Mode="In" Type="Int32" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+            <Parameter Name="Rating" Mode="In" Type="Int32" />
+            <Parameter Name="EntryDateUTC" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveTrafficIncidentInfoSelect_Result">
@@ -2519,6 +2533,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertUpdateUserRating" FunctionName="AniEntitiesModel.Store.InsertUpdateUserRating" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
