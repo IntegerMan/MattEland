@@ -1,5 +1,47 @@
-﻿
+﻿@model AniWebApp.Models.Metrics.AddEditRatingModel
+
 @{
-    ViewBag.Title = "Add Rating";
-    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+	ViewBag.Title = string.Format("Log {0}", @Model.Rating.Name);
+	ViewBag.BreadcrumbTitle = "Log";
+	Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section breadcrumbs
+{
+	<li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+	<li><a href="@Url.Action("Index", "Rating")">Ratings</a></li>
+	<li><a href="@Url.Action("History", "Rating", new { RatingId = @Model.Rating.Id})">@Model.Rating.Name</a></li>
+}
+
+<p class="lead">
+	Enter your @Model.Rating.Name rating and click Save to add the entry. If you select a date you already have an entry for,
+	your existing rating will be updated with the new value.
+</p>
+
+@using (Html.BeginForm("AddEntry", "Ratings", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.EntryDate, new { @class = "form-label" })<br />
+		@Html.EditorFor(m => m.EntryDate, new { @class = "form-control datepicker" })
+		@Html.ValidationMessageFor(m => m.EntryDate, "", new { @class = "text-danger" })
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.RatingValue, new { @class = "form-label" })<br />
+		@Html.EditorFor(m => m.RatingValue, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.RatingValue, "", new { @class = "text-danger" })
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Comments, new { @class = "form-label" })<br />
+		@Html.EditorFor(m => m.Comments, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger" })
+	</div>
+	
+	<input type="submit" value="Save" class="btn btn-primary" />
+	<a href="@Url.Action("Index", "Ratings")" class="btn btn-default">Cancel</a>
 }
