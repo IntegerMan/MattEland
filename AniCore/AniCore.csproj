@@ -96,7 +96,9 @@
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metrics\AddEditRatingModel.cs" />
-    <Compile Include="Models\Metrics\RatingsModel.cs" />
+    <Compile Include="Models\Metrics\RatingModel.cs" />
+    <Compile Include="Models\Metrics\RatingsSummaryModel.cs" />
+    <Compile Include="Models\Users\UserModel.cs" />
     <Compile Include="Models\Traffic\TrafficModel.cs" />
     <Compile Include="Models\Weather\WeatherFrostListModel.cs" />
     <Compile Include="Models\Weather\AddFrostRecordModel.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="ServiceStatu.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Severity.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
@@ -147,6 +150,8 @@
     <Compile Include="UserNode.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metrics\UserRatingHistoryModel.cs" />
+    <Compile Include="Models\Metrics\UserRatingHistoryEntry.cs" />
     <Compile Include="WeatherCode.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>

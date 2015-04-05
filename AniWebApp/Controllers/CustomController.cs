@@ -1,6 +1,8 @@
 using System.Web;
 using System.Web.Mvc;
 using Ani.Core;
+using Ani.Core.Models.Users;
+using Ani.Core.Services;
 using AniWebApp.Helpers;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -17,6 +19,8 @@ namespace AniWebApp.Controllers
         protected CustomController(ApplicationRoleManager roleManager)
         {
             RoleManager = roleManager;
+            Entities = new Entities();
+            UserService = new UserService(Entities);
         }
 
         /// <summary>
@@ -39,7 +43,7 @@ namespace AniWebApp.Controllers
         /// Gets the database context for working with entity framework.
         /// </summary>
         /// <value>The entity framework database context.</value>
-        protected Entities Entities { get; } = new Entities();
+        protected Entities Entities { get; }
 
         protected int GetUserZipCode()
         {
@@ -52,7 +56,21 @@ namespace AniWebApp.Controllers
             return UserHelper.GetCurrentUserEntity(Entities, this.User);
         }
 
-        protected string GetUserAspNetId()
+        /// <summary>
+        /// Gets a user model representing the current user or null if no user.
+        /// </summary>
+        /// <returns>A user model representing the current user or null if no user.</returns>
+        protected UserModel GetUserModel()
+        {
+            var userAspNetId = GetUserAspNetId();
+            return UserService.GetUserModelFromAspNetId(userAspNetId);
+        }
+
+        /// <summary>
+        /// Gets the current user's ASP .NET Id.
+        /// </summary>
+        /// <returns></returns>
+        private string GetUserAspNetId()
         {
             return UserHelper.GetUserAspNetId(this.User);
         }
@@ -62,5 +80,11 @@ namespace AniWebApp.Controllers
             var user = GetUserEntity();
             return user?.U_ID ?? 0;
         }
+
+        /// <summary>
+        /// Gets the user service.
+        /// </summary>
+        /// <value>The user service.</value>
+        protected UserService UserService { get; }
     }
 }

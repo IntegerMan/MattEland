@@ -12,11 +12,18 @@ namespace AniWebApp.Controllers
 	{
         private readonly RatingsService _ratingsService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RatingsController"/> class.
+        /// </summary>
         public RatingsController() : this(null)
 		{
 		}
 
-		public RatingsController(ApplicationRoleManager roleManager) : base(roleManager)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomController" /> class.
+        /// </summary>
+        /// <param name="roleManager">The role manager.</param>
+        public RatingsController(ApplicationRoleManager roleManager) : base(roleManager)
 		{
 		    _ratingsService = new RatingsService(this.Entities);
 		}
@@ -30,7 +37,7 @@ namespace AniWebApp.Controllers
 		[Authorize]
 		public ActionResult Index()
 		{
-			var model = new RatingsModel
+			var model = new RatingsSummaryModel
 			{
 				Ratings = _ratingsService.GetLatestRatingInfoForUser(this.GetUserId())
 			};
@@ -86,13 +93,20 @@ namespace AniWebApp.Controllers
 		[Authorize]
 		public ActionResult History(int ratingId)
 		{
-			var rating = _ratingsService.GetRating(ratingId);
-			if (rating == null)
-			{
-				return RedirectToAction("NotFound", "Error");
-			}
+            // Grab the rating
+	        var ratingModel = _ratingsService.GetRatingModel(ratingId);
+	        if (ratingModel == null)
+	        {
+	            return RedirectToAction("NotFound", "Error");
+	        }
 
-			return View();
+            // Grab the current user (we'll have one since we require authorized)
+            var userModel = this.GetUserModel();
+
+            // Get data for the user and return it to the view
+	        var model = _ratingsService.GetRatingUserHistory(ratingModel, userModel);
+
+			return View(model);
 		}
 	}
 }

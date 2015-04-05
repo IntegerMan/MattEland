@@ -3,7 +3,7 @@
   <Class Name="Ani.Core.Services.RatingsService">
     <Position X="7.75" Y="4.5" Width="5.25" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAACgAAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAACgAAAQQAAAAAAAAAAA=</HashCode>
       <FileName>Services\RatingsService.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -36,6 +36,13 @@
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Services\TrafficService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Services.UserService">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

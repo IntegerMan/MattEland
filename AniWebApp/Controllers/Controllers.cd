@@ -20,12 +20,13 @@
       <Field Name="_roleManager" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAAAAAAgQACAAAAACAEAABAAAAA=</HashCode>
+      <HashCode>AAAAAAABACAAAAAAAAAAgAAgQACAAAAACAEAABAAAAA=</HashCode>
       <FileName>Controllers\CustomController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="RoleManager" />
       <Property Name="Entities" />
+      <Property Name="UserService" />
     </ShowAsAssociation>
   </Class>
   <Class Name="AniWebApp.Controllers.ErrorController" Collapsed="true">
@@ -138,6 +139,10 @@
       <Property Name="UserManager" />
       <Property Name="AuthenticationManager" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="Ani.Core.Services.UserService" Collapsed="true">
+    <Position X="16.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
   </Class>
   <Interface Name="Microsoft.Owin.Security.IAuthenticationManager" Collapsed="true">
     <Position X="4.5" Y="3.5" Width="2" />
