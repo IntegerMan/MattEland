@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Principal;
 using System.Web.Mvc;
+using Ani.Core;
 using Ani.Core.Helpers;
 using Ani.Core.Models.Weather;
 using Ani.Core.Services;
@@ -13,7 +15,7 @@ namespace AniWebApp.Controllers
     [Route("Weather")]
     public class WeatherController : CustomController
     {
-        private WeatherService _weatherService;
+        private readonly WeatherService _weatherService;
 
         public WeatherController() : this(null)
         {
@@ -29,6 +31,7 @@ namespace AniWebApp.Controllers
         public ActionResult Home()
         {
             var zipCode = GetUserZipCode();
+
             return RedirectToAction("Index", "Weather", new {zipCode=zipCode});
         }
 
@@ -46,53 +49,7 @@ namespace AniWebApp.Controllers
                 zipCode = GetUserZipCode();
             }
 
-            var model = new WeatherHomeModel { ZipCode = zipCode };
-
-            var latestRecord = this.Entities.LatestWeatherEntrySelect(zipCode).FirstOrDefault();
-            if (latestRecord != null)
-            {
-                model.Conditions.WeatherDate = latestRecord.CreatedDateUTC;
-                model.Conditions.Temperature = latestRecord.Temperature;
-                model.Conditions.Sunrise = latestRecord.Sunrise;
-                model.Conditions.Sunset = latestRecord.Sunset;
-                model.Conditions.Description = latestRecord.Description;
-                model.Conditions.Pressure = latestRecord.Pressure;
-                model.Conditions.Humidity = latestRecord.Humidity;
-                model.Conditions.Rising = latestRecord.Rising;
-                model.Conditions.Visibility = latestRecord.Visibility;
-                model.Conditions.WindChill = latestRecord.WindChill;
-                model.Conditions.WindDirection = latestRecord.WindDirection;
-                model.Conditions.WindCardinalDirection = WindDirectionHelper.GetCardinalDirection(latestRecord.WindDirection);
-                model.Conditions.WindSpeed = latestRecord.WindSpeed;
-                model.Conditions.WeatherCode = latestRecord.WeatherCode;
-                model.Conditions.WeatherCodeName = latestRecord.WeatherCodeName;
-                model.Conditions.SeverityId = latestRecord.SeverityID;
-                model.Conditions.IconClass = latestRecord.IconClass;
-            }
-            else
-            {
-                // Well, crap. No weather. This may be an out of service area. Indicate via a null model.
-                model.Conditions = null;
-            }
-
-            var predictions = this.Entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today);
-            foreach (var prediction in predictions)
-            {
-                var forecast = new WeatherForecastModel
-                {
-                    Low = prediction.Low,
-                    High = prediction.High,
-                    SeverityId = prediction.SeverityID,
-                    MinutesToDefrost = prediction.MinutesToDefrost,
-                    WeatherCodeName = prediction.WeatherCodeName,
-                    WeatherCode = prediction.WeatherCodeID,
-                    ForecastDate = prediction.PredictionDateUTC,
-                    IconClass = prediction.IconClass,
-                    Description = prediction.Description
-                };
-
-                model.Forecasts.Add(forecast);
-            }
+            var model = _weatherService.GetWeatherModel(zipCode);
 
             return View(model);
         }
@@ -105,11 +62,7 @@ namespace AniWebApp.Controllers
         [Route(@"Weather/Frost")]
         public ActionResult Frost()
         {
-            var model = new WeatherFrostListModel
-            {
-                CanAddFrostEntry = this.User.IsInRole("Admin"),
-                Items = this.Entities.WeatherFrostDataSelect().ToList()
-            };
+            var model = _weatherService.GetFrostEntryData(this.User);
 
             return View(model);
         }
@@ -123,12 +76,7 @@ namespace AniWebApp.Controllers
         [Authorize(Roles="Admin")]
         public ActionResult AddFrostEntry()
         {
-            var model = new AddFrostRecordModel
-            {
-                RecordDate = DateTime.Today,
-                ZipCode = GetUserZipCode(),
-                ActualMinutes = 0.0
-            };
+            var model = WeatherService.BuildAddFrostEntryModel(this.GetUserZipCode());
 
             return View(model);
         }
@@ -146,14 +94,9 @@ namespace AniWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = GetUserId();
+                var user = this.GetUserEntity();
 
-                var result = this.Entities.WeatherFrostResultsInsert(userId,
-                    entry.RainedOvernight,
-                    entry.SnowedOvernight,
-                    entry.ActualMinutes,
-                    entry.ZipCode,
-                    entry.RecordDate.Date);
+                _weatherService.AddFrostEntry(user, entry);
 
                 return RedirectToAction("Frost");
             }
