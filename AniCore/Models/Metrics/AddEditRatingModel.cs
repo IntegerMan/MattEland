@@ -1,8 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Ani.Core;
 
-namespace AniWebApp.Models.Metrics
+namespace Ani.Core.Models.Metrics
 {
 	public class AddEditRatingModel
 	{

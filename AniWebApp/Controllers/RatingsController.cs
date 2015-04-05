@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AniWebApp.Models.Metrics;
+using Ani.Core.Models.Metrics;
 
 namespace AniWebApp.Controllers
 {

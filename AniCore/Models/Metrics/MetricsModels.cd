@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="AniWebApp.Models.Metrics.RatingsModel">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Ani.Core.Models.Metrics.RatingsModel">
     <Position X="8.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -10,8 +10,8 @@
       <Property Name="Ratings" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="AniWebApp.Models.Metrics.AddEditRatingModel">
-    <Position X="6" Y="1" Width="1.5" />
+  <Class Name="Ani.Core.Models.Metrics.AddEditRatingModel">
+    <Position X="6" Y="1" Width="2.25" />
     <TypeIdentifier>
       <HashCode>ACABAAAAAAAAAAIAAAAAAACAAAAAAAEAAAAAAAgAIAA=</HashCode>
       <FileName>Models\Metrics\AddEditRatingModel.cs</FileName>
@@ -20,24 +20,19 @@
       <Property Name="User" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="AniWebApp.User" Collapsed="true">
+  <Class Name="Ani.Core.User" Collapsed="true">
     <Position X="9.5" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IKAAACAQAAAQgAAAAAAAAAAAAAAABAAAAAIAQBQgAhA=</HashCode>
       <FileName>User.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AniWebApp.RatingsWithLatestInfoForUserSelect_Result">
-    <Position X="12.25" Y="1.75" Width="1.5" />
+  <Class Name="Ani.Core.RatingsWithLatestInfoForUserSelect_Result">
+    <Position X="12.25" Y="1.75" Width="3" />
     <TypeIdentifier>
       <HashCode>IAAEAACAAAQpABgAAAAAAAgAAAAAAIAAAAAiAUAAASA=</HashCode>
       <FileName>RatingsWithLatestInfoForUserSelect_Result.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="System.Int32" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier />
-    <Lollipop Position="0.2" />
-  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

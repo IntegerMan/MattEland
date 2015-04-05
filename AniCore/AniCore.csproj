@@ -94,6 +94,8 @@
     <Compile Include="LatestWeatherEntrySelect_Result.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metrics\AddEditRatingModel.cs" />
+    <Compile Include="Models\Metrics\RatingsModel.cs" />
     <Compile Include="Models\Traffic\TrafficModel.cs" />
     <Compile Include="Models\Weather\WeatherFrostListModel.cs" />
     <Compile Include="Models\Weather\AddFrostRecordModel.cs" />
@@ -175,6 +177,7 @@
       <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
     </None>
     <None Include="App.config" />
+    <Content Include="Models\Metrics\MetricsModels.cd" />
     <None Include="Models\Traffic\TrafficModels.cd" />
     <None Include="Models\Weather\WeatherModels.cd" />
     <None Include="packages.config" />
