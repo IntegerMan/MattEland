@@ -197,7 +197,6 @@
     <Compile Include="Models\Accounts\NewUserViewModelBase.cs" />
     <Compile Include="Models\Metrics\AddEditRatingModel.cs" />
     <Compile Include="Models\Metrics\RatingsModel.cs" />
-    <Compile Include="Models\Traffic\TrafficModel.cs" />
     <Compile Include="Models\Accounts\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\Accounts\ForgotViewModel.cs" />
