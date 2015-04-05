@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ani.Core.Models.Traffic;
+using Ani.Core.Services;
 using AniWebApp.Models;
 
 namespace AniWebApp.Controllers
 {
     public class TrafficController : CustomController
     {
+        private TrafficService _trafficService;
 
         public TrafficController() : this(null)
         {
@@ -17,6 +19,7 @@ namespace AniWebApp.Controllers
 
         public TrafficController(ApplicationRoleManager roleManager) : base(roleManager)
         {
+            _trafficService = new TrafficService(this.Entities);
         }
 
         /// <summary>

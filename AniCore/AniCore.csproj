@@ -137,6 +137,7 @@
     <Compile Include="TrafficIncidentType.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\TrafficService.cs" />
     <Compile Include="Transit.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
@@ -161,6 +162,7 @@
     <Compile Include="WeatherRecord.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\WeatherService.cs" />
     <Compile Include="WeatherSource.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Ani.Core.Helpers;
 using Ani.Core.Models.Weather;
+using Ani.Core.Services;
 
 namespace AniWebApp.Controllers
 {
@@ -12,6 +13,7 @@ namespace AniWebApp.Controllers
     [Route("Weather")]
     public class WeatherController : CustomController
     {
+        private WeatherService _weatherService;
 
         public WeatherController() : this(null)
         {
@@ -19,6 +21,7 @@ namespace AniWebApp.Controllers
 
         public WeatherController(ApplicationRoleManager roleManager) : base(roleManager)
         {
+            _weatherService = new WeatherService(this.Entities);
         }
 
         [HttpGet]
