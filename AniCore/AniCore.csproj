@@ -95,7 +95,7 @@
     <Compile Include="LatestWeatherEntrySelect_Result.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Metrics\AddEditRatingModel.cs" />
+    <Compile Include="Models\Metrics\AddEditUserRatingModel.cs" />
     <Compile Include="Models\Metrics\RatingModel.cs" />
     <Compile Include="Models\Metrics\RatingsSummaryModel.cs" />
     <Compile Include="Models\Users\UserModel.cs" />

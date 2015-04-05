@@ -86,5 +86,14 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <value>The user service.</value>
         protected UserService UserService { get; }
+
+        /// <summary>
+        /// Gets a temporary redirect for a not found action.
+        /// </summary>
+        /// <returns>A redirect to a not found result.</returns>
+        protected ActionResult GetNotFoundAction()
+        {
+            return RedirectToAction("NotFound", "Error");
+        }
     }
 }

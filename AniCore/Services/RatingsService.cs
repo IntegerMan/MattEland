@@ -22,11 +22,11 @@ namespace Ani.Core.Services
         }
 
         /// <summary>
-        /// Gets the specified rating.
+        /// Gets an entity framework entity for the specified rating.
         /// </summary>
         /// <param name="ratingId">The rating identifier.</param>
         /// <returns>The rating or null if no rating was found.</returns>
-        public Rating GetRating(int ratingId)
+        public Rating GetRatingEntity(int ratingId)
         {
             var rating = Entities.Ratings.FirstOrDefault(r => r.Id == ratingId);
             return rating;
@@ -40,23 +40,24 @@ namespace Ani.Core.Services
         /// <summary>
         /// Builds the new rating entry model for use when creating a new user rating.
         /// </summary>
-        /// <param name="rating">The rating.</param>
-        /// <param name="userEntity">The user entity.</param>
+        /// <param name="rating">The rating model.</param>
+        /// <param name="user">The user model.</param>
         /// <returns>
         /// A new model with good default values. 
         /// This model should be customized before adding it to the database.
         /// </returns>
-        public static AddEditRatingModel BuildNewRatingEntryModel(Rating rating, User userEntity)
+        public static AddEditUserRatingModel BuildNewRatingEntryModel(RatingModel rating, UserModel user)
         {
-            var model = new AddEditRatingModel
+            var model = new AddEditUserRatingModel
             {
                 Rating = rating,
                 RatingValue = rating.MinValue,
                 EntryDate = DateTime.Today,
                 CreatedTimeUTC = DateTime.Now.ToUniversalTime(),
                 ModifiedTimeUTC = DateTime.Now.ToUniversalTime(),
-                User = userEntity
+                User = user
             };
+
             return model;
         }
 
@@ -66,7 +67,7 @@ namespace Ani.Core.Services
         /// <param name="rating">The rating.</param>
         /// <param name="model">The model.</param>
         /// <param name="userId">The user identifier.</param>
-        public void AddUserRating(Rating rating, AddEditRatingModel model, int userId)
+        public void AddUserRating(RatingModel rating, AddEditUserRatingModel model, int userId)
         {
             var entryDateUtc = DateHelper.ToUtcDate(model.EntryDate);
             Entities.InsertUpdateUserRating(userId, rating.Id, model.Comments, model.RatingValue, entryDateUtc);
@@ -134,7 +135,7 @@ namespace Ani.Core.Services
         /// <returns>A rating model for the specified rating Id or null for no rating found.</returns>
         public RatingModel GetRatingModel(int ratingId)
         {
-            var rating = GetRating(ratingId);
+            var rating = GetRatingEntity(ratingId);
 
             if (rating == null)
             {

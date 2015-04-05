@@ -20,7 +20,7 @@
       <Field Name="_roleManager" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAABACAAAAAAAAAAgAAgQACAAAAACAEAABAAAAA=</HashCode>
+      <HashCode>AAAAAAABACAAAAAAAAAAgAAgQACAAAAACAEAABAAAEA=</HashCode>
       <FileName>Controllers\CustomController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -88,7 +88,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="AniWebApp.ApplicationRoleManager" Collapsed="true">
-    <Position X="9.25" Y="4" Width="2" />
+    <Position X="8.75" Y="4" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>App_Start\IdentityConfig.cs</FileName>

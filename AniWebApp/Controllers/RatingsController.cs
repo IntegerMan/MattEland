@@ -50,15 +50,14 @@ namespace AniWebApp.Controllers
 		[Authorize]
 		public ActionResult AddEntry(int ratingId)
 		{
-			var rating = _ratingsService.GetRating(ratingId);
+			var rating = _ratingsService.GetRatingModel(ratingId);
 			if (rating == null)
 			{
-				return RedirectToAction("NotFound", "Error");
+				return GetNotFoundAction();
 			}
 
-	        var userEntity = this.GetUserEntity();
-
-	        var model = RatingsService.BuildNewRatingEntryModel(rating, userEntity);
+	        var user = this.GetUserModel();
+	        var model = RatingsService.BuildNewRatingEntryModel(rating, user);
 
 			return View(model);
 		}
@@ -67,16 +66,16 @@ namespace AniWebApp.Controllers
 		[Route(@"Ratings/{ratingId}/Add")]
 		[Authorize]
 		[ValidateAntiForgeryToken]
-		public ActionResult AddEntryPost(int ratingId, AddEditRatingModel model)
+		public ActionResult AddEntryPost(int ratingId, AddEditUserRatingModel model)
 		{
 			if (ModelState.IsValid)
 			{
 				var userId = this.GetUserId();
 
-			    var rating = _ratingsService.GetRating(ratingId);
+			    var rating = _ratingsService.GetRatingModel(ratingId);
 				if (rating == null || model == null || userId <= 0)
 				{
-					return RedirectToAction("NotFound", "Error");
+				    return GetNotFoundAction();
 				}
 
 			    _ratingsService.AddUserRating(rating, model, userId);
@@ -97,7 +96,7 @@ namespace AniWebApp.Controllers
 	        var ratingModel = _ratingsService.GetRatingModel(ratingId);
 	        if (ratingModel == null)
 	        {
-	            return RedirectToAction("NotFound", "Error");
+	            return GetNotFoundAction();
 	        }
 
             // Grab the current user (we'll have one since we require authorized)
