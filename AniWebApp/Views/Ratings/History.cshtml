@@ -1,5 +1,53 @@
-﻿
+﻿@model Ani.Core.Models.Metrics.UserRatingHistoryModel
+
 @{
-    ViewBag.Title = "History";
-    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+    Layout = "~/Views/Shared/_ListLayout.cshtml";
+    ViewBag.Title = string.Format("{0} Ratings", Model.Rating.Name);
+    ViewBag.Lead = Model.Rating.Description;
+    ViewBag.ListNoItemsMessage = string.Format("You have not entered any {0} ratings yet.", Model.Rating.Name);
+    ViewBag.ListTitle = string.Format("{0} Ratings", Model.Rating.Name); ;
+    ViewBag.HasListItems = @Model.HistoryEntries.Any();
+}
+
+@section breadcrumbs
+{
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+    <li><a href="@Url.Action("Index", "Ratings")">Ratings</a></li>
+}
+
+@section header_side_content
+{
+    @Html.ActionLink("Add Entry", "AddEntry", new { RatingId = @Model.Rating.Id }, new { @class = "btn btn-primary" })    
+}
+
+@section table_headers
+{
+    <th>Date</th>
+    <th>Rating</th>
+    <th>Comments</th>
+    <th>Actions</th>
+}
+
+@section table_body
+{
+    @foreach (var entry in Model.HistoryEntries)
+    {
+        <tr>
+            <td>
+                @entry.EntryDateUTC.ToLongDateString()
+            </td>
+            <td>
+                @entry.RatingValue / @Model.Rating.MaxValue
+            </td>
+            <td>
+                @entry.Comments
+            </td>
+            <td>
+            @* - Not yet supported
+                @Html.ActionLink("Edit", "Edit", new {RatingId = @Model.Rating.Id, EntryDate = entry.EntryDateUTC})
+            *@
+            </td>
+        </tr>
+    }
+
 }

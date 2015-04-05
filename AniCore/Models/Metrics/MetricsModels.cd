@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Ani.Core.Models.Metrics.RatingsSummaryModel" Collapsed="true">
-    <Position X="8.75" Y="3" Width="2" />
+    <Position X="11.25" Y="8.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Metrics\RatingsSummaryModel.cs</FileName>
@@ -11,79 +11,62 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Ani.Core.Models.Metrics.AddEditUserRatingModel">
-    <Position X="6" Y="2.5" Width="2.25" />
+    <Position X="6" Y="9.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>ACABAAAAAAAAAAIAAAAAAACAAAAAAAEAAAAAAAgAIAA=</HashCode>
       <FileName>Models\Metrics\AddEditUserRatingModel.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="Ani.Core.User" Collapsed="true">
-    <Position X="9.5" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IKAAACAQAAAQgAAAAAAAAAAAAAAABAAAAAIAQBQgAhA=</HashCode>
-      <FileName>User.cs</FileName>
-    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Ani.Core.RatingsWithLatestInfoForUserSelect_Result">
-    <Position X="12.25" Y="1.75" Width="3" />
+    <Position X="10.75" Y="10.5" Width="3" />
     <TypeIdentifier>
       <HashCode>IAAEAACAAAQpABgAAAAAAAgAAAAAAIAAAAAiAUAAASA=</HashCode>
       <FileName>RatingsWithLatestInfoForUserSelect_Result.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ani.Core.Services.RatingsService">
-    <Position X="6" Y="7.25" Width="5.25" />
+    <Position X="14.75" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAEAAAAAAIAAAAAACgEAAQQAAAAAAAAAAA=</HashCode>
       <FileName>Services\RatingsService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ani.Core.Models.Metrics.UserRatingHistoryModel" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
+    <Position X="7" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAEAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Metrics\UserRatingHistoryModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rating" />
+      <Property Name="User" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="HistoryEntries" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Ani.Core.Rating">
-    <Position X="0.5" Y="3.25" Width="3" />
-    <Members>
-      <Method Name="Rating" Hidden="true" />
-    </Members>
-    <TypeIdentifier>
-      <HashCode>IAAGAAAAAAQgAAgAEAEAAAQEAAAAAAAAAAAiAAAAACA=</HashCode>
-      <FileName>Rating.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="RatingEntries" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="Ani.Core.Models.Metrics.UserRatingHistoryEntry">
-    <Position X="9.25" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>ACACAAAAAAAJAAIAAAAAAAgAAAAAAAAAAAAAAAgAIAA=</HashCode>
       <FileName>Models\Metrics\UserRatingHistoryEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Ani.Core.RatingEntry" Collapsed="true">
-    <Position X="1.25" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ACADgAAAAAAJAAIAAAAAAAgAAAAAAAEAAAAAAAAAIAA=</HashCode>
-      <FileName>RatingEntry.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="User" />
-      <Property Name="Rating1" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="Ani.Core.Models.Metrics.RatingModel" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+  <Class Name="Ani.Core.Models.Metrics.RatingModel">
+    <Position X="11" Y="3.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAGAAAAAAQgAAgAEAEAAAQEAAAAAAAAAAAiAAAAACA=</HashCode>
       <FileName>Models\Metrics\RatingModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Models.Users.UserModel" Collapsed="true">
+    <Position X="6.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAAAAAAAAAABAQBAAgAAAAg=</HashCode>
+      <FileName>Models\Users\UserModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
