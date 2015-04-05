@@ -11,7 +11,7 @@ namespace AniWebApp.Controllers
 {
     public class TrafficController : CustomController
     {
-        private TrafficService _trafficService;
+        private readonly TrafficService _trafficService;
 
         public TrafficController() : this(null)
         {
@@ -30,24 +30,9 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic")]
         public ActionResult Index()
         {
-            var model = GetTrafficModel();
+            var model = _trafficService.GetTrafficModel();
 
             return View(model);
-        }
-
-        /// <summary>
-        /// Gets the model for traffic information.
-        /// </summary>
-        /// <returns>TrafficModel.</returns>
-        private TrafficModel GetTrafficModel()
-        {
-            var model = new TrafficModel
-            {
-                Accidents = Entities.ActiveTrafficIncidentInfoSelect(true, false).ToList(),
-                ConstructionEvents = Entities.ActiveTrafficIncidentInfoSelect(false, true).ToList()
-            };
-
-            return model;
         }
 
         /// <summary>
@@ -58,7 +43,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Accidents")]
         public ActionResult Accidents()
         {
-            return View(GetTrafficModel().Accidents);
+            return View(_trafficService.GetTrafficModel().Accidents);
         }
 
         /// <summary>
@@ -69,7 +54,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Construction")]
         public ActionResult Construction()
         {
-            return View(GetTrafficModel().ConstructionEvents);
+            return View(_trafficService.GetTrafficModel().ConstructionEvents);
         }
     }
 }
