@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Ani.Core.Models.Metrics;
+using Ani.Core.Services;
 
 namespace AniWebApp.Controllers
 {
@@ -11,13 +10,15 @@ namespace AniWebApp.Controllers
 	[Authorize]
 	public class RatingsController : CustomController
 	{
+        private readonly RatingsService _ratingsService;
 
-		public RatingsController() : this(null)
+        public RatingsController() : this(null)
 		{
 		}
 
 		public RatingsController(ApplicationRoleManager roleManager) : base(roleManager)
 		{
+		    _ratingsService = new RatingsService(this.Entities);
 		}
 
 		/// <summary>
@@ -31,68 +32,61 @@ namespace AniWebApp.Controllers
 		{
 			var model = new RatingsModel
 			{
-				Ratings = this.Entities.RatingsWithLatestInfoForUserSelect(this.GetUserId()).ToList()
+				Ratings = _ratingsService.GetLatestRatingInfoForUser(this.GetUserId())
 			};
 
 			return View(model);
 		}
 
-		[HttpGet]
-		[Route(@"Ratings/{RatingId}/Add")]
+	    [HttpGet]
+		[Route(@"Ratings/{ratingId}/Add")]
 		[Authorize]
-		public ActionResult AddEntry(int RatingId)
+		public ActionResult AddEntry(int ratingId)
 		{
-			var rating = this.Entities.Ratings.FirstOrDefault(r => r.Id == RatingId);
+			var rating = _ratingsService.GetRating(ratingId);
 			if (rating == null)
 			{
 				return RedirectToAction("NotFound", "Error");
 			}
 
-			var model = new AddEditRatingModel
-			{
-				Rating = rating,
-				RatingValue = rating.MinValue,
-				EntryDate = DateTime.Today,
-				CreatedTimeUTC = DateTime.Now.ToUniversalTime(),
-				ModifiedTimeUTC = DateTime.Now.ToUniversalTime(),
-				User = this.GetUserEntity()
-			};
+	        var userEntity = this.GetUserEntity();
+
+	        var model = RatingsService.BuildNewRatingEntryModel(rating, userEntity);
 
 			return View(model);
 		}
 
-		[HttpPost]
-		[Route(@"Ratings/{RatingId}/Add")]
+	    [HttpPost]
+		[Route(@"Ratings/{ratingId}/Add")]
 		[Authorize]
 		[ValidateAntiForgeryToken]
-		public ActionResult AddEntryPost(int RatingId, AddEditRatingModel model)
+		public ActionResult AddEntryPost(int ratingId, AddEditRatingModel model)
 		{
 			if (ModelState.IsValid)
 			{
 				var userId = this.GetUserId();
 
-				var rating = this.Entities.Ratings.FirstOrDefault(r => r.Id == RatingId);
+			    var rating = _ratingsService.GetRating(ratingId);
 				if (rating == null || model == null || userId <= 0)
 				{
 					return RedirectToAction("NotFound", "Error");
 				}
 
-				var entryDateUtc = new DateTime(model.EntryDate.Year, model.EntryDate.Month, model.EntryDate.Day, 0, 0, 0, DateTimeKind.Utc);
-				this.Entities.InsertUpdateUserRating(userId, RatingId, model.Comments, model.RatingValue, entryDateUtc);
+			    _ratingsService.AddUserRating(rating, model, userId);
 
-				return RedirectToAction("Index");
+			    return RedirectToAction("Index");
 			}
 
 			return View(model);
 		}
 
 
-		[HttpGet]
-		[Route(@"Ratings/{RatingId}")]
+	    [HttpGet]
+		[Route(@"Ratings/{ratingId}")]
 		[Authorize]
-		public ActionResult History(int RatingId)
+		public ActionResult History(int ratingId)
 		{
-			var rating = this.Entities.Ratings.FirstOrDefault(r => r.Id == RatingId);
+			var rating = _ratingsService.GetRating(ratingId);
 			if (rating == null)
 			{
 				return RedirectToAction("NotFound", "Error");

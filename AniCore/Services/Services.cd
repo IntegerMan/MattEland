@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ani.Core.Services.RatingsService">
+    <Position X="6.75" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\RatingsService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Services.ServiceBase">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Services\ServiceBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Entities" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Ani.Core.Entities" Collapsed="true">
+    <Position X="7" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAgACETEAABpBAEAgEAICEEEAAAQAAAgEIQQBAxAgE=</HashCode>
+      <FileName>AniEntities.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
