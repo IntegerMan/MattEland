@@ -16,7 +16,6 @@
 /// <reference path="scrollspy.js" />
 /// <reference path="popover.js" />
 /// <reference path="modal.js" />
-/// <reference path="../gruntfile.js" />
 /// <reference path="jquery-2.1.3.js" />
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="jquery.validate.js" />

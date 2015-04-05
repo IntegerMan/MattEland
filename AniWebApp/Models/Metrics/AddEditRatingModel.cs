@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Ani.Core;
 
 namespace AniWebApp.Models.Metrics
 {

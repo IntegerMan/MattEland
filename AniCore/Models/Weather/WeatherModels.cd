@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Ani.Core.Models.Weather.WeatherHomeModel">
+    <Position X="3" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAQAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Weather\WeatherHomeModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Conditions" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Forecasts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Ani.Core.Models.Weather.AddFrostRecordModel">
+    <Position X="11" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAgA=</HashCode>
+      <FileName>Models\Weather\AddFrostRecordModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Models.Weather.WeatherConditionsModel">
+    <Position X="6.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AGAAQABBIAAAAAAAAAAGAAAAAAAAAAAAACAEAgAEAAA=</HashCode>
+      <FileName>Models\Weather\WeatherConditionsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Models.Weather.WeatherEntryBase">
+    <Position X="4.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAgBAAAAQAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Weather\WeatherEntryBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Models.Weather.WeatherForecastModel">
+    <Position X="3.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgABACAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Weather\WeatherForecastModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Models.Weather.WeatherFrostListModel">
+    <Position X="10.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Weather\WeatherFrostListModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Ani.Core.WeatherFrostDataSelect_Result" Collapsed="true">
+    <Position X="11.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEEAAAAQAAAAACxQAACgAAAgEAAABAwAAEQAAkgw=</HashCode>
+      <FileName>WeatherFrostDataSelect_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

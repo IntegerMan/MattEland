@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Principal;
+using Ani.Core;
 using Microsoft.AspNet.Identity;
 
 namespace AniWebApp.Helpers
@@ -12,7 +13,7 @@ namespace AniWebApp.Helpers
             return user?.Identity?.GetUserId();
         }
 
-        public static User GetCurrentUserEntity(AniEntities entities, IPrincipal principal)
+        public static User GetCurrentUserEntity(Entities entities, IPrincipal principal)
         {
             var aspNetId = GetUserAspNetId(principal);
 

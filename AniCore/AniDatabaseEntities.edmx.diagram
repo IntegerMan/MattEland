@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f93d25066c14a3ea431592bb353dc3a" Name="Diagram1" ZoomLevel="29">
+        <EntityTypeShape EntityType="Ani.Core.Entities.AspNetRole" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.AspNetUser" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.GPSLocation" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.Node" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.NodeType" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.Rating" Width="1.5" PointX="8.25" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.RatingEntry" Width="1.5" PointX="10.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.ServiceStatu" Width="1.5" PointX="9" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.Severity" Width="1.5" PointX="12" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.TrafficIncident" Width="1.5" PointX="13.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.TrafficIncidentSeverity" Width="1.5" PointX="11.25" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.TrafficIncidentType" Width="1.5" PointX="11.25" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.Transit" Width="1.5" PointX="10.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.UserNode" Width="1.5" PointX="10.5" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.User" Width="1.5" PointX="8.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.WeatherCode" Width="1.5" PointX="14.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.WeatherFrostResult" Width="1.5" PointX="13.5" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.WeatherPrediction" Width="1.5" PointX="16.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.WeatherRecord" Width="1.5" PointX="13.5" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.WeatherSource" Width="1.5" PointX="14.25" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.WebTheme" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.ZipCode" Width="1.5" PointX="11.25" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ani.Core.Entities.FrostPredictionDataView" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Users_AspNetUsers_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Node_GPSLocation_GPS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Transits_GPSLocations_GPS_ID_End" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Transits_GPSLocations_GPS_ID_Start" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Drives_Nodes_N_ID_Modified" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Node_NodeType_NT_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_UserNodes_Node_N_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_RatingEntry_Rating_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_RatingEntry_Users_U_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_ZipCodes_ServiceStatus_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_TrafficIncidentSeverity_Severities_SEV_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherCodes_Severities_SEV_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_TrafficIncidents_TrafficIncidentSeverity_TIS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_TrafficIncidents_TrafficIncidentType_TIT_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_TrafficIncidents_UserNodes_UN_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Transits_UserNodes_UN_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_UserNodes_Users_U_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_Users_WebThemes_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherFrostResults_UserNodes_UN_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherPredictions_Users_U_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherRecord_Users_U_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherPrediction_WeatherCode_WC_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherRecord_WeatherCodes_WC_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherFrostResult_WeatherPrediction_WP_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherPrediction_WeatherSource_WS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherRecord_WeatherSources_WS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.FK_WeatherRecord_ZipCodes_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Ani.Core.Entities.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

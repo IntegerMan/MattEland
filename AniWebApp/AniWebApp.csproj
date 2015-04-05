@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AniWebApp</RootNamespace>
     <AssemblyName>AniWebApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -172,44 +172,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveTrafficIncidentInfoSelect_Result.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ActiveWeatherPredictionsSelect_Result.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AniDatabaseEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AniDatabaseEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AniDatabaseEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AniDatabaseEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="AspNetRole.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUser.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserClaim.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserLogin.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -223,24 +190,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GPSLocation.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\NavUtilities.cs" />
     <Compile Include="Helpers\StyleHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
-    <Compile Include="LatestWeatherEntrySelect_Result.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LogEntry.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Accounts\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Accounts\NewUserViewModelBase.cs" />
     <Compile Include="Models\Metrics\AddEditRatingModel.cs" />
     <Compile Include="Models\Metrics\RatingsModel.cs" />
     <Compile Include="Models\Traffic\TrafficModel.cs" />
-    <Compile Include="Models\Weather\AddFrostRecordModel.cs" />
     <Compile Include="Models\Accounts\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\Accounts\ForgotViewModel.cs" />
@@ -252,88 +209,10 @@
     <Compile Include="Models\Accounts\SendCodeViewModel.cs" />
     <Compile Include="Models\Accounts\UserProfileModel.cs" />
     <Compile Include="Models\Accounts\VerifyCodeViewModel.cs" />
-    <Compile Include="Models\Weather\WeatherConditionsModel.cs" />
-    <Compile Include="Models\Weather\WeatherEntryBase.cs" />
-    <Compile Include="Models\Weather\WeatherForecastModel.cs" />
-    <Compile Include="Models\Weather\WeatherFrostListModel.cs" />
-    <Compile Include="Models\Weather\WeatherHomeModel.cs" />
-    <Compile Include="Node.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NodeType.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rating.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RatingEntry.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RatingsWithLatestInfoForUserSelect_Result.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ServiceStatu.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Severity.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="TrafficIncident.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TrafficIncidentSeverity.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TrafficIncidentType.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Transit.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserNode.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherCode.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherFrostDataSelect_Result.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherFrostResult.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherPrediction.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherRecord.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherSource.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WebTheme.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ZipCode.cs">
-      <DependentUpon>AniDatabaseEntities.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AniDatabaseEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
-      <LastGenOutput>AniDatabaseEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="AniDatabaseEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
-      <LastGenOutput>AniDatabaseEntities.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Console.css" />
     <Content Include="Content\SlateCustom.css" />
@@ -346,13 +225,6 @@
     <Content Include="fonts\weathericons-regular-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="AniDatabaseEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AniDatabaseEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="AniDatabaseEntities.edmx.diagram">
-      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
-    </Content>
     <None Include="bower.json" />
     <Content Include="Content\Bootstrap.less" />
     <Content Include="fonts\weathericons-regular-webfont.eot" />
@@ -362,7 +234,6 @@
     <Content Include="Content\SlateCustom.less" />
     <Content Include="Content\Terminal.less" />
     <Content Include="Content\Console.less" />
-    <None Include="gruntfile.js" />
     <Content Include="Images\ApplicationIcon.png" />
     <Content Include="Images\contentback.jpg" />
     <Content Include="Images\DailyQuestions99.png" />
@@ -511,9 +382,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AniCommon\AniCommon.csproj">
-      <Project>{06cdb97d-7f03-45b5-8acb-e837aaf616cb}</Project>
-      <Name>AniCommon</Name>
+    <ProjectReference Include="..\AniCore\AniCore.csproj">
+      <Project>{e6c53e29-9824-47f1-9601-e3534cb6cd2c}</Project>
+      <Name>AniCore</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ani.Core;
 
 namespace AniWebApp.Helpers
 {
@@ -84,7 +85,8 @@ namespace AniWebApp.Helpers
 
         private static WebTheme GetTheme()
         {
-            var entities = new AniEntities();
+            // TODO: Grab this from a global context
+            var entities = new Entities();
 
             var user = UserHelper.GetCurrentUserEntity(entities, HttpContext.Current.User);
             var theme = user != null ? user.WebTheme : entities.WebThemes.First(t => t.ID == DefaultThemeId);

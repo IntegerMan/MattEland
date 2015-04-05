@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E6C53E29-9824-47F1-9601-E3534CB6CD2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ani.Core</RootNamespace>
+    <AssemblyName>Ani.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3-beta1\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActiveTrafficIncidentInfoSelect_Result.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActiveWeatherPredictionsSelect_Result.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AniEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AniEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AniEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AniDatabaseEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrostPredictionDataView.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GPSLocation.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\WindDirectionHelper.cs" />
+    <Compile Include="LatestWeatherEntrySelect_Result.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Weather\WeatherFrostListModel.cs" />
+    <Compile Include="Models\Weather\AddFrostRecordModel.cs" />
+    <Compile Include="Models\Weather\WeatherConditionsModel.cs" />
+    <Compile Include="Models\Weather\WeatherEntryBase.cs" />
+    <Compile Include="Models\Weather\WeatherForecastModel.cs" />
+    <Compile Include="Models\Weather\WeatherHomeModel.cs" />
+    <Compile Include="Node.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NodeType.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rating.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RatingEntry.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RatingsWithLatestInfoForUserSelect_Result.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceStatu.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Severity.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrafficIncident.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrafficIncidentSeverity.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrafficIncidentType.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transit.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserNode.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherCode.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherFrostDataSelect_Result.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherFrostResult.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherPrediction.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherRecord.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherSource.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebTheme.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZipCode.cs">
+      <DependentUpon>AniEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AniDatabaseEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AniDatabaseEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AniDatabaseEntities.edmx.diagram">
+      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
+    </None>
+    <None Include="App.config" />
+    <None Include="Models\Weather\WeatherModels.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AniEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
+      <LastGenOutput>AniEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AniEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
+      <LastGenOutput>AniEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,7 +1,7 @@
 using System.Web;
 using System.Web.Mvc;
+using Ani.Core;
 using AniWebApp.Helpers;
-using AniWebApp.Models.Accounts;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace AniWebApp.Controllers
@@ -39,7 +39,7 @@ namespace AniWebApp.Controllers
         /// Gets the database context for working with entity framework.
         /// </summary>
         /// <value>The entity framework database context.</value>
-        protected AniEntities Entities { get; } = new AniEntities();
+        protected Entities Entities { get; } = new Entities();
 
         protected int GetUserZipCode()
         {

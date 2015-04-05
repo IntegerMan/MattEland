@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using AniCommon.Helpers;
-using AniWebApp.Helpers;
-using AniWebApp.Models;
-using AniWebApp.Models.Weather;
+using Ani.Core.Helpers;
+using Ani.Core.Models.Weather;
 
 namespace AniWebApp.Controllers
 {
@@ -154,11 +152,7 @@ namespace AniWebApp.Controllers
                     entry.ZipCode,
                     entry.RecordDate.Date);
 
-                // On success, go back to the list page
-                if (result >= 1)
-                {
-                    return RedirectToAction("Frost");
-                }
+                return RedirectToAction("Frost");
             }
 
             // We're not quite valid. Redirect to the view
