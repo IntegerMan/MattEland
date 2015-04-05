@@ -208,6 +208,7 @@
     <Compile Include="Models\Accounts\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\UserControllerBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -276,6 +277,7 @@
     <Content Include="fonts\Fixedsys500c.otf" />
     <Content Include="fonts\Fixedsys500c.ttf" />
     <Content Include="fonts\Fixedsys500c.woff" />
+    <Content Include="Controllers\Controllers.cd" />
     <None Include="package.json" />
     <None Include="Properties\PublishProfiles\DiscountASP.net.pubxml" />
     <None Include="Properties\PublishProfiles\matteland.pubxml" />

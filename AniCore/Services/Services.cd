@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Ani.Core.Services.RatingsService">
-    <Position X="6.75" Y="4.25" Width="2.25" />
+    <Position X="7.75" Y="4.5" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAAAAAAAAAACgAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>Services\RatingsService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ani.Core.Services.ServiceBase">
-    <Position X="7" Y="2.5" Width="1.5" />
+    <Position X="10.5" Y="2.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAEAAA=</HashCode>
       <FileName>Services\ServiceBase.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -18,23 +18,23 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Ani.Core.Entities" Collapsed="true">
-    <Position X="7" Y="0.75" Width="1.5" />
+    <Position X="10.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>JAAgACETEAABpBAEAgEAICEEEAAAQAAAgEIQQBAxAgE=</HashCode>
       <FileName>AniEntities.Context.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ani.Core.Services.WeatherService">
-    <Position X="9.75" Y="4.25" Width="1.5" />
+    <Position X="13.75" Y="4.5" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAoAAAAAAAgBAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>Services\WeatherService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ani.Core.Services.TrafficService">
-    <Position X="4.5" Y="4.25" Width="1.5" />
+    <Position X="4.5" Y="4.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Services\TrafficService.cs</FileName>
     </TypeIdentifier>
   </Class>

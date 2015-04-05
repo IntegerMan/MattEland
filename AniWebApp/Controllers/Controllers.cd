@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="AniWebApp.Controllers.AccountController" Collapsed="true">
+    <Position X="3.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAhAIAAQAAAAAEAEgAABAABEKAAAAMRAAQAACA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.Controllers.AppsController" Collapsed="true">
+    <Position X="12.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAgAQAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\AppsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.Controllers.CustomController" Collapsed="true">
+    <Position X="12.25" Y="4" Width="2" />
+    <Members>
+      <Field Name="_roleManager" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAgQACAAAAACAEAABAAAAA=</HashCode>
+      <FileName>Controllers\CustomController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RoleManager" />
+      <Property Name="Entities" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AniWebApp.Controllers.ErrorController" Collapsed="true">
+    <Position X="19.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ErrorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.Controllers.HomeController" Collapsed="true">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.Controllers.ManageController" Collapsed="true">
+    <Position X="5.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQgAAgAAAAEEBAAAAAAEAAMAAAEEEgAAEAAA=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.Controllers.ProjectsController" Collapsed="true">
+    <Position X="17" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAEAAAAAACA=</HashCode>
+      <FileName>Controllers\ProjectsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.Controllers.TrafficController" Collapsed="true">
+    <Position X="21.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAEAAAAAACA=</HashCode>
+      <FileName>Controllers\TrafficController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_trafficService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AniWebApp.Controllers.RatingsController" Collapsed="true">
+    <Position X="10.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAIECAAAAAAA=</HashCode>
+      <FileName>Controllers\RatingsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_ratingsService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AniWebApp.Controllers.WeatherController" Collapsed="true">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAgAAAAAAAAAAAAAAAQAAAAAAAEgAAABAAA=</HashCode>
+      <FileName>Controllers\WeatherController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_weatherService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AniWebApp.ApplicationRoleManager" Collapsed="true">
+    <Position X="9.25" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Entities" Collapsed="true">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="AniWebApp.ApplicationSignInManager" Collapsed="true">
+    <Position X="0.75" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AniWebApp.ApplicationUserManager" Collapsed="true">
+    <Position X="1.5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ani.Core.Services.WeatherService" Collapsed="true">
+    <Position X="14.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Ani.Core.Services.TrafficService" Collapsed="true">
+    <Position X="21.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Ani.Core.Services.RatingsService" Collapsed="true">
+    <Position X="10.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="AniWebApp.Controllers.UserControllerBase" Collapsed="true">
+    <Position X="4.75" Y="5.5" Width="1.5" />
+    <Members>
+      <Field Name="_signInManager" Hidden="true" />
+      <Field Name="_userManager" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAABACAACAAAAAAAABgAAAAAAAAIAIAAAAAAAAgAAA=</HashCode>
+      <FileName>Controllers\UserControllerBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SignInManager" />
+      <Property Name="UserManager" />
+      <Property Name="AuthenticationManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="Microsoft.Owin.Security.IAuthenticationManager" Collapsed="true">
+    <Position X="4.5" Y="3.5" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
