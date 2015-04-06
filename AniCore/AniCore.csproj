@@ -186,7 +186,6 @@
     <None Include="AniDatabaseEntities.edmx.diagram">
       <DependentUpon>AniDatabaseEntities.edmx</DependentUpon>
     </None>
-    <None Include="App.config" />
     <Content Include="Models\Metrics\MetricsModels.cd" />
     <None Include="Models\Traffic\TrafficModels.cd" />
     <None Include="Models\Weather\WeatherModels.cd" />
