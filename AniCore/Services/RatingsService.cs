@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Ani.Core.Helpers;
 using Ani.Core.Models.Metrics;
@@ -108,11 +109,17 @@ namespace Ani.Core.Services
 
         /// <summary>
         /// Gets the user rating history entry from a RatingEntry entity.
+        /// This will return null if entry is null, for convenience.
         /// </summary>
-        /// <param name="entry">The entry.</param>
-        /// <returns>A UserRatingHistoryEntry representing the RatingEntry.</returns>
+        /// <param name="entry">The entry. Can be null.</param>
+        /// <returns>A UserRatingHistoryEntry representing the RatingEntry or null if entry is null.</returns>
         private static UserRatingHistoryEntry GetUserRatingHistoryEntryFromRatingEntryEntity(RatingEntry entry)
         {
+            if (entry == null)
+            {
+                return null;
+            }
+
             var historyEntry = new UserRatingHistoryEntry
             {
                 Comments = entry.Comments,
@@ -171,6 +178,35 @@ namespace Ani.Core.Services
             };
 
             return ratingModel;
+        }
+
+        /// <summary>
+        /// Gets the user rating history entry model for a specified user / rating / date combination or null
+        /// if no entry exists.
+        /// </summary>
+        /// <param name="rating">The rating.</param>
+        /// <param name="user">The user.</param>
+        /// <param name="date">The date.</param>
+        /// <returns>A UserRatingHistoryEntry or null.</returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// rating
+        /// or
+        /// user
+        /// </exception>
+        public UserRatingHistoryEntry GetUserRatingHistoryEntryModel(RatingModel rating, UserModel user, DateTime date)
+        {
+            if (rating == null) throw new ArgumentNullException("rating");
+            if (user == null) throw new ArgumentNullException("user");
+
+            // Chop off the time component
+            date = date.Date;
+
+            var entry = Entities.RatingEntries.FirstOrDefault(
+                e => e.UserId == user.Id &&
+                e.RatingId == rating.Id && 
+                DbFunctions.TruncateTime(e.EntryDateUTC) == date);
+
+            return GetUserRatingHistoryEntryFromRatingEntryEntity(entry);
         }
     }
 }

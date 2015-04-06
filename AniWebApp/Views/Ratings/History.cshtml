@@ -17,7 +17,7 @@
 
 @section header_side_content
 {
-    @Html.ActionLink("Add Entry", "AddEntry", new { RatingId = @Model.Rating.Id }, new { @class = "btn btn-primary" })    
+    @Html.ActionLink("Add Entry", "AddEntry", new { RatingId = @Model.Rating.Id }, new { @class = "btn btn-primary" })
 }
 
 @section table_headers
@@ -43,9 +43,13 @@
                 @entry.Comments
             </td>
             <td>
-            @* - Not yet supported
-                @Html.ActionLink("Edit", "Edit", new {RatingId = @Model.Rating.Id, EntryDate = entry.EntryDateUTC})
-            *@
+                @Html.ActionLink("Edit", "EditEntry", new
+                                                {
+                                                    ratingId = @Model.Rating.Id,
+                                                    year = entry.EntryDateUTC.Year,
+                                                    month = entry.EntryDateUTC.Month,
+                                                    day = entry.EntryDateUTC.Day
+                                                })
             </td>
         </tr>
     }

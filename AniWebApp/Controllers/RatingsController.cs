@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Ani.Core.Models.Metrics;
 using Ani.Core.Services;
 
@@ -43,6 +44,45 @@ namespace AniWebApp.Controllers
 			};
 
 			return View(model);
+		}
+
+        /// <summary>
+        /// Serves up a view for editing the current user's entry for a specific rating on a specific day.
+        /// </summary>
+        /// <param name="ratingId">The rating identifier.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns>A view for editing the rating or a redirect to an item not found.</returns>
+        [HttpGet]
+		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}")]
+		[Authorize]
+		public ActionResult EditEntry(int ratingId, int year, int month, int day)
+		{
+			var rating = _ratingsService.GetRatingModel(ratingId);
+			if (rating == null)
+			{
+				return GetNotFoundAction();
+			}
+
+            // Interpret the date, bearing in mind that the user could have entered bogus dates (e.g. March 42nd)
+            DateTime date;
+	        try
+	        {
+	            date = new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
+	        }
+	        catch (ArgumentOutOfRangeException)
+	        {
+                // If the user entered an invalid date, it's kinda their loss.
+	            return GetNotFoundAction();
+	        }
+
+            // Okay, now we know who we're talking about and what rating we're talking about, get the entry.
+	        var user = this.GetUserModel();
+	        var model = _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date);
+
+            // TODO: It'd be nice to redirect to add new if model is null
+            return model == null ? GetNotFoundAction() : View(model);
 		}
 
 	    [HttpGet]
