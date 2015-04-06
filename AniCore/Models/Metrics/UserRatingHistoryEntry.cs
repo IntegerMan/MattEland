@@ -4,13 +4,11 @@ namespace Ani.Core.Models.Metrics
 {
     public class UserRatingHistoryEntry
     {
-        public int RatingId { get; set; }
-
         public int UserId{ get; set; }
 
         public int RatingValue { get; set; }
 
-        public DateTime EntryDateUTC { get; set; }
+        public DateTime EntryDate { get; set; }
 
         public DateTime CreatedTimeUTC { get; set; }
 
@@ -19,5 +17,11 @@ namespace Ani.Core.Models.Metrics
         public string Comments{ get; set; }
 
         public int Id{ get; set; }
+
+		/// <summary>
+		/// Gets or sets the rating.
+		/// </summary>
+		/// <value>The rating.</value>
+		public RatingModel Rating { get; set; }
     }
 }

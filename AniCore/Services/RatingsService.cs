@@ -100,20 +100,21 @@ namespace Ani.Core.Services
             ratingHistoryModel.HistoryEntries = new List<UserRatingHistoryEntry>();            
             foreach (var historyEntry in ratingsHistory)
             {
-                var entryModel = GetUserRatingHistoryEntryFromRatingEntryEntity(historyEntry);
+                var entryModel = GetUserRatingHistoryEntryFromRatingEntryEntity(historyEntry, rating);
                 ratingHistoryModel.HistoryEntries.Add(entryModel);
             }
 
             return ratingHistoryModel;
         }
 
-        /// <summary>
-        /// Gets the user rating history entry from a RatingEntry entity.
-        /// This will return null if entry is null, for convenience.
-        /// </summary>
-        /// <param name="entry">The entry. Can be null.</param>
-        /// <returns>A UserRatingHistoryEntry representing the RatingEntry or null if entry is null.</returns>
-        private static UserRatingHistoryEntry GetUserRatingHistoryEntryFromRatingEntryEntity(RatingEntry entry)
+	    /// <summary>
+	    /// Gets the user rating history entry from a RatingEntry entity.
+	    /// This will return null if entry is null, for convenience.
+	    /// </summary>
+	    /// <param name="entry">The entry. Can be null.</param>
+	    /// <param name="rating"></param>
+	    /// <returns>A UserRatingHistoryEntry representing the RatingEntry or null if entry is null.</returns>
+	    private static UserRatingHistoryEntry GetUserRatingHistoryEntryFromRatingEntryEntity(RatingEntry entry, RatingModel rating)
         {
             if (entry == null)
             {
@@ -124,12 +125,12 @@ namespace Ani.Core.Services
             {
                 Comments = entry.Comments,
                 CreatedTimeUTC = entry.CreatedTimeUTC,
-                EntryDateUTC = entry.EntryDateUTC,
+                EntryDate = entry.EntryDateUTC,
                 Id = entry.Id,
                 ModifiedTimeUTC = entry.ModifiedTimeUTC,
-                RatingId = entry.RatingId,
                 RatingValue = entry.Rating,
-                UserId = entry.UserId
+                UserId = entry.UserId,
+				Rating = rating
             };
 
             return historyEntry;
@@ -206,7 +207,7 @@ namespace Ani.Core.Services
                 e.RatingId == rating.Id && 
                 DbFunctions.TruncateTime(e.EntryDateUTC) == date);
 
-            return GetUserRatingHistoryEntryFromRatingEntryEntity(entry);
+            return GetUserRatingHistoryEntryFromRatingEntryEntity(entry, rating);
         }
     }
 }

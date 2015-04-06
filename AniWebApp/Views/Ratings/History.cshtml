@@ -34,7 +34,7 @@
     {
         <tr>
             <td>
-                @entry.EntryDateUTC.ToLongDateString()
+                @entry.EntryDate.ToLongDateString()
             </td>
             <td>
                 @entry.RatingValue / @Model.Rating.MaxValue
@@ -46,9 +46,9 @@
                 @Html.ActionLink("Edit", "EditEntry", new
                                                 {
                                                     ratingId = @Model.Rating.Id,
-                                                    year = entry.EntryDateUTC.Year,
-                                                    month = entry.EntryDateUTC.Month,
-                                                    day = entry.EntryDateUTC.Day
+                                                    year = entry.EntryDate.Year,
+                                                    month = entry.EntryDate.Month,
+                                                    day = entry.EntryDate.Day
                                                 })
             </td>
         </tr>
