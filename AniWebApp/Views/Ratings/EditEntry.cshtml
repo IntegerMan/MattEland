@@ -16,11 +16,16 @@
 
 <hr />
 
-@using (Html.BeginForm("EditEntry", "Ratings", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
+@using (Html.BeginForm("EditEntryPost", "Ratings", new { ratingId = @Model.Rating.Id}, FormMethod.Post, new { @class = "form", role = "form" }))
 {
 	@Html.AntiForgeryToken()
 
 	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	@Html.HiddenFor(m => m.UserId)
+	@Html.HiddenFor(m => m.Id)
+	@Html.HiddenFor(m => m.CreatedTimeUTC)
+	@Html.HiddenFor(m => m.ModifiedTimeUTC)
 
 	<div class="form-group">
 		@Html.LabelFor(m => m.EntryDate, new { @class = "form-label" })<br />

@@ -85,6 +85,38 @@ namespace AniWebApp.Controllers
             return model == null ? GetNotFoundAction() : View(model);
 		}
 
+		
+	    [HttpPost]
+		[Route(@"Ratings/{ratingId}/Edit")]
+		[Authorize]
+		[ValidateAntiForgeryToken]
+		public ActionResult EditEntryPost(int ratingId, UserRatingHistoryEntry model)
+		{
+			if (ModelState.IsValid)
+			{
+				// Ensure we have a rating object - this won't come back in the post.
+				var rating = _ratingsService.GetRatingModel(ratingId);
+				if (rating == null)
+				{
+					return GetNotFoundAction();
+				}
+				model.Rating = rating;
+
+				// Get our user
+				var user = this.GetUserModel();
+
+				if (user.Id != model.UserId)
+				{
+					return GetNotFoundAction();
+				}
+			    _ratingsService.UpdateUserRating(model, user);
+
+			    return RedirectToAction("Index");
+			}
+
+			return View(model);
+		}
+
 	    [HttpGet]
 		[Route(@"Ratings/{ratingId}/Add")]
 		[Authorize]
