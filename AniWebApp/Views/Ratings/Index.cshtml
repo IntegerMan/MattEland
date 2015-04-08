@@ -46,7 +46,10 @@
                 @rating.Description
             </td>
             <td>
-                @rating.LastRating
+                @if (rating.LastRating.HasValue)
+                {
+                    @rating.LastRating @:/ @rating.MaxValue
+                }
             </td>
             <td>
                 @Html.ActionLink("Add Entry", "AddEntry", new { RatingId=@rating.RatingId})

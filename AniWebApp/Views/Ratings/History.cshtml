@@ -35,7 +35,14 @@
     {
         <tr>
             <td>
-                @entry.EntryDate.ToLongDateString()
+                @Html.ActionLink(entry.EntryDate.ToLongDateString(), "ViewEntry",
+                new
+                {
+                    ratingId = entry.Rating.Id,
+                    year = entry.EntryDate.Year,
+                    month = entry.EntryDate.Month,
+                    day = entry.EntryDate.Day
+                })
             </td>
             <td>
                 @entry.RatingValue / @Model.Rating.MaxValue

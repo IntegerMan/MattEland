@@ -11,68 +11,77 @@
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
     <li><a href="@Url.Action("Index", "Ratings")">Ratings</a></li>
     <li><a href="@Url.Action("History", "Ratings", new { ratingId = @Model.Rating.Id})">@Model.Rating.Name</a></li>
+    <li><a href="@Url.Action("ViewEntry", "Ratings", new {
+                                                    ratingId = Model.Rating.Id,
+                                                    year = Model.EntryDate.Year,
+                                                    month = Model.EntryDate.Month,
+                                                    day = Model.EntryDate.Day
+                                                })">@Model.EntryDate.ToShortDateString()</a>
+    </li>
 }
 
-<div class="media alert alert-info">
-	<div class="media-left">
-		<i class="fa fa-2x media-object @Model.Rating.IconClass"></i>
-	</div>
-	<div class="media-body">
-		Edit your existing @Model.Rating.Name rating and click Save to update the entry.
-	</div>
+<div class="media">
+    <div class="media-left">
+        <i class="fa fa-2x media-object @Model.Rating.IconClass"></i>
+    </div>
+    <div class="media-body">
+        Edit your existing @Model.Rating.Name rating and click Save to update the entry.
+    </div>
 </div>
 
 <hr />
 
-@using (Html.BeginForm("EditEntryPost", "Ratings", new { ratingId = @Model.Rating.Id}, FormMethod.Post, new { @class = "form", role = "form" }))
+@using (Html.BeginForm("EditEntryPost", "Ratings", new { ratingId = @Model.Rating.Id }, FormMethod.Post, new { @class = "form", role = "form" }))
 {
-	@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-	@Html.HiddenFor(m => m.UserId)
-	@Html.HiddenFor(m => m.Id)
-	@Html.HiddenFor(m => m.CreatedTimeUTC)
-	@Html.HiddenFor(m => m.ModifiedTimeUTC)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.CreatedTimeUTC)
+    @Html.HiddenFor(m => m.ModifiedTimeUTC)
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.EntryDate, new { @class = "form-label" })<br />
-		@Html.TextBox("EntryDate", Model.EntryDate.ToShortDateString(), new { @class = "form-control datefield" })
-		@Html.ValidationMessageFor(m => m.EntryDate, "", new { @class = "text-danger" })
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EntryDate, new { @class = "form-label" })<br />
+        @Html.TextBox("EntryDate", Model.EntryDate.ToShortDateString(), new { @class = "form-control datefield" })
+        @Html.ValidationMessageFor(m => m.EntryDate, "", new { @class = "text-danger" })
+    </div>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.RatingValue, new { @class = "form-label" })<br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.RatingValue, new { @class = "form-label" })<br />
 
-		@for (var i = Model.Rating.MinValue; i <= Model.Rating.MaxValue; i++)
-		{
-			@:<div class="radio">
-				@:<label for="@string.Format("RatingValue{0}",i)">
-					@Html.RadioButton("RatingValue", i, Model.RatingValue == i, new { id = string.Format("RatingValue{0}", i) })
+        @for (var i = Model.Rating.MinValue; i <= Model.Rating.MaxValue; i++)
+        {
+            @:<div class="radio">
+                @:<label for="@string.Format("RatingValue{0}",i)">
+                    @Html.RadioButton("RatingValue", i, Model.RatingValue == i, new { id = string.Format("RatingValue{0}", i) })
 
-					@i
+                    @i
+            if (i == Model.Rating.MinValue)
+            {
+                @(string.Format(" - {0}", Model.Rating.MinLabel))}
+            else if (i == Model.Rating.MaxValue)
+            {
+                @(string.Format(" - {0}", Model.Rating.MaxLabel))}
 
-			if (i == Model.Rating.MinValue)
-			{
-				@(string.Format(" - {0}", Model.Rating.MinLabel))
-			}
-			else if (i == Model.Rating.MaxValue)
-			{
-				@(string.Format(" - {0}", Model.Rating.MaxLabel))
-			}
-
-			@:</label>
-			@:</div>
+            @:</label>
+            @:</div>
 		}
-		@Html.ValidationMessageFor(m => m.RatingValue, "", new { @class = "text-danger" })
-	</div>
+        @Html.ValidationMessageFor(m => m.RatingValue, "", new { @class = "text-danger" })
+    </div>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.Comments, new { @class = "form-label" })<br />
-		@Html.TextAreaFor(m => m.Comments, new { @class = "form-control", rows = 5, placeholder = "Enter additional comments here..." })
-		@Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger" })
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Comments, new { @class = "form-label" })<br />
+        @Html.TextAreaFor(m => m.Comments, new { @class = "form-control", rows = 5, placeholder = "Enter additional comments here..." })
+        @Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger" })
+    </div>
 
-	<input type="submit" value="Save" class="btn btn-primary" />
-	<a href="@Url.Action("Index", "Ratings")" class="btn btn-default">Cancel</a>
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a href="@Url.Action("ViewEntry", "Ratings", new {
+                                                    ratingId = Model.Rating.Id,
+                                                    year = Model.EntryDate.Year,
+                                                    month = Model.EntryDate.Month,
+                                                    day = Model.EntryDate.Day
+                                                })" class="btn btn-default">Cancel</a>
 }

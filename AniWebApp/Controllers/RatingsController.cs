@@ -47,6 +47,22 @@ namespace AniWebApp.Controllers
 		}
 
         /// <summary>
+        /// Serves up a view for viewing the details of a past entry.
+        /// </summary>
+        /// <param name="ratingId">The rating identifier.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns>A view for viewing the rating or a redirect to an item not found.</returns>
+        [HttpGet]
+		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}")]
+		[Authorize]
+		public ActionResult ViewEntry(int ratingId, int year, int month, int day)
+        {
+            return GetRatingDetailsOrEditView(ratingId, year, month, day);
+        }
+
+	    /// <summary>
         /// Serves up a view for editing the current user's entry for a specific rating on a specific day.
         /// </summary>
         /// <param name="ratingId">The rating identifier.</param>
@@ -55,36 +71,12 @@ namespace AniWebApp.Controllers
         /// <param name="day">The day.</param>
         /// <returns>A view for editing the rating or a redirect to an item not found.</returns>
         [HttpGet]
-		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}")]
+		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}/Edit")]
 		[Authorize]
 		public ActionResult EditEntry(int ratingId, int year, int month, int day)
 		{
-			var rating = _ratingsService.GetRatingModel(ratingId);
-			if (rating == null)
-			{
-				return GetNotFoundAction();
-			}
-
-            // Interpret the date, bearing in mind that the user could have entered bogus dates (e.g. March 42nd)
-            DateTime date;
-	        try
-	        {
-	            date = new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
-	        }
-	        catch (ArgumentOutOfRangeException)
-	        {
-                // If the user entered an invalid date, it's kinda their loss.
-	            return GetNotFoundAction();
-	        }
-
-            // Okay, now we know who we're talking about and what rating we're talking about, get the entry.
-	        var user = this.GetUserModel();
-	        var model = _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date);
-
-            // TODO: It'd be nice to redirect to add new if model is null
-            return model == null ? GetNotFoundAction() : View(model);
-		}
-
+            return GetRatingDetailsOrEditView(ratingId, year, month, day);
+        }
 		
 	    [HttpPost]
 		[Route(@"Ratings/{ratingId}/Edit")]
@@ -111,7 +103,13 @@ namespace AniWebApp.Controllers
 				}
 			    _ratingsService.UpdateUserRating(model, user);
 
-			    return RedirectToAction("Index");
+                // Go back to our main view page
+			    return RedirectToAction("ViewEntry", "Ratings", new {
+			        ratingId = ratingId,
+                    year = model.EntryDate.Year,
+                    month = model.EntryDate.Month,
+                    day = model.EntryDate.Day
+			    });
 			}
 
 			return View(model);
@@ -179,5 +177,41 @@ namespace AniWebApp.Controllers
 
 			return View(model);
 		}
+
+        /// <summary>
+        /// Gets the rating details or edit view.
+        /// </summary>
+        /// <param name="ratingId">The rating identifier.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns>An ActionResult representing the desired action.</returns>
+        private ActionResult GetRatingDetailsOrEditView(int ratingId, int year, int month, int day)
+	    {
+	        var rating = _ratingsService.GetRatingModel(ratingId);
+	        if (rating == null)
+	        {
+	            return GetNotFoundAction();
+	        }
+
+	        // Interpret the date, bearing in mind that the user could have entered bogus dates (e.g. March 42nd)
+	        DateTime date;
+	        try
+	        {
+	            date = new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
+	        }
+	        catch (ArgumentOutOfRangeException)
+	        {
+	            // If the user entered an invalid date, it's kinda their loss.
+	            return GetNotFoundAction();
+	        }
+
+	        // Okay, now we know who we're talking about and what rating we're talking about, get the entry.
+	        var user = this.GetUserModel();
+	        var model = _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date);
+
+	        return model == null ? GetNotFoundAction() : View(model);
+	    }
+
 	}
 }

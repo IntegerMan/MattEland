@@ -1,0 +1,80 @@
+﻿@using Microsoft.Ajax.Utilities
+@model Ani.Core.Models.Metrics.UserRatingHistoryEntry
+
+@{
+    ViewBag.Title = string.Format("{0} Rating Details", Model.Rating.Name);
+    ViewBag.BreadcrumbTitle = Model.EntryDate.ToShortDateString();
+    ViewBag.Lead = string.Format("Details for a specific {0} rating you entered for a particular date.", Model.Rating.Name);
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section breadcrumbs
+{
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+    <li><a href="@Url.Action("Index", "Ratings")">Ratings</a></li>
+    <li><a href="@Url.Action("History", "Ratings", new { ratingId = @Model.Rating.Id})">@Model.Rating.Name</a></li>
+}
+
+@section header_side_content
+{
+    <div class="btn-group-sm">
+        @Html.ActionLink("Edit", "EditEntry", new {id = Model.Id}, new {@class = "btn btn-primary"})
+        @*
+        @Html.ActionLink("Delete", "Delete", new {ratingId = Model.Rating.Id, entryId = Model.Id}, new {@class = "btn btn-danger"})
+        *@
+    </div>
+}
+
+<br/>
+
+<div class="well">
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingValue) / @Model.Rating.MaxValue
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+
+        <dd>
+            @Model.EntryDate.ToLongDateString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTimeUTC)
+        </dt>
+
+        <dd>
+            @Model.CreatedTimeUTC.ToLocalTime().ToLongTimeString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedTimeUTC)
+        </dt>
+
+        <dd>
+            @Model.ModifiedTimeUTC.ToLocalTime().ToLongTimeString()
+        </dd>
+
+        @if (!Model.Comments.IsNullOrWhiteSpace())
+        {
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+        }
+
+    </dl>
+</div>
+
+@Html.ActionLink("Back", "History", new { ratingId = Model.Rating.Id }, new { @class = "btn btn-default" })

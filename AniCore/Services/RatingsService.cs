@@ -247,7 +247,7 @@ namespace Ani.Core.Services
 		/// <param name="user">The user.</param>
 		/// <param name="date">The date.</param>
 		/// <returns>An Ani.Core.RatingEntry representing the history entry.</returns>
-		public RatingEntry GetUserRatingHistoryEntryEntity(RatingModel rating, UserModel user, DateTime date)
+		private RatingEntry GetUserRatingHistoryEntryEntity(RatingModel rating, UserModel user, DateTime date)
 		{
 			if (rating == null) throw new ArgumentNullException("rating");
 			if (user == null) throw new ArgumentNullException("user");
