@@ -3,6 +3,7 @@
 @{
     Layout = "~/Views/Shared/_ListLayout.cshtml";
     ViewBag.Title = string.Format("{0} Ratings", Model.Rating.Name);
+    ViewBag.BreadcrumbTitle = Model.Rating.Name;
     ViewBag.Lead = Model.Rating.Description;
     ViewBag.ListNoItemsMessage = string.Format("You have not entered any {0} ratings yet.", Model.Rating.Name);
     ViewBag.ListTitle = string.Format("{0} Ratings", Model.Rating.Name); ;
