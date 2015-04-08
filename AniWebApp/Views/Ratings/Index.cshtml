@@ -25,7 +25,7 @@
 
 @section table_headers
 {
-    <th>Name</th>
+    <th class="text-center">Rating</th>
     <th>Description</th>
     <th>Last Rating</th>
     <th>Actions</th>
@@ -37,8 +37,10 @@
     {
         <tr>
             <td class="text-center">
-                <i class="fa fa-2x fa-fw @rating.IconClass"></i><br />
-                <strong>@rating.RatingName</strong>
+                <a href="@Url.Action("History", new {ratingId = @rating.RatingId})">
+                    <i class="fa fa-2x fa-fw @rating.IconClass"></i><br />
+                    <strong>@rating.RatingName</strong>
+                </a>
             </td>
             <td>
                 @rating.Description
@@ -47,7 +49,6 @@
                 @rating.LastRating
             </td>
             <td>
-                @Html.ActionLink("History", "History", new {RatingId = @rating.RatingId})<br/>
                 @Html.ActionLink("Add Entry", "AddEntry", new { RatingId=@rating.RatingId})
             </td>
         </tr>
