@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ani.Core.Models.Metrics;
+using Ani.Core.Models.Users;
 using Ani.Core.Services;
 
 namespace AniWebApp.Controllers
@@ -59,7 +60,60 @@ namespace AniWebApp.Controllers
 		[Authorize]
 		public ActionResult ViewEntry(int ratingId, int year, int month, int day)
         {
-            return GetRatingDetailsOrEditView(ratingId, year, month, day);
+            return GetRatingEntryView(ratingId, year, month, day);
+        }
+
+        /// <summary>
+        /// Serves up a view for confirming deletion of an entry.
+        /// </summary>
+        /// <param name="ratingId">The rating identifier.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns>A view for deleting the rating or a redirect to an item not found.</returns>
+        [HttpGet]
+		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}/Delete")]
+		[Authorize]
+		public ActionResult DeleteEntry(int ratingId, int year, int month, int day)
+        {
+            return GetRatingEntryView(ratingId, year, month, day);
+        }
+
+        /// <summary>
+        /// Handles the delete rating action
+        /// </summary>
+        /// <param name="ratingId">The rating identifier.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns>A view for deleting the rating or a redirect to an item not found.</returns>
+        [HttpPost]
+		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}/Delete")]
+		[Authorize]
+        [ValidateAntiForgeryToken]
+		public ActionResult DeleteEntryPost(int ratingId, int year, int month, int day)
+        {
+            var user = GetUserModel();
+            var entry = GetUserRatingEntry(ratingId, year, month, day, user);
+
+            // No entry for whatever reason. Handle it.
+            if (entry == null)
+            {
+                return GetNotFoundAction();
+            }
+
+            // Attempt the delete and redirect as needed on success / failure
+            if (_ratingsService.DeleteUserRating(entry, user))
+            {
+                // Take them back to the list
+                return RedirectToAction("History", new {ratingId});
+            }
+            else
+            {
+                // FAIL! Redirect to the view
+                return GetRedirectToViewEntry(ratingId, entry);
+            }
+
         }
 
 	    /// <summary>
@@ -75,7 +129,7 @@ namespace AniWebApp.Controllers
 		[Authorize]
 		public ActionResult EditEntry(int ratingId, int year, int month, int day)
 		{
-            return GetRatingDetailsOrEditView(ratingId, year, month, day);
+            return GetRatingEntryView(ratingId, year, month, day);
         }
 		
 	    [HttpPost]
@@ -104,16 +158,21 @@ namespace AniWebApp.Controllers
 			    _ratingsService.UpdateUserRating(model, user);
 
                 // Go back to our main view page
-			    return RedirectToAction("ViewEntry", "Ratings", new {
-			        ratingId = ratingId,
-                    year = model.EntryDate.Year,
-                    month = model.EntryDate.Month,
-                    day = model.EntryDate.Day
-			    });
+			    return GetRedirectToViewEntry(ratingId, model);
 			}
 
 			return View(model);
 		}
+
+	    private ActionResult GetRedirectToViewEntry(int ratingId, UserRatingHistoryEntry model)
+	    {
+	        return RedirectToAction("ViewEntry", "Ratings", new {
+	                                                                ratingId = ratingId,
+	                                                                year = model.EntryDate.Year,
+	                                                                month = model.EntryDate.Month,
+	                                                                day = model.EntryDate.Day
+	                                                            });
+	    }
 
 	    [HttpGet]
 		[Route(@"Ratings/{ratingId}/Add")]
@@ -148,9 +207,12 @@ namespace AniWebApp.Controllers
 				    return GetNotFoundAction();
 				}
 
-			    _ratingsService.AddUserRating(rating, model, userId);
+			    var userRatingHistoryEntry = _ratingsService.AddUserRating(rating, model, userId);
 
-			    return RedirectToAction("Index");
+			    if (userRatingHistoryEntry != null)
+			    {
+			        return GetRedirectToViewEntry(ratingId, userRatingHistoryEntry);
+			    }
 			}
 
 			return View(model);
@@ -186,12 +248,27 @@ namespace AniWebApp.Controllers
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <returns>An ActionResult representing the desired action.</returns>
-        private ActionResult GetRatingDetailsOrEditView(int ratingId, int year, int month, int day)
+        private ActionResult GetRatingEntryView(int ratingId, int year, int month, int day)
 	    {
+
+	        var user = this.GetUserModel();
+
+            var model = GetUserRatingEntry(ratingId, year, month, day, user);
+
+	        return model == null ? GetNotFoundAction() : View(model);
+	    }
+
+	    private UserRatingHistoryEntry GetUserRatingEntry(int ratingId,
+	        int year,
+	        int month,
+	        int day,
+	        UserModel user)
+	    {
+            // Grab the rating. We fail if this doesn't exist.
 	        var rating = _ratingsService.GetRatingModel(ratingId);
 	        if (rating == null)
 	        {
-	            return GetNotFoundAction();
+                return null;
 	        }
 
 	        // Interpret the date, bearing in mind that the user could have entered bogus dates (e.g. March 42nd)
@@ -202,16 +279,11 @@ namespace AniWebApp.Controllers
 	        }
 	        catch (ArgumentOutOfRangeException)
 	        {
-	            // If the user entered an invalid date, it's kinda their loss.
-	            return GetNotFoundAction();
+                // Bad date. We fail since no no date is possible.
+	            return null;
 	        }
 
-	        // Okay, now we know who we're talking about and what rating we're talking about, get the entry.
-	        var user = this.GetUserModel();
-	        var model = _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date);
-
-	        return model == null ? GetNotFoundAction() : View(model);
+	        return _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date);
 	    }
-
 	}
 }

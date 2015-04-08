@@ -19,9 +19,12 @@
 {
     <div class="btn-group-sm">
         @Html.ActionLink("Edit", "EditEntry", new {id = Model.Id}, new {@class = "btn btn-primary"})
-        @*
-        @Html.ActionLink("Delete", "Delete", new {ratingId = Model.Rating.Id, entryId = Model.Id}, new {@class = "btn btn-danger"})
-        *@
+        @Html.ActionLink("Delete", "DeleteEntry", new {
+                                                       ratingId = Model.Rating.Id,
+                                                       year = Model.EntryDate.Year,
+                                                       month = Model.EntryDate.Month,
+                                                       day = Model.EntryDate.Day
+                                                   }, new {@class = "btn btn-danger"})
     </div>
 }
 

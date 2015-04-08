@@ -68,10 +68,13 @@ namespace Ani.Core.Services
         /// <param name="rating">The rating.</param>
         /// <param name="model">The model.</param>
         /// <param name="userId">The user identifier.</param>
-        public void AddUserRating(RatingModel rating, AddEditUserRatingModel model, int userId)
+        /// <returns>The UserRatingHistoryEntry created.</returns>
+        public UserRatingHistoryEntry AddUserRating(RatingModel rating, AddEditUserRatingModel model, int userId)
         {
             var entryDateUtc = DateHelper.ToUtcDate(model.EntryDate);
-            Entities.InsertUpdateUserRating(userId, rating.Id, model.Comments, model.RatingValue, entryDateUtc);
+            var id = Entities.InsertUpdateUserRating(userId, rating.Id, model.Comments, model.RatingValue, entryDateUtc);
+
+            return id > 0 ? GetUserRatingHistoryEntryModel(rating, model.User, entryDateUtc) : null;
         }
 
 		/// <summary>
@@ -259,7 +262,37 @@ namespace Ani.Core.Services
 				e => e.UserId == user.Id &&
 					 e.RatingId == rating.Id &&
 					 DbFunctions.TruncateTime(e.EntryDateUTC) == date);
+
 			return entry;
 		}
-	}
+
+        /// <summary>
+        /// Deletes a user rating belonging to the executing user
+        /// </summary>
+        /// <param name="entry">The entry.</param>
+        /// <param name="user">The user.</param>
+        /// <returns><c>true</c> if the entity was deleted, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// entry
+        /// or
+        /// user
+        /// </exception>
+        public bool DeleteUserRating(UserRatingHistoryEntry entry, UserModel user)
+        {
+            if (entry == null) throw new ArgumentNullException("entry");
+            if (user == null) throw new ArgumentNullException("user");
+
+            var entity = Entities.RatingEntries.FirstOrDefault(e => e.Id == entry.Id);
+
+            if (entity != null && entity.UserId == user.Id)
+            {
+                Entities.RatingEntries.Remove(entity);
+                Entities.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
+    }
 }

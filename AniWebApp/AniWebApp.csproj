@@ -371,6 +371,7 @@
     <Content Include="Views\Ratings\ViewEntry.cshtml">
       <BrowseToURL>~/Ratings/2/2015/4/2</BrowseToURL>
     </Content>
+    <Content Include="Views\Ratings\DeleteEntry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
