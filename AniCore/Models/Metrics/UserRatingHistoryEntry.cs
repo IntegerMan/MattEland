@@ -33,5 +33,20 @@ namespace Ani.Core.Models.Metrics
 		/// </summary>
 		/// <value>The rating.</value>
 		public RatingModel Rating { get; set; }
+
+        /// <summary>
+        /// Gets the rating percent with 100 meaning 100% and 0 meaning 0%.
+        /// </summary>
+        /// <value>The rating percent.</value>
+        public double RatingPercentWhole
+        {
+            get
+            {
+                int numRatings = (Rating.MaxValue - Rating.MinValue);
+                double valuePerBump = 100.0/numRatings;
+
+                return (RatingValue - Rating.MinValue) * valuePerBump;
+            }
+        }
     }
 }

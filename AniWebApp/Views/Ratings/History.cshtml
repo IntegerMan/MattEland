@@ -45,7 +45,22 @@
                 })
             </td>
             <td>
-                @entry.RatingValue / @Model.Rating.MaxValue
+                <span class="bg-primary">
+                   &nbsp;@entry.RatingValue / @Model.Rating.MaxValue
+                </span>
+                <span class="margin-left">
+                    @for (int i = @Model.Rating.MinValue; i <= @Model.Rating.MaxValue; i++)
+                    {
+                        if (i <= entry.RatingValue)
+                        {
+                            @:<i class="fa fa-star text-primary"></i>
+                        }
+                        else
+                        {
+                            @:<i class="fa fa-star-o"></i>
+                        }
+                    }
+                </span>
             </td>
             <td>
                 @entry.Comments

@@ -367,7 +367,9 @@
     <Content Include="Views\Ratings\AddEntry.cshtml">
       <BrowseToURL>~/Ratings/2/Add</BrowseToURL>
     </Content>
-    <Content Include="Views\Ratings\History.cshtml" />
+    <Content Include="Views\Ratings\History.cshtml">
+      <BrowseToURL>~/Ratings/4</BrowseToURL>
+    </Content>
     <Content Include="Views\Ratings\EditEntry.cshtml">
       <BrowseToURL>~/Ratings/2/2015/4/2/Edit</BrowseToURL>
     </Content>
