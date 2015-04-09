@@ -199,15 +199,14 @@ namespace AniWebApp.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var userId = this.GetUserId();
-
 			    var rating = _ratingsService.GetRatingModel(ratingId);
-				if (rating == null || model == null || userId <= 0)
+				if (rating == null || model == null)
 				{
 				    return GetNotFoundAction();
 				}
 
-			    var userRatingHistoryEntry = _ratingsService.AddUserRating(rating, model, userId);
+			    model.User = GetUserModel();
+			    var userRatingHistoryEntry = _ratingsService.AddUserRating(rating, model);
 
 			    if (userRatingHistoryEntry != null)
 			    {

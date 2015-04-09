@@ -25,7 +25,7 @@
 
 <hr />
 
-@using (Html.BeginForm("AddEntry", "Ratings", new { }, FormMethod.Post, new { @class = "form", role = "form" }))
+@using (Html.BeginForm("AddEntry", "Ratings", new { ratingId=Model.Rating.Id }, FormMethod.Post, new { @class = "form", role = "form" }))
 {
 	@Html.AntiForgeryToken()
 

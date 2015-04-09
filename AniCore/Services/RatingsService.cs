@@ -67,12 +67,11 @@ namespace Ani.Core.Services
         /// </summary>
         /// <param name="rating">The rating.</param>
         /// <param name="model">The model.</param>
-        /// <param name="userId">The user identifier.</param>
         /// <returns>The UserRatingHistoryEntry created.</returns>
-        public UserRatingHistoryEntry AddUserRating(RatingModel rating, AddEditUserRatingModel model, int userId)
+        public UserRatingHistoryEntry AddUserRating(RatingModel rating, AddEditUserRatingModel model)
         {
             var entryDateUtc = DateHelper.ToUtcDate(model.EntryDate);
-            var id = Entities.InsertUpdateUserRating(userId, rating.Id, model.Comments, model.RatingValue, entryDateUtc);
+            var id = Entities.InsertUpdateUserRating(model.User.Id, rating.Id, model.Comments, model.RatingValue, entryDateUtc);
 
             return id > 0 ? GetUserRatingHistoryEntryModel(rating, model.User, entryDateUtc) : null;
         }
