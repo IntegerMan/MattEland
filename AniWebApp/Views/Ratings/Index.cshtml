@@ -48,11 +48,21 @@
             <td>
                 @if (rating.LastRating.HasValue)
                 {
-                    @rating.LastRating @:/ @rating.MaxValue
+                    for (int i = @rating.MinValue; i <= @rating.MaxValue; i++)
+                    {
+                        if (i <= rating.LastRating)
+                        {
+                            @:<i class="fa fa-star text-primary"></i>
+                        }
+                        else
+                        {
+                            @:<i class="fa fa-star-o"></i>
+                        }
+                    }
                 }
             </td>
             <td>
-                @Html.ActionLink("Add Entry", "AddEntry", new { RatingId=@rating.RatingId})
+                @Html.ActionLink("Add Entry", "AddEntry", new { RatingId = @rating.RatingId })
             </td>
         </tr>
     }
