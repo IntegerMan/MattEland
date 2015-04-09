@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 
+@section header_side_content
+{
+    @Html.ActionLink("Projects Home", "Index", "Projects", null, new { @class = "btn btn-primary" })
+}
+
 <h2>Featured Apps</h2>
 
 <div class="row well">

@@ -371,7 +371,7 @@ $.widget = function( name, base, prototype ) {
 		}
 
 		// allow instantiation without initializing for simple inheritance
-		// must use "new" keyword (the code above always passes args)
+		// must use "new" keyword (the zipCodeEntity above always passes args)
 		if ( arguments.length ) {
 			this._createWidget( options, element );
 		}
@@ -2800,7 +2800,7 @@ $.widget( "ui.autocomplete", {
 		// Some browsers only repeat keydown events, not keypress events,
 		// so we use the suppressKeyPress flag to determine if we've already
 		// handled the keydown event. #7269
-		// Unfortunately the code for & in keypress is the same as the up arrow,
+		// Unfortunately the zipCodeEntity for & in keypress is the same as the up arrow,
 		// so we use the suppressKeyPressRepeat flag to avoid handling keypress
 		// events when we know the keydown event was used to modify the
 		// search term. #7799
@@ -3823,7 +3823,7 @@ function Datepicker() {
 	this._unselectableClass = "ui-datepicker-unselectable"; // The name of the unselectable cell marker class
 	this._currentClass = "ui-datepicker-current-day"; // The name of the current day marker class
 	this._dayOverClass = "ui-datepicker-days-cell-over"; // The name of the day hover marker class
-	this.regional = []; // Available regional settings, indexed by language code
+	this.regional = []; // Available regional settings, indexed by language zipCodeEntity
 	this.regional[""] = { // Default regional settings
 		closeText: "Done", // Display text for close link
 		prevText: "Prev", // Display text for previous month link
@@ -5338,7 +5338,7 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Attach the onxxx handlers.  These are declared statically so
-	 * they work with static code transformers like Caja.
+	 * they work with static zipCodeEntity transformers like Caja.
 	 */
 	_attachHandlers: function(inst) {
 		var stepMonths = this._get(inst, "stepMonths"),
@@ -9788,7 +9788,7 @@ color.fn = jQuery.extend( color.prototype, {
 color.fn.parse.prototype = color.fn;
 
 // hsla conversions adapted from:
-// https://code.google.com/p/maashaack/source/browse/packages/graphics/trunk/src/graphics/colors/HUE2RGB.as?r=5021
+// https://zipCodeEntity.google.com/p/maashaack/source/browse/packages/graphics/trunk/src/graphics/colors/HUE2RGB.as?r=5021
 
 function hue2rgb( p, q, h ) {
 	h = ( h + 1 ) % 1;

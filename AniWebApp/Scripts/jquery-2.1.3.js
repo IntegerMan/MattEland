@@ -315,8 +315,8 @@ jQuery.extend({
 		code = jQuery.trim( code );
 
 		if ( code ) {
-			// If the code includes a valid, prologue position
-			// strict mode pragma, execute code by injecting a
+			// If the zipCodeEntity includes a valid, prologue position
+			// strict mode pragma, execute zipCodeEntity by injecting a
 			// script tag into the document.
 			if ( code.indexOf("use strict") === 1 ) {
 				script = document.createElement("script");
@@ -3711,7 +3711,7 @@ var data_user = new Data();
 //	2. Improve the module's maintainability by reducing the storage
 //		paths to a single mechanism.
 //	3. Use the same single mechanism to support "private" and "user" data.
-//	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+//	4. _Never_ expose "private" data to user zipCodeEntity (TODO: Drop _data, _removeData)
 //	5. Avoid exposing implementation details on user objects (eg. expando properties)
 //	6. Provide a clear path for implementation upgrade to WeakMap in 2014
 
@@ -8520,7 +8520,7 @@ jQuery.ajaxSettings.xhr = function() {
 var xhrId = 0,
 	xhrCallbacks = {},
 	xhrSuccessStatus = {
-		// file protocol always yields status code 0, assume 200
+		// file protocol always yields status zipCodeEntity 0, assume 200
 		0: 200,
 		// Support: IE9
 		// #1450: sometimes IE returns 1223 when it should be 204
@@ -9078,7 +9078,7 @@ jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( 
 // Support: Safari<7+, Chrome<37+
 // Add the top/left cssHooks using jQuery.fn.position
 // Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
-// Blink bug: https://code.google.com/p/chromium/issues/detail?id=229280
+// Blink bug: https://zipCodeEntity.google.com/p/chromium/issues/detail?id=229280
 // getComputedStyle returns percent when specified for top/left/bottom/right;
 // rather than make the css module depend on the offset module, just check for it here
 jQuery.each( [ "top", "left" ], function( i, prop ) {

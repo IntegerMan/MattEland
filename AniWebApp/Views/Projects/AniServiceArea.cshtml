@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Ani.Core.Models.Geo.ZipCodeModel>
+
+@{
+    ViewBag.Title = "Service Area";
+    ViewBag.Lead = "The following zip codes are currently supported. Additional areas will be supported as the project grows.";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section breadcrumbs
+{
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+}
+
+@section header_side_content
+{
+    @Html.ActionLink("ANI Home","ANI", "Projects", new {@class="btn btn-primary"})
+}
+
+<hr />
+
+<div class="row">
+    @foreach (var code in Model)
+    {
+        <div class="col-md-2 col-sm-3 col-xs-6">
+            <h4>
+                @Html.ActionLink(@code.ZipCode.ToString(), "Index", "Weather", new { zipCode = @code.ZipCode }, null)
+            </h4>
+        </div>
+    }
+</div>

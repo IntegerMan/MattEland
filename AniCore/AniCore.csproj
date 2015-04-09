@@ -95,6 +95,7 @@
     <Compile Include="LatestWeatherEntrySelect_Result.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Geo\ZipCodeModel.cs" />
     <Compile Include="Models\Metrics\AddEditUserRatingModel.cs" />
     <Compile Include="Models\Metrics\RatingModel.cs" />
     <Compile Include="Models\Metrics\RatingsSummaryModel.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="RatingEntry.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\AniService.cs" />
     <Compile Include="Services\RatingsService.cs" />
     <Compile Include="RatingsWithLatestInfoForUserSelect_Result.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>

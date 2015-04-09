@@ -213,6 +213,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Console.css" />
+    <Content Include="Content\Scanline.css" />
     <Content Include="Content\SlateCustom.css" />
     <Content Include="Content\Terminal.css" />
     <Content Include="Content\weather-icons.css" />
@@ -374,9 +375,13 @@
       <BrowseToURL>~/Ratings/2/2015/4/2</BrowseToURL>
     </Content>
     <Content Include="Views\Ratings\DeleteEntry.cshtml" />
+    <Content Include="Views\Projects\AniServiceArea.cshtml">
+      <BrowseToURL>~/Projects/Ani/ServiceArea</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Ani\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

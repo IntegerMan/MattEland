@@ -9,6 +9,12 @@
     @Styles.Render("~/content/weather-icons.min.css")
 }
 
+@section header_side_content
+{
+    @Html.ActionLink("Projects Home", "Index", "Projects", null, new { @class = "btn btn-primary" })
+}
+
+
 <h2>Project Overview</h2>
 
 <div class="well">
@@ -18,8 +24,9 @@
         Advanced Narrow Intelligence (ANI) to attempt to analyze, predict, and improve users daily lives.
     </p>
     <p>
-        This project is still in its infancy and only services the Columbus, Ohio area at present, but if this
-        proves to be useful to people beyond as an experiment, I may scale it upward to reach more users.
+        This project is still in its infancy and only services @Html.ActionLink("a limited area", "AniServiceArea", "Projects")
+        at present, but if this proves to be useful to people beyond as an experiment, I may scale it upward
+        to reach more users.
     </p>
 </div>
 
@@ -32,7 +39,7 @@
                 Weather
             </div>
             <div class="panel-body">
-                <br/>
+                <br />
                 <p>
                     <i class="wi wi-day-snow-thunderstorm fa-3x"></i>
                 </p>
@@ -40,7 +47,7 @@
                     Available
                 </p>
                 <p>
-                    @Html.ActionLink("View", "Index", "Weather", null, new {@class = "btn btn-block btn-info"})
+                    @Html.ActionLink("View", "Index", "Weather", null, new { @class = "btn btn-block btn-info" })
                 </p>
             </div>
         </div>

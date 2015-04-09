@@ -1,21 +1,20 @@
 ﻿@{
     ViewBag.Title = "Pi-MFD";
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
+    ViewBag.Lead = "A Python information dashboard monstrosity hosted inside of a Raspberry Pi (which in turn is hosted inside an ammo box).";
 }
 
 @section breadcrumbs {
     <li><a href="@Url.Action("Index", "Projects")">Projects</a></li>
 }
 
+@section header_side_content
+{
+    @Html.ActionLink("Projects Home", "Index", "Projects", null, new { @class = "btn btn-primary" })
+}
+
 <div class="row">
     <div class="col-md-9">
-
-        <h2>Project Overview</h2>
-
-        <p class="lead">
-            A Python information dashboard monstrosity hosted inside of a Raspberry Pi (which in turn is hosted inside an
-            ammo box).
-        </p>
 
         <h3>Current Features</h3>
         <p>

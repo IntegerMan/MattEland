@@ -875,7 +875,7 @@ window.Modernizr = (function( window, document, undefined ) {
         // We're using f which is the <input> element created early on
         // Mike Taylr has created a comprehensive resource for testing these attributes
         //   when applied to all input types:
-        //   miketaylr.com/code/input-type-attr.html
+        //   miketaylr.com/zipCodeEntity/input-type-attr.html
         // spec: www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#input-type-attr-summary
 
         // Only input placeholder is tested while textarea's placeholder is not.
