@@ -12,6 +12,15 @@
 @section scripts
 {
     @RenderSection("scripts", false)
+
+    @Scripts.Render("~/scripts/jquery.bootgrid.min.js")
+    <script type="text/javascript">
+
+        $(function() {
+            $("#grid-list").bootgrid();
+        });
+
+    </script>
 }
 
 @section header_side_content
@@ -34,7 +43,7 @@
 
     <div class="panel-body">
 
-        <table class="table @ViewBag.TableClasses">
+        <table id="grid-list" class="table @ViewBag.TableClasses">
             <thead>
                 <tr>
                     @RenderSection("table_headers", true)

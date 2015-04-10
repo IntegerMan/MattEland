@@ -21,3 +21,4 @@
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery-ui-1.11.4.min.js" />
 /// <reference path="easyslider1.7.min.js" />
+/// <reference path="jquery.bootgrid.min.js" />
