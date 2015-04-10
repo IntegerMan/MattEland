@@ -13,14 +13,8 @@
 {
     @RenderSection("scripts", false)
 
-    @Scripts.Render("~/scripts/jquery.bootgrid.min.js")
-    <script type="text/javascript">
-
-        $(function() {
-            $("#grid-list").bootgrid();
-        });
-
-    </script>
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.1.4/jquery.bootgrid.min.js")
+    @*@Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.1.4/jquery.bootgrid.min.css")*@
 }
 
 @section header_side_content
@@ -43,7 +37,12 @@
 
     <div class="panel-body">
 
-        <table id="grid-list" class="table @ViewBag.TableClasses">
+        <table class="table @ViewBag.TableClasses"
+               data-toggle="bootgrid"
+               data-sorting="false"
+               data-navigation="1"
+               data-rowCount="25"
+               data-columnSelection="false" >
             <thead>
                 <tr>
                     @RenderSection("table_headers", true)
