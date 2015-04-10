@@ -4,16 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Ani.Core.Models.Metrics
 {
-    public class UserRatingHistoryEntry
+    public class UserRatingHistoryEntry : RatingModelBase
     {
+        /// <summary>
+        /// Gets or sets the user identifier.
+        /// </summary>
+        /// <value>The user identifier.</value>
         public int UserId{ get; set; }
-
-        [DisplayName("Rating")]
-        public int RatingValue { get; set; }
-
-        [DisplayName("Entry Date")]
-        [DataType(DataType.Date)]
-        public DateTime EntryDate { get; set; }
 
         [DisplayName("Created Time")]
         [DataType(DataType.DateTime)]
@@ -23,16 +20,8 @@ namespace Ani.Core.Models.Metrics
         [DataType(DataType.DateTime)]
         public DateTime ModifiedTimeUTC{ get; set; }
 
-        [DataType(DataType.MultilineText)]
-        public string Comments{ get; set; }
 
         public int Id{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the rating.
-		/// </summary>
-		/// <value>The rating.</value>
-		public RatingModel Rating { get; set; }
 
         /// <summary>
         /// Gets the rating percent with 100 meaning 100% and 0 meaning 0%.
@@ -42,6 +31,12 @@ namespace Ani.Core.Models.Metrics
         {
             get
             {
+                // Protect against bad rating values during reflection / validation
+                if (Rating == null)
+                {
+                    return 0;
+                }
+
                 int numRatings = (Rating.MaxValue - Rating.MinValue);
                 double valuePerBump = 100.0/numRatings;
 

@@ -71,6 +71,7 @@ namespace Ani.Core.Services
         public UserRatingHistoryEntry AddUserRating(RatingModel rating, AddEditUserRatingModel model)
         {
             var entryDateUtc = DateHelper.ToUtcDate(model.EntryDate);
+            model.RatingValue = Math.Max(rating.MinValue, Math.Min(rating.MaxValue, model.RatingValue));
             var id = Entities.InsertUpdateUserRating(model.User.Id, rating.Id, model.Comments, model.RatingValue, entryDateUtc);
 
             return id > 0 ? GetUserRatingHistoryEntryModel(rating, model.User, entryDateUtc) : null;
@@ -108,7 +109,7 @@ namespace Ani.Core.Services
 			// Update Properties on the EF Model
 			entry.Comments = model.Comments;
 			entry.ModifiedTimeUTC = DateTime.UtcNow;
-			entry.Rating = model.RatingValue;
+			entry.Rating = Math.Max(model.Rating.MinValue, Math.Min(model.Rating.MaxValue, model.RatingValue));
 			entry.EntryDateUTC = DateHelper.ToUtcDate(model.EntryDate);
 
 			// Save the entity
