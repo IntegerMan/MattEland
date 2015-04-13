@@ -99,7 +99,7 @@ namespace Ani.Core.Services
 			var entry = this.Entities.RatingEntries.FirstOrDefault(
 				e => e.UserId == user.Id &&
 					 e.RatingId == model.Rating.Id &&
-					 DbFunctions.TruncateTime(e.EntryDateUTC) == model.EntryDate);
+					 e.Id == model.Id);
 
 			if (entry == null)
 			{

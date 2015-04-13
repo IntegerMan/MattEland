@@ -31,7 +31,7 @@
 
 <hr />
 
-@using (Html.BeginForm("EditEntryPost", "Ratings", new { ratingId = @Model.Rating.Id }, FormMethod.Post, new { @class = "form", role = "form" }))
+@using (Html.BeginForm("EditEntryPost", "Ratings", null, FormMethod.Post, new { @class = "form", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -42,46 +42,8 @@
     @Html.HiddenFor(m => m.CreatedTimeUTC)
     @Html.HiddenFor(m => m.ModifiedTimeUTC)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.EntryDate, new { @class = "form-label" })<br />
-        @Html.TextBox("EntryDate", Model.EntryDate.ToShortDateString(), new { @class = "form-control datefield" })
-        @Html.ValidationMessageFor(m => m.EntryDate, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.RatingValue, new { @class = "form-label" })<br />
-
-        @for (var i = Model.Rating.MinValue; i <= Model.Rating.MaxValue; i++)
-        {
-            @:<div class="radio">
-                @:<label for="@string.Format("RatingValue{0}",i)">
-                    @Html.RadioButton("RatingValue", i, Model.RatingValue == i, new { id = string.Format("RatingValue{0}", i) })
-
-                    @i
-            if (i == Model.Rating.MinValue)
-            {
-                @(string.Format(" - {0}", Model.Rating.MinLabel))}
-            else if (i == Model.Rating.MaxValue)
-            {
-                @(string.Format(" - {0}", Model.Rating.MaxLabel))}
-
-            @:</label>
-            @:</div>
-		}
-        @Html.ValidationMessageFor(m => m.RatingValue, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Comments, new { @class = "form-label" })<br />
-        @Html.TextAreaFor(m => m.Comments, new { @class = "form-control", rows = 5, placeholder = "Enter additional comments here..." })
-        @Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger" })
-    </div>
+    Html.RenderPartial("_RatingAddEditFieldsPartial", Model);
 
     <input type="submit" value="Save" class="btn btn-primary" />
-    <a href="@Url.Action("ViewEntry", "Ratings", new {
-                                                    ratingId = Model.Rating.Id,
-                                                    year = Model.EntryDate.Year,
-                                                    month = Model.EntryDate.Month,
-                                                    day = Model.EntryDate.Day
-                                                })" class="btn btn-default">Cancel</a>
+    <a href="@Url.Action("ViewEntry", "Ratings")" class="btn btn-default">Cancel</a>
 }
