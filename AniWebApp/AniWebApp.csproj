@@ -384,6 +384,7 @@
     <Content Include="Views\Projects\AniServiceArea.cshtml">
       <BrowseToURL>~/Projects/Ani/ServiceArea</BrowseToURL>
     </Content>
+    <Content Include="Views\Ratings\_RatingAddEditFieldsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
