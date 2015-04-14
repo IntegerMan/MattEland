@@ -11,21 +11,25 @@
 
     @for (var i = Model.Rating.MinValue; i <= Model.Rating.MaxValue; i++)
     {
-        @:<div class="radio">
-            @:<label for="@string.Format("RatingValue{0}",i)">
-                @Html.RadioButton("RatingValue", i, Model.RatingValue == i, new { id = string.Format("RatingValue{0}", i) })
+        <div class="radio">
+            <label for="@string.Format("RatingValue{0}", i)">
+                
+                @Html.RadioButton("RatingValue", i, Model.RatingValue == i, new {id = string.Format("RatingValue{0}", i)})
 
                 @i
-        if (i == Model.Rating.MinValue)
-        {
-            @(string.Format(" - {0}", Model.Rating.MinLabel))}
-        else if (i == Model.Rating.MaxValue)
-        {
-            @(string.Format(" - {0}", Model.Rating.MaxLabel))}
 
-        @:</label>
-            @:</div>
-		}
+                @if (i == Model.Rating.MinValue)
+                {
+                    @(string.Format(" - {0}", Model.Rating.MinLabel));
+                }
+                else if (i == Model.Rating.MaxValue)
+                {
+                    @(string.Format(" - {0}", Model.Rating.MaxLabel))
+                }
+
+            </label>
+        </div>
+    }
     @Html.ValidationMessageFor(m => m.RatingValue, "", new { @class = "text-danger" })
 </div>
 
