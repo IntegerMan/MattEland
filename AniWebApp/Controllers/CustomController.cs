@@ -6,6 +6,7 @@ using Ani.Core.Services;
 using AniWebApp.Helpers;
 using Microsoft.AspNet.Identity.Owin;
 using MvcFlash.Core;
+using MvcFlash.Core.Extensions;
 
 namespace AniWebApp.Controllers
 {
@@ -104,6 +105,42 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <value>The flash message provider.</value>
         protected IFlashPusher Flash { get; }
+
+        /// <summary>
+        /// Shows a success message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        protected void ShowSuccess(string message)
+        {
+            Flash.Success(title: message);
+        }
+
+        /// <summary>
+        /// Shows an error message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        protected void ShowError(string message)
+        {
+            Flash.Error(title: message);
+        }
+
+        /// <summary>
+        /// Shows a warning message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        protected void ShowWarning(string message)
+        {
+            Flash.Warning(title: message);
+        }
+
+        /// <summary>
+        /// Shows an info message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        protected void ShowInfo(string message)
+        {
+            Flash.Info(title: message);
+        }
 
     }
 }
