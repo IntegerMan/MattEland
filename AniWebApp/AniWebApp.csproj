@@ -107,6 +107,10 @@
       <HintPath>C:\Dev\AniWebApp\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvcFlash.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcFlash.Core.2.0.0\lib\net40\MvcFlash.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -385,6 +389,8 @@
       <BrowseToURL>~/Projects/Ani/ServiceArea</BrowseToURL>
     </Content>
     <Content Include="Views\Ratings\_RatingAddEditFieldsPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SimpleMessage.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MessageBase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

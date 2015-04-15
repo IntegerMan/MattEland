@@ -5,6 +5,7 @@ using Ani.Core.Models.Users;
 using Ani.Core.Services;
 using AniWebApp.Helpers;
 using Microsoft.AspNet.Identity.Owin;
+using MvcFlash.Core;
 
 namespace AniWebApp.Controllers
 {
@@ -21,6 +22,8 @@ namespace AniWebApp.Controllers
             RoleManager = roleManager;
             Entities = new Entities();
             UserService = new UserService(Entities);
+
+            Flash = MvcFlash.Core.Flash.Instance;
         }
 
         /// <summary>
@@ -44,7 +47,7 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <value>The entity framework database context.</value>
         protected Entities Entities { get; }
-
+                
         protected int GetUserZipCode()
         {
             var user = GetUserEntity();
@@ -95,5 +98,12 @@ namespace AniWebApp.Controllers
         {
             return RedirectToAction("NotFound", "Error");
         }
+
+        /// <summary>
+        /// Gets the flash message provider.
+        /// </summary>
+        /// <value>The flash message provider.</value>
+        protected IFlashPusher Flash { get; }
+
     }
 }

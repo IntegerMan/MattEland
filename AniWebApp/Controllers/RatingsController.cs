@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Ani.Core.Models.Metrics;
 using Ani.Core.Models.Users;
 using Ani.Core.Services;
+using MvcFlash.Core.Extensions;
 
 namespace AniWebApp.Controllers
 {
@@ -105,11 +106,15 @@ namespace AniWebApp.Controllers
             // Attempt the delete and redirect as needed on success / failure
             if (_ratingsService.DeleteUserRating(entry, user))
             {
+                Flash.Success(title: string.Empty, content: "Rating deleted");
+
                 // Take them back to the list
                 return RedirectToAction("History", new {ratingId});
             }
             else
             {
+                Flash.Error(title: string.Empty, content: "Could not delete rating");
+
                 // FAIL! Redirect to the view
                 return GetRedirectToViewEntry(ratingId, entry);
             }
@@ -156,6 +161,8 @@ namespace AniWebApp.Controllers
 					return GetNotFoundAction();
 				}
 			    _ratingsService.UpdateUserRating(model, user);
+
+                Flash.Success(title: string.Empty, content: "Rating Edited");
 
                 // Go back to our main view page
 			    return GetRedirectToViewEntry(ratingId, model);
@@ -210,8 +217,11 @@ namespace AniWebApp.Controllers
 
 			    if (userRatingHistoryEntry != null)
 			    {
+			        Flash.Success(title: string.Empty, content: "Rating Added");
 			        return GetRedirectToViewEntry(ratingId, userRatingHistoryEntry);
 			    }
+
+			    Flash.Error(title: string.Empty, content: "Could not add rating");
 			}
 
 			return View(model);
