@@ -217,7 +217,9 @@ namespace AniWebApp.Controllers
 			    if (userRatingHistoryEntry != null)
 			    {
 			        ShowSuccess("Rating Added");
-			        return GetRedirectToViewEntry(ratingId, userRatingHistoryEntry);
+
+                    // Redirect back to the rating list for that rating
+			        return RedirectToAction("History", "Ratings", new { ratingId=rating.Id});
 			    }
 
 			    ShowError("Could not add rating");
