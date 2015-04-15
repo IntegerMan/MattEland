@@ -98,6 +98,8 @@ namespace AniWebApp.Controllers
 
                 _weatherService.AddFrostEntry(user, entry);
 
+                ShowSuccess("Frost Entry Added");
+
                 return RedirectToAction("Frost");
             }
 
