@@ -1,5 +1,14 @@
 ﻿@model MvcFlash.Core.Messages.MessageBase
-<div class="alert alert-@Model.MessageType">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <strong>@Model.Title</strong> @Model.Content
+
+<div class="alert alert-@Model.MessageType alert-dismissible" role="alert">
+    
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Title))
+    {
+        <strong>@Model.Title</strong>
+    }
+
+    @Model.Content
+
 </div>
