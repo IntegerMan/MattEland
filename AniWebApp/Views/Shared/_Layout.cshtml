@@ -53,10 +53,41 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class='@Html.IsActive("Home", "Index")'>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li class='@Html.IsActive("Projects", "Index")'>@Html.ActionLink("Projects", "Index", "Projects")</li>
-                        <li class='@Html.IsActive("Projects", "ANI")'>@Html.ActionLink("ANI", "ANI", "Projects")</li>
-                        <li class='@Html.IsActive("Apps", "Index")'>@Html.ActionLink("Apps", "Index", "Apps")</li>
-                        <li class='@Html.IsActive("Home", "About")'>@Html.ActionLink("About", "About", "Home")</li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("All Projects", "Index", "Projects")</li>
+                                <li>@Html.ActionLink("ANI Project", "ANI", "Projects")</li>
+                                <li>@Html.ActionLink("Pi-MFD", "PiMFD", "Projects")</li>
+                                <li>@Html.ActionLink("Mobile Apps", "Index", "Apps")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ANI <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Project Home", "ANI", "Projects")</li>
+                                <li>@Html.ActionLink("Weather", "Index", "Weather")</li>
+                                <li>@Html.ActionLink("Frost", "Frost", "Weather")</li>
+                                <li>@Html.ActionLink("Traffic", "Index", "Traffic")</li>
+                                <li>@Html.ActionLink("Ratings", "Index", "Ratings")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Apps <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("All Apps", "Index", "Apps")</li>
+                                <li>@Html.ActionLink("Seeking God", "SeekingGod", "Apps")</li>
+                                <li>@Html.ActionLink("Seeking Jesus", "SeekingJesus", "Apps")</li>
+                                <li>@Html.ActionLink("Life Lights", "LifeLights", "Apps")</li>
+                            </ul>
+                        </li>
+
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+
+
                     </ul>
                     @if (Request.IsAuthenticated)
             {
