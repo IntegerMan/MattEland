@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Models\Geo\ZipCodeModel.cs" />
     <Compile Include="Models\Metrics\AddEditUserRatingModel.cs" />
+    <Compile Include="Models\Metrics\DailyRatingsModel.cs" />
     <Compile Include="Models\Metrics\RatingModel.cs" />
     <Compile Include="Models\Metrics\RatingModelBase.cs" />
     <Compile Include="Models\Metrics\RatingsSummaryModel.cs" />

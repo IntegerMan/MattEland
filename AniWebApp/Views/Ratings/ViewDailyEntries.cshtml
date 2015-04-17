@@ -1,0 +1,72 @@
+﻿@using System.Globalization
+@using Ani.Core
+@model Ani.Core.Models.Metrics.DailyRatingsModel
+
+@{
+    ViewBag.Title = "View Daily Entries";
+    ViewBag.BreadcrumbTitle = Model.Date.ToShortDateString();
+    ViewBag.Lead = "This contains rating entries for you on " + Model.Date.ToLongDateString();
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section breadcrumbs
+{
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+    <li><a href="@Url.Action("Index", "Ratings")">Ratings</a></li>
+}
+
+<h2>Ratings</h2>
+
+<div class="row">
+
+    @foreach (var rating in Model.Ratings)
+    {
+        <div class="col-md-3 col-sm-4">
+
+            <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-fw @rating.IconClass"></i> @rating.Name</h3>
+            </div>
+
+            <div class="panel-body tile-panel-tall">
+                @{
+                    var entry = Model.HistoryEntries.FirstOrDefault(e => e.Rating.Id == rating.Id);
+                    if (entry != null)
+                    {
+                        // Render Star Ratings
+                        <p>
+                            @for (int i = rating.MinValue; i <= rating.MaxValue; i++)
+                            {
+                                if (i <= entry.RatingValue)
+                                {
+                                    @:<i class="fa fa-star text-primary"></i>
+                                }
+                                else
+                                {
+                                    @:<i class="fa fa-star-o"></i>
+                                }
+                            }
+                        </p>
+
+                        // Render comments (if present)
+                        if (!string.IsNullOrWhiteSpace(entry.Comments))
+                        {
+                            <p>@entry.Comments</p>
+                        }
+
+                        <p>On @entry.CreatedTimeUTC.ToLocalTime().ToString(CultureInfo.CurrentCulture)</p>
+
+                    }
+                    else
+                    {
+                        <p>No Rating</p>
+                    }
+                }
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

@@ -48,6 +48,28 @@ namespace AniWebApp.Controllers
 		}
 
         /// <summary>
+        /// Serves up a view for viewing the details of entries for a particular date.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns>A view for viewing the rating or a redirect to an item not found.</returns>
+        [HttpGet]
+		[Route(@"Ratings/Calendar/{year}/{month}/{day}")]
+		[Authorize]
+		public ActionResult ViewDailyEntries(int year, int month, int day)
+        {
+            var dateTime = GetDate(year, month, day);
+
+            if (!dateTime.HasValue)
+            {
+                return GetNotFoundAction();
+            }
+
+            return View(_ratingsService.GetDailyRatings(this.GetUserModel(), dateTime.Value));
+        }
+
+        /// <summary>
         /// Serves up a view for viewing the details of a past entry.
         /// </summary>
         /// <param name="ratingId">The rating identifier.</param>
@@ -282,18 +304,27 @@ namespace AniWebApp.Controllers
 	        }
 
 	        // Interpret the date, bearing in mind that the user could have entered bogus dates (e.g. March 42nd)
-	        DateTime date;
-	        try
+	        var date = GetDate(year, month, day);
+
+	        if (!date.HasValue)
 	        {
-	            date = new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
-	        }
-	        catch (ArgumentOutOfRangeException)
-	        {
-                // Bad date. We fail since no no date is possible.
 	            return null;
 	        }
 
-	        return _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date);
+	        return _ratingsService.GetUserRatingHistoryEntryModel(rating, user, date.Value);
+	    }
+
+	    private static DateTime? GetDate(int year, int month, int day)
+	    {
+	        try
+	        {
+	            return new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
+	        }
+	        catch (ArgumentOutOfRangeException)
+	        {
+	            // Bad date. We fail since no no date is possible.
+	            return null;
+	        }
 	    }
 	}
 }

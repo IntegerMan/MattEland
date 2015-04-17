@@ -391,6 +391,9 @@
     <Content Include="Views\Ratings\_RatingAddEditFieldsPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SimpleMessage.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MessageBase.cshtml" />
+    <Content Include="Views\Ratings\ViewDailyEntries.cshtml">
+      <BrowseToURL>~/Ratings/Calendar/2015/4/10</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

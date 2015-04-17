@@ -294,5 +294,46 @@ namespace Ani.Core.Services
 
             return false;
         }
+
+        public DailyRatingsModel GetDailyRatings(UserModel user, DateTime date)
+        {
+            date = DateHelper.ToUtcDate(date);
+
+            var model = new DailyRatingsModel
+            {
+                Date = date,
+                User = user,
+                Ratings = this.GetRatingsForUser(user),
+                HistoryEntries = this.GetUserHistoryEntries(user, date)
+            };
+
+            return model;
+        }
+
+        private IEnumerable<UserRatingHistoryEntry> GetUserHistoryEntries(UserModel user, DateTime date)
+        {
+            var ratings =
+                this.Entities.RatingEntries.Where(
+                    r => r.UserId == user.Id && r.EntryDateUTC == date);
+
+            foreach (var ratingEntry in ratings)
+            {
+                var ratingModel = GetRatingModelFromRatingEntity(ratingEntry.Rating1);
+
+                yield return GetUserRatingHistoryEntryFromRatingEntryEntity(ratingEntry, ratingModel);
+            }
+        }
+
+        private IEnumerable<RatingModel> GetRatingsForUser(UserModel user)
+        {
+            var ratings = this.Entities.Ratings.Where(r => r.IsActive && r.IsGlobal)
+                                               .OrderBy(r => r.Name);
+
+            foreach (var rating in ratings)
+            {
+                yield return GetRatingModelFromRatingEntity(rating);
+            }
+
+        }
     }
 }
