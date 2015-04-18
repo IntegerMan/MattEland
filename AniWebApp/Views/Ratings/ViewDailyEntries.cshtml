@@ -61,6 +61,8 @@
                     else
                     {
                         <p>No Rating</p>
+
+                        @Html.ActionLink("Add Entry", "AddEntry", new { RatingId = @rating.Id })
                     }
                 }
 
