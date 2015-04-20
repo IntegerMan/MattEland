@@ -1,0 +1,38 @@
+﻿@model Ani.Core.Models.Metrics.AddEditUserRatingModel
+
+@{
+    ViewBag.Title = string.Format("Log {0}", @Model.Rating.Name);
+    ViewBag.BreadcrumbTitle = "Log";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section breadcrumbs
+{
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+    <li><a href="@Url.Action("Index", "Ratings")">Ratings</a></li>
+    <li><a href="@Url.Action("History", "Ratings", new { ratingId = @Model.Rating.Id })">@Model.Rating.Name</a></li>
+}
+
+<div class="media alert alert-info">
+    <div class="media-left">
+        <i class="fa fa-2x media-object @Model.Rating.IconClass"></i>
+    </div>
+    <div class="media-body">
+        Enter your @Model.Rating.Name rating and click Save to add the entry.<br />
+        If you select a date you already have an entry for, your existing rating will be updated with the new value.
+    </div>
+</div>
+
+<hr />
+
+@using (Html.BeginForm("AddEntry", "Ratings", new { ratingId = Model.Rating.Id }, FormMethod.Post, new { @class = "form", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+    Html.RenderPartial("_RatingAddEditFieldsForDatePartial", Model);
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a href="@Url.Action("Index", "Ratings")" class="btn btn-default">Cancel</a>
+}

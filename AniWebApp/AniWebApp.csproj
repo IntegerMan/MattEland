@@ -394,6 +394,8 @@
     <Content Include="Views\Ratings\ViewDailyEntries.cshtml">
       <BrowseToURL>~/Ratings/Calendar/2015/4/10</BrowseToURL>
     </Content>
+    <Content Include="Views\Ratings\AddEntryForDate.cshtml" />
+    <Content Include="Views\Ratings\_RatingAddEditFieldsForDatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

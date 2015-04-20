@@ -203,6 +203,30 @@ namespace AniWebApp.Controllers
 	    }
 
 	    [HttpGet]
+		[Route(@"Ratings/{ratingId}/{year}/{month}/{day}/Add")]
+		[Authorize]
+		public ActionResult AddEntryForDate(int ratingId, int year, int month, int day)
+		{
+
+            var date = GetDate(year, month, day);
+	        if (!date.HasValue)
+	        {
+	            return GetNotFoundAction();
+	        }
+
+            var rating = _ratingsService.GetRatingModel(ratingId);
+			if (rating == null)
+			{
+				return GetNotFoundAction();
+			}
+
+	        var user = this.GetUserModel();
+	        var model = RatingsService.BuildNewRatingEntryModel(rating, user, date.Value);
+
+			return View(model);
+		}
+
+	    [HttpGet]
 		[Route(@"Ratings/{ratingId}/Add")]
 		[Authorize]
 		public ActionResult AddEntry(int ratingId)
@@ -214,7 +238,7 @@ namespace AniWebApp.Controllers
 			}
 
 	        var user = this.GetUserModel();
-	        var model = RatingsService.BuildNewRatingEntryModel(rating, user);
+	        var model = RatingsService.BuildNewRatingEntryModel(rating, user, DateTime.Today);
 
 			return View(model);
 		}

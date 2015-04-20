@@ -43,17 +43,18 @@ namespace Ani.Core.Services
         /// </summary>
         /// <param name="rating">The rating model.</param>
         /// <param name="user">The user model.</param>
+        /// <param name="entryDate"></param>
         /// <returns>
         /// A new model with good default values. 
         /// This model should be customized before adding it to the database.
         /// </returns>
-        public static AddEditUserRatingModel BuildNewRatingEntryModel(RatingModel rating, UserModel user)
+        public static AddEditUserRatingModel BuildNewRatingEntryModel(RatingModel rating, UserModel user, DateTime entryDate)
         {
             var model = new AddEditUserRatingModel
             {
                 Rating = rating,
                 RatingValue = rating.MinValue,
-                EntryDate = DateTime.Today,
+                EntryDate = entryDate,
                 CreatedTimeUTC = DateTime.Now.ToUniversalTime(),
                 ModifiedTimeUTC = DateTime.Now.ToUniversalTime(),
                 User = user
