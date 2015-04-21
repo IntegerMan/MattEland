@@ -48,6 +48,20 @@ namespace AniWebApp.Controllers
 		}
 
         /// <summary>
+        /// Views today's rating entries.
+        /// </summary>
+        /// <returns>A redirect to action to viewing today's ratings</returns>
+        [HttpGet]
+		[Route(@"Ratings/Today")]
+		[Authorize]
+	    public ActionResult ViewTodaysEntries()
+	    {
+	        var now = DateTime.Today;
+
+	        return RedirectToAction("ViewDailyEntries", new {year=now.Year, month=now.Month, day=now.Day});
+	    }
+
+        /// <summary>
         /// Serves up a view for viewing the details of entries for a particular date.
         /// </summary>
         /// <param name="year">The year.</param>
@@ -262,10 +276,15 @@ namespace AniWebApp.Controllers
 
 			    if (userRatingHistoryEntry != null)
 			    {
-			        ShowSuccess("Rating Added");
+			        ShowSuccess(string.Format("{0} Rating Added", rating.Name));
 
-                    // Redirect back to the rating list for that rating
-			        return RedirectToAction("History", "Ratings", new { ratingId=rating.Id});
+                    // Redirect back to the rating list for that date
+			        return RedirectToAction("ViewDailyEntries", "Ratings", new
+			        {
+			            year = model.EntryDate.Year,
+                        month = model.EntryDate.Month,
+                        day = model.EntryDate.Day
+			        });
 			    }
 
 			    ShowError("Could not add rating");
