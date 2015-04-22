@@ -15,6 +15,12 @@
     <li><a href="@Url.Action("Index", "Ratings")">Ratings</a></li>
 }
 
+@section header_side_content
+{
+    @Html.ActionLink("Prev", "ViewDailyEntries", new { year=Model.Date.AddDays(-1).Year, month = Model.Date.AddDays(-1).Month, day = Model.Date.AddDays(-1).Day }, new {@class="btn btn-default"})
+    @Html.ActionLink("Next", "ViewDailyEntries", new { year=Model.Date.AddDays(1).Year, month = Model.Date.AddDays(1).Month, day = Model.Date.AddDays(1).Day }, new { @class = "btn btn-default" })
+}
+
 <h2>Ratings</h2>
 
 <div class="row">
