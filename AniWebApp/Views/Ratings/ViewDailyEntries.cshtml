@@ -63,7 +63,10 @@
                         
                         <p>On @entry.CreatedTimeUTC.ToLocalTime().ToString(CultureInfo.CurrentCulture)</p>
 
-                        @Html.ActionLink("View Details", "ViewEntry", new { ratingId = @rating.Id})
+                        <div class="btn-group">
+                            @Html.ActionLink("Edit", "EditEntry", new { ratingId = @rating.Id }) | 
+                            @Html.ActionLink("View Details", "ViewEntry", new { ratingId = @rating.Id })
+                        </div>
 
                     }
                     else
