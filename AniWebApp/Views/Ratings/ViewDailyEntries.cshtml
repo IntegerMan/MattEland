@@ -53,16 +53,19 @@
                                     @:<i class="fa fa-star-o"></i>
                                 }
                             }
+
+                            @* Render comments (if present) *@
+                            @if (!string.IsNullOrWhiteSpace(entry.Comments))
+                            {
+                                <i class="fa fa-fw fa-comment-o" title="@entry.Comments"></i>
+                            }
                         </p>
 
-                        // Render comments (if present)
-                        if (!string.IsNullOrWhiteSpace(entry.Comments))
-                        {
-                            <p>@entry.Comments</p>
-                        }
 
                         <p>On @entry.CreatedTimeUTC.ToLocalTime().ToString(CultureInfo.CurrentCulture)</p>
 
+
+                        @Html.ActionLink("View Details", "ViewEntry", new { ratingId = @rating.Id})
                     }
                     else
                     {
