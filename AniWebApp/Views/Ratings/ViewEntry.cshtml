@@ -41,7 +41,7 @@
         </dt>
 
         <dd>
-            @Model.EntryDate.ToLongDateString()
+            @Html.ActionLink(Model.EntryDate.ToLongDateString(), "ViewDailyEntries")
         </dd>
 
         <dt>
@@ -74,5 +74,3 @@
 
     </dl>
 </div>
-
-@Html.ActionLink("Back", "History", new { ratingId = Model.Rating.Id }, new { @class = "btn btn-default" })
