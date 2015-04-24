@@ -33,7 +33,17 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RatingValue) / @Model.Rating.MaxValue
+            @for (int i = @Model.Rating.MinValue; i <= @Model.Rating.MaxValue; i++)
+            {
+                if (i <= @Model.RatingValue)
+                {
+                    @:<i class="fa fa-star text-primary"></i>
+                }
+                else
+                {
+                    @:<i class="fa fa-star-o"></i>
+                }
+            }
         </dd>
 
         <dt>
@@ -49,7 +59,7 @@
         </dt>
 
         <dd>
-            @Model.CreatedTimeUTC.ToLocalTime().ToLongTimeString()
+            @Model.CreatedTimeUTC.ToLocalTime()
         </dd>
 
         <dt>
@@ -57,7 +67,7 @@
         </dt>
 
         <dd>
-            @Model.ModifiedTimeUTC.ToLocalTime().ToLongTimeString()
+            @Model.ModifiedTimeUTC.ToLocalTime()
         </dd>
 
         @if (!Model.Comments.IsNullOrWhiteSpace())
