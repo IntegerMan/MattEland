@@ -5,12 +5,16 @@ namespace Ani.Core.Services
 {
     public class TrafficService : Services.ServiceBase
     {
+        private readonly string _apiKey;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceBase" /> class.
         /// </summary>
         /// <param name="entities">The database context for working with entity framework.</param>
-        public TrafficService(Entities entities) : base(entities)
+        /// <param name="apiKey">The Bing Maps API key.</param>
+        public TrafficService(Entities entities, string apiKey) : base(entities)
         {
+            _apiKey = apiKey;
         }
 
         /// <summary>
@@ -22,7 +26,8 @@ namespace Ani.Core.Services
             var model = new TrafficModel
             {
                 Accidents = Entities.ActiveTrafficIncidentInfoSelect(true, false).ToList(),
-                ConstructionEvents = Entities.ActiveTrafficIncidentInfoSelect(false, true).ToList()
+                ConstructionEvents = Entities.ActiveTrafficIncidentInfoSelect(false, true).ToList(),
+                BingMapsKey = _apiKey
             };
 
             return model;

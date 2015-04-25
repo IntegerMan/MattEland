@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 using System.Web.Mvc;
-using Ani.Core.Models.Traffic;
 using Ani.Core.Services;
-using AniWebApp.Models;
 
 namespace AniWebApp.Controllers
 {
@@ -19,7 +14,11 @@ namespace AniWebApp.Controllers
 
         public TrafficController(ApplicationRoleManager roleManager) : base(roleManager)
         {
-            _trafficService = new TrafficService(this.Entities);
+
+            var apiKey = ConfigurationManager.AppSettings.Get("BingMapsKey");
+
+            _trafficService = new TrafficService(this.Entities, apiKey);
+
         }
 
         /// <summary>

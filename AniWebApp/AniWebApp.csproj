@@ -352,7 +352,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
     <Content Include="Views\Projects\ANI.cshtml" />
-    <Content Include="Views\Traffic\Index.cshtml" />
+    <Content Include="Views\Traffic\Index.cshtml">
+      <BrowseToURL>~/Traffic/</BrowseToURL>
+    </Content>
     <Content Include="Views\Weather\Frost.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Weather\AddFrostEntry.cshtml" />
