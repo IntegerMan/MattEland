@@ -29,7 +29,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic")]
         public ActionResult Index()
         {
-            var model = _trafficService.GetTrafficModel();
+            var model = _trafficService.GetTrafficModel(this.GetUserZipCode());
 
             return View(model);
         }
@@ -42,7 +42,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Accidents")]
         public ActionResult Accidents()
         {
-            return View(_trafficService.GetTrafficModel().Accidents);
+            return View(_trafficService.GetTrafficModel(this.GetUserZipCode()).Accidents);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Construction")]
         public ActionResult Construction()
         {
-            return View(_trafficService.GetTrafficModel().ConstructionEvents);
+            return View(_trafficService.GetTrafficModel(this.GetUserZipCode()).ConstructionEvents);
         }
     }
 }

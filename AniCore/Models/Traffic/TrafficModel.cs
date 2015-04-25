@@ -12,5 +12,17 @@ namespace Ani.Core.Models.Traffic
         /// </summary>
         /// <value>The bing maps key.</value>
         public string BingMapsKey { get; set; }
+
+        /// <summary>
+        /// Gets or sets the map latitude.
+        /// </summary>
+        /// <value>The map latitude.</value>
+        public double MapLat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the map longitude.
+        /// </summary>
+        /// <value>The map longitude.</value>
+        public double MapLong { get; set; }
     }
 }

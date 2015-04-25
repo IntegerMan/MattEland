@@ -20,8 +20,9 @@ namespace Ani.Core.Services
         /// <summary>
         /// Gets the model for traffic information.
         /// </summary>
+        /// <param name="zipCode">The zip code.</param>
         /// <returns>The traffic model.</returns>
-        public TrafficModel GetTrafficModel()
+        public TrafficModel GetTrafficModel(int zipCode)
         {
             var model = new TrafficModel
             {
@@ -29,6 +30,24 @@ namespace Ani.Core.Services
                 ConstructionEvents = Entities.ActiveTrafficIncidentInfoSelect(false, true).ToList(),
                 BingMapsKey = _apiKey
             };
+
+            // Get the zip code, defaulting to the default zip code if none found
+            var zip = Entities.ZipCodes.FirstOrDefault(z => z.ID == zipCode) ??
+                      Entities.ZipCodes.FirstOrDefault(z => z.ID == 43035);
+
+            // If we have a zip code, use it to inform our lat / longitude values
+            if (zip != null)
+            {
+                if (zip.Lat != null)
+                {
+                    model.MapLat = zip.Lat.Value;
+                }
+
+                if (zip.Lng != null)
+                {
+                    model.MapLong = zip.Lng.Value;
+                }
+            }
 
             return model;
         }

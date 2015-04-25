@@ -27,8 +27,11 @@
 
             var mapOptions = {
                 credentials: "@Model.BingMapsKey",
-                mapTypeId: Microsoft.Maps.MapTypeId.aerial
-            }
+                center: new Microsoft.Maps.Location(@Model.MapLat, @Model.MapLong),
+                mapTypeId: Microsoft.Maps.MapTypeId.road,
+                zoom: 11,
+                showScalebar: true
+        }
 
             var map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
         }
