@@ -1,7 +1,7 @@
 
 var infobox = null;
 
-function addPin(map, lat, lng, severityId, severityName, title, description) {
+function addPin(map, lat, lng, severityId, severityName, title, description, start, end) {
 
     // Build the location of the pin
     var location = new Microsoft.Maps.Location(lat, lng);
@@ -14,6 +14,8 @@ function addPin(map, lat, lng, severityId, severityName, title, description) {
     pin.Title = title;
     pin.Description = description;
     pin.SeverityName = severityName;
+    pin.Start = start;
+    pin.End = end;
 
     // Add handler for the pushpin click event.
     Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
@@ -48,7 +50,10 @@ function initializeMap(mapKey, lat, long, zoom) {
 function displayInfobox(e) {
     if (e.targetType == 'pushpin') {
         infobox.setLocation(e.target.getLocation());
-        infobox.setOptions({ visible: true, title: e.target.SeverityName + ": " + e.target.Title, description: e.target.Description });
+        infobox.setOptions({
+            visible: true, title: e.target.SeverityName + ": " + e.target.Title,
+            description: e.target.Description + " " + e.target.Start + " - " + e.target.End
+        });
     } else {
         hideInfobox(e);
     }

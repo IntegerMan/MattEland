@@ -31,13 +31,13 @@
             // Add Construction
             @foreach (var incident in Model.ConstructionEvents)
             {
-                @:addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description');
+                @:addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description', '@incident.StartTimeUTC.Value.ToLocalTime()', '@incident.EndTimeUTC.Value.ToLocalTime()');
             }
 
             // Add Accidents
             @foreach (var accident in Model.Accidents)
             {
-                @:addPin(map, @accident.Lat, @accident.Lng, @accident.SeverityID, '@accident.SeverityName', '@accident.TypeName', '@accident.Description');
+                @:addPin(map, @accident.Lat, @accident.Lng, @accident.SeverityID, '@accident.SeverityName', '@accident.TypeName', '@accident.Description', '@accident.StartTimeUTC.Value.ToLocalTime()', '@accident.EndTimeUTC.Value.ToLocalTime()');
             }
         }
 
