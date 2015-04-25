@@ -1,7 +1,6 @@
 ﻿@using AniWebApp.Helpers
 @{
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
-    ViewBag.NoListItemsClass = "alert-danger";
     ViewBag.TableClasses = "table-responsive table-hover";
 }
 
@@ -13,8 +12,7 @@
 {
     @RenderSection("scripts", false)
 
-    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.1.4/jquery.bootgrid.min.js")
-    @*@Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.1.4/jquery.bootgrid.min.css")*@
+    @*@Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.1.4/jquery.bootgrid.min.js")*@
 }
 
 @section header_side_content
@@ -31,12 +29,14 @@
 
 <div class="panel panel-default @StyleHelper.GetHiddenClass(ViewBag.HasListItems)">
 
-    <div class="panel-heading">
-        @ViewBag.ListTitle
-    </div>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.ListTitle))
+    {
+        <div class="panel-heading">
+            @ViewBag.ListTitle
+        </div>
+    }
 
     <div class="panel-body">
-
         <table class="table @ViewBag.TableClasses"
                data-toggle="bootgrid"
                data-sorting="false"

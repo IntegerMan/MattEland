@@ -14,81 +14,19 @@
 {
 
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0">
-
-
-
     </script>
+    @Scripts.Render("~/scripts/maps.js")
 
     <script type="text/javascript">
 
         $(function() {
-            getMap();
+            loadMap();
         });
 
-        var infobox = null;
+        function loadMap() {
 
-        function addPin(map, lat, lng, severityId, severityName, title, description) {
-
-            // Build the location of the pin
-            var location = new Microsoft.Maps.Location(lat, lng);
-
-            // Create a pin object
-            var pin = new Microsoft.Maps.Pushpin(location, { text: '!', draggable: false });
-
-            // TODO: Support for severity-based icons would be nice.
-
-            pin.Title = title;
-            pin.Description = description;
-            pin.SeverityName = severityName;
-
-            // Add handler for the pushpin click event.
-            Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
-
-            // Add the items to the map
-            map.entities.push(pin);
-        }
-
-        function displayInfobox(e) {
-            if (e.targetType == 'pushpin') {
-                infobox.setLocation(e.target.getLocation());
-                infobox.setOptions({ visible: true, title: e.target.SeverityName + ": " + e.target.Title, description: e.target.Description });
-            } else {
-                hideInfobox(e);
-            }
-        }
-
-        function hideInfobox(e) {
-            infobox.setOptions({ visible: false });
-        }
-
-        function initializeInfoBox(map) {
-            // Create the infobox for the pushpins
-            infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0),
-            {
-                visible: false,
-                offset: new Microsoft.Maps.Point(0, 0)
-            });
-            map.entities.push(infobox);
-        }
-
-        function getMap() {
-
-            // Set up mapping options
-            var mapOptions = {
-                credentials: "@Model.BingMapsKey",
-                center: new Microsoft.Maps.Location(@Model.MapLat, @Model.MapLong),
-                mapTypeId: Microsoft.Maps.MapTypeId.road,
-                zoom: 11,
-                showScalebar: true
-            }
-
-            // Create the map control
-            var map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
-
-            initializeInfoBox(map);
-
-            // Hide the infobox when the map is moved.
-            Microsoft.Maps.Events.addHandler(map, 'viewchange', hideInfobox);
+            // Build out the core map
+            var map = initializeMap("@Model.BingMapsKey", @Model.MapLat, @Model.MapLong, 11);
 
             // Add Construction
             @foreach (var incident in Model.ConstructionEvents)

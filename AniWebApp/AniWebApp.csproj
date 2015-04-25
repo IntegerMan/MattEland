@@ -274,6 +274,7 @@
     <Content Include="Images\TaskEstimator99.png" />
     <Content Include="Images\WheelOfNames99.png" />
     <Content Include="Images\world.png" />
+    <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\easySlider1.7.min.js" />
     <Content Include="Scripts\alert.js" />

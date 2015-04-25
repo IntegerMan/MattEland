@@ -1,12 +1,12 @@
 ﻿@using AniWebApp.Helpers
 
-@model IList<Ani.Core.ActiveTrafficIncidentInfoSelect_Result>
+@model Ani.Core.Models.Traffic.TrafficModel
 
 @{
     ViewBag.Title = "Traffic Accidents";
-    ViewBag.TitleSmall = string.Format("{0}", @Model.Count());
+    ViewBag.TitleSmall = string.Format("{0}", @Model.Accidents.Count());
     ViewBag.BreadcrumbTitle = "Accidents";
-    ViewBag.HasListItems = Model.Any();
+    ViewBag.HasListItems = Model.Accidents.Any();
     ViewBag.ListTitle = "Current Traffic Incidents";
     ViewBag.NoListItemsClass = "alert-success";
     ViewBag.NoListItemsMessage = "No Traffic Incidents";
@@ -17,6 +17,40 @@
 {
     <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
     <li><a href="@Url.Action("Index", "Traffic")">Traffic</a></li>
+}
+
+@section scripts
+{
+
+    <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0">
+    </script>
+    @Scripts.Render("~/scripts/maps.js")
+
+    <script type="text/javascript">
+
+        $(function() {
+            loadMap();
+        });
+
+        function loadMap() {
+
+            // Build out the core map
+            var map = initializeMap("@Model.BingMapsKey", @Model.MapLat, @Model.MapLong, 11);
+
+            // Add Construction
+            @foreach (var incident in Model.Accidents)
+            {
+                @:addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description');
+            }
+
+        }
+
+    </script>
+}
+
+@section top_content
+{
+    <div id='mapDiv' style="position:relative; height:400px;"></div>
 }
 
 @section table_headers
@@ -30,7 +64,7 @@
 
 @section table_body
 {
-    @foreach (var m in Model)
+    @foreach (var m in Model.Accidents)
     {
         <tr class="@Html.GetTableRowClass(m.SeverityID)">
             <td>

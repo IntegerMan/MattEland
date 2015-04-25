@@ -42,7 +42,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Accidents")]
         public ActionResult Accidents()
         {
-            return View(_trafficService.GetTrafficModel(this.GetUserZipCode()).Accidents);
+            return View(_trafficService.GetTrafficModel(this.GetUserZipCode()));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace AniWebApp.Controllers
         [Route(@"Traffic/Construction")]
         public ActionResult Construction()
         {
-            return View(_trafficService.GetTrafficModel(this.GetUserZipCode()).ConstructionEvents);
+            return View(_trafficService.GetTrafficModel(this.GetUserZipCode()));
         }
     }
 }
