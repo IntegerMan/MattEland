@@ -6,10 +6,22 @@ function addPin(map, lat, lng, severityId, severityName, title, description, sta
     // Build the location of the pin
     var location = new Microsoft.Maps.Location(lat, lng);
 
-    // Create a pin object
-    var pin = new Microsoft.Maps.Pushpin(location, { text: '!', draggable: false });
+    // Determine Icon & Text
+    var icon;
+    var text;
+    if (severityId <= 1) {
+        icon = "/Images/BlueDiamond.png";
+        text = "";
+    } else if (severityId >= 3) {
+        icon = "/Images/RedDiamond.png";
+        text = "";
+    } else {
+        icon = "/Images/YellowDiamond.png";
+        text = "";
+    }
 
-    // TODO: Support for severity-based icons would be nice.
+    // Create a pin object
+    var pin = new Microsoft.Maps.Pushpin(location, { text: text, icon: icon, draggable: false });
 
     pin.Title = title;
     pin.Description = description;

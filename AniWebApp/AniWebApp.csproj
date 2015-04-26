@@ -240,6 +240,7 @@
     <Content Include="Content\Terminal.less" />
     <Content Include="Content\Console.less" />
     <Content Include="Images\ApplicationIcon.png" />
+    <Content Include="Images\BlueDiamond.png" />
     <Content Include="Images\contentback.jpg" />
     <Content Include="Images\DailyQuestions99.png" />
     <Content Include="Images\download.png" />
@@ -249,6 +250,7 @@
     <Content Include="Images\listcircle.png" />
     <Content Include="Images\map.png" />
     <Content Include="Images\phonebackground.png" />
+    <Content Include="Images\RedDiamond.png" />
     <Content Include="Images\route.png" />
     <Content Include="Images\RunningLate99.png" />
     <Content Include="Images\screenshots\LifeLights\SS1.png" />
@@ -274,6 +276,7 @@
     <Content Include="Images\TaskEstimator99.png" />
     <Content Include="Images\WheelOfNames99.png" />
     <Content Include="Images\world.png" />
+    <Content Include="Images\YellowDiamond.png" />
     <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\easySlider1.7.min.js" />
