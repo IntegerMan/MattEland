@@ -21,7 +21,7 @@ function addPin(map, lat, lng, severityId, severityName, title, description, sta
     }
 
     // Create a pin object
-    var pin = new Microsoft.Maps.Pushpin(location, { text: text, icon: icon, draggable: false });
+    var pin = new Microsoft.Maps.Pushpin(location, { text: text, icon: icon, width: 16, height:16, draggable: false });
 
     pin.Title = title;
     pin.Description = description;
