@@ -1,27 +1,43 @@
 
 var infobox = null;
 
-function addPin(map, lat, lng, severityId, severityName, title, description, start, end) {
+function addPin(map, lat, lng, severityId, severityName, title, description, start, end, typeId) {
 
     // Build the location of the pin
     var location = new Microsoft.Maps.Location(lat, lng);
 
-    // Determine Icon & Text
-    var icon;
-    var text;
-    if (severityId <= 1) {
-        icon = "/Images/BlueDiamond.png";
-        text = "";
-    } else if (severityId >= 3) {
-        icon = "/Images/RedDiamond.png";
-        text = "";
-    } else {
-        icon = "/Images/YellowDiamond.png";
-        text = "";
+    // Determine Shape Name based on type of item
+    var shapeName;
+    if (typeId === 1 || typeId === 3 || typeId === 8) { // Accidents
+        shapeName = "BowTie";
+    } else if (typeId === 5) {  // For misc. shapes
+        shapeName = "HalfDiamond";
+    } else { // All other shapes - primarily construction
+        shapeName = "Diamond";
     }
 
+    // Determine Color based on severity
+    var color;
+    if (severityId <= 1) {
+        color = "Blue";
+    } else if (severityId >= 3) {
+        color = "Red";
+    } else {
+        color = "Yellow";
+    }
+
+    // Put it all together in an icon
+    var icon = "/Images/" + color + shapeName + ".png";
+
     // Create a pin object
-    var pin = new Microsoft.Maps.Pushpin(location, { text: text, icon: icon, width: 16, height:16, draggable: false });
+    var pin = new Microsoft.Maps.Pushpin(location,
+    {
+        text: "",
+        icon: icon,
+        width: 16,
+        height: 16,
+        draggable: false
+    });
 
     pin.Title = title;
     pin.Description = description;

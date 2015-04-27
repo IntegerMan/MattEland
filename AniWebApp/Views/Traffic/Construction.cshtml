@@ -39,7 +39,7 @@
             // Add Construction
             @foreach (var incident in Model.ConstructionEvents)
             {
-                @:addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description', '@incident.StartTimeUTC.Value.ToLocalTime()', '@incident.EndTimeUTC.Value.ToLocalTime()');
+                @:addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description', '@incident.StartTimeUTC.Value.ToLocalTime()', '@incident.EndTimeUTC.Value.ToLocalTime()', @incident.TypeID);
             }
 
         }
