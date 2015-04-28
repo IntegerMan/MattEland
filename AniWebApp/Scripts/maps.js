@@ -1,10 +1,13 @@
 
 var infobox = null;
 
-function addPin(map, lat, lng, severityId, severityName, title, description, start, end, typeId) {
+function getIcon(typeId, severityId) {
 
-    // Build the location of the pin
-    var location = new Microsoft.Maps.Location(lat, lng);
+    /// <summary>
+    /// Gets the icon path for a map shape given the type and severity.
+    /// </summary>
+    /// <param name="typeId">The type identifier.</param>
+    /// <param name="severityId">The severity identifier.</param>
 
     // Determine Shape Name based on type of item
     var shapeName;
@@ -27,13 +30,35 @@ function addPin(map, lat, lng, severityId, severityName, title, description, sta
     }
 
     // Put it all together in an icon
-    var icon = "/Images/" + color + shapeName + ".png";
+    return "/Images/" + color + shapeName + ".png";
+
+}
+
+function addPin(map, lat, lng, severityId, severityName, title, description, start, end, typeId) {
+
+    /// <summary>
+    /// Builds and adds a pin to the map.
+    /// </summary>
+    /// <param name="map">The map.</param>
+    /// <param name="lat">The latitude.</param>
+    /// <param name="lng">The longitude.</param>
+    /// <param name="severityId">The severity identifier.</param>
+    /// <param name="severityName">Name of the severity.</param>
+    /// <param name="title">The title.</param>
+    /// <param name="description">The description.</param>
+    /// <param name="start">The start date/time.</param>
+    /// <param name="end">The end date/time.</param>
+    /// <param name="typeId">The type identifier.</param>
+
+    // Build the location of the pin
+    var location = new Microsoft.Maps.Location(lat, lng);
+
 
     // Create a pin object
     var pin = new Microsoft.Maps.Pushpin(location,
     {
         text: "",
-        icon: icon,
+        icon: getIcon(typeId, severityId),
         width: 16,
         height: 16,
         draggable: false
@@ -52,12 +77,20 @@ function addPin(map, lat, lng, severityId, severityName, title, description, sta
     map.entities.push(pin);
 }
 
-function initializeMap(mapKey, lat, long, zoom) {
+function initializeMap(mapKey, lat, lng, zoom) {
+
+    /// <summary>
+    /// Initializes the map control.
+    /// </summary>
+    /// <param name="mapKey">The Bing map key.</param>
+    /// <param name="lat">The latitude.</param>
+    /// <param name="lng">The longitude.</param>
+    /// <param name="zoom">The zoom level.</param>
 
     // Set up mapping options
     var mapOptions = {
         credentials: mapKey,
-        center: new Microsoft.Maps.Location(lat, long),
+        center: new Microsoft.Maps.Location(lat, lng),
         mapTypeId: Microsoft.Maps.MapTypeId.road,
         zoom: zoom,
         showScalebar: false
@@ -76,6 +109,12 @@ function initializeMap(mapKey, lat, long, zoom) {
 
 
 function displayInfobox(e) {
+
+    /// <summary>
+    /// Displays the info box for the selected pushpin.
+    /// </summary>
+    /// <param name="e">The event arguments.</param>
+
     if (e.targetType == 'pushpin') {
         infobox.setLocation(e.target.getLocation());
         infobox.setOptions({
@@ -88,15 +127,29 @@ function displayInfobox(e) {
 }
 
 function hideInfobox(e) {
+
+    /// <summary>
+    /// Hides the info box.
+    /// </summary>
+    /// <param name="e">The event arguments.</param>
+
     infobox.setOptions({ visible: false });
 }
 
 function initializeInfoBox(map) {
+
+    /// <summary>
+    /// Initializes the info box.
+    /// </summary>
+    /// <param name="map">The map.</param>
+
     // Create the infobox for the pushpins
     infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0),
     {
         visible: false,
         offset: new Microsoft.Maps.Point(0, 0)
     });
+
+    // Add the box to the map
     map.entities.push(infobox);
 }
