@@ -21,6 +21,50 @@
     @Html.ActionLink("Add Entry", "AddEntry", new { RatingId = @Model.Rating.Id }, new { @class = "btn btn-primary" })
 }
 
+@section scripts
+{
+    @Scripts.Render("http://d3js.org/d3.v3.min.js")
+    @Scripts.Render("http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
+
+    <script type="text/javascript">
+
+        function addBar(svg, index, value, minValue, maxValue, svgHeight) {
+
+            var width = 10;
+            var itemHeight = (value / (maxValue - minValue)) * svgHeight;
+
+            svg.append("rect")
+                    .attr("class", "bar")
+                    .attr("x", index * (width + 1))
+                    .attr("width", width)
+                    .attr("y", svgHeight - itemHeight)
+                    .attr("height", itemHeight);
+        }
+
+        $(function () {
+
+            var height = 50;
+
+            var svg = d3.select("#ChartContainer").append("svg")
+                .attr("height", height);
+
+            var index = 0;
+
+            @foreach (var entry in Model.HistoryEntries)
+            {
+                @:addBar(svg, index++, @entry.RatingValue, @Model.Rating.MinValue, @Model.Rating.MaxValue, height);
+            }
+
+        });
+
+    </script>
+}
+
+@section top_content
+{
+    <div id="ChartContainer"></div>
+}
+
 @section table_headers
 {
     <th>Date</th>

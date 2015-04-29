@@ -44,3 +44,7 @@ th {
 .margin-left {
     margin-left: 8px;
 }
+
+.bar {
+    fill: #0092ff;
+}
