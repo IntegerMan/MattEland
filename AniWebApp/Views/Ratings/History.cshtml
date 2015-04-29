@@ -102,10 +102,11 @@
                 })
             </td>
             <td>
-                <span class="bg-primary">
-                   &nbsp;@entry.RatingValue / @Model.Rating.MaxValue
-                </span>
-                <span class="margin-left">
+                <span class="text-nowrap">
+                    <span class="bg-primary margin-right">
+                        &nbsp;@entry.RatingValue / @Model.Rating.MaxValue
+                    </span>
+
                     @for (int i = @Model.Rating.MinValue; i <= @Model.Rating.MaxValue; i++)
                     {
                         if (i <= entry.RatingValue)
