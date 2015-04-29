@@ -28,10 +28,10 @@
 
     <script type="text/javascript">
 
-        function addBar(svg, index, value, minValue, maxValue, svgHeight, tip) {
+        function addBar(svg, index, value, minValue, maxValue, svgHeight, tip, date, comments) {
 
             var width = 10;
-            var itemHeight = (value / (maxValue - minValue)) * svgHeight;
+            var itemHeight = ((value - minValue + 1) / (maxValue - minValue + 1)) * svgHeight;
 
             svg.append("rect")
                 .attr("class", "bar")
@@ -41,7 +41,7 @@
                 .attr("height", itemHeight)
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide)
-                .datum({ value: value, minValue: minValue, maxValue: maxValue });
+                .datum({ value: value, minValue: minValue, maxValue: maxValue, date: date, comments: comments});
     }
 
         $(function () {
@@ -53,10 +53,10 @@
                 .attr("width", 700);
 
             var tip = d3.tip()
-                .attr('class', 'label label-info')
-                .offset([-10, 0])
+                .attr('class', 'label label-info text-justify')
+                .offset([-20, 0])
                 .html(function(d) {
-                    return d.value + "/" + d.maxValue;
+                    return "<p>" + d.value + "/" + d.maxValue + " on " + d.date + "</p><p>" + d.comments + "</p>";
                 });
 
             svg.call(tip);
@@ -65,7 +65,7 @@
 
             @foreach (var entry in Model.HistoryEntries)
             {
-                @:addBar(svg, index++, @entry.RatingValue, @Model.Rating.MinValue, @Model.Rating.MaxValue, height, tip);
+                @:addBar(svg, index++, @entry.RatingValue, @Model.Rating.MinValue, @Model.Rating.MaxValue, height, tip, "@entry.EntryDate.ToLongDateString()", "@entry.Comments");
             }
 
         });
