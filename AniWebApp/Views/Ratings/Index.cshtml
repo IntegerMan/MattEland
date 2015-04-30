@@ -47,7 +47,7 @@
             <td>
                 @rating.Description
             </td>
-            <td>
+            <td class="text-nowrap">
                 @if (rating.LastRating.HasValue)
                 {
                     for (int i = @rating.MinValue; i <= @rating.MaxValue; i++)
