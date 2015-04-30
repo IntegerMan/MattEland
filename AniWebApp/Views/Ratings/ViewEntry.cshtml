@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = string.Format("{0} Rating Details", Model.Rating.Name);
     ViewBag.BreadcrumbTitle = Model.EntryDate.ToShortDateString();
-    ViewBag.Lead = string.Format("Details for a specific {0} rating you entered for a particular date.", Model.Rating.Name);
+    ViewBag.Lead = string.Format("Details for a specific {0} rating you entered for a particular date.", @Html.ActionLink(Model.Rating.Name, "History", "Ratings"));
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 

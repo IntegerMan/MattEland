@@ -52,3 +52,7 @@ th {
 .bar {
     fill: #0092ff;
 }
+
+.bar:hover {
+  fill: #5555FF;
+}

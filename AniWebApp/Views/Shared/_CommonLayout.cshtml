@@ -33,7 +33,7 @@
             @if (!string.IsNullOrWhiteSpace(ViewBag.Lead))
             {
                 <p class="lead">
-                    @ViewBag.Lead
+                    @Html.Raw(ViewBag.Lead)
                 </p>
             }
         </div>
