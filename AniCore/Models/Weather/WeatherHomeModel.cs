@@ -24,5 +24,18 @@ namespace Ani.Core.Models.Weather
         /// </summary>
         /// <value>The zip code.</value>
         public int ZipCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the low temperature forecast line data for inclusion in a chart.
+        /// </summary>
+        /// <value>The low temperature forecast line data.</value>
+        public string ForecastLowLineData { get; set; }
+
+        /// <summary>
+        /// Gets or sets the high temperature forecast line data for inclusion in a chart.
+        /// </summary>
+        /// <value>The high forecast line data.</value>
+        public string ForecastHighLineData { get; set; }
+
     }
 }

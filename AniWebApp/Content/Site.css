@@ -49,6 +49,14 @@ th {
     margin-right: 8px;
 }
 
+.margin-top {
+    margin-top: 8px;
+}
+
+.margin-bottom {
+    margin-bottom: 8px;
+}
+
 .bar {
     fill: #0092ff;
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Principal;
+using System.Text;
 using Ani.Core.Helpers;
 using Ani.Core.Models.Weather;
 
 namespace Ani.Core.Services
 {
-    public class WeatherService : Services.ServiceBase
+    public class WeatherService : ServiceBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceBase" /> class.
@@ -65,9 +66,16 @@ namespace Ani.Core.Services
                 model.Conditions = null;
             }
 
+            int index = 0;
+
+            // Start our line graph JSON
+            var lowLineData = new StringBuilder("[");
+            var highLineData = new StringBuilder("[");
+
             var predictions = Entities.ActiveWeatherPredictionsSelect(zipCode, DateTime.Today);
             foreach (var prediction in predictions)
             {
+                // Build out object data for page binding
                 var forecast = new WeatherForecastModel
                 {
                     Low = prediction.Low,
@@ -81,8 +89,28 @@ namespace Ani.Core.Services
                     Description = prediction.Description
                 };
 
+                // Build out JSON data for line graphs
+                if (index > 0)
+                {
+                    lowLineData.Append(",");
+                    highLineData.Append(",");
+                }
+
+                lowLineData.AppendFormat("{{\"x\": \"{0}\", \"y\": \"{1}\"}}", index, prediction.Low);
+                highLineData.AppendFormat("{{\"x\": \"{0}\", \"y\": \"{1}\"}}", index, prediction.High);
+                
                 model.Forecasts.Add(forecast);
+
+                index++;
             }
+
+            // End our line graph JSON
+            lowLineData.Append("]");
+            model.ForecastLowLineData = lowLineData.ToString();
+
+            highLineData.Append("]");
+            model.ForecastHighLineData = highLineData.ToString();
+
             return model;
         }
 

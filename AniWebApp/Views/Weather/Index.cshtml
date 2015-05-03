@@ -13,6 +13,87 @@
     @Styles.Render("~/content/weather-icons.min.css")
 }
 
+@section scripts
+{
+    @Scripts.Render("http://d3js.org/d3.v3.min.js")
+    @Scripts.Render("http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            var height = 50;
+
+            var svg = d3.select("#svgForecastContainer").append("svg")
+                .attr("height", height)
+                .attr("width", "100%");
+
+            // Translate our objects to JSON
+            var lowLineData = @Html.Raw(Model.ForecastLowLineData);
+            var highLineData = @Html.Raw(Model.ForecastHighLineData);
+
+            // Set the ranges
+            var x = d3.scale.linear().range([5, 935]);
+            var y = d3.scale.linear().range([height, 0]);
+
+            // Determine how to do our drawing
+            var lineFunc = d3.svg.line()
+                .x(function (d) { return x(d.x); })
+                .y(function (d) { return y(d.y); })
+                .interpolate("basis");
+
+            // Scale the range of the data
+            x.domain([0, 4]);
+            y.domain([@Model.Forecasts.Min(f => f.Low) - 5, @Model.Forecasts.Max(f => f.High) + 5]);
+
+            // Draw the low forecast line
+            svg.append('svg:path')
+              .attr('d', lineFunc(lowLineData))
+              .attr('stroke', '#5555FF')
+              .attr('stroke-width', 2)
+              .attr('fill', 'none');
+
+            // Draw the high forecast line
+            svg.append('svg:path')
+              .attr('d', lineFunc(highLineData))
+              .attr('stroke', '#ff5555')
+              .attr('stroke-width', 2)
+              .attr('fill', 'none');
+
+            // Adding Points for high
+            svg.selectAll(".dot")
+                .data(highLineData, function(d) { return d.x; })
+                .enter().append("circle")
+                .attr("cx", function(d) { return x(d.x); })
+                .attr("cy", function(d) { return y(d.y); })
+                .attr("r", 2.5)
+                .attr("fill", "white")
+                .on("mouseover", function(d){ 
+                    d3.select(this).style("fill", "red");
+                })
+                .on("mouseout", function(){
+                    d3.select(this).style("fill", "white");
+                });    
+
+            // Adding Points
+            svg.selectAll(".dot")
+                .data(lowLineData, function(d) { return d.x; })
+                .enter().append("circle")
+                .attr("cx", function(d) { return x(d.x); })
+                .attr("cy", function(d) { return y(d.y); })
+                .attr("r", 2.5)
+                .attr("fill", "white")
+                .on("mouseover", function(d){ 
+                    d3.select(this).style("fill", "blue");
+                })
+                .on("mouseout", function(){
+                    d3.select(this).style("fill", "white");
+                });    
+        });
+
+    </script>
+}
+
 <h2>Current Weather</h2>
 
 @if (Model.Conditions == null)
@@ -99,6 +180,11 @@ else
 @if (Model.Forecasts != null && Model.Forecasts.Any())
 {
     <h2>Forecast</h2>
+
+    <div class="row">
+        <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10 margin-bottom" id="svgForecastContainer">
+        </div>
+    </div>
 
     <div class="row">
 
