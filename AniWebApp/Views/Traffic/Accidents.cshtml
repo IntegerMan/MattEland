@@ -35,12 +35,12 @@
         function loadMap() {
 
             // Build out the core map
-            var map = initializeMap("@Model.BingMapsKey", @Model.MapLat, @Model.MapLong, 11);
+            var map = MattEland.Maps.initializeMap("@Model.BingMapsKey", @Model.MapLat, @Model.MapLong, 11);
 
             // Add Construction
             @foreach (var incident in Model.Accidents)
             {
-                @:addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description', '@incident.StartTimeUTC.Value.ToLocalTime()', '@incident.EndTimeUTC.Value.ToLocalTime()', @incident.TypeID);
+                @:MattEland.Maps.addPin(map, @incident.Lat, @incident.Lng, @incident.SeverityID, '@incident.SeverityName', '@incident.TypeName', '@incident.Description', '@incident.StartTimeUTC.Value.ToLocalTime()', '@incident.EndTimeUTC.Value.ToLocalTime()', @incident.TypeID);
             }
 
         }
