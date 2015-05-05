@@ -32,6 +32,16 @@
             var lowLineData = @Html.Raw(Model.ForecastLowLineData);
             var highLineData = @Html.Raw(Model.ForecastHighLineData);
 
+            // Add tooltip for low
+            var tipLow = d3.tip()
+                .attr('class', 'label label-info text-justify');
+            svg.call(tipLow);
+
+            // Add tooltip for high
+            var tipHigh = d3.tip()
+                .attr('class', 'label label-danger text-justify');
+            svg.call(tipHigh);
+
             // Set the ranges
             var x = d3.scale.linear().range([5, 935]);
             var y = d3.scale.linear().range([height, 0]);
@@ -69,24 +79,31 @@
                 .attr("r", 2.5)
                 .attr("fill", "white")
                 .on("mouseover", function(d){ 
+                    tipLow.hide();
+                    tipHigh.html(d.y + "&deg;");
+                    tipHigh.show();
                     d3.select(this).style("fill", "red");
                 })
                 .on("mouseout", function(){
                     d3.select(this).style("fill", "white");
                 });    
 
-            // Adding Points
-            svg.selectAll(".dot")
+            // Adding Points for low
+            svg.selectAll("dot")
                 .data(lowLineData, function(d) { return d.x; })
                 .enter().append("circle")
                 .attr("cx", function(d) { return x(d.x); })
                 .attr("cy", function(d) { return y(d.y); })
                 .attr("r", 2.5)
                 .attr("fill", "white")
-                .on("mouseover", function(d){ 
+                .on("mouseover", function(d) {
+                    tipHigh.hide();
+                    tipLow.html(d.y + "&deg;");
+                    tipLow.show();
                     d3.select(this).style("fill", "blue");
                 })
-                .on("mouseout", function(){
+                .on("mouseout", function() {
+                    tipLow.hide();
                     d3.select(this).style("fill", "white");
                 });    
         });
