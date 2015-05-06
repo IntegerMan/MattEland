@@ -221,6 +221,7 @@
     <Content Include="Content\jquery.bootgrid.css" />
     <Content Include="Content\jquery.bootgrid.min.css" />
     <Content Include="Content\Scanline.css" />
+    <Content Include="Content\Site.min.css" />
     <Content Include="Content\SlateCustom.css" />
     <Content Include="Content\Terminal.css" />
     <Content Include="Content\weather-icons.css" />
@@ -285,6 +286,7 @@
     <Content Include="Images\YellowBowTie.png" />
     <Content Include="Images\YellowDiamond.png" />
     <Content Include="Images\YellowHalfDiamond.png" />
+    <Content Include="Scripts\bootstrap-386.min.js" />
     <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\easySlider1.7.min.js" />
@@ -317,6 +319,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\maps.min.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\popover.js" />
