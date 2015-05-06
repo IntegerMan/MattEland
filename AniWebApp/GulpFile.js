@@ -5,6 +5,7 @@ var del = require('del');
 var minifyCss = require("gulp-minify-css");
 var rename = require('gulp-rename');
 var uglify = require("gulp-uglify");
+var less = require("gulp-less");
 
 var lib = '/lib';
 
@@ -45,6 +46,15 @@ gulp.task('minify-js', ['clean'], function () {
 
 });
 
-gulp.task('minify', ['minify-css', 'minify-js'], function () {
+gulp.task('compile-less', ['clean'], function () {
+
+    gulp.src('./Content/Bootstrap.less')
+        .pipe(less())
+        .pipe(rename({ extname: ".css" }))
+        .pipe(gulp.dest("./Content"));
+
+});
+
+gulp.task('minify', ['minify-css', 'minify-js', 'compile-less'], function () {
 
 });
