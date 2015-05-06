@@ -147,7 +147,7 @@ MattEland.Maps = (function () {
                 mapTypeId: Microsoft.Maps.MapTypeId.road,
                 zoom: zoom,
                 showScalebar: false
-            }
+            };
 
             // Create the map control
             var map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);

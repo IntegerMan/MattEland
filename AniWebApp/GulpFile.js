@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='minify' Clean='clean' />
+﻿/// <binding BeforeBuild='minify' AfterBuild='watch-all' Clean='clean, watch-all' ProjectOpened='watch-all' />
 var gulp = require('gulp');
 var bower = require('gulp-bower');
 var del = require('del');
@@ -6,6 +6,7 @@ var minifyCss = require("gulp-minify-css");
 var rename = require('gulp-rename');
 var uglify = require("gulp-uglify");
 var less = require("gulp-less");
+var jshint = require("gulp-jshint");
 
 var lib = '/lib';
 
@@ -58,3 +59,25 @@ gulp.task('compile-less', ['clean'], function () {
 gulp.task('minify', ['minify-css', 'minify-js', 'compile-less'], function () {
 
 });
+
+gulp.task('jsLint', function () {
+    gulp.src('./Scripts/maps.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter());
+});
+
+gulp.task('watch-js', function () {
+    gulp.watch(['./Scripts/*.js'], ['jsLint', 'minify-js']);
+});
+
+gulp.task('watch-css', function () {
+    gulp.watch(['./Content/*.css'], ['minify-css']);
+});
+
+gulp.task('watch-less', function () {
+    gulp.watch(['./Content/*.less'], ['compile-less']);
+});
+
+gulp.task('watch-all', ['watch-js', 'watch-css', 'watch-less'], function() {
+    
+})
