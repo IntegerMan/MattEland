@@ -23,3 +23,4 @@
 /// <reference path="easyslider1.7.min.js" />
 /// <reference path="jquery.bootgrid.min.js" />
 /// <reference path="maps.js" />
+/// <reference path="../gulpfile.js" />

@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <ApplicationInsightsResourceId />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -239,6 +240,7 @@
     <Content Include="Content\SlateCustom.less" />
     <Content Include="Content\Terminal.less" />
     <Content Include="Content\Console.less" />
+    <Content Include="GulpFile.js" />
     <Content Include="Images\ApplicationIcon.png" />
     <Content Include="Images\BlueBowTie.png" />
     <Content Include="Images\BlueDiamond.png" />
