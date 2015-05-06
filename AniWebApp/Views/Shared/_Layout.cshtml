@@ -20,10 +20,11 @@
 
     @* Site includes *@
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/scripts/bootstrap-386.js")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/scripts/bootstrap-386.min.js")
     @Styles.Render(Html.GetThemeCss())
     @Styles.Render("~/Content/Site.min.css")
-    @Scripts.Render("~/bundles/modernizr")
 
     <meta name="description" content="Personal Development and Research Projects by Matt Eland" />
 

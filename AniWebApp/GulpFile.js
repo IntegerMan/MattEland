@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='minify' AfterBuild='watch-all' Clean='clean, watch-all' ProjectOpened='watch-all' />
+﻿/// <binding BeforeBuild='minify' Clean='clean' ProjectOpened='watch-all' />
 var gulp = require('gulp');
 var bower = require('gulp-bower');
 var del = require('del');
