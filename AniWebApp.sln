@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniWebApp", "AniWebApp\AniWebApp.csproj", "{28745FA8-46CE-4D1F-844D-F8E16A30FCD7}"
 EndProject
@@ -13,6 +13,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniCore", "AniCore\AniCore.csproj", "{E6C53E29-9824-47F1-9601-E3534CB6CD2C}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AniArchitecture", "AniArchitecture\AniArchitecture.modelproj", "{E1FA56CE-BF1B-4930-AB4B-EB8F4F7CD807}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceSimCore", "SpaceSimCore\SpaceSimCore.csproj", "{E91449EB-2C6B-42A2-9093-9B0F935EA9D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{E1FA56CE-BF1B-4930-AB4B-EB8F4F7CD807}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1FA56CE-BF1B-4930-AB4B-EB8F4F7CD807}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1FA56CE-BF1B-4930-AB4B-EB8F4F7CD807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E91449EB-2C6B-42A2-9093-9B0F935EA9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91449EB-2C6B-42A2-9093-9B0F935EA9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91449EB-2C6B-42A2-9093-9B0F935EA9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91449EB-2C6B-42A2-9093-9B0F935EA9D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -435,6 +435,10 @@
       <Project>{e6c53e29-9824-47f1-9601-e3534cb6cd2c}</Project>
       <Name>AniCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpaceSimCore\SpaceSimCore.csproj">
+      <Project>{e91449eb-2c6b-42a2-9093-9b0f935ea9d7}</Project>
+      <Name>SpaceSimCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
