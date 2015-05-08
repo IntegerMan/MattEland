@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MattEland.SpaceSim.Ship.ShipEngine" Collapsed="true">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship\ShipEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.CargoItem" Collapsed="true">
+    <Position X="2" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship\CargoItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.ShipArea" Collapsed="true">
+    <Position X="3.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship\ShipArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.CargoHold" Collapsed="true">
+    <Position X="2" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship\CargoHold.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.ShipAttachment" Collapsed="true">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <AssociationLine Name="MaintenanceArea" Type="MattEland.SpaceSim.Ship.ShipArea">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.287" Y="0.331" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Ship\ShipAttachment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MaintenanceArea" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.PowerPlant" Collapsed="true">
+    <Position X="2" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship\PowerPlant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.CrewQuarters" Collapsed="true">
+    <Position X="4.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship\CrewQuarters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MattEland.SpaceSim.Ship.ShipChassis" Collapsed="true">
+    <Position X="3.25" Y="1.25" Width="1.5" />
+    <AssociationLine Name="Areas" Type="MattEland.SpaceSim.Ship.ShipArea">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.742" Y="0.162" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAIAAEAAAAAAAAAAASAAAAAAAAAAAAQAAE=</HashCode>
+      <FileName>Ship\ShipChassis.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Areas" />
+      <Property Name="Attachments" />
+      <Property Name="Engines" />
+      <Property Name="PowerPlants" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

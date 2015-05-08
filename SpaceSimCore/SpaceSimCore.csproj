@@ -42,7 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ship\CrewQuarters.cs" />
+    <Compile Include="Ship\PowerPlant.cs" />
+    <Compile Include="Ship\ShipAttachment.cs" />
+    <Compile Include="Ship\CargoHold.cs" />
+    <Compile Include="Ship\CargoItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ship\ShipArea.cs" />
+    <Compile Include="Ship\ShipEngine.cs" />
+    <Compile Include="Ship\ShipChassis.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ship\ShipStructure.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
