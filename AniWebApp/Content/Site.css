@@ -65,7 +65,13 @@ th {
   fill: #5555FF;
 }
 
-.tick {
+.tick text {
+    fill: lightgrey;
+}
+
+.tick line {
     stroke: lightgrey;
-    opacity: 0.7;
+    opacity: 0.5;
+    -ms-opacity: 0.5;
+    stroke-dasharray: 0.5;    
 }

@@ -20,17 +20,10 @@
 
     <script type="text/javascript">
 
-        function make_y_axis(y) {
-            return d3.svg.axis()
-                .scale(y)
-                .orient("left")
-                .ticks(3);
-        }
-
         $(function () {
 
             var width = 935;
-            var height = 50;
+            var height = 60;
 
             var svg = d3.select("#svgForecastContainer").append("svg")
                 .attr("height", height)
@@ -55,22 +48,19 @@
             var x = d3.scale
                       .linear()
                       .domain([0, 4])
-                      .range([50, width]);
+                      .range([30, width]);
 
             var y = d3.scale
                       .linear()
                       .domain([@Model.Forecasts.Min(f => f.Low) - 5, @Model.Forecasts.Max(f => f.High) + 5])
                       .range([height, 0]);
 
-            // Add Y Axis
-            svg.call(make_y_axis(y)
-                .tickSize(-width, 0, 0)
-                .tickFormat(""))
-                .selectAll("text")
-                .attr("transform", "translate(25, 0)")
-                .style("text-anchor", "end")
-                .attr("dx", ".8em")
-                .attr("dy", ".15em");
+            var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4).tickSize(-width, 0, 0);
+            
+            svg.append("g").attr("transform", "translate(20, 0)").call(yAxis).attr("fill","none");
+
+            d3.selectAll(".tick > text")
+                .style("font-size", function(d) { return 10; });
 
             // Determine how to do our drawing
             var lineFunc = d3.svg.line()
