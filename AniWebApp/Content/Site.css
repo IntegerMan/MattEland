@@ -64,3 +64,8 @@ th {
 .bar:hover {
   fill: #5555FF;
 }
+
+.tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}

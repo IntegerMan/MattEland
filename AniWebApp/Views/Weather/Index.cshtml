@@ -20,12 +20,21 @@
 
     <script type="text/javascript">
 
+        function make_y_axis(y) {
+            return d3.svg.axis()
+                .scale(y)
+                .orient("left")
+                .ticks(3);
+        }
+
         $(function () {
 
+            var width = 935;
             var height = 50;
 
             var svg = d3.select("#svgForecastContainer").append("svg")
                 .attr("height", height)
+                .attr("maxwidth", width)
                 .attr("width", "100%");
 
             // Translate our objects to JSON
@@ -43,18 +52,31 @@
             svg.call(tipHigh);
 
             // Set the ranges
-            var x = d3.scale.linear().range([5, 935]);
-            var y = d3.scale.linear().range([height, 0]);
+            var x = d3.scale
+                      .linear()
+                      .domain([0, 4])
+                      .range([50, width]);
+
+            var y = d3.scale
+                      .linear()
+                      .domain([@Model.Forecasts.Min(f => f.Low) - 5, @Model.Forecasts.Max(f => f.High) + 5])
+                      .range([height, 0]);
+
+            // Add Y Axis
+            svg.call(make_y_axis(y)
+                .tickSize(-width, 0, 0)
+                .tickFormat(""))
+                .selectAll("text")
+                .attr("transform", "translate(25, 0)")
+                .style("text-anchor", "end")
+                .attr("dx", ".8em")
+                .attr("dy", ".15em");
 
             // Determine how to do our drawing
             var lineFunc = d3.svg.line()
                 .x(function (d) { return x(d.x); })
                 .y(function (d) { return y(d.y); })
                 .interpolate("basis");
-
-            // Scale the range of the data
-            x.domain([0, 4]);
-            y.domain([@Model.Forecasts.Min(f => f.Low) - 5, @Model.Forecasts.Max(f => f.High) + 5]);
 
             // Draw the low forecast line
             svg.append('svg:path')
@@ -78,7 +100,7 @@
                 .attr("cy", function(d) { return y(d.y); })
                 .attr("r", 2.5)
                 .attr("fill", "white")
-                .on("mouseover", function(d){ 
+                .on("mouseover", function(d){
                     tipLow.hide();
                     tipHigh.html(d.y + "&deg;");
                     tipHigh.show();
@@ -86,7 +108,7 @@
                 })
                 .on("mouseout", function(){
                     d3.select(this).style("fill", "white");
-                });    
+                });
 
             // Adding Points for low
             svg.selectAll("dot")
@@ -105,7 +127,7 @@
                 .on("mouseout", function() {
                     tipLow.hide();
                     d3.select(this).style("fill", "white");
-                });    
+                });
         });
 
     </script>
