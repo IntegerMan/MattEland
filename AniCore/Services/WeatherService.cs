@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -165,6 +166,18 @@ namespace Ani.Core.Services
                 Items = Entities.WeatherFrostDataSelect().ToList()
             };
             return model;
+        }
+
+        /// <summary>
+        /// Gets the weather history entries for the specified zip code.
+        /// </summary>
+        /// <param name="zipCode">The zip code.</param>
+        /// <returns>A list of WeatherPredictions for the zip code.</returns>
+        public IEnumerable<WeatherPrediction> GetWeatherHistory(int zipCode)
+        {
+            var predictions = Entities.WeatherPredictions.Where(p => p.WP_ZipCode == zipCode).OrderBy(p => p.WP_PredictionDateUTC);
+
+            return predictions.ToList();
         }
     }
 }

@@ -413,6 +413,9 @@
     </Content>
     <Content Include="Views\Ratings\AddEntryForDate.cshtml" />
     <Content Include="Views\Ratings\_RatingAddEditFieldsForDatePartial.cshtml" />
+    <Content Include="Views\Weather\History.cshtml">
+      <BrowseToURL>~/Weather/43035/History</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -55,6 +55,25 @@ namespace AniWebApp.Controllers
         }
 
         /// <summary>
+        /// Gets the historical weather for a specific zip code.
+        /// </summary>
+        /// <param name="zipCode">The zip code</param>
+        /// <returns>A view of weather history for this zip code</returns>
+        [HttpGet]
+        [Route(@"Weather/{zipCode}/History")]
+        public ActionResult History(int zipCode = 0)
+        {
+            if (zipCode <= 0)
+            {
+                zipCode = GetUserZipCode();
+            }
+
+            var model = _weatherService.GetWeatherHistory(zipCode);
+
+            return View(model);
+        }
+
+        /// <summary>
         /// Gets data for the weather forecasts page.
         /// </summary>
         /// <returns>ActionResult.</returns>

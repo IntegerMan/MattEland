@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Ani.Core.WeatherPrediction>
+
+@{
+    ViewBag.Title = "Weather History";
+    ViewBag.BreadcrumbTitle = "History";
+    Layout = "~/Views/Shared/_ListLayout.cshtml";
+    ViewBag.ListNoItemsMessage = "No forecasts have been logged for this zip code.";
+    ViewBag.ListTitle = "Forecasts";
+    ViewBag.HasListItems = @Model.Any();
+}
+
+@section breadcrumbs
+{
+    <li><a href="@Url.Action("ANI", "Projects")">ANI</a></li>
+    <li><a href="@Url.Action("Home", "Weather")">Weather</a></li>    
+}
+
+@section heading {
+    @Styles.Render("~/content/weather-icons.min.css")
+}
+
+@section table_headers
+{
+    <th>Date</th>
+    <th>Low</th>
+    <th>High</th>
+    <th>Description</th>
+}
+
+@section table_body
+{
+    @foreach (var rating in Model)
+    {
+        <tr>
+            <td>
+                @rating.WP_PredictionDateUTC.ToLongDateString()
+            </td>
+            <td>
+                <span class="label label-info">@rating.WP_TempLow&deg;</span>
+            </td>
+            <td>
+                <span class="label label-danger">@rating.WP_TempHigh&deg;</span>
+            </td>
+            <td>
+                @if (string.IsNullOrWhiteSpace(rating.WP_Description))
+                {
+                    <span class="text-danger">Not Available</span>
+                }
+                else
+                {
+                    @rating.WP_Description
+                }
+            </td>
+        </tr>
+    }
+}
