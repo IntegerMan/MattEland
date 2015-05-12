@@ -37,12 +37,12 @@
             svg.append("rect")
                 .attr("class", "bar")
                 .attr("x", 10 + index * (width + 1))
-                .attr("width", width)
                 .attr("y", 5 + svgHeight - itemHeight)
                 .attr("height", itemHeight)
+                .attr("width", width)
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide)
-                .datum({ value: value, minValue: minValue, maxValue: maxValue, date: date, comments: comments});
+                .datum({ value: value, minValue: minValue, maxValue: maxValue, date: date, comments: comments });
         }
 
         $(function () {

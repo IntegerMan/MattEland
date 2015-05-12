@@ -70,6 +70,7 @@
 
             // Draw the low forecast line
             svg.append('svg:path')
+              .transition()
               .attr('d', lineFunc(lowLineData))
               .attr('stroke', '#5555FF')
               .attr('stroke-width', 2)
@@ -77,6 +78,7 @@
 
             // Draw the high forecast line
             svg.append('svg:path')
+              .transition()
               .attr('d', lineFunc(highLineData))
               .attr('stroke', '#ff5555')
               .attr('stroke-width', 2)

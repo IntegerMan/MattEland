@@ -19,6 +19,125 @@
     @Styles.Render("~/content/weather-icons.min.css")
 }
 
+@section top_content
+{
+<div class="row">
+    <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10 margin-bottom" id="svgForecastContainer">
+    </div>
+</div>    
+}
+
+
+@section scripts
+{
+    @Scripts.Render("http://d3js.org/d3.v3.min.js")
+    @Scripts.Render("http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            var width = 935;
+            var height = 60;
+
+            var svg = d3.select("#svgForecastContainer").append("svg")
+                .attr("height", height)
+                .attr("maxwidth", width)
+                .attr("width", "100%");
+
+            // Translate our objects to JSON
+            var lowLineData = @Html.Raw(Model.ForecastLowLineData);
+            var highLineData = @Html.Raw(Model.ForecastHighLineData);
+
+            // Add tooltip for low
+            var tipLow = d3.tip()
+                .attr('class', 'label label-info text-justify');
+            svg.call(tipLow);
+
+            // Add tooltip for high
+            var tipHigh = d3.tip()
+                .attr('class', 'label label-danger text-justify');
+            svg.call(tipHigh);
+
+            // Set the ranges
+            var x = d3.scale
+                      .linear()
+                      .domain([0, 4])
+                      .range([30, width]);
+
+            var y = d3.scale
+                      .linear()
+                      .domain([@Model.Min(f => f.WP_TempLow) - 5, @Model.Max(f => f.WP_TempHigh) + 5])
+                      .range([height, 0]);
+
+            var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4).tickSize(-width, 0, 0);
+            
+            svg.append("g").attr("transform", "translate(20, 0)").call(yAxis).attr("fill","none");
+
+            d3.selectAll(".tick > text")
+                .style("font-size", function(d) { return 10; });
+
+            // Determine how to do our drawing
+            var lineFunc = d3.svg.line()
+                .x(function (d) { return x(d.x); })
+                .y(function (d) { return y(d.y); })
+                .interpolate("basis");
+
+            // Draw the low forecast line
+            svg.append('svg:path')
+              .attr('d', lineFunc(lowLineData))
+              .attr('stroke', '#5555FF')
+              .attr('stroke-width', 2)
+              .attr('fill', 'none');
+
+            // Draw the high forecast line
+            svg.append('svg:path')
+              .attr('d', lineFunc(highLineData))
+              .attr('stroke', '#ff5555')
+              .attr('stroke-width', 2)
+              .attr('fill', 'none');
+
+            // Adding Points for high
+            svg.selectAll(".dot")
+                .data(highLineData, function(d) { return d.x; })
+                .enter().append("circle")
+                .attr("cx", function(d) { return x(d.x); })
+                .attr("cy", function(d) { return y(d.y); })
+                .attr("r", 2.5)
+                .attr("fill", "white")
+                .on("mouseover", function(d){
+                    tipLow.hide();
+                    tipHigh.html(d.y + "&deg;");
+                    tipHigh.show();
+                    d3.select(this).style("fill", "red");
+                })
+                .on("mouseout", function(){
+                    d3.select(this).style("fill", "white");
+                });
+
+            // Adding Points for low
+            svg.selectAll("dot")
+                .data(lowLineData, function(d) { return d.x; })
+                .enter().append("circle")
+                .attr("cx", function(d) { return x(d.x); })
+                .attr("cy", function(d) { return y(d.y); })
+                .attr("r", 2.5)
+                .attr("fill", "white")
+                .on("mouseover", function(d) {
+                    tipHigh.hide();
+                    tipLow.html(d.y + "&deg;");
+                    tipLow.show();
+                    d3.select(this).style("fill", "blue");
+                })
+                .on("mouseout", function() {
+                    tipLow.hide();
+                    d3.select(this).style("fill", "white");
+                });
+        });
+
+    </script>
+}
+
 @section table_headers
 {
     <th>Date</th>
