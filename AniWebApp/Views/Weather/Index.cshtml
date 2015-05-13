@@ -20,15 +20,35 @@
 
     <script type="text/javascript">
 
-        function drawLine(svg, lineFunc, lineData, stroke) {
+        function drawForecastLine(svg, lineFunc, x, y, lineData, stroke, hideTip, showTip) {
 
-            // Draw the low forecast line
+            // Draw the forecast line
             svg.append('svg:path')
               .transition()
               .attr('d', lineFunc(lineData))
               .attr('stroke', stroke)
               .attr('stroke-width', 2)
               .attr('fill', 'none');
+
+            // Draw the data nodes with tooltip support
+            svg.selectAll("dot")
+                .data(lineData, function(d) { return d.x; })
+                .enter().append("circle")
+                .attr("cx", function(d) { return x(d.x); })
+                .attr("cy", function(d) { return y(d.y); })
+                .attr("r", 2.5)
+                .attr("fill", "white")
+                .on("mouseover", function(d) {
+                    hideTip.hide();
+                    showTip.html(d.y + "&deg;");
+                    showTip.show();
+                    d3.select(this).style("fill", stroke);
+                })
+                .on("mouseout", function() {
+                    showTip.hide();
+                    d3.select(this).style("fill", "white");
+                });
+
             
         }
 
@@ -80,46 +100,10 @@
                 .y(function (d) { return y(d.y); })
                 .interpolate("basis");
 
-            // Draw Forecast lines
-            drawLine(svg, lineFunc, lowLineData, '#5555FF');
-            drawLine(svg, lineFunc, highLineData, '#ff5555');
+            // Draw Forecast lines with data nodes
+            drawForecastLine(svg, lineFunc, x, y, lowLineData, '#5555FF', tipHigh, tipLow);
+            drawForecastLine(svg, lineFunc, x, y, highLineData, '#ff5555', tipLow, tipHigh);
 
-            // Adding Points for high
-            svg.selectAll(".dot")
-                .data(highLineData, function(d) { return d.x; })
-                .enter().append("circle")
-                .attr("cx", function(d) { return x(d.x); })
-                .attr("cy", function(d) { return y(d.y); })
-                .attr("r", 2.5)
-                .attr("fill", "white")
-                .on("mouseover", function(d){
-                    tipLow.hide();
-                    tipHigh.html(d.y + "&deg;");
-                    tipHigh.show();
-                    d3.select(this).style("fill", "red");
-                })
-                .on("mouseout", function(){
-                    d3.select(this).style("fill", "white");
-                });
-
-            // Adding Points for low
-            svg.selectAll("dot")
-                .data(lowLineData, function(d) { return d.x; })
-                .enter().append("circle")
-                .attr("cx", function(d) { return x(d.x); })
-                .attr("cy", function(d) { return y(d.y); })
-                .attr("r", 2.5)
-                .attr("fill", "white")
-                .on("mouseover", function(d) {
-                    tipHigh.hide();
-                    tipLow.html(d.y + "&deg;");
-                    tipLow.show();
-                    d3.select(this).style("fill", "blue");
-                })
-                .on("mouseout", function() {
-                    tipLow.hide();
-                    d3.select(this).style("fill", "white");
-                });
         });
 
     </script>
