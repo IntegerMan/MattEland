@@ -20,7 +20,7 @@
 
     <script type="text/javascript">
 
-        function drawForecastLine(svg, lineFunc, x, y, lineData, stroke, hideTip, showTip) {
+        function drawForecastLine(svg, lineFunc, x, y, lineData, stroke, tip, tipCss) {
 
             // Draw the forecast line
             svg.append('svg:path')
@@ -39,13 +39,13 @@
                 .attr("r", 2.5)
                 .attr("fill", "white")
                 .on("mouseover", function(d) {
-                    hideTip.hide();
-                    showTip.html(d.y + "&deg;");
-                    showTip.show();
+                    tip.attr('class', tipCss);
+                    tip.html(d.y + "&deg;");
+                    tip.show();
                     d3.select(this).style("fill", stroke);
                 })
                 .on("mouseout", function() {
-                    showTip.hide();
+                    tip.hide();
                     d3.select(this).style("fill", "white");
                 });
 
@@ -67,14 +67,8 @@
             var highLineData = @Html.Raw(Model.ForecastHighLineData);
 
             // Add tooltip for low
-            var tipLow = d3.tip()
-                .attr('class', 'label label-info text-justify');
-            svg.call(tipLow);
-
-            // Add tooltip for high
-            var tipHigh = d3.tip()
-                .attr('class', 'label label-danger text-justify');
-            svg.call(tipHigh);
+            var tip = d3.tip();
+            svg.call(tip);
 
             // Set the ranges
             var x = d3.scale
@@ -101,8 +95,8 @@
                 .interpolate("basis");
 
             // Draw Forecast lines with data nodes
-            drawForecastLine(svg, lineFunc, x, y, lowLineData, '#5555FF', tipHigh, tipLow);
-            drawForecastLine(svg, lineFunc, x, y, highLineData, '#ff5555', tipLow, tipHigh);
+            drawForecastLine(svg, lineFunc, x, y, lowLineData, '#5555FF', tip, 'label label-info text-justify');
+            drawForecastLine(svg, lineFunc, x, y, highLineData, '#ff5555', tip, 'label label-danger text-justify');
 
         });
 
