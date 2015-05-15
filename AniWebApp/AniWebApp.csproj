@@ -299,6 +299,7 @@
     <Content Include="fonts\Fixedsys500c.ttf" />
     <Content Include="fonts\Fixedsys500c.woff" />
     <Content Include="Controllers\Controllers.cd" />
+    <Content Include="changes.md" />
     <None Include="package.json" />
     <None Include="Properties\PublishProfiles\DiscountASP.net.pubxml" />
     <None Include="Properties\PublishProfiles\matteland.pubxml" />
