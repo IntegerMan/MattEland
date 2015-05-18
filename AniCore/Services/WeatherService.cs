@@ -173,11 +173,12 @@ namespace Ani.Core.Services
         /// </summary>
         /// <param name="zipCode">The zip code.</param>
         /// <returns>A list of WeatherPredictions for the zip code.</returns>
-        public IEnumerable<WeatherPrediction> GetWeatherHistory(int zipCode)
+        public WeatherHistoryModel GetWeatherHistory(int zipCode)
         {
             var predictions = Entities.WeatherPredictions.Where(p => p.WP_ZipCode == zipCode).OrderBy(p => p.WP_PredictionDateUTC);
+            var model = new WeatherHistoryModel {Predeictions = predictions.ToList(), ZipCode = zipCode};
 
-            return predictions.ToList();
+            return model;
         }
     }
 }
