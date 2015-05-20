@@ -32,7 +32,7 @@
 {
     @Scripts.Render("http://d3js.org/d3.v3.min.js")
     @Scripts.Render("http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
-
+    @*
     <script type="text/javascript">
 
         $(function () {
@@ -71,7 +71,7 @@
                       .range([height, 0]);
 
             var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4).tickSize(-width, 0, 0);
-            
+
             svg.append("g").attr("transform", "translate(20, 0)").call(yAxis).attr("fill","none");
 
             d3.selectAll(".tick > text")
@@ -136,6 +136,7 @@
         });
 
     </script>
+    *@
 }
 
 @section table_headers
