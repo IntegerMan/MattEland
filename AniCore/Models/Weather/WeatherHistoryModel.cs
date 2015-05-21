@@ -13,5 +13,8 @@ namespace Ani.Core.Models.Weather
 
         public IList<WeatherPrediction> Predeictions { get; set; } = new List<WeatherPrediction>();
 
+
+        public string ForecastLowLineData;
+        public string ForecastHighLineData;
     }
 }
