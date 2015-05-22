@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_ListLayout.cshtml";
     ViewBag.ListNoItemsMessage = "No forecasts have been logged for this zip code.";
     ViewBag.ListTitle = "Forecasts";
-    ViewBag.HasListItems = @Model.Predeictions.Any();
+    ViewBag.HasListItems = @Model.Predictions.Any();
 }
 
 @section breadcrumbs
@@ -67,7 +67,7 @@
 
             var y = d3.scale
                       .linear()
-                      .domain([@Model.Predeictions.Min(f => f.WP_TempLow) - 5, @Model.Predeictions.Max(f => f.WP_TempHigh) + 5])
+                      .domain([@Model.Predictions.Min(f => f.WP_TempLow) - 5, @Model.Predictions.Max(f => f.WP_TempHigh) + 5])
                       .range([height, 0]);
 
             var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4).tickSize(-width, 0, 0);
@@ -149,7 +149,7 @@
 
 @section table_body
 {
-    @foreach (var rating in Model.Predeictions)
+    @foreach (var rating in Model.Predictions)
     {
         <tr>
             <td>

@@ -11,7 +11,7 @@ namespace Ani.Core.Models.Weather
 
         public int ZipCode { get; set; }
 
-        public IList<WeatherPrediction> Predeictions { get; set; } = new List<WeatherPrediction>();
+        public IList<WeatherPrediction> Predictions { get; set; } = new List<WeatherPrediction>();
 
 
         public string ForecastLowLineData;

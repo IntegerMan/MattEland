@@ -176,7 +176,7 @@ namespace Ani.Core.Services
         public WeatherHistoryModel GetWeatherHistory(int zipCode)
         {
             var predictions = Entities.WeatherPredictions.Where(p => p.WP_ZipCode == zipCode).OrderBy(p => p.WP_PredictionDateUTC);
-            var model = new WeatherHistoryModel {Predeictions = predictions.ToList(), ZipCode = zipCode};
+            var model = new WeatherHistoryModel {Predictions = predictions.ToList(), ZipCode = zipCode};
 
             return model;
         }
