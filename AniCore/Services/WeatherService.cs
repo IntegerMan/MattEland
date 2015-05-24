@@ -178,6 +178,35 @@ namespace Ani.Core.Services
             var predictions = Entities.WeatherPredictions.Where(p => p.WP_ZipCode == zipCode).OrderBy(p => p.WP_PredictionDateUTC);
             var model = new WeatherHistoryModel {Predictions = predictions.ToList(), ZipCode = zipCode};
 
+            int index = 0;
+
+            // Start our line graph JSON
+            var lowLineData = new StringBuilder("[");
+            var highLineData = new StringBuilder("[");
+
+            foreach (var prediction in predictions.OrderBy(p => p.WP_PredictionDateUTC))
+            {
+
+                // Build out JSON data for line graphs
+                if (index > 0)
+                {
+                    lowLineData.Append(",");
+                    highLineData.Append(",");
+                }
+
+                lowLineData.AppendFormat("{{\"x\": \"{0}\", \"y\": \"{1}\"}}", index, prediction.WP_TempLow);
+                highLineData.AppendFormat("{{\"x\": \"{0}\", \"y\": \"{1}\"}}", index, prediction.WP_TempHigh);
+
+                index++;
+            }
+
+            // End our line graph JSON
+            lowLineData.Append("]");
+            model.ForecastLowLineData = lowLineData.ToString();
+
+            highLineData.Append("]");
+            model.ForecastHighLineData = highLineData.ToString();
+            
             return model;
         }
     }
