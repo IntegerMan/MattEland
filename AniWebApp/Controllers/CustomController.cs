@@ -10,6 +10,10 @@ using MvcFlash.Core.Extensions;
 
 namespace AniWebApp.Controllers
 {
+    /// <summary>
+    /// A controller base class providing wrappers around standard
+    /// behaviors.
+    /// </summary>
     public abstract class CustomController : Controller
     {
         private ApplicationRoleManager _roleManager;
