@@ -52,7 +52,11 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <value>The entity framework database context.</value>
         protected Entities Entities { get; }
-                
+
+        /// <summary>
+        /// Gets the user's zip code or the default zip code for unauthenticated users.
+        /// </summary>
+        /// <returns>The user's zip code</returns>
         protected int GetUserZipCode()
         {
             var user = GetUserEntity();
