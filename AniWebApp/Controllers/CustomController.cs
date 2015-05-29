@@ -63,6 +63,10 @@ namespace AniWebApp.Controllers
             return user?.U_ZipCode ?? 43035;
         }
 
+        /// <summary>
+        /// Gets the user entity or returns null if no user is logged in.
+        /// </summary>
+        /// <returns>A User or null.</returns>
         protected User GetUserEntity()
         {
             return UserHelper.GetCurrentUserEntity(Entities, this.User);
