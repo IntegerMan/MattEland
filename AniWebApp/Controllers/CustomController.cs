@@ -69,7 +69,7 @@ namespace AniWebApp.Controllers
         /// <returns>A User or null.</returns>
         protected User GetUserEntity()
         {
-            return UserHelper.GetCurrentUserEntity(Entities, this.User);
+            return UserHelper.GetCurrentUserEntity(Entities, User);
         }
 
         /// <summary>
@@ -88,9 +88,13 @@ namespace AniWebApp.Controllers
         /// <returns></returns>
         private string GetUserAspNetId()
         {
-            return UserHelper.GetUserAspNetId(this.User);
+            return UserHelper.GetUserAspNetId(User);
         }
 
+        /// <summary>
+        /// Gets the user identifier or 0 if the user is anonymous.
+        /// </summary>
+        /// <returns>The user identifier or 0 for unauthenticated users.</returns>
         protected int GetUserId()
         {
             var user = GetUserEntity();
