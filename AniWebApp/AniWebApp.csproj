@@ -15,7 +15,7 @@
     <AssemblyName>AniWebApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -299,6 +299,7 @@
     <Content Include="fonts\Fixedsys500c.ttf" />
     <Content Include="fonts\Fixedsys500c.woff" />
     <Content Include="Controllers\Controllers.cd" />
+    <Content Include="changes.md" />
     <None Include="package.json" />
     <None Include="Properties\PublishProfiles\DiscountASP.net.pubxml" />
     <None Include="Properties\PublishProfiles\matteland.pubxml" />
@@ -465,7 +466,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32957</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:32957/</IISUrl>
+          <IISUrl>http://localhost/AniWebApp</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -10,6 +10,10 @@ using MvcFlash.Core.Extensions;
 
 namespace AniWebApp.Controllers
 {
+    /// <summary>
+    /// A controller base class providing wrappers around standard
+    /// behaviors.
+    /// </summary>
     public abstract class CustomController : Controller
     {
         private ApplicationRoleManager _roleManager;
@@ -48,16 +52,24 @@ namespace AniWebApp.Controllers
         /// </summary>
         /// <value>The entity framework database context.</value>
         protected Entities Entities { get; }
-                
+
+        /// <summary>
+        /// Gets the user's zip code or the default zip code for unauthenticated users.
+        /// </summary>
+        /// <returns>The user's zip code</returns>
         protected int GetUserZipCode()
         {
             var user = GetUserEntity();
             return user?.U_ZipCode ?? 43035;
         }
 
+        /// <summary>
+        /// Gets the user entity or returns null if no user is logged in.
+        /// </summary>
+        /// <returns>A User or null.</returns>
         protected User GetUserEntity()
         {
-            return UserHelper.GetCurrentUserEntity(Entities, this.User);
+            return UserHelper.GetCurrentUserEntity(Entities, User);
         }
 
         /// <summary>
@@ -76,9 +88,13 @@ namespace AniWebApp.Controllers
         /// <returns></returns>
         private string GetUserAspNetId()
         {
-            return UserHelper.GetUserAspNetId(this.User);
+            return UserHelper.GetUserAspNetId(User);
         }
 
+        /// <summary>
+        /// Gets the user identifier or 0 if the user is anonymous.
+        /// </summary>
+        /// <returns>The user identifier or 0 for unauthenticated users.</returns>
         protected int GetUserId()
         {
             var user = GetUserEntity();

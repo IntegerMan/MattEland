@@ -108,6 +108,7 @@
     <Compile Include="Models\Weather\WeatherConditionsModel.cs" />
     <Compile Include="Models\Weather\WeatherEntryBase.cs" />
     <Compile Include="Models\Weather\WeatherForecastModel.cs" />
+    <Compile Include="Models\Weather\WeatherHistoryModel.cs" />
     <Compile Include="Models\Weather\WeatherHomeModel.cs" />
     <Compile Include="Node.cs">
       <DependentUpon>AniEntities.tt</DependentUpon>
