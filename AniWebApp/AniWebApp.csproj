@@ -184,6 +184,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -417,6 +418,7 @@
     <Content Include="Views\Weather\History.cshtml">
       <BrowseToURL>~/Weather/43035/History</BrowseToURL>
     </Content>
+    <Content Include="Views\Search\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
