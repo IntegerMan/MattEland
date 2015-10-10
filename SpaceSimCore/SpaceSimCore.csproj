@@ -55,6 +55,12 @@
   <ItemGroup>
     <None Include="Ship\ShipStructure.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MattEland.Common\MattEland.Common\MattEland.Common.csproj">
+      <Project>{514cb422-a6ef-4c75-b925-92ab599ba1be}</Project>
+      <Name>MattEland.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
