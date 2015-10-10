@@ -443,10 +443,6 @@
       <Project>{514cb422-a6ef-4c75-b925-92ab599ba1be}</Project>
       <Name>MattEland.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpaceSimCore\SpaceSimCore.csproj">
-      <Project>{e91449eb-2c6b-42a2-9093-9b0f935ea9d7}</Project>
-      <Name>SpaceSimCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
