@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MattEland.Common", "MattEla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MattEland.Common.Testing", "MattEland.Common\MattEland.Common.Testing\MattEland.Common.Testing.csproj", "{913569FC-7B28-432F-A29A-8ACC7A1A5FBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniServices", "ANIServices\AniServices.csproj", "{642DC462-9E20-49AB-A930-FB59E478AF06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{913569FC-7B28-432F-A29A-8ACC7A1A5FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{913569FC-7B28-432F-A29A-8ACC7A1A5FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{913569FC-7B28-432F-A29A-8ACC7A1A5FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{642DC462-9E20-49AB-A930-FB59E478AF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642DC462-9E20-49AB-A930-FB59E478AF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642DC462-9E20-49AB-A930-FB59E478AF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642DC462-9E20-49AB-A930-FB59E478AF06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
